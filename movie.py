@@ -5,7 +5,7 @@ import streamlit as st
 import matplotlib.pyplot as plt
 
 wait_times = []
-cashier_line = []
+cashier_line = [] # (for plot)
 
 # Determine the average time a moviegoer goes from entering
 # the theater to sitting down to watch a movie
@@ -53,7 +53,7 @@ def go_to_movies(env, moviegoer, theater):
             yield request
             yield env.process(theater.sell_food(moviegoer))
     
-    # Update the cashier line
+    # Update the cashier line (for plot)
     cashier_line.append((env.now,len(theater.cashier.queue))) 
 
     #Moviegoer heads into the theater
@@ -99,11 +99,15 @@ def main():
     
     #Setup environment
     random.seed(42)
-    num_cashiers, num_servers, num_ushers = get_user_input()
+    #num_cashiers, num_servers, num_ushers = get_user_input()
 
-    'Cashiers:', num_cashiers
-    'Servers:', num_servers
-    'Ushers:', num_ushers
+    #'Cashiers:', num_cashiers
+    #'Servers:', num_servers
+    #'Ushers:', num_ushers
+
+    num_cashiers = st.number_input("Cashiers: ",step=1)
+    num_servers = st.number_input("Servers: ",step=1)
+    num_ushers = st.number_input("Ushers: ",step=1)
 
     #Create environment run the simulation
     env = simpy.Environment()
@@ -131,6 +135,12 @@ def main():
     ax.set_ylabel("People in queue")
     ax.set_title("Cashier queue")
     st.pyplot(fig)
+
+    st.write(f"**Average wait time**: {min} minutes and {sec} seconds")
+
+    st.balloons()
+    st.snow()
+
 
 # Invoke main function 
 if __name__ == '__main__':
