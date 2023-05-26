@@ -12,7 +12,6 @@ import matplotlib.pyplot as plt
 
 TIMI = 0
 STOP = 10000
-visual_col,chart_col = st.columns([1,3])
 prob = {
     "surgery" : (0.0,0.7,0.3,0.0),
     "móttaka" : (0.5,0.0,0.0,0.5),
@@ -25,13 +24,13 @@ class Patient:
         self.aldur = aldur
         self.place = place
         if self.place == "skurðaaðgerð":
-            self.p_death = 1.0
+            self.p_death = 0.3
             self.p_surgery = 0.0
-            self.p_mottaka = 0.0
+            self.p_mottaka = 0.7
         if self.place == "móttaka":
-            self.p_death = 1.0
-            self.p_surgery = 0.5
-            self.p_home = 0.0
+            self.p_death = 0.0
+            self.p_surgery = 0.3
+            self.p_home = 0.7
 
 class Spitali:
     def __init__(self,cap,amount):
@@ -54,6 +53,8 @@ with st.expander("Breyta hlutum"):
     PROB_U = st.slider("Líkur á að ungir fari á spítala",value = 0.02,step=0.1)
 
 h_U = 1-h_A
+
+visual_col,chart_col = st.columns(2)
 
 labels = "Aldraðir","Ungir"
 sizes = [h_A*N,h_U*N]
@@ -116,9 +117,8 @@ def sim():
         time.sleep(0.1)
         print("fjöldi fólks á spítala á degi",timi,"er",S.amount)
 
-st.sidebar.title("Controls")
-start = st.sidebar.button("Start")
-stop = st.sidebar.button("Stop")
+start = chart_col.button("Start")
+stop = chart_col.button("Stop")
 
 if start:
     sim()
