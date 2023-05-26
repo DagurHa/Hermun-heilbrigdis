@@ -43,40 +43,39 @@ class Spitali:
     def removeP(self):
         self.amount -= 1
 
-#sliders o.fl.
-with st.expander("Breyta hlutum"):
-    h_A = st.slider("Hlutfall aldraðra",value = 0.3,step = 0.02)
-    N = st.slider("Stærð þjóðar",min_value = 500,max_value = 5000,value = 1000,step = 100)
-    T = st.slider("Tímaskref í dögum",min_value = 1,max_value = 30,step = 1)
-    CAP = st.slider("Hámarskfjöldi á spítala",min_value = 100,max_value = 1000,value = 250,step = 50)
-    PROB_A = st.slider("Líkur á að aldraðir fari á spítala",value = 0.1,step=0.1)
-    PROB_U = st.slider("Líkur á að ungir fari á spítala",value = 0.02,step=0.1)
+def transition(p,r,P,S,n):
+    if p.place == "móttaka":
+        if r < p.p_death:
+            P.remove(p)
+            S.removeP()
+        if r >= p.p_death and r <= p.p_surgery:
+            P.remove(p)
+            S.removeP()
+            n += 1
+        else:
+            p.place = "skurðaaðgerð"
+    elif p.place == "skurðaaðgerð":
+        if r < p.p_surgery:
+            p.place = "skurðaaðgerð"
+        if r >= p.p_surgery and r <= p.p_death:
+            P.remove(p)
+            S.removeP()
+        else:
+            p.place = "móttaka"
 
-h_U = 1-h_A
-
-visual_col,chart_col = st.columns(2)
-
-labels = "Aldraðir","Ungir"
-sizes = [h_A*N,h_U*N]
-
-fig1,ax1 = plt.subplots()
-ax1.pie(sizes,labels = labels)
-
-visual_col.pyplot(fig1)
-
-def sim():
+def sim(stop):
     p_A = PROB_A
     p_U = PROB_U
     n = N
     timi = TIMI
     t = T
     cap = CAP
-    P = []            # fjöldi sjúklinga á spítala
+    P = []              # listi af sjúklingum á spítala
     S = Spitali(cap,0)  # spítali með capacity 500 og núverandi sjúklinga 0
     d = {"fjöldi á spítala":[0],"capacity":cap}
     df = pd.DataFrame(d,index = [timi])
     chart = chart_col.line_chart(df)
-    while(timi < STOP):
+    while(timi < stop):
         timi += t
         for _ in range(t):
             s_A = np.random.binomial(h_A*n,p_A)
@@ -94,35 +93,45 @@ def sim():
                 S.addP()
             for p in P:
                 r = random.random()
-                if p.place == "móttaka":
-                    if r < p.p_death:
-                        P.remove(p)
-                        S.removeP()
-                    if r >= p.p_death and r <= p.p_surgery:
-                        P.remove(p)
-                        S.removeP()
-                        n += 1
-                    else:
-                        p.place = "skurðaaðgerð"
-                elif p.place == "skurðaaðgerð":
-                    if r < p.p_surgery:
-                        p.place = "skurðaaðgerð"
-                    if r >= p.p_surgery and r <= p.p_death:
-                        P.remove(p)
-                        S.removeP()
-                    else:
-                        p.place = "móttaka"
+                transition(p,r,P,S,n)
         d = {"fjöldi á spítala": [S.amount],"capacity":cap}
         df = pd.DataFrame(d,index = [timi])
         chart.add_rows(df)
-        time.sleep(0.1)
-        print("fjöldi fólks á spítala á degi",timi,"er",S.amount)
+
+#sliders o.fl.
+with st.expander("Breyta hlutum"):
+    h_A = st.slider("Hlutfall aldraðra",value = 0.3,step = 0.02)
+    N = st.slider("Stærð þjóðar",min_value = 500,max_value = 5000,value = 1000,step = 100)
+    T = st.slider("Tímaskref í dögum",min_value = 1,max_value = 30,step = 1)
+    CAP = st.slider("Hámarskfjöldi á spítala",min_value = 100,max_value = 1000,value = 250,step = 50)
+    PROB_A = st.slider("Líkur á að aldraðir fari á spítala",value = 0.1,step=0.01)
+    PROB_U = st.slider("Líkur á að ungir fari á spítala",value = 0.02,step=0.01)
+
+h_U = 1-h_A
+
+visual_col,chart_col = st.columns(2)
+
+labels = "Aldraðir","Ungir"
+sizes = [h_A*N,h_U*N]
+
+fig1,ax1 = plt.subplots()
+ax1.pie(sizes,labels = labels)
+
+visual_col.pyplot(fig1)
 
 start = chart_col.button("Start")
 stop = chart_col.button("Stop")
 
 if start:
-    sim()
+    sim(STOP)
+    time.sleep(0.1)
 
 if stop:
     st.stop()
+
+st.write("Hermunarstillingar")
+
+dt = st.slider("Fjöldi daga per hermun",10,10000,1000,100)
+L = st.number_input("Fjöldi hermana",1,1000,1)
+
+
