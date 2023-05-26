@@ -78,39 +78,40 @@ def sim():
     chart = chart_col.line_chart(df)
     while(timi < STOP):
         timi += t
-        s_A = t*np.random.binomial(h_A*n,p_A)
-        s_U = t*np.random.binomial(h_U*n,p_U)
-        n -= (s_A+s_U)
-        for _ in range(s_A):
-            age = random.randint(65,99)
-            pi = Patient(age,"móttaka")
-            P.append(pi)
-            S.addP()
-        for _ in range(s_U):
-            age = random.randint(1,64)
-            pi = Patient(age,"móttaka")
-            P.append(pi)
-            S.addP()
-        for p in P:
-            r = random.random()
-            if p.place == "móttaka":
-                if r < p.p_death:
-                    P.remove(p)
-                    S.removeP()
-                if r >= p.p_death and r <= p.p_surgery:
-                    P.remove(p)
-                    S.removeP()
-                    n += 1
-                else:
-                    p.place = "skurðaaðgerð"
-            elif p.place == "skurðaaðgerð":
-                if r < p.p_surgery:
-                    p.place = "skurðaaðgerð"
-                if r >= p.p_surgery and r <= p.p_death:
-                    P.remove(p)
-                    S.removeP()
-                else:
-                    p.place = "móttaka"
+        for _ in range(t):
+            s_A = np.random.binomial(h_A*n,p_A)
+            s_U = np.random.binomial(h_U*n,p_U)
+            n -= (s_A+s_U)
+            for _ in range(s_A):
+                age = random.randint(65,99)
+                pi = Patient(age,"móttaka")
+                P.append(pi)
+                S.addP()
+            for _ in range(s_U):
+                age = random.randint(1,64)
+                pi = Patient(age,"móttaka")
+                P.append(pi)
+                S.addP()
+            for p in P:
+                r = random.random()
+                if p.place == "móttaka":
+                    if r < p.p_death:
+                        P.remove(p)
+                        S.removeP()
+                    if r >= p.p_death and r <= p.p_surgery:
+                        P.remove(p)
+                        S.removeP()
+                        n += 1
+                    else:
+                        p.place = "skurðaaðgerð"
+                elif p.place == "skurðaaðgerð":
+                    if r < p.p_surgery:
+                        p.place = "skurðaaðgerð"
+                    if r >= p.p_surgery and r <= p.p_death:
+                        P.remove(p)
+                        S.removeP()
+                    else:
+                        p.place = "móttaka"
         d = {"fjöldi á spítala": [S.amount],"capacity":cap}
         df = pd.DataFrame(d,index = [timi])
         chart.add_rows(df)
