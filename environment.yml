@@ -1,0 +1,8 @@
+ channels:
+     - conda-forge
+ dependencies:
+     - altair
+     - streamlit
+     - pandas
+     - simpy
+     - numpy
