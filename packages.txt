@@ -1,1 +1,4 @@
+altair
+pandas
+streamlit
 simpy
