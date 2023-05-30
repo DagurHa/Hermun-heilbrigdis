@@ -3,6 +3,8 @@ import simpy
 import statistics
 import streamlit as st
 import matplotlib.pyplot as plt
+from bokeh.plotting import figure,show
+import seaborn as sns
 
 wait_times = []
 cashier_line = [] # (for plot)
@@ -140,6 +142,14 @@ def main():
 
     st.balloons()
     st.snow()
+
+    # Bokeh
+    p = figure(title = "Cashier queue",x_axis_label="Time (min)",y_axis_label = "People in queue")
+    p.line(x,y)
+    st.bokeh_chart(p,use_container_width=True)
+
+    # Seaborn
+
 
 
 # Invoke main function 
