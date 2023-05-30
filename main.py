@@ -1,102 +1,72 @@
-import simpy as sp
-import streamlit as st
 import numpy as np
-import math
 import random
 import time
-import os
-import signal
-from multiprocessing import Process
 import pandas as pd
 import matplotlib.pyplot as plt
+import streamlit as st
+import simpy as sp
 
 TIMI = 0
 STOP = 10000
-prob = {
-    "surgery" : (0.0,0.7,0.3,0.0),
-    "móttaka" : (0.5,0.0,0.0,0.5),
-    "death" : (0.0,0.0,1.0,0.0),
-    "Heim" : (0.0,0.0,0.0,1.0)
-}
+MEAN_VISIT = [20.0,5.0] #1.0 deilt með þessu fyrir expovar
+MEAN_STAY_LEGA = [5.0,2.0]
+MEAN_STAY_MOT = 0.2
 
 class Patient:
-    def __init__(self,aldur,place):
+    def __init__(env,self,aldur,id):
         self.aldur = aldur
-        self.place = place
-        if self.place == "skurðaaðgerð":
-            self.p_death = 0.3
-            self.p_surgery = 0.0
-            self.p_mottaka = 0.7
-        if self.place == "móttaka":
-            self.p_death = 0.0
-            self.p_surgery = 0.3
-            self.p_home = 0.7
+        self.env = env
+        self.id = id
+    
+def patient_gen(env):
+    s = MEAN_VISIT[0] + MEAN_VISIT[1]
+    vis = random.expovariate(1.0/s)
+    yield vis
+    r = random.random()
+    if r < MEAN_VISIT[0]/s:
+        age = random.randint(65,99)
+        p = Patient(env,age,env.now)
+        return p
+    else:
+        age = random.randint(0,64)
+        p = Patient(env,age,env.now)
 
 class Spitali:
-    def __init__(self,cap,amount):
-        self.cap = cap
+    def __init__(self,env,amount,inn_cap,mottaka_cap):
+        self.inn_cap = inn_cap
         self.amount = amount
-    def addP(self):
-        #if self.amount == self.cap:
-            #raise Exception("Nú er spítalinn fullur það tók")
-        self.amount += 1
-    def removeP(self):
-        self.amount -= 1
-
-def transition(p,r,P,S,n):
-    if p.place == "móttaka":
-        if r < p.p_death:
-            P.remove(p)
-            S.removeP()
-        if r >= p.p_death and r <= p.p_surgery:
-            P.remove(p)
-            S.removeP()
-            n += 1
+        self.env = env
+        self.mottaka_cap = mottaka_cap
+        self.mottaka = sp.Resource(env,mottaka_cap)
+        self.inn = sp.Resource(env,inn_cap)
+    def newP(p,self,env):
+        with self.mottaka.request() as req:
+            amount += 1
+            yield req
+            wait_time = random.expovariate(1.0/MEAN_STAY_MOT)
+            yield env.timeout(env,wait_time)
+            self.mottaka.release(req)
+            r = random.random() # Hvort göngu eða legu
+            self.newInn(p,r,env,self.inn)
+    def newInn(p,r,env,inn):
+        if r < 0.7:
+            lam = 3
         else:
-            p.place = "skurðaaðgerð"
-    elif p.place == "skurðaaðgerð":
-        if r < p.p_surgery:
-            p.place = "skurðaaðgerð"
-        if r >= p.p_surgery and r <= p.p_death:
-            P.remove(p)
-            S.removeP()
-        else:
-            p.place = "móttaka"
+            lam = 10
+        with inn.request() as req:
+            yield req
+            stay_time = random.expovariate(1.0/lam)
+            yield env.timeout(env,stay_time)
+            inn.release(req)
+            amount -= 1
 
-def sim(stop):
-    p_A = PROB_A
-    p_U = PROB_U
-    n = N
-    timi = TIMI
-    t = T
-    cap = CAP
-    P = []              # listi af sjúklingum á spítala
-    S = Spitali(cap,0)  # spítali með capacity 500 og núverandi sjúklinga 0
-    d = {"fjöldi á spítala":[0],"capacity":cap}
-    df = pd.DataFrame(d,index = [timi])
-    chart = chart_col.line_chart(df)
-    while(timi < stop):
-        timi += t
-        for _ in range(t):
-            s_A = np.random.binomial(h_A*n,p_A)
-            s_U = np.random.binomial(h_U*n,p_U)
-            n -= (s_A+s_U)
-            for _ in range(s_A):
-                age = random.randint(65,99)
-                pi = Patient(age,"móttaka")
-                P.append(pi)
-                S.addP()
-            for _ in range(s_U):
-                age = random.randint(1,64)
-                pi = Patient(age,"móttaka")
-                P.append(pi)
-                S.addP()
-            for p in P:
-                r = random.random()
-                transition(p,r,P,S,n)
-        d = {"fjöldi á spítala": [S.amount],"capacity":cap}
-        df = pd.DataFrame(d,index = [timi])
-        chart.add_rows(df)
+def sim(stop,p_S,N,T):
+    env = sp.Environment()
+    S = Spitali(env,0,40,3)
+    
+    p = patient_gen(env)
+    S.newP(env,p)
+
 
 #sliders o.fl.
 with st.expander("Breyta hlutum"):
@@ -119,19 +89,11 @@ ax1.pie(sizes,labels = labels)
 
 visual_col.pyplot(fig1)
 
-start = chart_col.button("Start")
-stop = chart_col.button("Stop")
-
-if start:
-    sim(STOP)
-    time.sleep(0.1)
-
-if stop:
-    st.stop()
-
 st.write("Hermunarstillingar")
 
 dt = st.slider("Fjöldi daga per hermun",10,10000,1000,100)
 L = st.number_input("Fjöldi hermana",1,1000,1)
+p = [PROB_A,PROB_U]
 
-
+for _ in range(L):
+    sim(dt,p,N,T)
