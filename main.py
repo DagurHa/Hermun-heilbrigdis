@@ -6,67 +6,78 @@ import matplotlib.pyplot as plt
 import streamlit as st
 import simpy as sp
 
+SEED = 100
 TIMI = 0
 STOP = 10000
-MEAN_VISIT = [20.0,5.0] #1.0 deilt með þessu fyrir expovar
-MEAN_STAY_LEGA = [5.0,2.0]
-MEAN_STAY_MOT = 0.2
+MEAN_VISIT = [5.0,1.0]
+MEAN_TIME = [9.0,5.0]
+
+random.seed(SEED)
 
 class Patient:
-    def __init__(env,self,aldur,id):
+    def __init__(self,env,aldur):
         self.aldur = aldur
         self.env = env
-        self.id = id
     
 def patient_gen(env):
     s = MEAN_VISIT[0] + MEAN_VISIT[1]
     vis = random.expovariate(1.0/s)
-    yield vis
+    yield env.timeout(vis)
     r = random.random()
     if r < MEAN_VISIT[0]/s:
         age = random.randint(65,99)
-        p = Patient(env,age,env.now)
+        p = Patient(env,age)
+        print("Nú kom gömul manneskja á tímanum",env.now)
         return p
     else:
         age = random.randint(0,64)
-        p = Patient(env,age,env.now)
+        p = Patient(env,age)
+        print("Nú kom ung manneskja á tímanum",env.now)
+        return p
+
+def get_patient(env):
+    patient = yield env.process(patient_gen(env))
+    return patient
 
 class Spitali:
-    def __init__(self,env,amount,inn_cap,mottaka_cap):
-        self.inn_cap = inn_cap
+    def __init__(self,env,amount):
         self.amount = amount
         self.env = env
-        self.mottaka_cap = mottaka_cap
-        self.mottaka = sp.Resource(env,mottaka_cap)
-        self.inn = sp.Resource(env,inn_cap)
-    def newP(p,self,env):
-        with self.mottaka.request() as req:
-            amount += 1
-            yield req
-            wait_time = random.expovariate(1.0/MEAN_STAY_MOT)
-            yield env.timeout(env,wait_time)
-            self.mottaka.release(req)
-            r = random.random() # Hvort göngu eða legu
-            self.newInn(p,r,env,self.inn)
-    def newInn(p,r,env,inn):
-        if r < 0.7:
-            lam = 3
+    def newP(self,p,env):
+        self.amount += 1
+        if p.aldur < 65:    
+            wait = random.expovariate(1.0/MEAN_TIME[0])
         else:
-            lam = 10
-        with inn.request() as req:
-            yield req
-            stay_time = random.expovariate(1.0/lam)
-            yield env.timeout(env,stay_time)
-            inn.release(req)
-            amount -= 1
+            wait = random.expovariate(1.0/MEAN_TIME[1])
+        yield env.timeout(wait)
+        if p.aldur < 65:
+            print(f"Ung manneskja útskrifast á tímanum {env.now}")
+        else:
+            print(f"Gömul manneskja útskrifast á tímanum {env.now}")
+        self.amount -= 1
 
-def sim(stop,p_S,N,T):
-    env = sp.Environment()
-    S = Spitali(env,0,40,3)
-    
-    p = patient_gen(env)
-    S.newP(env,p)
+def sim(env):
+    S = Spitali(env,0)
+    while True:
+        s = MEAN_VISIT[0] + MEAN_VISIT[1]
+        vis = random.expovariate(1.0/s)
+        yield env.timeout(vis)
+        r = random.random()
+        if r < MEAN_VISIT[0]/s:
+            age = random.randint(65,99)
+            p = Patient(env,age)
+            print("Nú kom gömul manneskja á tímanum",env.now)
+        else:
+            age = random.randint(0,64)
+            p = Patient(env,age)
+            print("Nú kom ung manneskja á tímanum",env.now)
+        #env.process(S.newP(p,env))
+        
 
+
+env = sp.Environment()
+env.process(sim(env))
+env.run(until = 90)
 
 #sliders o.fl.
 with st.expander("Breyta hlutum"):
@@ -94,6 +105,3 @@ st.write("Hermunarstillingar")
 dt = st.slider("Fjöldi daga per hermun",10,10000,1000,100)
 L = st.number_input("Fjöldi hermana",1,1000,1)
 p = [PROB_A,PROB_U]
-
-for _ in range(L):
-    sim(dt,p,N,T)
