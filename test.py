@@ -6,18 +6,18 @@ import streamlit as st
 SEED = 27
 random.seed(27)
 AGE_GROUPS = ["Ungir","Miðaldra","Gamlir"]
-#meðaltöl aldurshópa, fyrsta tala er meðaltími þar til aðili kemur á spítala,
+#meðaltöl aldurshópa, fyrsta tala er meðaltími (á dags basis) þar til aðili kemur á spítala,
 #tala tvö er meðal bið á göngudeild, þriðja er meðal bið á legudeild
-MEANS_ungir = [4.0, 5.0, 40.0] 
-MEANS_midaldra = [2.0,10.0,50.0]
-MEANS_gamlir = [1.0,15.0,60.0]
+MEANS_ungir = [0.1, 0.05, 2.0] 
+MEANS_midaldra = [0.01, 0.05, 5.0]
+MEANS_gamlir = [0.01, 0.05, 6.0]
 TOTAL_DATA = {
         "Legustaða:" : [],
         "Göngustaða" : [],
         "Heildarfjöldi" : []
     }
 
-#Líkur fyrir aldurshópa að ferðast milli eininga í spítala
+#Líkur fyrir aldurshópa að ferðast milli eininga í spítala per dagur
 #nú höfum við þrjár einingar: göngudeild, legudeild og móttaka
 #Gerum ráð fyrir að sjúklingur sé engann tíma í móttöku 
 transProb = {
@@ -26,9 +26,9 @@ transProb = {
     "Gamall": [0.1,0.9]
 }
 age_group_attribs = {
-    "Ungur": [4.0, 5.0, 40.0],
-    "Miðaldra": [2.0, 10.0, 50.0],
-    "Gamall": [1.0, 15.0, 60.0]
+    "Ungur": [0.1, 0.005, 2.0],
+    "Miðaldra": [0.01, 0.05, 5.0],
+    "Gamall": [0.01, 0.05, 6.0]
 }
 
 class Patient:
@@ -57,9 +57,9 @@ class Spitali:
             self.amount += 1 
             r = random.random()
             if r < p.trans_prob(transProb)[0]:
-                env.process(self.g_deildNyrPatient(env,p))
+               yield env.process(self.g_deildNyrPatient(env,p))
             else:
-                env.process(self.l_deildNyrPatient(env,p))  
+                yield env.process(self.l_deildNyrPatient(env,p))  
         else:
             self.returnHome(p)
     #Nýr sjúklingur á göngudeild
@@ -69,7 +69,7 @@ class Spitali:
         stay_t = random.expovariate(1.0/p.attribs[1])
         yield env.timeout(stay_t)
         self.g_deild_amount -= 1
-        env.process(self.m_deildNyrPatient(env,p))
+        yield env.process(self.m_deildNyrPatient(env,p))
     #Nýr sjúklingur á legudeild
     def l_deildNyrPatient(self,env,p):
         self.l_deild_amount += 1
@@ -77,7 +77,7 @@ class Spitali:
         stay_t = random.expovariate(1.0/p.attribs[2])
         yield env.timeout(stay_t)
         self.l_deild_amount -= 1
-        env.process(self.m_deildNyrPatient(env,p))
+        yield env.process(self.m_deildNyrPatient(env,p))
     #Sjúklingur fer heim
     def returnHome(self,p):
         self.amount -= 1
@@ -87,34 +87,25 @@ def patientGen(env,s,S,age_group,lambd):
     yield env.timeout(wait)
     age = np.random.choice(age_group,p=lambd)
     p = Patient(env,age,True)
-    env.process(S.m_deildNyrPatient(env,p))
+    yield env.process(S.m_deildNyrPatient(env,p))
 
-#Athugum stöðu spítalans á t tíma fresti (setjum klukkutima default)
-def monitor(S,env,t):
-    yield env.timeout(t)
+def monitor(env,sim,resume_sim):
+    yield env.timeout(1)
+    sim.interrupt()
+    resume_sim.succeed()
+
+def getData(S):
     data = {
-        "Legustaða": S.l_deild_amount,
-        "Göngustaða": S.g_deild_amount,
-        "Heildarfjöldi": S.amount
+        "Legustaða" : S.l_deild_amount,
+        "Göngustaða" : S.g_deild_amount,
+        "Heildarfjöldi" : S.amount
     }
     return data
 
-#Skrítnar leiðir til að safna gögnum
-def get_data(S,env,t=1):
-    data = yield env.process(monitor(S,env,t))
-    return data
-
-def collectData(data):
-    for deild in data:
-            TOTAL_DATA[deild].append(data[deild])
-    print(TOTAL_DATA)
-
-outer_env = sp.Environment()
-
-def sim(T):
-    env = sp.Environment()
+#T er fjöldi daga sem við keyrum hermunina
+def sim(T,env,resume_sim):
     print("byrja")
-    t = 24*T
+    t = T
     lambd = []
     #Gerum lista af stikunum
     for age_group in age_group_attribs:
@@ -122,9 +113,18 @@ def sim(T):
     #Þetta verður stikinn í exp dreifingunni, min af exp dreifingum er exp dreifing af summu stikanna
     s = sum(lambd)
     S = Spitali(env,0)
-    env.run(until = t)
-    while True:
-        env.process(patientGen(env,s,S,age_group,lambd))
+    try:
+        while True:
+            yield env.process(patientGen(env,s,S,age_group,lambd))
+    except sp.Interrupt:
+        data = getData(S)
+        for k in data:
+            TOTAL_DATA[k].append(data[k])
+        yield resume_sim
 
-p = outer_env.process(sim(7))
-outer_env.run(until = p)
+env = sp.Environment()
+resume_sim = env.event()
+p = env.process(sim(15,env,resume_sim))
+env.process(monitor(env,p,resume_sim))
+env.run(until = 15)
+print(TOTAL_DATA)
