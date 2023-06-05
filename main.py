@@ -4,104 +4,172 @@ import time
 import pandas as pd
 import matplotlib.pyplot as plt
 import streamlit as st
-import simpy as sp
 from bokeh.plotting import figure,show
 from bokeh.io import output_notebook
 
-SEED = 42
 TIMI = 0
 STOP = 10000
-MEAN_VISIT = [1.0,5.0]
-MEAN_TIME = [9.0,5.0]
-patients = []
-stay = []
-
-random.seed(SEED)
+prob = {
+    "legudeild" : [0.0, 0.7, 0.3, 0.0],
+    "móttaka" : [0.5, 0.0, 0.0, 0.5],
+    "death" : [0.0, 0.0, 1.0, 0.0],
+    "Heim" : [0.0, 0.0, 0.0, 1.0]
+}
+#Athuga gæti verið gott að setja default sim attributes lika
+simAttributes = {}
 
 class Patient:
-    def __init__(self,env,aldur):
+    def __init__(self,aldur,place):
         self.aldur = aldur
-        self.env = env
-        self.check_in_time = None
-        self.check_out_time = None
-    
-def patient_gen(env):
-    s = 1/MEAN_VISIT[0] + 1/MEAN_VISIT[1]
-    vis = random.expovariate(s)
-    yield env.timeout(vis)
-    r = random.random()
-    if r < (1/MEAN_VISIT[0])/s:
-        age = random.randint(65,99)
-        p = Patient(env,age)
-        p.check_in_time = env.now 
-        print("Nú kom gömul manneskja á tímanum",env.now)
-        return p
-    else:
-        age = random.randint(0,64)
-        p = Patient(env,age)
-        p.check_in_time = env.now
-        print("Nú kom ung manneskja á tímanum",env.now)
-        return p
-
-def get_patient(env):
-    patient = yield env.process(patient_gen(env))
-    return patient
+        self.place = place
+        self.timiSpitala = 0
+        self.attribs = prob
+    def updatePatient(self,S):
+        assert self.place in self.attribs, "sjúklingur er ekki á vel skilgreindum stað"
+        prev = self.place
+        for deild in self.attribs:
+            if self.place == deild:
+                self.place = np.random.choice(list(self.attribs.keys()), p = self.attribs[deild])
+        if self.place != "Heim" and self.place != "death":
+            S.moveP(self.place,prev)
 
 class Spitali:
-    def __init__(self,env,amount):
-        self.amount = amount
-        self.env = env
-    def newP(self,p,env):
+    def __init__(self,cap,fjoldi):
+        self.cap = cap
+        self.fjoldi = fjoldi
+        self.amount = sum(list(fjoldi.values()))
+    def addP(self,p):
+        self.fjoldi[p.place] += 1
         self.amount += 1
-        if p.aldur < 65:    
-            wait = random.expovariate(1.0/MEAN_TIME[0])
-        else:
-            wait = random.expovariate(1.0/MEAN_TIME[1])
-        yield env.timeout(wait)
-        if p.aldur < 65:
-            print(f"Ung manneskja útskrifast á tímanum {env.now}")
-        else:
-            print(f"Gömul manneskja útskrifast á tímanum {env.now}")
+    def removeP(self):
         self.amount -= 1
-        p.check_out_time = env.now 
-    def release_patient(self, p, env):
-        yield env.process(self.newP(p, env))
+    def moveP(self,new,prev):
+        self.fjoldi[new] += 1
+        self.fjoldi[prev] -= 1
+ 
+def sim(showSim,simAttributes):
+    #simAttributes inniheldur allar upplýsingar um forsendum hermuninnar
+    #Ef maður vill sjá þróun fjölda fólks á spítalanum er showSim = True
+    #Skilar núna fjölda á deildum spítalans á hverju dt skrefi.
+    fjoldi = {
+    "legudeild" : 0,
+    "móttaka" : 0
+    }
+    data = {
+        "legudeild" : [],
+        "móttaka" : []
+    }
+    p_A = simAttributes["p_A"]
+    p_U = simAttributes["p_U"]
+    dt = simAttributes["dt"]
+    N = simAttributes["N"]
+    h_A = simAttributes["h_A"]
+    h_U = simAttributes["h_U"]
+    timi = TIMI #global breyta
+    cap = simAttributes["CAP"]
+    STOP = simAttributes["STOP"]
+    P = []            # listi sjúklinga á spítala
+    S = Spitali(cap,fjoldi)  # spítali með capacity cap og núverandi sjúklingar á deildum í fjoldi (global breyta)
+    if showSim:
+        d = {"fjöldi á spítala":[0],"capacity":cap}
+        df = pd.DataFrame(d,index = [timi])
+        chart = chart_col.line_chart(df)
+    for deild in S.fjoldi:
+        data[deild].append(S.fjoldi[deild])
+    while(timi < STOP):
+        timi += dt
+        for _ in range(dt):
+            s_A = np.random.binomial(h_A*N,p_A)
+            s_U = np.random.binomial(h_U*N,p_U)
+            N -= (s_A+s_U)
+            for _ in range(s_A):
+                age = random.randint(65,99)
+                pi = Patient(age,"móttaka")
+                P.append(pi)
+                S.addP(pi)
+            for _ in range(s_U):
+                age = random.randint(1,64)
+                pi = Patient(age,"móttaka")
+                P.append(pi)
+                S.addP(pi)
+            for p in P:
+                p.updatePatient(S)
+                if p.place == "Death":
+                    P.remove(p)
+                    S.removeP()
+                if p.place == "Heim":
+                    P.remove(p)
+                    S.removeP()
+                    N+=1
+        if showSim:            
+            d = {"fjöldi á spítala": [S.amount],"capacity":cap}
+            df = pd.DataFrame(d,index = [timi])
+            chart.add_rows(df)
+            time.sleep(0.1)
+        for deild in S.fjoldi:
+            data[deild].append(S.fjoldi[deild])
+        #print("fjöldi fólks á spítala á degi",timi,"er",S.amount)
+    return data
 
-def sim(env):
-    S = Spitali(env,0)
-    while True:
-        s = 1/MEAN_VISIT[0] + 1/MEAN_VISIT[1]
-        vis = random.expovariate(s)
-        yield env.timeout(vis)
-        r = random.random()
-        if r < (1/MEAN_VISIT[0])/s:
-            age = random.randint(65,99)
-            p = Patient(env,age)
-            p.check_in_time = env.now 
-            print("Nú kom gömul manneskja á tímanum",env.now)
-        else:
-            age = random.randint(0,64)
-            p = Patient(env,age)
-            p.check_in_time = env.now 
-            print("Nú kom ung manneskja á tímanum",env.now)
-        patients.append(p)
-        env.process(S.release_patient(p, env))
-        
+#sliders o.fl.
+with st.expander("Hermunarstillingar"):
+    simAttributes["h_A"] = st.slider("Hlutfall aldraðra",value = 0.3,step = 0.02)
+    simAttributes["N"] = st.number_input("Stærð þjóðar",min_value = 500,max_value = 10000,value = 1000)
+    simAttributes["dt"] = st.slider("Tímaskref í dögum",min_value = 1,max_value = 30,step = 1)
+    simAttributes["CAP"] = st.slider("Hámarskfjöldi á spítala",min_value = 100,max_value = 1000,value = 250,step = 50)
+    simAttributes["p_A"] = st.slider("Líkur á að aldraðir fari á spítala á dag",value = 0.1,step=0.1)
+    simAttributes["p_U"] = st.slider("Líkur á að ungir fari á spítala á dag",value = 0.02,step=0.1)
+    simAttributes["STOP"] = st.number_input("Fjöldi hermunardaga",min_value=10,max_value=1095,value=100)
 
+simAttributes["h_U"] = 1-simAttributes["h_A"]
 
-env = sp.Environment()
-env.process(sim(env))
-env.run(until = 90)
+visual_col,chart_col = st.columns(2)
 
-noncheckout = 0
-for p in patients:
-    if p.check_in_time is None:
-        print("Patient missing check-in time")
-    elif p.check_out_time is None:
-        print("Patient missing check-out time!")
-        noncheckout += 1
+labels = "Aldraðir","Ungir"
+sizes = [simAttributes["h_A"]*simAttributes["N"],simAttributes["h_U"]*simAttributes["N"]]
 
-gamall = 0
+fig1,ax1 = plt.subplots()
+ax1.pie(sizes,labels = labels)
+
+visual_col.pyplot(fig1)
+
+chart_col.write("Sjá hermun með völdum hermunarstillingum")
+start = chart_col.button("Start")
+stop = chart_col.button("Stop")
+
+if start:
+   data = sim(True,simAttributes)
+
+if stop:
+    st.stop()
+
+st.write("Hermunarstillingar")
+
+L = st.number_input("Fjöldi hermana",2,1000,100)
+
+totalData = {
+    "legudeild" :[] ,
+    "móttaka" : []
+}
+hundur = st.button("Byrja hermun!")
+if hundur:
+    for _ in range(L):
+        data = sim(False,simAttributes)
+        print(data)
+        for deild in data:
+            totalData[deild].append(sum(data[deild])/simAttributes["STOP"])
+
+leguData = totalData["legudeild"]
+motData = totalData["móttaka"]
+
+print(totalData)
+
+fig2, ax2 = plt.subplots()
+ax2.boxplot([leguData,motData])
+
+st.pyplot(fig2)
+
+"""gamall = 0
 ungur = 0
 for p in patients:
     if p.check_in_time and p.check_out_time is not None:    
@@ -118,43 +186,12 @@ print(f"Fraction of old people: {gamall/(gamall+ungur)}")
 
 plot = figure(x_range=['Younger than 65', 'Older than 65'], title='Patient Age Distribution')
 
-# Creating a histogram
+Creating a histogram
 plot.vbar(x=['Younger than 65', 'Older than 65'], top=[ungur, gamall], width=0.4)
 
-# Styling the plot
+Styling the plot
 plot.xaxis.axis_label = 'Age Group'
 plot.yaxis.axis_label = 'Number of Patients'
 
-# Show the plot
-st.write(plot)
-
-
-"""sliders o.fl.
-with st.expander("Breyta hlutum"):
-    h_A = st.slider("Hlutfall aldraðra",value = 0.3,step = 0.02)
-    N = st.slider("Stærð þjóðar",min_value = 500,max_value = 5000,value = 1000,step = 100)
-    T = st.slider("Tímaskref í dögum",min_value = 1,max_value = 30,step = 1)
-    CAP = st.slider("Hámarskfjöldi á spítala",min_value = 100,max_value = 1000,value = 250,step = 50)
-    PROB_A = st.slider("Líkur á að aldraðir fari á spítala",value = 0.1,step=0.01)
-    PROB_U = st.slider("Líkur á að ungir fari á spítala",value = 0.02,step=0.01)
-"""
-"""
-
-h_U = 1-h_A
-
-visual_col,chart_col = st.columns(2)
-
-labels = "Aldraðir","Ungir"
-sizes = [h_A*N,h_U*N]
-
-fig1,ax1 = plt.subplots()
-ax1.pie(sizes,labels = labels)
-
-visual_col.pyplot(fig1)
-
-st.write("Hermunarstillingar")
-
-dt = st.slider("Fjöldi daga per hermun",10,10000,1000,100)
-L = st.number_input("Fjöldi hermana",1,1000,1)
-p = [PROB_A,PROB_U]
-"""
+Show the plot
+st.write(plot)"""
