@@ -50,9 +50,12 @@ class Hospital:
 
     def patient_arrival(self):
         while True:
-            age_group = random.choices(
-                population=['Young', 'Middle-aged', 'Old'],
-                weights=[(1.0/0.2)/min_summa, (1.0/0.4)/min_summa, (1.0/0.6)/min_summa])
+            age_group = np.random.choice(["Young","Middle-aged","Old"],
+                                         1,
+                                         p=[(1.0/0.6)/min_summa,(1.0/0.4)/min_summa,(1.0/0.2)/min_summa])
+            #age_group = random.choices(
+            #    population=['Young', 'Middle-aged', 'Old'],
+            #    cum_weights=[(1.0/0.2)/min_summa, (1.0/0.4)/min_summa, (1.0/0.6)/min_summa])
             try:    
                 yield self.env.timeout(random.expovariate(min_summa))  # Patient arrival rate
             except sp.Interrupt:
@@ -109,16 +112,29 @@ print(f"Number of Young/Middle-aged/Old arrivals in the Inpatient unit: {ungur[0
 print(f"Number of Young/Middle-aged/Old arrivals in the Outpatient unit: {ungur[1]}/{middle[1]}/{old[1]}")
 print(f"Total no. of arrivals in the Outpatient/Inpatient unit: {outp}/{inp}")
 
+ungur = [ungur[0], ungur[1]]  # Number of young patients: [Inpatient, Outpatient]
+middle = [middle[0], middle[1]]  # Number of middle-aged patients: [Inpatient, Outpatient]
+old = [old[0], old[1]]  # Number of old patients: [Inpatient, Outpatient]
+
 df = pd.DataFrame(
-    {"Inpatient": [ungur[0],middle[0],old[0]],
-     "Outpatient": [ungur[1],middle[1],old[1]]},
-     index = ["Young","Middle-aged","Old"]
+    {
+        "Age group": ["Young", "Middle-aged", "Old", "Young", "Middle-aged", "Old"],
+        "Unit": ["Inpatient", "Inpatient", "Inpatient", "Outpatient", "Outpatient", "Outpatient"],
+        "No. of patients": ungur + middle + old,
+    }
 )
 
+color_mapping = {"Inpatient": "red", "Outpatient": "blue"}
 
+fig = px.bar(
+    df,
+    x="Age group",
+    y="No. of patients",
+    color="Unit",
+    color_discrete_map=color_mapping,
+    barmode="group",
+    labels={"Age group": "Age group", "No. of patients": "No. of patients"},
+)
+st.write("# Patient arrivals")
+st.plotly_chart(fig)
 
-fig = px.bar(df,
-            barmode="group",
-            labels={"variable":"Unit","index":"Age group","value":"No. of patients"},
-            )
-fig.show()
