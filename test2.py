@@ -1,13 +1,15 @@
 import simpy as sp
 import random
 import numpy as np
-import streamlit as sp
+import streamlit as st
 import pandas as pd
+import plotly.express as px
 
 inpatient_arrival = []
 outpatient_arrival = []
 pts = []
-arrival_rates = {'Young':0.2,'Middle-aged':0.4,'Old':0.6} 
+arrival_rates = {'Young':1.0/0.2,'Middle-aged':1.0/0.4,'Old':1.0/0.6}
+min_summa = 1.0/0.2+1.0/0.4+1.0/0.6
 
 class Patient:
     def __init__(self, id, age, unit):
@@ -50,9 +52,9 @@ class Hospital:
         while True:
             age_group = random.choices(
                 population=['Young', 'Middle-aged', 'Old'],
-                weights=[0.2, 0.3, 0.5])[0]
+                weights=[(1.0/0.2)/min_summa, (1.0/0.4)/min_summa, (1.0/0.6)/min_summa])
             try:    
-                yield self.env.timeout(random.expovariate(arrival_rates[age_group]))  # Patient arrival rate
+                yield self.env.timeout(random.expovariate(min_summa))  # Patient arrival rate
             except sp.Interrupt:
                 print("Process interrupted at time ",env.now)
                 print("Number of patients in outpatient unit:", hospital.num_patients_outpatient)
@@ -74,67 +76,49 @@ hospital = Hospital(env)
 env.process(the_interrupter(env,hospital))
 env.run(until=100)
 print("Process complete at time ",env.now)
-print("Outpatient unit: ",hospital.num_patients_outpatient)
-print("Inpatient unit: ",hospital.num_patients_inpatient)
+print("Current left in Outpatient unit: ",hospital.num_patients_outpatient)
+print("Current left in Inpatient unit: ",hospital.num_patients_inpatient)
 
 
-"""
-timeout1 = env.timeout(25)
-timeout2 = env.timeout(50)
-timeout3 = env.timeout(75)
-try:
-    env.run(until=timeout1)
-    print("Simulation interrupted at time:", env.now)
-    print("Number of patients in outpatient unit:", hospital.num_patients_outpatient)
-    print("Number of patients in inpatient unit:", hospital.num_patients_inpatient)
-except sp.Interrupt:
-    print("Simulation interrupted at time:", env.now)
-    print("Number of patients in outpatient unit:", hospital.num_patients_outpatient)
-    print("Number of patients in inpatient unit:", hospital.num_patients_inpatient)
 
-try:
-    env.run(until=timeout2)
-    print("Simulation interrupted at time:", env.now)
-    print("Number of patients in outpatient unit:", hospital.num_patients_outpatient)
-    print("Number of patients in inpatient unit:", hospital.num_patients_inpatient)
-except sp.Interrupt:
-    print("Simulation interrupted at time:", env.now)
-    print("Number of patients in outpatient unit:", hospital.num_patients_outpatient)
-    print("Number of patients in inpatient unit:", hospital.num_patients_inpatient)
-
-try:
-    env.run(until=timeout3)
-    print("Simulation interrupted at time:", env.now)
-    print("Number of patients in outpatient unit:", hospital.num_patients_outpatient)
-    print("Number of patients in inpatient unit:", hospital.num_patients_inpatient)
-except sp.Interrupt:
-    print("Simulation interrupted at time:", env.now)
-    print("Number of patients in outpatient unit:", hospital.num_patients_outpatient)
-    print("Number of patients in inpatient unit:", hospital.num_patients_inpatient)
-
-env.run(until=100)
-print("Simulation complete at time: ",env.now)
-print("Number of arrivals in outpatient unit: ",hospital.num_patients_outpatient)
-print("Number of arrivals in inpatient unit: ",hospital.num_patients_inpatient)
-""" and None
-
-ungur = 0
-middle = 0
-old = 0
+ungur = np.zeros(2)
+middle = np.zeros(2)
+old = np.zeros(2)
 inp = 0
 outp = 0
 
 for p in pts:
-    if p.age == "Young":
-        ungur += 1
-    elif p.age == "Middle-aged":
-        middle += 1
+    if p.age == "Young" and p.unit == "Inpatient":
+        ungur[0] += 1
+    elif p.age == "Young" and p.unit == "Outpatient":
+        ungur[1] += 1
+    elif p.age == "Middle-aged" and p.unit == "Inpatient":
+        middle[0] += 1
+    elif p.age == "Middle-aged" and p.unit == "Outpatient":
+        middle[1] += 1
+    elif p.age == "Old" and p.unit == "Inpatient":
+        old[0] += 1
     else:
-        old +=1
+        old[1] += 1
     if p.unit == "Outpatient":
         outp +=1
     else:
         inp +=1
 
-print(f"Number of Young/Middle-aged/Old patients that arrived: {ungur}/{middle}/{old}")
-print(f"Number of arrivals in the Outpatient/Inpatient unit: {outp}/{inp}")
+print(f"Number of Young/Middle-aged/Old arrivals in the Inpatient unit: {ungur[0]}/{middle[0]}/{old[0]}")
+print(f"Number of Young/Middle-aged/Old arrivals in the Outpatient unit: {ungur[1]}/{middle[1]}/{old[1]}")
+print(f"Total no. of arrivals in the Outpatient/Inpatient unit: {outp}/{inp}")
+
+df = pd.DataFrame(
+    {"Inpatient": [ungur[0],middle[0],old[0]],
+     "Outpatient": [ungur[1],middle[1],old[1]]},
+     index = ["Young","Middle-aged","Old"]
+)
+
+
+
+fig = px.bar(df,
+            barmode="group",
+            labels={"variable":"Unit","index":"Age group","value":"No. of patients"},
+            )
+fig.show()
