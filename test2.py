@@ -1,6 +1,8 @@
 import simpy as sp
 import random
 import numpy as np
+import streamlit as sp
+import pandas as pd
 
 inpatient_arrival = []
 outpatient_arrival = []
@@ -8,9 +10,10 @@ pts = []
 arrival_rates = {'Young':0.2,'Middle-aged':0.4,'Old':0.6} 
 
 class Patient:
-    def __init__(self, id, age):
+    def __init__(self, id, age, unit):
         self.id = id
         self.age = age
+        self.unit = unit
 
 class Hospital:
     def __init__(self, env):
@@ -26,20 +29,22 @@ class Hospital:
             with self.outpatient_units.request() as request:
                 yield request # Patient arrived at outpatient unit
                 self.num_patients_outpatient += 1
+                patient.unit = "Outpatient"
                 #print(f'{patient.id} ({patient.age}) assigned to outpatient unit')
 
-                yield self.env.timeout(random.expovariate(0.02))  # Treatment time
+                yield self.env.timeout(0.3)  # Treatment time
                 #print(f'{patient.id} ({patient.age}) discharged from outpatient unit')
-                #self.num_patients_outpatient -= 1
+                self.num_patients_outpatient -= 1
         else:
             with self.inpatient_units.request() as request:
                 yield request # Patient arrived to inpatient unit
                 self.num_patients_inpatient += 1
+                patient.unit = "Inpatient"
                 #print(f'{patient.id} ({patient.age}) assigned to inpatient unit')
 
-                yield self.env.timeout(0.1)  # Treatment time
+                yield self.env.timeout(1)  # Treatment time
                 #print(f'{patient.id} ({patient.age}) discharged from inpatient unit')
-                #self.num_patients_inpatient -= 1
+                self.num_patients_inpatient -= 1
 
     def patient_arrival(self):
         while True:
@@ -52,7 +57,7 @@ class Hospital:
                 print("Process interrupted at time ",env.now)
                 print("Number of patients in outpatient unit:", hospital.num_patients_outpatient)
                 print("Number of patients in inpatient unit:", hospital.num_patients_inpatient)
-            patient = Patient(f'Patient-{self.env.now}', age_group)
+            patient = Patient(f'Patient-{self.env.now}', age_group,"")
             pts.append(patient)
             self.env.process(self.assign_unit(patient))
     
@@ -111,11 +116,13 @@ env.run(until=100)
 print("Simulation complete at time: ",env.now)
 print("Number of arrivals in outpatient unit: ",hospital.num_patients_outpatient)
 print("Number of arrivals in inpatient unit: ",hospital.num_patients_inpatient)
-"""
+""" and None
 
 ungur = 0
 middle = 0
 old = 0
+inp = 0
+outp = 0
 
 for p in pts:
     if p.age == "Young":
@@ -124,5 +131,10 @@ for p in pts:
         middle += 1
     else:
         old +=1
+    if p.unit == "Outpatient":
+        outp +=1
+    else:
+        inp +=1
 
-#print(f"Number of Young/Middle-aged/Old patients: {ungur}/{middle}/{old}")
+print(f"Number of Young/Middle-aged/Old patients that arrived: {ungur}/{middle}/{old}")
+print(f"Number of arrivals in the Outpatient/Inpatient unit: {outp}/{inp}")
