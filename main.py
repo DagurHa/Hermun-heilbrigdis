@@ -4,152 +4,165 @@ import time
 import pandas as pd
 import matplotlib.pyplot as plt
 import streamlit as st
+import simpy as sp
 from bokeh.plotting import figure,show
 from bokeh.io import output_notebook
 
-TIMI = 0
-STOP = 10000
-prob = {
-    "legudeild" : [0.0, 0.7, 0.3, 0.0],
-    "móttaka" : [0.5, 0.0, 0.0, 0.5],
-    "death" : [0.0, 0.0, 1.0, 0.0],
-    "Heim" : [0.0, 0.0, 0.0, 1.0]
+TIMI = 0  #Byrjunartími hermunar (gæti verið useless)
+#Hér eftir koma allar global breytur.
+# Mismunandi stöður sjúklings. Bætum við og breytum þegar lengra er komið.
+STATES = ["legudeild", "göngudeild", "dauði", "heim"]
+AGE_GROUPS = ["Ungir","Miðaldra","Gamlir"] # mismunandi aldurshópar sjúklings. Breytum/bætum við mögulega
+# meðaltími milli koma á spítalann frá mismunandi aldurshópum. Hér höfum við default tímann.
+# Þessi tími mun vera byggður á gögnum vonandi, síðan er hægt að breyta í streamlit til að fá mismunandi útkomur.
+ARRIVAL_RATES = {
+    AGE_GROUPS[0] : 1.0,
+    AGE_GROUPS[1] : 0.8,
+    AGE_GROUPS[2] : 0.5
 }
+# færslulíkur milli deilda, hér höfum við default færslulíkur sem verða vonandi byggðar á gögnum. 
+# Síðan er líka hægt að breyta í streamlit.
+PROB = {
+    STATES[0] : [0.0, 0.1, 0.3, 0.6],
+    STATES[1] : [0.0, 0.1, 0.0, 0.9],
+    STATES[2] : [0.0, 0.0, 1.0, 0.0],
+    STATES[3] : [0.0, 0.0, 0.0, 1.0]
+}
+INITIAL_PROB = [0.3, 0.7] # Upphafslíkur á að fara á göngudeild og legudeild (þessu mun verða breytt)
+# meðalbiðtímar á göngu- og legudeild, þetta verður default biðin sem byggist nú á aldri og verður vonandi byggð á gögnum.
+MEAN_WAIT_TIMES = {
+    (AGE_GROUPS[0], STATES[0]) : 2.0, (AGE_GROUPS[0], STATES[1]) : 0.01,
+    (AGE_GROUPS[1], STATES[0]) : 3.0, (AGE_GROUPS[1], STATES[1]) : 0.02,
+    (AGE_GROUPS[2], STATES[0]) : 5.0, (AGE_GROUPS[2], STATES[1]) : 0.04
+}
+# stiki fyrir min af veldisvísisdreifingum fyrir tíma til næstu komu
+lam = sum([1.0/ARRIVAL_RATES[age] for age in AGE_GROUPS])
 #Athuga gæti verið gott að setja default sim attributes lika
-simAttributes = {}
+simAttributes = {
+    "Komutímar" : ARRIVAL_RATES,
+    "Færslulíkur" : PROB,
+    "Upphafslíkur" : INITIAL_PROB
+}
 
 class Patient:
-    def __init__(self,aldur,place):
+    def __init__(self,aldur,env):
+        self.env = env
         self.aldur = aldur
-        self.place = place
         self.timiSpitala = 0
-        self.attribs = prob
-    def updatePatient(self,S):
-        assert self.place in self.attribs, "sjúklingur er ekki á vel skilgreindum stað"
-        prev = self.place
-        for deild in self.attribs:
-            if self.place == deild:
-                self.place = np.random.choice(list(self.attribs.keys()), p = self.attribs[deild])
-        if self.place != "Heim" and self.place != "death":
-            S.moveP(self.place,prev)
+        self.attribs = PROB
+    def newPatient(self,S):
+        deild = np.random.choice([STATES[0],STATES[1]],p = INITIAL_PROB)
+        yield self.env.process(S.addP(self,deild))
+    def updatePatient(self,S,prev):
+        deild = np.random.choice(PROB,p = PROB[prev])
+        if deild == STATES[2] or deild == STATES[3]:
+            S.removeP(prev,deild)
+        else:
+            yield self.env.process(S.addP(self,deild))
+
 
 class Spitali:
-    def __init__(self,cap,fjoldi):
+    def __init__(self,cap,fjoldi,env):
+        self.p_age = [(1.0/ARRIVAL_RATES[age])/lam for age in AGE_GROUPS]
+        self.env = env
         self.cap = cap
         self.fjoldi = fjoldi
         self.amount = sum(list(fjoldi.values()))
-    def addP(self,p):
-        self.fjoldi[p.place] += 1
+        self.action = env.process(self.patientGen(env))
+    def addP(self,p,deild):
+        self.fjoldi[deild] += 1
         self.amount += 1
-    def removeP(self):
+        wait = random.expovariate(1.0/MEAN_WAIT_TIMES[(p.aldur,deild)])
+        yield self.env.timeout(wait)
+        p.updatePatient(self,deild)
+    def removeP(self,prev):
         self.amount -= 1
-    def moveP(self,new,prev):
-        self.fjoldi[new] += 1
         self.fjoldi[prev] -= 1
- 
+    def patientGen(self,env):
+        while True:
+            try:
+                wait = random.expovariate(lam)
+                yield env.timeout(wait)
+                aldur = np.random.choice(AGE_GROUPS,p = self.p_age)
+                p = Patient(aldur,env)
+                print(f"Nýr {p.aldur} sjúklingur kemur á tíma {env.now}")
+                yield env.process(p.newPatient(self))
+            except sp.Interrupt:
+                print(f'Stoppum á tíma {env.now} og náum í gögn')
+
+def interrupter(env,S,t,data,showSim,chart = None):
+    for _ in range(t):
+        yield env.timeout(1)
+        S.action.interrupt()
+        for state in STATES:
+            data[state].append(S.fjoldi[state])
+        if showSim:
+            d = {"fjöldi á spítala": [S.amount],"capacity":S.cap}
+            df = pd.DataFrame(d,index = [env.now])
+            chart.add_rows(df)
+            time.sleep(0.1)
+        
+
 def sim(showSim,simAttributes):
     #simAttributes inniheldur allar upplýsingar um forsendum hermuninnar
     #Ef maður vill sjá þróun fjölda fólks á spítalanum er showSim = True
     #Skilar núna fjölda á deildum spítalans á hverju dt skrefi.
+    env = sp.Environment()
     fjoldi = {
-    "legudeild" : 0,
-    "móttaka" : 0
+        STATES[0] : 0,
+        STATES[1] : 0,
+        STATES[2] : 0,
+        STATES[3] : 0
     }
     data = {
-        "legudeild" : [],
-        "móttaka" : []
+        STATES[0] : [],
+        STATES[1] : [],
+        STATES[2] : [],
+        STATES[3] : []
     }
-    p_A = simAttributes["p_A"]
-    p_U = simAttributes["p_U"]
-    dt = simAttributes["dt"]
-    N = simAttributes["N"]
-    h_A = simAttributes["h_A"]
-    h_U = simAttributes["h_U"]
-    timi = TIMI #global breyta
     cap = simAttributes["CAP"]
     STOP = simAttributes["STOP"]
-    P = []            # listi sjúklinga á spítala
-    S = Spitali(cap,fjoldi)  # spítali með capacity cap og núverandi sjúklingar á deildum í fjoldi (global breyta)
+    S = Spitali(cap,fjoldi,env)  # spítali með capacity cap og núverandi sjúklingar á deildum í fjoldi (global breyta)
     if showSim:
-        d = {"fjöldi á spítala":[0],"capacity":cap}
-        df = pd.DataFrame(d,index = [timi])
-        chart = chart_col.line_chart(df)
-    for deild in S.fjoldi:
-        data[deild].append(S.fjoldi[deild])
-    while(timi < STOP):
-        timi += dt
-        for _ in range(dt):
-            s_A = np.random.binomial(h_A*N,p_A)
-            s_U = np.random.binomial(h_U*N,p_U)
-            N -= (s_A+s_U)
-            for _ in range(s_A):
-                age = random.randint(65,99)
-                pi = Patient(age,"móttaka")
-                P.append(pi)
-                S.addP(pi)
-            for _ in range(s_U):
-                age = random.randint(1,64)
-                pi = Patient(age,"móttaka")
-                P.append(pi)
-                S.addP(pi)
-            for p in P:
-                p.updatePatient(S)
-                if p.place == "Death":
-                    P.remove(p)
-                    S.removeP()
-                if p.place == "Heim":
-                    P.remove(p)
-                    S.removeP()
-                    N+=1
-        if showSim:            
-            d = {"fjöldi á spítala": [S.amount],"capacity":cap}
-            df = pd.DataFrame(d,index = [timi])
-            chart.add_rows(df)
-            time.sleep(0.1)
-        for deild in S.fjoldi:
-            data[deild].append(S.fjoldi[deild])
-        #print("fjöldi fólks á spítala á degi",timi,"er",S.amount)
+        d = {"fjöldi á spítala": [S.amount],"capacity":S.cap}
+        df = pd.DataFrame(d,index = [0])
+        chart = st.line_chart(df)
+        env.process(interrupter(env,S,STOP,data,chart,showSim))
+    else:
+        env.process(interrupter(env,S,STOP,data,showSim))
+    env.run(until = STOP)
     return data
 
 #sliders o.fl.
 with st.expander("Hermunarstillingar"):
-    simAttributes["h_A"] = st.slider("Hlutfall aldraðra",value = 0.3,step = 0.02)
-    simAttributes["N"] = st.number_input("Stærð þjóðar",min_value = 500,max_value = 10000,value = 1000)
-    simAttributes["dt"] = st.slider("Tímaskref í dögum",min_value = 1,max_value = 30,step = 1)
+    simAttributes["Komutímar"][0] = st.number_input("Meðaltími milli komu ungra",min_value = 0.01, max_value=5.0,
+                                                    value = simAttributes["Komutímar"][AGE_GROUPS[0]],step = 0.02)
+    simAttributes["Komutímar"][1] = st.number_input("Meðaltími milli komu miðaldra",min_value = 0.01, max_value=5.0,
+                                                    value = simAttributes["Komutímar"][AGE_GROUPS[1]],step = 0.02)
+    simAttributes["Komutímar"][2] = st.number_input("Meðaltími milli komu aldraðra",min_value = 0.01, max_value=5.0,
+                                                    value = simAttributes["Komutímar"][AGE_GROUPS[2]],step = 0.02)
+    simAttributes["Upphafslíkur"][0] = st.slider("Líkur á að nýr sjúklingur fari á göngudeild", 
+                                                    value = simAttributes["Upphafslíkur"][0])
+    simAttributes["Upphafslíkur"][1] = st.slider("Líkur á að nýr sjúklingur fari á legudeild", 
+                                                    value = simAttributes["Upphafslíkur"][1])
     simAttributes["CAP"] = st.slider("Hámarskfjöldi á spítala",min_value = 100,max_value = 1000,value = 250,step = 50)
-    simAttributes["p_A"] = st.slider("Líkur á að aldraðir fari á spítala á dag",value = 0.1,step=0.1)
-    simAttributes["p_U"] = st.slider("Líkur á að ungir fari á spítala á dag",value = 0.02,step=0.1)
     simAttributes["STOP"] = st.number_input("Fjöldi hermunardaga",min_value=10,max_value=1095,value=100)
+    L = st.number_input("Fjöldi hermana",2,1000,100)
 
-simAttributes["h_U"] = 1-simAttributes["h_A"]
-
-visual_col,chart_col = st.columns(2)
-
-labels = "Aldraðir","Ungir"
-sizes = [simAttributes["h_A"]*simAttributes["N"],simAttributes["h_U"]*simAttributes["N"]]
-
-fig1,ax1 = plt.subplots()
-ax1.pie(sizes,labels = labels)
-
-visual_col.pyplot(fig1)
-
-chart_col.write("Sjá hermun með völdum hermunarstillingum")
-start = chart_col.button("Start")
-stop = chart_col.button("Stop")
+st.write("Sjá eina hermun með völdum hermunarstillingum")
+start = st.button("Start")
 
 if start:
    data = sim(True,simAttributes)
-
-if stop:
-    st.stop()
+   print(data)
 
 st.write("Hermunarstillingar")
 
-L = st.number_input("Fjöldi hermana",2,1000,100)
-
 totalData = {
-    "legudeild" :[] ,
-    "móttaka" : []
+    STATES[0] : [],
+    STATES[1] : [],
+    STATES[2] : [],
+    STATES[3] : []
 }
 hundur = st.button("Byrja hermun!")
 if hundur:
@@ -159,8 +172,8 @@ if hundur:
         for deild in data:
             totalData[deild].append(sum(data[deild])/simAttributes["STOP"])
 
-leguData = totalData["legudeild"]
-motData = totalData["móttaka"]
+leguData = totalData[STATES[0]]
+motData = totalData[STATES[1]]
 
 print(totalData)
 
