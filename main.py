@@ -12,24 +12,29 @@ TIMI = 0  #Byrjunartími hermunar (gæti verið useless)
 #Hér eftir koma allar global breytur.
 # Mismunandi stöður sjúklings. Bætum við og breytum þegar lengra er komið.
 STATES = ["legudeild", "göngudeild", "dauði", "heim"]
-AGE_GROUPS = ["Ungir","Miðaldra","Gamlir"] # mismunandi aldurshópar sjúklings. Breytum/bætum við mögulega
+AGE_GROUPS = ["Ungur","Miðaldra","Gamall"] # mismunandi aldurshópar sjúklings. Breytum/bætum við mögulega
 # meðaltími milli koma á spítalann frá mismunandi aldurshópum. Hér höfum við default tímann.
 # Þessi tími mun vera byggður á gögnum vonandi, síðan er hægt að breyta í streamlit til að fá mismunandi útkomur.
+lyklar = [age_group for age_group in AGE_GROUPS]
+vals = [len(AGE_GROUPS)-i for i in range(len(AGE_GROUPS))]
 ARRIVAL_RATES = {
     AGE_GROUPS[0] : 1.0,
     AGE_GROUPS[1] : 0.8,
     AGE_GROUPS[2] : 0.5
 }
+
 # færslulíkur milli deilda, hér höfum við default færslulíkur sem verða vonandi byggðar á gögnum. 
 # Síðan er líka hægt að breyta í streamlit.
 PROB = {
-    STATES[0] : [0.0, 0.1, 0.3, 0.6],
-    STATES[1] : [0.0, 0.1, 0.0, 0.9],
+    STATES[0] : [0.0, 0.0, 0.3, 0.7],
+    STATES[1] : [0.0, 0.0, 0.0, 1.0],
     STATES[2] : [0.0, 0.0, 1.0, 0.0],
     STATES[3] : [0.0, 0.0, 0.0, 1.0]
 }
 INITIAL_PROB = [0.3, 0.7] # Upphafslíkur á að fara á göngudeild og legudeild (þessu mun verða breytt)
 # meðalbiðtímar á göngu- og legudeild, þetta verður default biðin sem byggist nú á aldri og verður vonandi byggð á gögnum.
+keys2 = [(AGE_GROUPS[i],STATES[j]) for i in range(len(AGE_GROUPS)) for j in range(len(STATES))]
+vals2 = [len(AGE_GROUPS)+len(STATES)-i-j for i in range(len(AGE_GROUPS)) for j in range(len(STATES))]
 MEAN_WAIT_TIMES = {
     (AGE_GROUPS[0], STATES[0]) : 2.0, (AGE_GROUPS[0], STATES[1]) : 0.01,
     (AGE_GROUPS[1], STATES[0]) : 3.0, (AGE_GROUPS[1], STATES[1]) : 0.02,
@@ -85,10 +90,9 @@ class Spitali:
                 yield env.timeout(wait)
                 aldur = np.random.choice(AGE_GROUPS,p = self.p_age)
                 p = Patient(aldur,env)
-                print(f"Nýr {p.aldur} sjúklingur kemur á tíma {env.now}")
                 yield env.process(p.newPatient(self))
             except sp.Interrupt:
-                print(f'Stoppum á tíma {env.now} og náum í gögn')
+                pass
 
 def interrupter(env,S,t,data,showSim,chart = None):
     for _ in range(t):
@@ -104,9 +108,9 @@ def interrupter(env,S,t,data,showSim,chart = None):
         
 
 def sim(showSim,simAttributes):
-    #simAttributes inniheldur allar upplýsingar um forsendum hermuninnar
+    #simAttributes inniheldur allar upplýsingar um forsendur hermuninnar
     #Ef maður vill sjá þróun fjölda fólks á spítalanum er showSim = True
-    #Skilar núna fjölda á deildum spítalans á hverju dt skrefi.
+    #Skilar núna fjölda á deildum spítalans á hverjum klst.
     env = sp.Environment()
     fjoldi = {
         STATES[0] : 0,
@@ -127,36 +131,40 @@ def sim(showSim,simAttributes):
         d = {"fjöldi á spítala": [S.amount],"capacity":S.cap}
         df = pd.DataFrame(d,index = [0])
         chart = st.line_chart(df)
-        env.process(interrupter(env,S,STOP,data,chart,showSim))
+        env.process(interrupter(env,S,STOP,data,showSim,chart))
     else:
         env.process(interrupter(env,S,STOP,data,showSim))
     env.run(until = STOP)
     return data
 
+
+## Hér kemur streamlit kóðinn
+
+st.title("Hermun heilbrigðiskerfisins")
+
 #sliders o.fl.
 with st.expander("Hermunarstillingar"):
-    simAttributes["Komutímar"][0] = st.number_input("Meðaltími milli komu ungra",min_value = 0.01, max_value=5.0,
+    simAttributes["Komutímar"][AGE_GROUPS[0]] = st.number_input("Meðaltími milli komu ungra",min_value = 0.01, max_value=5.0,
                                                     value = simAttributes["Komutímar"][AGE_GROUPS[0]],step = 0.02)
-    simAttributes["Komutímar"][1] = st.number_input("Meðaltími milli komu miðaldra",min_value = 0.01, max_value=5.0,
+    simAttributes["Komutímar"][AGE_GROUPS[1]] = st.number_input("Meðaltími milli komu miðaldra",min_value = 0.01, max_value=5.0,
                                                     value = simAttributes["Komutímar"][AGE_GROUPS[1]],step = 0.02)
-    simAttributes["Komutímar"][2] = st.number_input("Meðaltími milli komu aldraðra",min_value = 0.01, max_value=5.0,
+    simAttributes["Komutímar"][AGE_GROUPS[2]] = st.number_input("Meðaltími milli komu aldraðra",min_value = 0.01, max_value=5.0,
                                                     value = simAttributes["Komutímar"][AGE_GROUPS[2]],step = 0.02)
-    simAttributes["Upphafslíkur"][0] = st.slider("Líkur á að nýr sjúklingur fari á göngudeild", 
+    simAttributes["Upphafslíkur"][0] = st.slider("Líkur á að nýr sjúklingur fari á legudeild", 
                                                     value = simAttributes["Upphafslíkur"][0])
-    simAttributes["Upphafslíkur"][1] = st.slider("Líkur á að nýr sjúklingur fari á legudeild", 
-                                                    value = simAttributes["Upphafslíkur"][1])
     simAttributes["CAP"] = st.slider("Hámarskfjöldi á spítala",min_value = 100,max_value = 1000,value = 250,step = 50)
     simAttributes["STOP"] = st.number_input("Fjöldi hermunardaga",min_value=10,max_value=1095,value=100)
     L = st.number_input("Fjöldi hermana",2,1000,100)
 
-st.write("Sjá eina hermun með völdum hermunarstillingum")
+simAttributes["Upphafslíkur"][1] = 1 - simAttributes["Upphafslíkur"][0]
+st.text("Sjá eina hermun með völdum hermunarstillingum")
 start = st.button("Start")
 
 if start:
    data = sim(True,simAttributes)
    print(data)
 
-st.write("Hermunarstillingar")
+st.text("Hermunarstillingar")
 
 totalData = {
     STATES[0] : [],
@@ -177,10 +185,10 @@ motData = totalData[STATES[1]]
 
 print(totalData)
 
-fig2, ax2 = plt.subplots()
-ax2.boxplot([leguData,motData])
+fig1, ax1 = plt.subplots()
+ax1.boxplot([leguData,motData])
 
-st.pyplot(fig2)
+st.pyplot(fig1)
 
 """gamall = 0
 ungur = 0
