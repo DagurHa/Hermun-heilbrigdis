@@ -7,6 +7,7 @@ import streamlit as st
 import simpy as sp
 from bokeh.plotting import figure,show
 from bokeh.io import output_notebook
+import plotly.express as px
 
 TIMI = 0  #Byrjunartími hermunar (gæti verið useless)
 #Hér eftir koma allar global breytur.
@@ -185,34 +186,11 @@ motData = totalData[STATES[1]]
 
 print(totalData)
 
-fig1, ax1 = plt.subplots()
-ax1.boxplot([leguData,motData])
+df = pd.DataFrame(
+    {"Legudeild": leguData,
+     "Göngudeild": motData}
+)
+fig = px.box(df)
+st.plotly_chart(fig)
 
-st.pyplot(fig1)
 
-"""gamall = 0
-ungur = 0
-for p in patients:
-    if p.check_in_time and p.check_out_time is not None:    
-        stay.append(p.check_out_time - p.check_in_time)
-    if p.aldur < 65:
-        ungur +=1
-    else:
-        gamall +=1
-
-print(f"Number of patients: {gamall+ungur}")
-print(f"Number of patients that have yet to check out: {noncheckout}")
-print(f"Average stay of patients: {sum(stay)/len(stay)} time units")
-print(f"Fraction of old people: {gamall/(gamall+ungur)}")
-
-plot = figure(x_range=['Younger than 65', 'Older than 65'], title='Patient Age Distribution')
-
-Creating a histogram
-plot.vbar(x=['Younger than 65', 'Older than 65'], top=[ungur, gamall], width=0.4)
-
-Styling the plot
-plot.xaxis.axis_label = 'Age Group'
-plot.yaxis.axis_label = 'Number of Patients'
-
-Show the plot
-st.write(plot)"""
