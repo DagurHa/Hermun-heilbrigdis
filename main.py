@@ -2,13 +2,9 @@ import numpy as np
 import random
 import time
 import pandas as pd
-import matplotlib.pyplot as plt
 import streamlit as st
 import simpy as sp
-from bokeh.plotting import figure,show
-from bokeh.io import output_notebook
 import plotly.express as px
-import altair as alt
 
 TIMI = 0  #Byrjunartími hermunar (gæti verið useless)
 #Hér eftir koma allar global breytur.
@@ -17,26 +13,21 @@ STATES = ["legudeild", "göngudeild", "dauði", "heim"]
 AGE_GROUPS = ["Ungur","Miðaldra","Gamall"] # mismunandi aldurshópar sjúklings. Breytum/bætum við mögulega
 # meðaltími milli koma á spítalann frá mismunandi aldurshópum. Hér höfum við default tímann.
 # Þessi tími mun vera byggður á gögnum vonandi, síðan er hægt að breyta í streamlit til að fá mismunandi útkomur.
-lyklar = [age_group for age_group in AGE_GROUPS]
-vals = [len(AGE_GROUPS)-i for i in range(len(AGE_GROUPS))]
 ARRIVAL_RATES = {
     AGE_GROUPS[0] : 1.0,
     AGE_GROUPS[1] : 0.8,
     AGE_GROUPS[2] : 0.5
 }
-
 # færslulíkur milli deilda, hér höfum við default færslulíkur sem verða vonandi byggðar á gögnum. 
 # Síðan er líka hægt að breyta í streamlit.
 PROB = {
-    STATES[0] : [0.0, 0.0, 0.3, 0.7],
-    STATES[1] : [0.0, 0.0, 0.0, 1.0],
+    STATES[0] : [0.0, 0.3, 0.1, 0.6],
+    STATES[1] : [0.0, 0.5, 0.0, 0.5],
     STATES[2] : [0.0, 0.0, 1.0, 0.0],
     STATES[3] : [0.0, 0.0, 0.0, 1.0]
 }
-INITIAL_PROB = [0.3, 0.7] # Upphafslíkur á að fara á göngudeild og legudeild (þessu mun verða breytt)
+INITIAL_PROB = [0.3, 0.7] # Upphafslíkur á að fara á legudeild og göngudeild (þessu mun verða breytt)
 # meðalbiðtímar á göngu- og legudeild, þetta verður default biðin sem byggist nú á aldri og verður vonandi byggð á gögnum.
-keys2 = [(AGE_GROUPS[i],STATES[j]) for i in range(len(AGE_GROUPS)) for j in range(len(STATES))]
-vals2 = [len(AGE_GROUPS)+len(STATES)-i-j for i in range(len(AGE_GROUPS)) for j in range(len(STATES))]
 #Pæling að hafa dag-/göngudeild alltaf einn dag og einhverjar líkur á að göngu-/dagdeildarsjúklingar fari á legudeild
 MEAN_WAIT_TIMES = {
     (AGE_GROUPS[0], STATES[0]) : 2.0, (AGE_GROUPS[0], STATES[1]) : 0.01,
@@ -60,12 +51,13 @@ class Patient:
     # Þegar sjúklingur er búinn á sinni deild finnum við hvert hann fer næst og sendum hann þangað
     def updatePatient(self,S):
         prev = self.deild
-        new_deild = np.random.choice(PROB,p = PROB[prev])
+        new_deild = np.random.choice(STATES,p = PROB[prev])
         self.deild = new_deild
         if self.deild == STATES[2] or self.deild == STATES[3]:
-            S.removeP(prev,self.deild)
+            S.removeP(prev,self)
         else:
-            yield self.env.process(S.addP(self))
+            S.fjoldi[prev] -= 1
+            yield self.env.process(S.addP(self,True))
 
 
 class Spitali:
@@ -85,31 +77,34 @@ class Spitali:
                 aldur = np.random.choice(AGE_GROUPS,p = self.p_age)
                 deild = np.random.choice([STATES[0],STATES[1]],p = INITIAL_PROB)
                 p = Patient(aldur,env,deild)
-                yield env.process(self.addP(p))
+                yield env.process(self.addP(p,False))
             except sp.Interrupt:
                 pass
     # Bætum nýjum sjúklingi við á deildina sína og látum hann bíða þar
-    def addP(self,p):
+    def addP(self,p,innritaður):
         self.fjoldi[p.deild] += 1
-        self.amount += 1
+        if not innritaður:
+            self.amount += 1
         wait = random.expovariate(1.0/MEAN_WAIT_TIMES[(p.aldur,p.deild)])
         yield self.env.timeout(wait)
-        p.updatePatient(self)
+        yield self.env.process(p.updatePatient(self))
     # fjarlægjum sjúkling af deildinni prev
-    def removeP(self,prev):
+    def removeP(self,prev,p):
         self.amount -= 1
         self.fjoldi[prev] -= 1
+        self.fjoldi[p.deild] += 1 # Ef sjúklingur er farinn af spítala er hann annað hvort dáinn eða farinn heim núna
 
-def interrupter(env,S,t,data,showSim,chart = None):
+
+def interrupter(env,S,t,data,showSim,chart):
     wait_time = t/100.0
-    for _ in range(t):
+    for i in range(t):
         yield env.timeout(wait_time)
         S.action.interrupt()
         for state in STATES:
             data[state].append(S.fjoldi[state])
         if showSim:
             d = {"fjöldi á spítala": [S.amount],"capacity":S.cap}
-            df = pd.DataFrame(d,index = [env.now])
+            df = pd.DataFrame(d,index = [i])
             chart.add_rows(df)
             time.sleep(0.1)
         
@@ -139,7 +134,7 @@ def sim(showSim,simAttributes):
         chart = st.line_chart(df)
         env.process(interrupter(env,S,STOP,data,showSim,chart))
     else:
-        env.process(interrupter(env,S,STOP,data,showSim))
+        env.process(interrupter(env,S,STOP,data,showSim, None))
     env.run(until = STOP)
     return data
 
