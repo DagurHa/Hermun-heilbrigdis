@@ -8,6 +8,7 @@ import simpy as sp
 from bokeh.plotting import figure,show
 from bokeh.io import output_notebook
 import plotly.express as px
+import altair as alt
 
 TIMI = 0  #Byrjunartími hermunar (gæti verið useless)
 #Hér eftir koma allar global breytur.
@@ -36,13 +37,12 @@ INITIAL_PROB = [0.3, 0.7] # Upphafslíkur á að fara á göngudeild og legudeil
 # meðalbiðtímar á göngu- og legudeild, þetta verður default biðin sem byggist nú á aldri og verður vonandi byggð á gögnum.
 keys2 = [(AGE_GROUPS[i],STATES[j]) for i in range(len(AGE_GROUPS)) for j in range(len(STATES))]
 vals2 = [len(AGE_GROUPS)+len(STATES)-i-j for i in range(len(AGE_GROUPS)) for j in range(len(STATES))]
+#Pæling að hafa dag-/göngudeild alltaf einn dag og einhverjar líkur á að göngu-/dagdeildarsjúklingar fari á legudeild
 MEAN_WAIT_TIMES = {
     (AGE_GROUPS[0], STATES[0]) : 2.0, (AGE_GROUPS[0], STATES[1]) : 0.01,
     (AGE_GROUPS[1], STATES[0]) : 3.0, (AGE_GROUPS[1], STATES[1]) : 0.02,
     (AGE_GROUPS[2], STATES[0]) : 5.0, (AGE_GROUPS[2], STATES[1]) : 0.04
 }
-# stiki fyrir min af veldisvísisdreifingum fyrir tíma til næstu komu
-lam = sum([1.0/ARRIVAL_RATES[age] for age in AGE_GROUPS])
 #Athuga gæti verið gott að setja default sim attributes lika
 simAttributes = {
     "Komutímar" : ARRIVAL_RATES,
@@ -51,53 +51,59 @@ simAttributes = {
 }
 
 class Patient:
-    def __init__(self,aldur,env):
+    def __init__(self,aldur,env,deild):
+        self.deild = deild
         self.env = env
         self.aldur = aldur
-        self.timiSpitala = 0
+        self.timiSpitala = 0 # Þetta gæti verið gott í framtíð
         self.attribs = PROB
-    def newPatient(self,S):
-        deild = np.random.choice([STATES[0],STATES[1]],p = INITIAL_PROB)
-        yield self.env.process(S.addP(self,deild))
-    def updatePatient(self,S,prev):
-        deild = np.random.choice(PROB,p = PROB[prev])
-        if deild == STATES[2] or deild == STATES[3]:
-            S.removeP(prev,deild)
+    # Þegar sjúklingur er búinn á sinni deild finnum við hvert hann fer næst og sendum hann þangað
+    def updatePatient(self,S):
+        prev = self.deild
+        new_deild = np.random.choice(PROB,p = PROB[prev])
+        self.deild = new_deild
+        if self.deild == STATES[2] or self.deild == STATES[3]:
+            S.removeP(prev,self.deild)
         else:
-            yield self.env.process(S.addP(self,deild))
+            yield self.env.process(S.addP(self))
 
 
 class Spitali:
-    def __init__(self,cap,fjoldi,env):
-        self.p_age = [(1.0/ARRIVAL_RATES[age])/lam for age in AGE_GROUPS]
+    def __init__(self,fjoldi,env,simAttributes):
+        self.const = simAttributes
+        self.p_age = [(1.0/self.const["Komutímar"][age])/self.const["lambda"] for age in AGE_GROUPS]
         self.env = env
-        self.cap = cap
+        self.cap = self.const["STOP"]
         self.fjoldi = fjoldi
-        self.amount = sum(list(fjoldi.values()))
+        self.amount = 0 # sum(list(fjoldi.values()))
         self.action = env.process(self.patientGen(env))
-    def addP(self,p,deild):
-        self.fjoldi[deild] += 1
-        self.amount += 1
-        wait = random.expovariate(1.0/MEAN_WAIT_TIMES[(p.aldur,deild)])
-        yield self.env.timeout(wait)
-        p.updatePatient(self,deild)
-    def removeP(self,prev):
-        self.amount -= 1
-        self.fjoldi[prev] -= 1
     def patientGen(self,env):
         while True:
             try:
-                wait = random.expovariate(lam)
+                wait = random.expovariate(self.const["lambda"])
                 yield env.timeout(wait)
                 aldur = np.random.choice(AGE_GROUPS,p = self.p_age)
-                p = Patient(aldur,env)
-                yield env.process(p.newPatient(self))
+                deild = np.random.choice([STATES[0],STATES[1]],p = INITIAL_PROB)
+                p = Patient(aldur,env,deild)
+                yield env.process(self.addP(p))
             except sp.Interrupt:
                 pass
+    # Bætum nýjum sjúklingi við á deildina sína og látum hann bíða þar
+    def addP(self,p):
+        self.fjoldi[p.deild] += 1
+        self.amount += 1
+        wait = random.expovariate(1.0/MEAN_WAIT_TIMES[(p.aldur,p.deild)])
+        yield self.env.timeout(wait)
+        p.updatePatient(self)
+    # fjarlægjum sjúkling af deildinni prev
+    def removeP(self,prev):
+        self.amount -= 1
+        self.fjoldi[prev] -= 1
 
 def interrupter(env,S,t,data,showSim,chart = None):
+    wait_time = t/100.0
     for _ in range(t):
-        yield env.timeout(1)
+        yield env.timeout(wait_time)
         S.action.interrupt()
         for state in STATES:
             data[state].append(S.fjoldi[state])
@@ -125,11 +131,10 @@ def sim(showSim,simAttributes):
         STATES[2] : [],
         STATES[3] : []
     }
-    cap = simAttributes["CAP"]
     STOP = simAttributes["STOP"]
-    S = Spitali(cap,fjoldi,env)  # spítali með capacity cap og núverandi sjúklingar á deildum í fjoldi (global breyta)
+    S = Spitali(fjoldi,env,simAttributes)  # spítali með capacity cap og núverandi sjúklingar á deildum í fjoldi (global breyta)
     if showSim:
-        d = {"fjöldi á spítala": [S.amount],"capacity":S.cap}
+        d = {"fjöldi á spítala": [S.amount],"capacity": S.cap}
         df = pd.DataFrame(d,index = [0])
         chart = st.line_chart(df)
         env.process(interrupter(env,S,STOP,data,showSim,chart))
@@ -155,15 +160,16 @@ with st.expander("Hermunarstillingar"):
                                                     value = simAttributes["Upphafslíkur"][0])
     simAttributes["CAP"] = st.slider("Hámarskfjöldi á spítala",min_value = 100,max_value = 1000,value = 250,step = 50)
     simAttributes["STOP"] = st.number_input("Fjöldi hermunardaga",min_value=10,max_value=1095,value=100)
-    L = st.number_input("Fjöldi hermana",2,1000,100)
+    L = st.number_input("Fjöldi hermana",100,1000,100)
 
 simAttributes["Upphafslíkur"][1] = 1 - simAttributes["Upphafslíkur"][0]
+simAttributes["lambda"] = sum([1.0/ARRIVAL_RATES[age] for age in AGE_GROUPS])
+
 st.text("Sjá eina hermun með völdum hermunarstillingum")
 start = st.button("Start")
 
 if start:
    data = sim(True,simAttributes)
-   print(data)
 
 st.text("Hermunarstillingar")
 
@@ -185,6 +191,7 @@ leguData = totalData[STATES[0]]
 motData = totalData[STATES[1]]
 
 print(totalData)
+print(len(totalData["legudeild"]))
 
 df = pd.DataFrame(
     {"Legudeild": leguData,
