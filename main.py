@@ -5,9 +5,11 @@ import pandas as pd
 import streamlit as st
 import simpy as sp
 import plotly.express as px
+import cProfile
+import pstats
+import snakeviz
+import io
 
-TELJA = 0
-TIMI = 0  #Byrjunartími hermunar (gæti verið useless)
 #Hér eftir koma allar global breytur.
 # Mismunandi stöður sjúklings. Bætum við og breytum þegar lengra er komið.
 STATES = ["legudeild", "göngudeild", "dauði", "heim"]
@@ -22,7 +24,7 @@ AGE_GROUP_AMOUNT = {
 # Síðan er líka hægt að breyta í streamlit.
 PROB = {
     STATES[0] : [0.0, 0.3, 0.1, 0.6],
-    STATES[1] : [0.0, 0.5, 0.0, 0.5],
+    STATES[1] : [0.25, 0.0, 0.0, 0.75],
     STATES[2] : [0.0, 0.0, 1.0, 0.0],
     STATES[3] : [0.0, 0.0, 0.0, 1.0]
 }
@@ -57,7 +59,8 @@ class Patient:
         if self.deild == STATES[2] or self.deild == STATES[3]:
             S.removeP(prev,self)
         else:
-            S.fjoldi[prev] -= 1
+            if prev == STATES[0]:
+                S.fjoldi[(prev,self.aldur)] -= 1
             yield self.env.process(S.addP(self,True))
 
 
@@ -70,6 +73,7 @@ class Spitali:
         self.fjoldi = fjoldi
         self.amount = sum(list(fjoldi.values()))
         self.action = env.process(self.patientGen(env))
+        self.telja = 0
     def patientGen(self,env):
         while True:
             try:
@@ -78,17 +82,17 @@ class Spitali:
                 yield env.timeout(wait)
                 aldur = np.random.choice(AGE_GROUPS,p = self.p_age)
                 deild = np.random.choice([STATES[0],STATES[1]],p = self.const["Upphafslíkur"])
-                p = Patient(aldur,env,deild,TELJA)
+                p = Patient(aldur,env,deild,self.telja)
                 #print(f"Sjúklingur númer {p.numer} fer á {p.deild} og er {p.aldur}, liðinn tími er {env.now}")
                 env.process(self.addP(p,False))
             except sp.Interrupt:
                 pass
     # Bætum nýjum sjúklingi við á deildina sína og látum hann bíða þar
     def addP(self,p,innritaður):
-        self.fjoldi[p.deild] += 1
+        if p.deild == STATES[0]:
+            self.fjoldi[(p.deild,p.aldur)] += 1
         if not innritaður:
-            global TELJA
-            TELJA += 1
+            self.telja += 1
             self.amount += 1
             #print(f"fjöldi á spítala er núna {self.amount}, liðinn tími er {self.env.now}")
         wait = random.expovariate(1.0/MEAN_WAIT_TIMES[(p.aldur,p.deild)])
@@ -99,16 +103,16 @@ class Spitali:
     def removeP(self,prev,p):
         #print(f"Sjúklingur númer {p.numer} fer af {prev} til {p.deild}, liðinn tími er {self.env.now}")
         self.amount -= 1
-        self.fjoldi[prev] -= 1
-        self.fjoldi[p.deild] += 1 # Ef sjúklingur er farinn af spítala er hann annað hvort dáinn eða farinn heim núna
+        if prev == STATES[0]:
+            self.fjoldi[(prev,p.aldur)] -= 1
 
 
 def interrupter(env,S,STOP,data,showSim,chart):
     for i in range(STOP):
         yield env.timeout(1)
         S.action.interrupt()
-        for state in STATES:
-            data[state].append(S.fjoldi[state])
+        for age_group in AGE_GROUPS:
+            data[(STATES[0],age_group)].append(S.fjoldi[(STATES[0],age_group)])
         if showSim:
             d = {"fjöldi á spítala": [S.amount],"capacity":S.cap}
             df = pd.DataFrame(d,index = [i])
@@ -120,24 +124,19 @@ def sim(showSim,simAttributes):
     #simAttributes inniheldur allar upplýsingar um forsendur hermuninnar
     #Ef maður vill sjá þróun fjölda fólks á spítalanum er showSim = True
     #Skilar núna fjölda á deildum spítalans á hverjum klst.
-    TELJA = 0
     env = sp.Environment()
     fjoldi = {
-        STATES[0] : 0,
-        STATES[1] : 0,
-        STATES[2] : 0,
-        STATES[3] : 0
+        (STATES[0],AGE_GROUPS[0]) : 0,
+        (STATES[0],AGE_GROUPS[1]) : 0,
+        (STATES[0],AGE_GROUPS[2]) : 0
     }
     data = {
-        STATES[0] : [],
-        STATES[1] : [],
-        STATES[2] : [],
-        STATES[3] : []
+        (STATES[0],AGE_GROUPS[0]) : [],
+        (STATES[0],AGE_GROUPS[1]) : [],
+        (STATES[0],AGE_GROUPS[2]) : []
     }
     STOP = simAttributes["STOP"]
-    print(f"lengd hermunar er {STOP}")
     S = Spitali(fjoldi,env,simAttributes)  # spítali með capacity cap og núverandi sjúklingar á deildum í fjoldi (global breyta)
-    print(f"capacity á spítala er {S.cap}")
     if showSim:
         d = {"fjöldi á spítala": [S.amount],"capacity": S.cap}
         df = pd.DataFrame(d,index = [0])
@@ -146,8 +145,28 @@ def sim(showSim,simAttributes):
     else:
         env.process(interrupter(env,S,STOP,data,showSim, None))
     env.run(until = STOP)
-    print(f"Heildar fjöldi fólks sem kom á spítalann alla hermunina er {TELJA}")
+    print(f"Heildar fjöldi fólks sem kom á spítalann alla hermunina er {S.telja}")
     return data
+
+def hermHundur(start,totalData):
+    if start:
+        for i in range(L):
+            data = sim(False,simAttributes)
+            for tvennd in data:
+                totalData[tvennd].append(sum(data[tvennd])/simAttributes["STOP"])
+        legudataUngir = totalData[(STATES[0],AGE_GROUPS[0])]
+        legudataMid = totalData[(STATES[0],AGE_GROUPS[1])]
+        legudataGamlir = totalData[(STATES[0],AGE_GROUPS[2])]
+        df = pd.DataFrame(
+            {
+                "Legudeild ungir": legudataUngir,
+                "Legudeild miðaldra": legudataMid,
+                "Legudeild Gamlir" : legudataGamlir
+            }
+        )
+        fig = px.box(df,labels = {"variable" : "deild", "value" : "meðalfjöldi daga"})
+        st.plotly_chart(fig)
+        x = [i for i in range(simAttributes["STOP"])]
 
 ## Hér kemur streamlit kóðinn
 
@@ -165,7 +184,7 @@ with st.expander("Hermunarstillingar"):
                                                     value = simAttributes["Upphafslíkur"][0])
     simAttributes["CAP"] = st.slider("Hámarskfjöldi á spítala",min_value = 100,max_value = 1000,value = 250,step = 50)
     simAttributes["STOP"] = st.number_input("Fjöldi hermunardaga",min_value=10,max_value=1095,value=100)
-    L = st.number_input("Fjöldi hermana",5,100,20)
+    L = st.number_input("Fjöldi hermana",5,100,100)
 
 # meðaltími milli koma á spítalann frá mismunandi aldurshópum. Hér höfum við default tímann.
 keys = [age_group for age_group in AGE_GROUPS]
@@ -184,28 +203,12 @@ if start:
 st.text("Hermunarstillingar")
 
 totalData = {
-    STATES[0] : [],
-    STATES[1] : [],
-    STATES[2] : [],
-    STATES[3] : []
+    (STATES[0],AGE_GROUPS[0]) : [],
+    (STATES[0],AGE_GROUPS[1]) : [],
+    (STATES[0],AGE_GROUPS[2]) : [],
+    "meðalLega" : []
 }
+
 hundur = st.button("Byrja hermun!")
-if hundur:
-    for _ in range(L):
-        data = sim(False,simAttributes)
-        for deild in data:
-            totalData[deild].append(sum(data[deild])/simAttributes["STOP"])
 
-leguData = totalData[STATES[0]]
-motData = totalData[STATES[1]]
-deadData = totalData[STATES[2]]
-homeData = totalData[STATES[3]]
-
-df = pd.DataFrame(
-    {
-        "Legudeild": leguData,
-        "Göngudeild": motData
-    }
-)
-fig = px.box(df)
-st.plotly_chart(fig)
+hermHundur(hundur,totalData)
