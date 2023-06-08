@@ -5,6 +5,7 @@ import pandas as pd
 import streamlit as st
 import simpy as sp
 import plotly.express as px
+import plotly.graph_objs as go
 
 #Hér eftir koma allar global breytur.
 # Mismunandi stöður sjúklings. Bætum við og breytum þegar lengra er komið.
@@ -109,6 +110,7 @@ def interrupter(env,S,STOP,data,showSim,chart):
         S.action.interrupt()
         for age_group in AGE_GROUPS:
             data[(STATES[0],age_group)].append(S.fjoldi[(STATES[0],age_group)])
+        data["spitaliAmount"].append(S.amount)
         if showSim:
             d = {"fjöldi á spítala": [S.amount],"capacity":S.cap}
             df = pd.DataFrame(d,index = [i])
@@ -129,7 +131,8 @@ def sim(showSim,simAttributes):
     data = {
         (STATES[0],AGE_GROUPS[0]) : [],
         (STATES[0],AGE_GROUPS[1]) : [],
-        (STATES[0],AGE_GROUPS[2]) : []
+        (STATES[0],AGE_GROUPS[2]) : [],
+        "spitaliAmount" : []
     }
     STOP = simAttributes["STOP"]
     S = Spitali(fjoldi,env,simAttributes)  # spítali með capacity cap og núverandi sjúklingar á deildum í fjoldi (global breyta)
@@ -146,10 +149,26 @@ def sim(showSim,simAttributes):
 
 def hermHundur(start,totalData):
     if start:
-        for i in range(L):
+        days = simAttributes["STOP"]-1
+        mean_stay = [0 for _ in range(days)]
+        min_stay = [float("inf") for _ in range(days)]
+        max_stay = [0 for _ in range(days)]
+        for _ in range(L):
             data = sim(False,simAttributes)
-            for tvennd in data:
-                totalData[tvennd].append(sum(data[tvennd])/simAttributes["STOP"])
+            print(f"lengd data {len(data['spitaliAmount'])}")
+            print(f"lengd min og max stay {days}")
+            for j in range(days):
+                if min_stay[j] > data["spitaliAmount"][j]:
+                    min_stay[j] = data["spitaliAmount"][j]
+                if max_stay[j] < data["spitaliAmount"][j]:
+                    max_stay[j] = data["spitaliAmount"][j]
+            for p in data:
+                totalData[p].append(np.sum(data[p])/days)
+            mean_stay_new = [mean_stay[i] + data["spitaliAmount"][i] for i in range(days)]
+            mean_stay = mean_stay_new
+        mean_stay_final = [mean_stay[i]/L for i in range(days)]
+        totalData["spitaliAmount"] = mean_stay_final
+
         legudataUngir = totalData[(STATES[0],AGE_GROUPS[0])]
         legudataMid = totalData[(STATES[0],AGE_GROUPS[1])]
         legudataGamlir = totalData[(STATES[0],AGE_GROUPS[2])]
@@ -160,9 +179,29 @@ def hermHundur(start,totalData):
                 "Legudeild Gamlir" : legudataGamlir
             }
         )
-        fig = px.box(df,labels = {"variable" : "deild", "value" : "meðalfjöldi daga"})
-        st.plotly_chart(fig)
+        fig1 = px.box(df,labels = {"variable" : "deild", "value" : "meðalfjöldi daga"})
+        st.plotly_chart(fig1)
         x = [i for i in range(simAttributes["STOP"])]
+        fig2 = go.Figure(
+            [
+                go.Scatter(
+                    x = x,
+                    y = totalData["spitaliAmount"],
+                    line = dict(color = "rgb(0,100,80)"),
+                    mode = "lines"
+                ),
+                go.Scatter(
+                    x = x + x[::-1],
+                    y = max_stay + min_stay[::-1],
+                    fill = "toself",
+                    fillcolor = "rgba(0,100,80,0.2)",
+                    line = dict(color = "rgba(255,255,255,0)"),
+                    hoverinfo = "skip",
+                    showlegend = False
+                )
+            ]
+        )
+        st.plotly_chart(fig2)
 
 ## Hér kemur streamlit kóðinn
 
@@ -202,7 +241,7 @@ totalData = {
     (STATES[0],AGE_GROUPS[0]) : [],
     (STATES[0],AGE_GROUPS[1]) : [],
     (STATES[0],AGE_GROUPS[2]) : [],
-    "meðalLega" : []
+    "spitaliAmount" : []
 }
 
 hundur = st.button("Byrja hermun!")
