@@ -5,10 +5,6 @@ import pandas as pd
 import streamlit as st
 import simpy as sp
 import plotly.express as px
-import cProfile
-import pstats
-import snakeviz
-import io
 
 #Hér eftir koma allar global breytur.
 # Mismunandi stöður sjúklings. Bætum við og breytum þegar lengra er komið.
