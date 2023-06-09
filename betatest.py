@@ -56,7 +56,7 @@ class Patient:
         prev = self.deild
         #ATHUGA: einmitt núna er PROB global breyta sem ekki er hægt að breyta á streamlit
         new_deild = np.random.choice(STATES,p = PROB[prev])
-        deildaskipti.append((prev,new_deild))
+        deildaskipti.append((prev,new_deild)) # listi heldur utan um hvert sjúklingur fer næst (eða verður kyrr)
         self.deild = new_deild
         if self.deild == STATES[2] or self.deild == STATES[3]:
             S.removeP(prev,self)
@@ -153,7 +153,7 @@ def sim(showSim,simAttributes):
     print(f"Heildar fjöldi fólks sem kom á spítalann alla hermunina er {TELJA}")
     return data
 
-def flow(deildaskipti):
+def flow(deildaskipti): # Fall sem reiknar gögn um flæði sjúklinga á milli deilda
     trans = {}
     stays = {}
     for i in deildaskipti:
@@ -219,8 +219,11 @@ simAttributes["lambda"] = sum([1.0/simAttributes["meðalbið"][age] for age in A
 st.text("Sjá eina hermun með völdum hermunarstillingum")
 start = st.button("Start")
 
+flowgogn = np.zeros((20,5))
+
 if start:
    data = sim(True,simAttributes)
+   info1,info2 = flow(deildaskipti) # ná í gögn um flæði
 
 st.text("Hermunarstillingar")
 
@@ -231,17 +234,17 @@ totalData = {
     STATES[3] : []
 }
 
-flowgogn = np.zeros((20,5))
-
 hundur = st.button("Byrja hermun!")
 if hundur:
     for i in range(L):
         data = sim(False,simAttributes)
-        info1,info2 = flow(deildaskipti)
-        flowgogn[i,:] = info2
-        deildaskipti = []
+        info1,info2 = flow(deildaskipti) # ná í gögn um flæði
+        flowgogn[i,:] = info2 # setja í array
+        deildaskipti = [] # endurstilla
         for deild in data:
             totalData[deild].append(sum(data[deild])/simAttributes["STOP"])
+    for j in range(5):
+        info2[j] = np.sum(flowgogn[:,j])/L 
 
 leguData = totalData[STATES[0]]
 motData = totalData[STATES[1]]
@@ -257,16 +260,16 @@ df = pd.DataFrame(
 fig = px.box(df)
 st.plotly_chart(fig)
 
-
+# dict sem geymir upplýsingar um flæði sjúklinga
 dictf = {
-    info1[0] : np.sum(flowgogn[:,0])/L,
-    info1[1] : np.sum(flowgogn[:,1])/L,
-    info1[2] : np.sum(flowgogn[:,2])/L,
-    info1[3] : np.sum(flowgogn[:,3])/L,
-    info1[4] : np.sum(flowgogn[:,4])/L
+    info1[0] : info2[0],
+    info1[1] : info2[1],
+    info1[2] : info2[2],
+    info1[3] : info2[3],
+    info1[4] : info2[4]
 }
-print(flowgogn)
 
+# Flæðirit sjúklinga á milli deilda
 fig2 = go.Figure(go.Sankey(
     arrangement = "snap",
     node = {
@@ -279,3 +282,17 @@ fig2 = go.Figure(go.Sankey(
 
 fig2.update_layout(title_text="Flæði sjúklinga í gegnum kerfið")
 st.plotly_chart(fig2)
+
+# Tafla um flæði fyrir L hermanir 
+frame = pd.DataFrame(
+    flowgogn,
+    columns = ("Göngudeild -> Heim","Legudeild -> Heim", "Legudeild -> Göngudeild","Legudeild -> Dauði","Aftur á göngudeild")
+)
+frame.loc[len(frame.index)] = [dictf[info1[2]], dictf[info1[3]], dictf[info1[1]], dictf[info1[0]], dictf[info1[4]]]
+frame = frame.astype("int")
+
+# Highlight-ar seinustu línu dálksins (sem er meðaltal gagna)
+df_styled = frame.style.apply(lambda x: ['background-color: yellow' if x.name == len(frame)-1 else '' for i in x], axis=1)
+
+# Sýna töflu
+st.dataframe(df_styled)
