@@ -6,6 +6,7 @@ import streamlit as st
 import simpy as sp
 import plotly.express as px
 import plotly.graph_objs as go
+import time
 
 #Hér eftir koma allar global breytur.
 # Mismunandi stöður sjúklings. Bætum við og breytum þegar lengra er komið.
@@ -245,5 +246,9 @@ totalData = {
 }
 
 hundur = st.button("Byrja hermun!")
+if hundur:
+    with st.spinner("Hermun í gangi..."):
+        hermHundur(hundur,totalData)
+    st.success("Hermun lokið")
 
-hermHundur(hundur,totalData)
+
