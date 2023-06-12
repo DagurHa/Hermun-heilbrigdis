@@ -17,11 +17,6 @@ PROB = {
     STATES[3] : [0.0, 0.0, 0.0, 1.0]
 }
 INITIAL_PROB = [0.3, 0.7] # Upphafslíkur á að fara á legudeild og göngudeild (þessu mun verða breytt)
-simAttributes = {
-    "meðalfjöldi" : AGE_GROUP_AMOUNT,
-    "Færslulíkur" : PROB,
-    "Upphafslíkur" : INITIAL_PROB
-}
 # meðalbiðtímar á göngu- og legudeild, þetta verður default biðin sem byggist nú á aldri og verður vonandi byggð á gögnum.
 #Pæling að hafa dag-/göngudeild alltaf einn dag og einhverjar líkur á að göngu-/dagdeildarsjúklingar fari á legudeild
 MEAN_WAIT_TIMES = {
@@ -30,3 +25,12 @@ MEAN_WAIT_TIMES = {
     (AGE_GROUPS[2], STATES[0]) : 5.0, (AGE_GROUPS[2], STATES[1]) : 0.04
 }
 L = 20
+simAttributes = {
+    "meðalfjöldi" : AGE_GROUP_AMOUNT,
+    "Færslulíkur" : PROB,
+    "Upphafslíkur" : INITIAL_PROB,
+    "Stöður" : STATES,
+    "Aldurshópar" : AGE_GROUPS,
+    "Biðtímar" : MEAN_WAIT_TIMES,
+    "Fjöldi hermana" : L
+}
