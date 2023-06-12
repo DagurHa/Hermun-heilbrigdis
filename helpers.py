@@ -1,3 +1,5 @@
+from itertools import product
+
 #Hér eftir koma allar global breytur.
 # Mismunandi stöður sjúklings. Bætum við og breytum þegar lengra er komið.
 STATES = ["legudeild", "göngudeild", "dauði", "heim"]
@@ -25,6 +27,11 @@ MEAN_WAIT_TIMES = {
     (AGE_GROUPS[2], STATES[0]) : 5.0, (AGE_GROUPS[2], STATES[1]) : 0.04
 }
 L = 20
+skiptiKeys = []
+for tvennd in product(STATES,range(len(STATES))):
+    if PROB[tvennd[0]][tvennd[1]] > 0.0:
+        skiptiKeys.append((tvennd[0],STATES[tvennd[1]]))
+deildaskipti = {keys : 0 for keys in skiptiKeys}
 simAttributes = {
     "meðalfjöldi" : AGE_GROUP_AMOUNT,
     "Færslulíkur" : PROB,
@@ -32,5 +39,6 @@ simAttributes = {
     "Stöður" : STATES,
     "Aldurshópar" : AGE_GROUPS,
     "Biðtímar" : MEAN_WAIT_TIMES,
-    "Fjöldi hermana" : L
+    "Fjöldi hermana" : L,
+    "deildaskipti" : deildaskipti
 }

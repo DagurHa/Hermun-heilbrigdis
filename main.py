@@ -2,6 +2,10 @@ from time import time
 import streamlit as st
 from helpers import *
 from simulation import sim,hermHundur
+import plotly.express as px
+import plotly.graph_objs as go
+import pandas as pd
+import numpy as np
 
 ## Hér kemur streamlit kóðinn
 
@@ -44,12 +48,85 @@ totalData = {
     AGE_GROUPS[0] : [],
     AGE_GROUPS[1] : [],
     AGE_GROUPS[2] : [],
-    "spitaliAmount" : []
+    "spitaliAmount" : [],
+    "meðal lega" : [],
+    "mesta lega" : [],
+    "minnsta lega" : [],
+    "Sankey" : {},
+    "dagar yfir cap" : []
 }
 
 hundur = st.button("Byrja hermun!")
 if hundur:
     with st.spinner("Hermun í gangi..."):
-        hermHundur(hundur,totalData,simAttributes)
+        totalData = hermHundur(hundur,totalData,simAttributes)
+        legudataUngir = totalData[simAttributes["Aldurshópar"][0]]
+        legudataMid = totalData[simAttributes["Aldurshópar"][1]]
+        legudataGamlir = totalData[simAttributes["Aldurshópar"][2]]
+        df = pd.DataFrame(
+            {
+                "Legudeild ungir": legudataUngir,
+                "Legudeild miðaldra": legudataMid,
+                "Legudeild Gamlir" : legudataGamlir
+            }
+        )
+        fig1 = px.box(df,labels = {"variable" : "deild", "value" : "meðalfjöldi daga"})
+        st.plotly_chart(fig1)
+        st.text(f"Hér sést meðalfjöldi innlagna á dag yfir þessar {L} hermanir.")
+        days = simAttributes["STOP"] -1
+        mean_stay = totalData["meðal lega"]
+        min_stay = totalData["minnsta lega"]
+        max_stay = totalData["mesta lega"]
+        x = [i for i in range(days)]
+        fig2 = go.Figure(
+            [
+                go.Scatter(
+                    x = x,
+                    y = mean_stay,
+                    line = dict(color = "rgb(0,100,80)"),
+                    mode = "lines"
+                ),
+                go.Scatter(
+                    x = x + x[::-1],
+                    y = max_stay + min_stay[::-1],
+                    fill = "toself",
+                    fillcolor = "rgba(0,100,80,0.2)",
+                    line = dict(color = "rgba(255,255,255,0)"),
+                    hoverinfo = "skip",
+                    showlegend = False
+                )
+            ]
+        )
+        fig2.update_layout(
+            xaxis_title = "Dagar",
+            yaxis_title = "meðalfjöldi"
+        )
+        st.plotly_chart(fig2)
+        sankeyData = totalData["Sankey"]
+        nodeNum = {simAttributes["Stöður"][i] : i for i in range(len(simAttributes["Stöður"]))}
+        source = []
+        target = []
+        for tvennd in simAttributes["deildaskipti"]:
+            source.append(nodeNum[tvennd[0]])
+            target.append(nodeNum[tvennd[1]])
+        print(simAttributes["Stöður"])
+        print(source)
+        print(target)
+        data_graph = [np.sum(sankeyData[key])/L for key in simAttributes["deildaskipti"]]
+        print(data_graph)
+        fig3 = go.Figure(go.Sankey(
+        arrangement = "snap",
+        node = {
+            "label": simAttributes["Stöður"],
+            'pad':10},
+        link = {
+            "arrowlen" : 10,
+            "source" : source,
+            "target" : target,
+            "value" : data_graph}))
+        fig3.update_layout(title_text="Flæði sjúklinga í gegnum kerfið")
+        meanYfirCap = np.sum(totalData["dagar yfir cap"])/L
+        st.plotly_chart(fig3)
+        st.write(f"Meðalfjöldi daga sem sjúklingar á spítala voru yfir hámark: {meanYfirCap}")
     st.success("Hermun lokið")
 print(time()-start_time)
