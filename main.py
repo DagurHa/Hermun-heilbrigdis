@@ -1,6 +1,5 @@
-import time
+from time import time
 import streamlit as st
-import time
 from helpers import *
 from simulation import sim,hermHundur
 
@@ -8,7 +7,7 @@ from simulation import sim,hermHundur
 
 #Athuga gæti verið gott að setja default sim attributes lika
 
-start_time = time.time()
+start_time = time()
 st.title("Hermun heilbrigðiskerfisins")
 
 #sliders o.fl.
@@ -23,7 +22,7 @@ with st.expander("Hermunarstillingar"):
                                                     value = simAttributes["Upphafslíkur"][0])
     simAttributes["CAP"] = st.slider("Hámarskfjöldi á spítala",min_value = 100,max_value = 1000,value = 250,step = 50)
     simAttributes["STOP"] = st.number_input("Fjöldi hermunardaga",min_value=10,max_value=1095,value=100)
-    L = st.number_input("Fjöldi hermana",5,100,20)
+    simAttributes["Fjöldi hermana"] = st.number_input("Fjöldi hermana",5,100,20)
 
 # meðaltími milli koma á spítalann frá mismunandi aldurshópum. Hér höfum við default tímann.
 keys = [age_group for age_group in AGE_GROUPS]
@@ -42,18 +41,15 @@ if start:
 st.text("Hermunarstillingar")
 
 totalData = {
-    (STATES[0],AGE_GROUPS[0]) : [],
-    (STATES[0],AGE_GROUPS[1]) : [],
-    (STATES[0],AGE_GROUPS[2]) : [],
+    AGE_GROUPS[0] : [],
+    AGE_GROUPS[1] : [],
+    AGE_GROUPS[2] : [],
     "spitaliAmount" : []
 }
 
 hundur = st.button("Byrja hermun!")
 if hundur:
     with st.spinner("Hermun í gangi..."):
-        hermHundur(hundur,totalData)
+        hermHundur(hundur,totalData,simAttributes)
     st.success("Hermun lokið")
-print(time.time()-start_time)
-print(L)
-
-
+print(time()-start_time)
