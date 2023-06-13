@@ -6,6 +6,9 @@ import plotly.express as px
 import plotly.graph_objs as go
 import pandas as pd
 import numpy as np
+import cProfile
+import pstats
+import io
 
 ## Hér kemur streamlit kóðinn
 
@@ -59,6 +62,7 @@ totalData = {
 hundur = st.button("Byrja hermun!")
 if hundur:
     with st.spinner("Hermun í gangi..."):
+        L = simAttributes["Fjöldi hermana"]
         totalData = hermHundur(hundur,totalData,simAttributes)
         legudataUngir = totalData[simAttributes["Aldurshópar"][0]]
         legudataMid = totalData[simAttributes["Aldurshópar"][1]]
@@ -132,4 +136,19 @@ if hundur:
         st.plotly_chart(fig3)
         st.write(f"Meðalfjöldi daga sem sjúklingar á spítala voru yfir hámarki: {meanYfirCap}")
     st.success("Hermun lokið")
+
+prof = st.button("Skoða tíma profile")
+
+if prof:
+    pr = cProfile.Profile()
+    pr.enable()
+    res = hermHundur(prof,totalData,simAttributes)
+    pr.disable()
+    s = io.StringIO()
+    ps = pstats.Stats(pr,stream = s).sort_stats("tottime")
+    ps.print_stats()
+    with open("time.txt","w+") as f:
+        f.write(s.getvalue())
+
+
 print(time()-start_time)
