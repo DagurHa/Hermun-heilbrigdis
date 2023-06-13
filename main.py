@@ -70,7 +70,7 @@ if hundur:
                 "Legudeild Gamlir" : legudataGamlir
             }
         )
-        fig1 = px.box(df,labels = {"variable" : "deild", "value" : "meðalfjöldi daga"})
+        fig1 = px.box(df,labels = {"variable" : "Deild", "value" : "Meðalfjöldi daga"},title = "Dreifing aldurshópa á legudeild")
         st.plotly_chart(fig1)
         st.text(f"Hér sést meðalfjöldi innlagna á dag yfir þessar {L} hermanir.")
         days = simAttributes["STOP"] -1
@@ -84,7 +84,8 @@ if hundur:
                     x = x,
                     y = mean_stay,
                     line = dict(color = "rgb(0,100,80)"),
-                    mode = "lines"
+                    mode = "lines",
+                    name = "Meðal"
                 ),
                 go.Scatter(
                     x = x + x[::-1],
@@ -97,9 +98,11 @@ if hundur:
                 )
             ]
         )
+        fig2.update_traces(marker=dict(size=24, color="blue"), selector = dict(name="first_trace"))
         fig2.update_layout(
+            title = "Innlagnir",
             xaxis_title = "Dagar",
-            yaxis_title = "meðalfjöldi"
+            yaxis_title = "Meðalfjöldi"
         )
         st.plotly_chart(fig2)
         sankeyData = totalData["Sankey"]
@@ -127,6 +130,6 @@ if hundur:
         fig3.update_layout(title_text="Flæði sjúklinga í gegnum kerfið")
         meanYfirCap = np.sum(totalData["dagar yfir cap"])/L
         st.plotly_chart(fig3)
-        st.write(f"Meðalfjöldi daga sem sjúklingar á spítala voru yfir hámark: {meanYfirCap}")
+        st.write(f"Meðalfjöldi daga sem sjúklingar á spítala voru yfir hámarki: {meanYfirCap}")
     st.success("Hermun lokið")
 print(time()-start_time)
