@@ -4,10 +4,6 @@ from time import sleep
 import pandas as pd
 import streamlit as st
 from simpy import Environment,Interrupt
-import plotly.express as px
-import plotly.graph_objs as go
-from helpers import simAttributes
-from itertools import product
 
 class Patient:
     def __init__(self,aldur,env,deild,numer):
@@ -79,45 +75,40 @@ def interrupter(env,S,STOP,data,showSim,chart):
         for age_group in S.fastar["Aldurshópar"]:
             data[age_group].append(S.fjoldi[age_group])
         data["spitaliAmount"].append(S.amount)
+        if S.amount > S.cap:
+            data["dagar yfir cap"] += 1
         if showSim:
             d = {"fjöldi á spítala": [S.amount],"capacity":S.cap}
             df = pd.DataFrame(d,index = [i])
             chart.add_rows(df)
             sleep(0.1)
 
-"""PROB = {
-    STATES[0] : [0.0, 0.3, 0.1, 0.6],
-    STATES[1] : [0.25, 0.0, 0.0, 0.75],
-    STATES[2] : [0.0, 0.0, 1.0, 0.0],
-    STATES[3] : [0.0, 0.0, 0.0, 1.0]
-}"""
 
 def sim(showSim,simAttributes):
     #simAttributes inniheldur allar upplýsingar um forsendur hermuninnar
     #Ef maður vill sjá þróun fjölda fólks á spítalanum er showSim = True
     #Skilar núna fjölda á deildum spítalans á hverri klst og upplýsingar um hvert fólk fór innan spítalans.
     env = Environment()
-    skiptiKeys = []
-    n = len(simAttributes["Stöður"])
-    for tvennd in product(simAttributes["Stöður"],range(n)):
-        if simAttributes["Færslulíkur"][tvennd[0]][tvennd[1]] > 0.0:
-            skiptiKeys.append((tvennd[0],simAttributes["Stöður"][tvennd[1]]))
-    deildaskipti = {keys : 0 for keys in skiptiKeys}
+    #Þurfum að endurstill deildaskipti töfluna í hvert sinn sem sim er kallað
+    simAttributes["deildaskipti"] = dict.fromkeys(simAttributes["deildaskipti"].keys(),0)
+    #Upprunalegur fjöldi á spítalanum
     fjoldi = {
         simAttributes["Aldurshópar"][0] : 0,
         simAttributes["Aldurshópar"][1] : 0,
         simAttributes["Aldurshópar"][2] : 0,
-        "deildaskipti" : deildaskipti
+        "deildaskipti" : simAttributes["deildaskipti"]
     }
+    #Gögnin sem sim skilar
     data = {
         simAttributes["Aldurshópar"][0] : [],
         simAttributes["Aldurshópar"][1] : [],
         simAttributes["Aldurshópar"][2] : [],
         "spitaliAmount" : [],
-        "deildaskipti" : {}
+        "deildaskipti" : {},
+        "dagar yfir cap" : 0
     }
     STOP = simAttributes["STOP"]
-    S = Spitali(fjoldi,env,simAttributes)  # spítali með capacity cap og núverandi sjúklingar á deildum í fjoldi (global breyta)
+    S = Spitali(fjoldi,env,simAttributes)
     if showSim:
         d = {"fjöldi á spítala": [S.amount],"capacity": S.cap}
         df = pd.DataFrame(d,index = [0])
@@ -127,7 +118,7 @@ def sim(showSim,simAttributes):
         env.process(interrupter(env,S,STOP,data,showSim, None))
     env.run(until = STOP)
     data["deildaskipti"] = S.fjoldi["deildaskipti"]
-    print(f"Heildar fjöldi fólks sem kom á spítalann alla hermunina er {S.telja}")
+    #print(f"Heildar fjöldi fólks sem kom á spítalann alla hermunina er {S.telja}")
     return data
 
 def hermHundur(start,totalData,simAttributes):
@@ -135,79 +126,27 @@ def hermHundur(start,totalData,simAttributes):
     if start:
         days = simAttributes["STOP"]-1
         stayData = []
+        dagarYfirCap = []
+        sankeyData = {key : [] for key in simAttributes["deildaskipti"]}
         for _ in range(L):
             data = sim(False,simAttributes)
             stayData.append(data["spitaliAmount"])
             for key in simAttributes["Aldurshópar"]:
                 totalData[key].append(np.sum(data[key])/days)
+            for key in data["deildaskipti"]:
+                sankeyData[key].append(data["deildaskipti"][key])
+            dagarYfirCap.append(data["dagar yfir cap"])
             #print(f"lengd data {len(data['spitaliAmount'])}")
             #print(f"lengd min og max stay {days}")
+        print(dagarYfirCap)
+        print(sankeyData)
+        totalData["Sankey"] = sankeyData
         stayData_arr = np.array(stayData)
         stayData_arr = np.transpose(stayData_arr)
         #print(stayData_arr)
         #print(np.shape(stayData_arr))
-        mean_stay = [np.sum(stayData_arr[row,:])/L for row in range(days)]
-        max_stay = [np.amax(stayData_arr[row,:]) for row in range(days)]
-        min_stay = [np.amin(stayData_arr[row,:]) for row in range(days)]
-        legudataUngir = totalData[simAttributes["Aldurshópar"][0]]
-        legudataMid = totalData[simAttributes["Aldurshópar"][1]]
-        legudataGamlir = totalData[simAttributes["Aldurshópar"][2]]
-        df = pd.DataFrame(
-            {
-                "Legudeild ungir": legudataUngir,
-                "Legudeild miðaldra": legudataMid,
-                "Legudeild Gamlir" : legudataGamlir
-            }
-        )
-        fig1 = px.box(df,labels = {"variable" : "deild", "value" : "meðalfjöldi daga"})
-        st.plotly_chart(fig1)
-        st.text(f"Hér sést meðalfjöldi innlagna á dag yfir þessar {L} hermanir.")
-        x = [i for i in range(days)]
-        fig2 = go.Figure(
-            [
-                go.Scatter(
-                    x = x,
-                    y = mean_stay,
-                    line = dict(color = "rgb(0,100,80)"),
-                    mode = "lines"
-                ),
-                go.Scatter(
-                    x = x + x[::-1],
-                    y = max_stay + min_stay[::-1],
-                    fill = "toself",
-                    fillcolor = "rgba(0,100,80,0.2)",
-                    line = dict(color = "rgba(255,255,255,0)"),
-                    hoverinfo = "skip",
-                    showlegend = False
-                )
-            ]
-        )
-        fig2.update_layout(
-            xaxis_title = "Dagar",
-            yaxis_title = "meðalfjöldi"
-        )
-        st.plotly_chart(fig2)
-        keyList = list(data["deildaskipti"].keys())
-        nodeNum = {simAttributes["Stöður"][i] : i for i in range(len(simAttributes["Stöður"]))}
-        source = []
-        target = []
-        for tvennd in keyList:
-            source.append(nodeNum[tvennd[0]])
-            target.append(nodeNum[tvennd[1]])
-        print(simAttributes["Stöður"])
-        print(source)
-        print(target)
-        data_graph = [data["deildaskipti"][tvennd] for tvennd in list(data["deildaskipti"].keys())]
-        print(data_graph)
-        fig3 = go.Figure(go.Sankey(
-        arrangement = "snap",
-        node = {
-            "label": simAttributes["Stöður"],
-            'pad':10},
-        link = {
-            "arrowlen" : 10,
-            "source" : source,
-            "target" : target,
-            "value" : data_graph}))
-        fig3.update_layout(title_text="Flæði sjúklinga í gegnum kerfið")
-        st.plotly_chart(fig3)
+        totalData["meðal lega"] = [np.sum(stayData_arr[row,:])/L for row in range(days)]
+        totalData["mesta lega"] = [np.amax(stayData_arr[row,:]) for row in range(days)]
+        totalData["minnsta lega"] = [np.amin(stayData_arr[row,:]) for row in range(days)]
+        totalData["dagar yfir cap"] = dagarYfirCap
+        return totalData
