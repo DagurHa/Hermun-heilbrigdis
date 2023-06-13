@@ -88,7 +88,7 @@ def interrupter(env,S,STOP,data,showSim,chart):
             sleep(0.1)
 
 def randomChoice(p):
-    rnd = random()*sum(p)
+    rnd = random()
     for i, w in enumerate(p):
         rnd -= w
         if rnd < 0:
