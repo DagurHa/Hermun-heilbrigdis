@@ -4,6 +4,7 @@ from time import sleep
 import pandas as pd
 import streamlit as st
 from simpy import Environment,Interrupt
+from random import random
 
 class Patient:
     def __init__(self,aldur,env,deild,numer):
@@ -15,7 +16,8 @@ class Patient:
     # Þegar sjúklingur er búinn á sinni deild finnum við hvert hann fer næst og sendum hann þangað
     def updatePatient(self,S):
         prev = self.deild
-        new_deild = np.random.choice(S.fastar["Stöður"],p = S.fastar["Færslulíkur"][prev])
+        i_deild = randomChoice(S.fastar["Færslulíkur"][prev])
+        new_deild = S.fastar["Stöður"][i_deild]
         self.deild = new_deild
         S.fjoldi["deildaskipti"][(prev,self.deild)] += 1
         if self.deild == S.fastar["Stöður"][2] or self.deild == S.fastar["Stöður"][3]:
@@ -41,9 +43,11 @@ class Spitali:
                 wait = expovariate(self.fastar["lambda"])
                 #print(f"Þurfum að bíða í {wait} langann tíma eftir næsta sjúkling, liðinn tími er {env.now}")
                 yield env.timeout(wait)
-                aldur = np.random.choice(self.fastar["Aldurshópar"],p = self.p_age)
-                deild = np.random.choice([self.fastar["Stöður"][0],self.fastar["Stöður"][1]],p = self.fastar["Upphafslíkur"])
-                p = Patient(aldur,env,deild,self.telja)
+                i_aldur = randomChoice(self.p_age)
+                aldur = self.fastar["Aldurshópar"][i_aldur]
+                i_deild_upphaf = randomChoice(self.fastar["Upphafslíkur"])
+                deild_upphaf = self.fastar["Upphafsstöður"][i_deild_upphaf]
+                p = Patient(aldur,env,deild_upphaf,self.telja)
                 #print(f"Sjúklingur númer {p.numer} fer á {p.deild} og er {p.aldur}, liðinn tími er {env.now}")
                 env.process(self.addP(p,False))
             except Interrupt:
@@ -83,6 +87,12 @@ def interrupter(env,S,STOP,data,showSim,chart):
             chart.add_rows(df)
             sleep(0.1)
 
+def randomChoice(p):
+    rnd = random()*sum(p)
+    for i, w in enumerate(p):
+        rnd -= w
+        if rnd < 0:
+            return i
 
 def sim(showSim,simAttributes):
     #simAttributes inniheldur allar upplýsingar um forsendur hermuninnar
@@ -136,15 +146,9 @@ def hermHundur(start,totalData,simAttributes):
             for key in data["deildaskipti"]:
                 sankeyData[key].append(data["deildaskipti"][key])
             dagarYfirCap.append(data["dagar yfir cap"])
-            #print(f"lengd data {len(data['spitaliAmount'])}")
-            #print(f"lengd min og max stay {days}")
-        print(dagarYfirCap)
-        print(sankeyData)
         totalData["Sankey"] = sankeyData
         stayData_arr = np.array(stayData)
         stayData_arr = np.transpose(stayData_arr)
-        #print(stayData_arr)
-        #print(np.shape(stayData_arr))
         totalData["meðal lega"] = [np.sum(stayData_arr[row,:])/L for row in range(days)]
         totalData["mesta lega"] = [np.amax(stayData_arr[row,:]) for row in range(days)]
         totalData["minnsta lega"] = [np.amin(stayData_arr[row,:]) for row in range(days)]

@@ -40,5 +40,6 @@ simAttributes = {
     "Aldurshópar" : AGE_GROUPS,
     "Biðtímar" : MEAN_WAIT_TIMES,
     "Fjöldi hermana" : L,
-    "deildaskipti" : deildaskipti
+    "deildaskipti" : deildaskipti,
+    "Upphafsstöður" : [STATES[0],STATES[1]]
 }
