@@ -147,5 +147,4 @@ if prof:
     with open("time.txt","w+") as f:
         f.write(s.getvalue())
 
-
 print(time()-start_time)
