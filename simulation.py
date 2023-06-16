@@ -1,10 +1,9 @@
 import numpy as np
-from random import expovariate
+from random import expovariate, random
 from time import sleep
-import pandas as pd
-import streamlit as st
+from pandas import DataFrame
+from streamlit import line_chart
 from simpy import Environment,Interrupt
-from random import random
 
 class Patient:
     def __init__(self,aldur,env,deild,numer):
@@ -19,7 +18,8 @@ class Patient:
         i_deild = randomChoice(S.fastar["Færslulíkur"][prev])
         new_deild = S.fastar["Stöður"][i_deild]
         self.deild = new_deild
-        S.fjoldi["deildaskipti"][(prev,self.deild)] += 1
+        if S.upphitunFlag:
+            S.fjoldi["deildaskipti"][(prev,self.deild)] += 1
         if self.deild == S.fastar["Stöður"][2] or self.deild == S.fastar["Stöður"][3]:
             S.removeP(prev,self)
         else:
@@ -37,6 +37,9 @@ class Spitali:
         self.telja = 0
         self.amount = 0 #sum(list(fjoldi.values()))
         self.action = env.process(self.patientGen(env))
+        self.upphitun = env.event()
+        env.process(self.upphitunWait())
+        self.upphitunFlag = False
     def patientGen(self,env):
         while True:
             try:
@@ -70,9 +73,14 @@ class Spitali:
         self.amount -= 1
         if prev == self.fastar["Stöður"][0]:
             self.fjoldi[p.aldur] -= 1
+    #Bíðum eftir að upphitunartími sé búinn
+    def upphitunWait(self):
+        yield self.env.timeout(self.fastar["Upphitunartími"])
+        self.upphitunFlag = True
+        self.upphitun.succeed()
 
-
-def interrupter(env,S,STOP,data,showSim,chart):
+def interrupter(env,S,STOP,data,showSim):
+    yield S.upphitun
     for i in range(STOP):
         yield env.timeout(1)
         S.action.interrupt()
@@ -82,9 +90,12 @@ def interrupter(env,S,STOP,data,showSim,chart):
         if S.amount > S.cap:
             data["dagar yfir cap"] += 1
         if showSim:
-            d = {"fjöldi á spítala": [S.amount],"capacity":S.cap}
-            df = pd.DataFrame(d,index = [i])
-            chart.add_rows(df)
+            d = {"fjöldi á spítala": [S.amount],"capacity": S.cap}
+            df = DataFrame(d,index = [i])
+            if i == 0:
+                chart = line_chart(df)
+            else:
+                chart.add_rows(df)
             sleep(0.1)
 
 def randomChoice(p):
@@ -120,37 +131,33 @@ def sim(showSim,simAttributes):
     STOP = simAttributes["STOP"]
     S = Spitali(fjoldi,env,simAttributes)
     if showSim:
-        d = {"fjöldi á spítala": [S.amount],"capacity": S.cap}
-        df = pd.DataFrame(d,index = [0])
-        chart = st.line_chart(df)
-        env.process(interrupter(env,S,STOP,data,showSim,chart))
+        env.process(interrupter(env,S,STOP,data,showSim))
     else:
-        env.process(interrupter(env,S,STOP,data,showSim, None))
-    env.run(until = STOP)
+        env.process(interrupter(env,S,STOP,data,showSim))
+    env.run(until = STOP + simAttributes["Upphitunartími"])
     data["deildaskipti"] = S.fjoldi["deildaskipti"]
     #print(f"Heildar fjöldi fólks sem kom á spítalann alla hermunina er {S.telja}")
     return data
 
-def hermHundur(start,totalData,simAttributes):
+def hermHundur(totalData,simAttributes):
     L = simAttributes["Fjöldi hermana"]
-    if start:
-        days = simAttributes["STOP"]-1
-        stayData = []
-        dagarYfirCap = []
-        sankeyData = {key : [] for key in simAttributes["deildaskipti"]}
-        for _ in range(L):
-            data = sim(False,simAttributes)
-            stayData.append(data["spitaliAmount"])
-            for key in simAttributes["Aldurshópar"]:
-                totalData[key].append(np.sum(data[key])/days)
-            for key in data["deildaskipti"]:
-                sankeyData[key].append(data["deildaskipti"][key])
-            dagarYfirCap.append(data["dagar yfir cap"])
-        totalData["Sankey"] = sankeyData
-        stayData_arr = np.array(stayData)
-        stayData_arr = np.transpose(stayData_arr)
-        totalData["meðal lega"] = [np.sum(stayData_arr[row,:])/L for row in range(days)]
-        totalData["mesta lega"] = [np.amax(stayData_arr[row,:]) for row in range(days)]
-        totalData["minnsta lega"] = [np.amin(stayData_arr[row,:]) for row in range(days)]
-        totalData["dagar yfir cap"] = dagarYfirCap
-        return totalData
+    days = simAttributes["STOP"]-1
+    stayData = []
+    dagarYfirCap = []
+    sankeyData = {key : [] for key in simAttributes["deildaskipti"]}
+    for _ in range(L):
+        data = sim(False,simAttributes)
+        stayData.append(data["spitaliAmount"])
+        for key in simAttributes["Aldurshópar"]:
+            totalData[key].append(np.sum(data[key])/days)
+        for key in data["deildaskipti"]:
+            sankeyData[key].append(data["deildaskipti"][key])
+        dagarYfirCap.append(data["dagar yfir cap"])
+    totalData["Sankey"] = sankeyData
+    stayData_arr = np.array(stayData)
+    stayData_arr = np.transpose(stayData_arr)
+    totalData["meðal lega"] = [np.sum(stayData_arr[row,:])/L for row in range(days)]
+    totalData["mesta lega"] = [np.amax(stayData_arr[row,:]) for row in range(days)]
+    totalData["minnsta lega"] = [np.amin(stayData_arr[row,:]) for row in range(days)]
+    totalData["dagar yfir cap"] = dagarYfirCap
+    return totalData

@@ -1,4 +1,5 @@
 from itertools import product
+from copy import deepcopy
 
 #Hér eftir koma allar global breytur.
 # Mismunandi stöður sjúklings. Bætum við og breytum þegar lengra er komið.
@@ -32,6 +33,7 @@ for tvennd in product(STATES,range(len(STATES))):
     if PROB[tvennd[0]][tvennd[1]] > 0.0:
         skiptiKeys.append((tvennd[0],STATES[tvennd[1]]))
 deildaskipti = {keys : 0 for keys in skiptiKeys}
+UPPHITUN = 20 # Upphitunartími hverrar hermunar, þ.e. byrjum ekki að safna/sýna upplýsingar fyrr en svona margir dagar hafa liðið
 simAttributes = {
     "meðalfjöldi" : AGE_GROUP_AMOUNT,
     "Færslulíkur" : PROB,
@@ -41,5 +43,7 @@ simAttributes = {
     "Biðtímar" : MEAN_WAIT_TIMES,
     "Fjöldi hermana" : L,
     "deildaskipti" : deildaskipti,
-    "Upphafsstöður" : [STATES[0],STATES[1]]
+    "Upphafsstöður" : [STATES[0],STATES[1]],
+    "Upphitunartími" : UPPHITUN
 }
+meanArrivaltimes = deepcopy(simAttributes["meðalfjöldi"])
