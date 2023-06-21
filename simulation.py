@@ -15,7 +15,7 @@ class Patient:
     # Þegar sjúklingur er búinn á sinni deild finnum við hvert hann fer næst og sendum hann þangað
     def updatePatient(self,S):
         prev = self.deild
-        i_deild = randomChoice(S.fastar["Færslulíkur"][prev])
+        i_deild = randomChoice(S.fastar["Færslulíkur"][(prev,self.aldur)])
         new_deild = S.fastar["Stöður"][i_deild]
         self.deild = new_deild
         if S.upphitunFlag:
@@ -26,6 +26,15 @@ class Patient:
             if prev == S.fastar["Stöður"][0]:
                 S.fjoldi[self.aldur] -= 1
             yield self.env.process(S.addP(self,True))
+
+class Deild:
+    def __init__(self,nafn):
+        self.nafn = nafn
+        self.fjoldi = 0
+    def addToDeild(self):
+        self.fjoldi += 1
+    def getFjoldi(self):
+        return self.fjoldi
 
 class Spitali:
     def __init__(self,fjoldi,env,simAttributes):
@@ -108,9 +117,8 @@ def randomChoice(p):
 def sim(showSim,simAttributes):
     #simAttributes inniheldur allar upplýsingar um forsendur hermuninnar
     #Ef maður vill sjá þróun fjölda fólks á spítalanum er showSim = True
-    #Skilar núna fjölda á deildum spítalans á hverri klst og upplýsingar um hvert fólk fór innan spítalans.
     env = Environment()
-    #Þurfum að endurstill deildaskipti töfluna í hvert sinn sem sim er kallað
+    #Þurfum að endurstilla deildaskipti töfluna í hvert sinn sem sim er kallað
     simAttributes["deildaskipti"] = dict.fromkeys(simAttributes["deildaskipti"].keys(),0)
     #Upprunalegur fjöldi á spítalanum
     fjoldi = {
@@ -130,10 +138,7 @@ def sim(showSim,simAttributes):
     }
     STOP = simAttributes["STOP"]
     S = Spitali(fjoldi,env,simAttributes)
-    if showSim:
-        env.process(interrupter(env,S,STOP,data,showSim))
-    else:
-        env.process(interrupter(env,S,STOP,data,showSim))
+    env.process(interrupter(env,S,STOP,data,showSim))
     env.run(until = STOP + simAttributes["Upphitunartími"])
     data["deildaskipti"] = S.fjoldi["deildaskipti"]
     #print(f"Heildar fjöldi fólks sem kom á spítalann alla hermunina er {S.telja}")
@@ -157,7 +162,9 @@ def hermHundur(totalData,simAttributes):
     stayData_arr = np.array(stayData)
     stayData_arr = np.transpose(stayData_arr)
     totalData["meðal lega"] = [np.sum(stayData_arr[row,:])/L for row in range(days)]
-    totalData["mesta lega"] = [np.amax(stayData_arr[row,:]) for row in range(days)]
-    totalData["minnsta lega"] = [np.amin(stayData_arr[row,:]) for row in range(days)]
+    totalData["mesta lega"] = [np.amax([stayData_arr[row,j] for j in range(L) 
+                                         if stayData_arr[row,j] <= 0.95*np.amax(stayData_arr[row,:])]) for row in range(days)]
+    totalData["minnsta lega"] = [np.amin([stayData_arr[row,j] for j in range(L) 
+                                         if stayData_arr[row,j] >= 1.05*np.amin(stayData_arr[row,:])]) for row in range(days)]
     totalData["dagar yfir cap"] = dagarYfirCap
     return totalData

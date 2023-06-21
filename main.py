@@ -9,7 +9,7 @@ import numpy as np
 import cProfile
 import pstats
 import io
-from copy import deepcopy
+from copy import copy,deepcopy
 
 ## Hér kemur streamlit kóðinn
 
@@ -26,7 +26,7 @@ with forstillt:
         st.write("Þetta eru grunnstillingarnar sem byggðar eru á gögnum, þú getur séð þær í næsta flipa")
     if scenarios == "Eldri þjóð":
         st.write("Hversu mikið eldri er þjóðin?")
-        t_G = st.slider("Prósentu aukning af eldra fólki",0.0,66.0,step = 1.0)
+        t_G = st.slider("Prósentu aukning af eldra fólki", 0.0, 66.0, step = 1.0)
         t_M = st.slider("Prósentu aukning af miðaldra fólki", 0.0, 33.0, step = 1.0)
         t_U = -(t_G+t_M)
         t = [t_U,t_M,t_G]
@@ -38,11 +38,11 @@ with forstillt:
 with stillingar.expander("Hermunarstillingar"):
     if scenarios == "Default":
         simAttributes["meðalfjöldi"][AGE_GROUPS[0]] = st.number_input("Meðalfjöldi ungra á dag",min_value = 1, max_value=100,
-                                                    value = deepcopy(meanArrivaltimes[AGE_GROUPS[0]]),step = 1)
+                                                    value = copy(meanArrivaltimes[AGE_GROUPS[0]]),step = 1)
         simAttributes["meðalfjöldi"][AGE_GROUPS[1]] = st.number_input("Meðalfjöldi miðaldra á dag",min_value = 1, max_value=100,
-                                                    value = deepcopy(meanArrivaltimes[AGE_GROUPS[1]]),step = 1)
+                                                    value = copy(meanArrivaltimes[AGE_GROUPS[1]]),step = 1)
         simAttributes["meðalfjöldi"][AGE_GROUPS[2]] = st.number_input("Meðalfjöldi aldraðra á dag",min_value = 1, max_value=100,
-                                                    value = deepcopy(meanArrivaltimes[AGE_GROUPS[2]]),step = 1)
+                                                    value = copy(meanArrivaltimes[AGE_GROUPS[2]]),step = 1)
     simAttributes["Upphafslíkur"][0] = st.slider("Líkur á að nýr sjúklingur fari á legudeild", 
                                                     value = simAttributes["Upphafslíkur"][0])
     simAttributes["CAP"] = st.slider("Hámarskfjöldi á spítala",min_value = 100,max_value = 1000,value = 250,step = 50)
@@ -50,7 +50,7 @@ with stillingar.expander("Hermunarstillingar"):
     simAttributes["Fjöldi hermana"] = st.number_input("Fjöldi hermana",5,100,20)
 
 if scenarios == "Eldri þjóð":
-    tmp = deepcopy(meanArrivaltimes)
+    tmp = copy(meanArrivaltimes)
     for i in range(len(AGE_GROUPS)):
         simAttributes["meðalfjöldi"][AGE_GROUPS[i]] = (1.0+t[i]/100.0)*tmp[AGE_GROUPS[i]]
 # meðaltími milli koma á spítalann frá mismunandi aldurshópum. Hér höfum við default tímann.
