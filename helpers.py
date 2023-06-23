@@ -12,30 +12,34 @@ AGE_GROUP_AMOUNT = {
     AGE_GROUPS[2] : 36
 }
 # færslulíkur milli deilda, hér höfum við default færslulíkur sem verða vonandi byggðar á gögnum. 
+#37% sem utskrifast af legudeild fara á göngudeild
 PROB = {
     #Færslulíkur ungra
     (STATES[0],AGE_GROUPS[0]) : [0.0, 0.3, 0.003, 0.697],
-    (STATES[1],AGE_GROUPS[0]) : [0.15, 0.0, 0.0, 0.85],
+    (STATES[1],AGE_GROUPS[0]) : [0.05, 0.0, 0.0, 0.995],
     (STATES[2],AGE_GROUPS[0]) : [0.0, 0.0, 1.0, 0.0],
     (STATES[3],AGE_GROUPS[0]) : [0.0, 0.0, 0.0, 1.0],
     #Færslulíkur miðaldra
-    (STATES[0],AGE_GROUPS[1]) : [0.0, 0.3, 0.0023, 0.6977],
-    (STATES[1],AGE_GROUPS[1]) : [0.20, 0.0, 0.0, 0.80],
+    (STATES[0],AGE_GROUPS[1]) : [0.0, 0.3, 0.003, 0.697],
+    (STATES[1],AGE_GROUPS[1]) : [0.05, 0.0, 0.0, 0.995],
     (STATES[2],AGE_GROUPS[1]) : [0.0, 0.0, 1.0, 0.0],
     (STATES[3],AGE_GROUPS[1]) : [0.0, 0.0, 0.0, 1.0],
     #Færslulíkur gamalla
-    (STATES[0],AGE_GROUPS[2]) : [0.0, 0.3, 0.0051, 0.6949],
-    (STATES[1],AGE_GROUPS[2]) : [0.25, 0.0, 0.0, 0.75],
+    (STATES[0],AGE_GROUPS[2]) : [0.0, 0.3, 0.003, 0.697],
+    (STATES[1],AGE_GROUPS[2]) : [0.05, 0.0, 0.0, 0.995],
     (STATES[2],AGE_GROUPS[2]) : [0.0, 0.0, 1.0, 0.0],
     (STATES[3],AGE_GROUPS[2]) : [0.0, 0.0, 0.0, 1.0],
 }
-INITIAL_PROB = [0.069, 0.931] # Upphafslíkur á að fara á legudeild og göngudeild (þessu mun verða breytt)
+INITIAL_PROB = [0.07, 0.93] # Upphafslíkur á að fara á legudeild og göngudeild (þessu mun verða breytt)
 # meðalbiðtímar á göngu- og legudeild, þetta verður default biðin sem byggist nú á aldri og verður vonandi byggð á gögnum.
 #Pæling að hafa dag-/göngudeild alltaf einn dag og einhverjar líkur á að göngu-/dagdeildarsjúklingar fari á legudeild
 MEAN_WAIT_TIMES = {
-    (AGE_GROUPS[0], STATES[0]) : 2.0, (AGE_GROUPS[0], STATES[1]) : 0.01,
-    (AGE_GROUPS[1], STATES[0]) : 3.0, (AGE_GROUPS[1], STATES[1]) : 0.02,
-    (AGE_GROUPS[2], STATES[0]) : 5.0, (AGE_GROUPS[2], STATES[1]) : 0.04
+    (AGE_GROUPS[0], STATES[0]) : 3.3,
+    (AGE_GROUPS[1], STATES[0]) : 4.8,
+    (AGE_GROUPS[2], STATES[0]) : 6.6, 
+    (AGE_GROUPS[0], STATES[1]) : 0.01,
+    (AGE_GROUPS[1], STATES[1]) : 0.02,
+    (AGE_GROUPS[2], STATES[1]) : 0.04
 }
 L = 20
 skiptiKeys = []

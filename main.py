@@ -72,15 +72,15 @@ if start:
 st.text("Hermunarstillingar")
 
 totalData = {
-    AGE_GROUPS[0] : [],
-    AGE_GROUPS[1] : [],
-    AGE_GROUPS[2] : [],
+    (AGE_GROUPS[0],STATES[0]) : [],
+    (AGE_GROUPS[1],STATES[0]) : [],
+    (AGE_GROUPS[2],STATES[0]) : [],
     "spitaliAmount" : [],
     "meðal lega" : [],
-    "mesta lega" : [],
-    "minnsta lega" : [],
     "Sankey" : {},
-    "dagar yfir cap" : []
+    "dagar yfir cap" : [],
+    "CI" : [],
+    "heildarsjúklingar" : 0
 }
 
 hundur = st.button("Byrja hermun!")
@@ -88,9 +88,9 @@ if hundur:
     with st.spinner("Hermun í gangi..."):
         L = simAttributes["Fjöldi hermana"]
         totalData = hermHundur(totalData,simAttributes)
-        legudataUngir = totalData[simAttributes["Aldurshópar"][0]]
-        legudataMid = totalData[simAttributes["Aldurshópar"][1]]
-        legudataGamlir = totalData[simAttributes["Aldurshópar"][2]]
+        legudataUngir = totalData[(simAttributes["Aldurshópar"][0],STATES[0])]
+        legudataMid = totalData[(simAttributes["Aldurshópar"][1],STATES[0])]
+        legudataGamlir = totalData[(simAttributes["Aldurshópar"][2],STATES[0])]
         df = pd.DataFrame(
             {
                 "Legudeild ungir": legudataUngir,
@@ -104,8 +104,11 @@ if hundur:
         st.text(f"Hér sést meðalfjöldi innlagna á dag yfir þessar {L} hermanir.")
         days = simAttributes["STOP"] -1
         mean_stay = totalData["meðal lega"]
-        min_stay = totalData["minnsta lega"]
-        max_stay = totalData["mesta lega"]
+        CI = totalData["CI"]
+        lower,upper = [],[]
+        for i in range(days):
+            lower.append(CI[i][0])
+            upper.append(CI[i][1])
         x = [i for i in range(days)]
         fig2 = go.Figure(
             [
@@ -117,7 +120,7 @@ if hundur:
                 ),
                 go.Scatter(
                     x = x + x[::-1],
-                    y = max_stay + min_stay[::-1],
+                    y = upper + lower[::-1],
                     fill = "toself",
                     fillcolor = "rgba(0,100,80,0.2)",
                     line = dict(color = "rgba(255,255,255,0)"),
@@ -152,7 +155,8 @@ if hundur:
         fig3.update_layout(title_text="Flæði sjúklinga í gegnum kerfið")
         meanYfirCap = np.sum(totalData["dagar yfir cap"])/L
         st.plotly_chart(fig3)
-        st.write(f"Meðalfjöldi daga sem sjúklingar á spítala voru yfir hámark: {meanYfirCap}")
+        st.write(f"Meðalfjöldi daga sem sjúklingar á spítala voru yfir hámark voru {meanYfirCap}. Heildar fjöldi sjúklinga sem komu", 
+                 f"í kerfið voru {totalData['heildarsjúklingar']}")
     st.success("Hermun lokið")
 
 prof = st.button("Skoða tíma profile")
