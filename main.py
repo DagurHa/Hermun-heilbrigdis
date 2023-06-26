@@ -18,6 +18,24 @@ from copy import copy,deepcopy
 start_time = time()
 st.title("Hermun heilbrigðiskerfisins")
 
+st.header("Deildir")
+
+gongu,legu = st.tabs(["Göngudeild","Legudeild"])
+
+with gongu:
+    st.write("Veldu hversu marga sjúklinga hver göngudeildalæknir getur séð um á dag.")
+    simAttributes["Starfsþörf"]["göngudeild"][0] = st.number_input("Fjöldi",value = STARFSDEMAND["göngudeild"][0],max_value=40,step =1)
+
+with legu:
+    st.write("Veldu fjölda lækna á legudeild")
+    SERF = st.number_input("Sérfræðingur", value = 1)
+    SNL = st.number_input("Sérnámslæknir", value = 1)
+    SGL = st.number_input("Deildarlæknir",value = 1)
+    st.write("Veldu legurými á einni legudeil")
+    simAttributes["Starfsþörf"]["legudeild"][0] = st.number_input("Fjöldi", value = STARFSDEMAND["legudeild"][0],max_value=40,step=1)
+    simAttributes["Starfsþörf"]["legudeild"][1] = SERF+SNL+SGL
+
+st.header("Stillingar")
 forstillt, stillingar = st.tabs(["Forstillt","Stillingar"])
 
 with forstillt:
@@ -63,6 +81,8 @@ simAttributes["lambda"] = sum([1.0/simAttributes["meðalbið"][age] for age in A
 
 st.divider()
 
+st.header("Hermun")
+
 st.text("Sjá eina hermun með völdum hermunarstillingum")
 start = st.button("Start")
 
@@ -80,7 +100,8 @@ totalData = {
     "Sankey" : {},
     "dagar yfir cap" : [],
     "CI" : [],
-    "heildarsjúklingar" : 0
+    "heildarsjúklingar" : [],
+    "Læknar" : {deild : [] for deild in simAttributes["Upphafsstöður"]}
 }
 
 hundur = st.button("Byrja hermun!")
@@ -155,8 +176,13 @@ if hundur:
         fig3.update_layout(title_text="Flæði sjúklinga í gegnum kerfið")
         meanYfirCap = np.sum(totalData["dagar yfir cap"])/L
         st.plotly_chart(fig3)
+        meanDoctors_legu = sum(totalData["Læknar"]["legudeild"])/L
+        meanDoctors_gongu = sum(totalData["Læknar"]["göngudeild"])/L
+        meanFjoldi_patient = sum(totalData["heildarsjúklingar"])/L
         st.write(f"Meðalfjöldi daga sem sjúklingar á spítala voru yfir hámark voru {meanYfirCap}. Heildar fjöldi sjúklinga sem komu", 
-                 f"í kerfið voru {totalData['heildarsjúklingar']}")
+                 f"í kerfið voru {meanFjoldi_patient}")
+        st.write(f"meðalfjöldi göngudeildalækna sem þarf til þess að það sé engin bið er {meanDoctors_gongu} og",
+                 f"meðalfjöldi legudeildalækna sem þarf er {meanDoctors_legu}")
     st.success("Hermun lokið")
 
 prof = st.button("Skoða tíma profile")
