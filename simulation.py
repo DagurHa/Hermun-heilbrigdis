@@ -18,7 +18,7 @@ class Patient:
     # Þegar sjúklingur er búinn á sinni deild finnum við hvert hann fer næst og sendum hann þangað
     def updatePatient(self,S):
         prev = self.deild
-        i_deild = randomChoice(S.fastar["Færslulíkur"][(prev,self.aldur)])
+        i_deild = randomChoice(S.fastar["Færslulíkur"][prev])
         self.deild = S.fastar["Stöður"][i_deild]
         if S.upphitunFlag:
             S.fjoldi["deildaskipti"][(prev,self.deild)] += 1
@@ -73,12 +73,12 @@ class Spitali:
             self.fjoldi["deildaskipti"][("heim",p.deild)] += 1
             self.endurkomur += 1
         wait = expovariate(1.0/self.fastar["Biðtímar"][(p.aldur,p.deild)])
-        for deild in self.fastar["Upphafsstöður"]:
-            fj_deild = sum(self.fjoldi[(age_grp,deild)] for age_grp in self.fastar["Aldurshópar"])
-            load = fj_deild/((self.fastar["Starfsþörf"][deild][0]/self.fastar["Starfsþörf"][deild][1])*self.fjoldi["Læknar"][deild])
+        for key in self.fastar["Starfsþörf"]:
+            fj_deild = sum(self.fjoldi[(age_grp,key[0])] for age_grp in self.fastar["Aldurshópar"])
+            load = fj_deild/((self.fastar["Starfsþörf"][key][0]/self.fastar["Starfsþörf"][key][1])*self.fjoldi["Læknar"][key])
             while load > 1:
-                self.fjoldi["Læknar"][deild] += self.fastar["Starfsþörf"][deild][1]
-                load = fj_deild/((self.fastar["Starfsþörf"][deild][0]/self.fastar["Starfsþörf"][deild][1])*self.fjoldi["Læknar"][deild])
+                self.fjoldi["Læknar"][key] += self.fastar["Starfsþörf"][key][1]
+                load = fj_deild/((self.fastar["Starfsþörf"][key][0]/self.fastar["Starfsþörf"][key][1])*self.fjoldi["Læknar"][key])
         #print(f"Sjúklingur númer {p.numer} á {p.deild} þarf að bíða þar í {wait}, liðinn tími er {self.env.now}")
         yield self.env.timeout(wait)
         yield self.env.process(p.updatePatient(self))
@@ -118,8 +118,8 @@ def interrupter(env,S,STOP,data,showSim,keys):
         data["spitaliAmount"].append(S.amount)
         if S.amount > S.cap:
             data["dagar yfir cap"] += 1
-        for deild in S.fastar["Upphafsstöður"]:
-            data["Læknar"][deild] = S.fjoldi["Læknar"][deild]
+        for key in S.fastar["Starfsþörf"]:
+            data["Læknar"][key] = S.fjoldi["Læknar"][key]
         if showSim:
             d = {"fjöldi á spítala": [S.amount],"capacity": S.cap}
             df = DataFrame(d,index = [i])
@@ -152,13 +152,13 @@ def sim(showSim,simAttributes):
     KEYS_TOT = KEYS_LEGU + KEYS_GONGU
     fjoldi = {keys : 0 for keys in KEYS_TOT}
     fjoldi["deildaskipti"] = simAttributes["deildaskipti"]
-    fjoldi["Læknar"] = {deild : simAttributes["Starfsþörf"][deild][1] for deild in simAttributes["Upphafsstöður"]}
+    fjoldi["Læknar"] = {key : simAttributes["Starfsþörf"][key][1] for key in list(simAttributes["Starfsþörf"].keys())}
     #Gögnin sem sim skilar
     data = {keys : [] for keys in KEYS_TOT}
     data["spitaliAmount"] = []
     data["deildaskipti"] = {}
     data["dagar yfir cap"] = 0
-    data["Læknar"] = {states: 0 for states in simAttributes["Upphafsstöður"]}
+    data["Læknar"] = {key : 0 for key in list(simAttributes["Starfsþörf"].keys())}
     STOP = simAttributes["STOP"]
     S = Spitali(fjoldi,env,simAttributes)
     env.process(interrupter(env,S,STOP,data,showSim,[KEYS_GONGU,KEYS_LEGU,KEYS_TOT]))
@@ -188,8 +188,8 @@ def hermHundur(totalData,simAttributes):
             totalData[key].append(np.sum(data[key])/days)
         for key in data["deildaskipti"]:
             sankeyData[key].append(data["deildaskipti"][key])
-        for deild in simAttributes["Upphafsstöður"]:
-            totalData["Læknar"][deild].append(data["Læknar"][deild])
+        for key in simAttributes["Starfsþörf"]:
+            totalData["Læknar"][key].append(data["Læknar"][key])
         dagarYfirCap.append(data["dagar yfir cap"])
         totalData["heildarsjúklingar"].append(data["heildarsjúklingar"])
     totalData["Sankey"] = sankeyData

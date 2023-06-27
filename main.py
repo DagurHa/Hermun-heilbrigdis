@@ -10,6 +10,7 @@ import cProfile
 import pstats
 import io
 from copy import copy,deepcopy
+from math import ceil
 
 ## Hér kemur streamlit kóðinn
 
@@ -24,7 +25,9 @@ gongu,legu = st.tabs(["Göngudeild","Legudeild"])
 
 with gongu:
     st.write("Veldu hversu marga sjúklinga hver göngudeildalæknir getur séð um á dag.")
-    simAttributes["Starfsþörf"]["göngudeild"][0] = st.number_input("Fjöldi",value = STARFSDEMAND["göngudeild"][0],max_value=40,step =1)
+    simAttributes["Starfsþörf"][("göngudeild","Læknar")][0] = st.number_input("Fjöldi",value = STARFSDEMAND[("göngudeild","Læknar")][0],max_value=40,step =1)
+    st.write("Veldu hversu marga sjúklinga hver göngudeildar hjúkrunarfræðingur getur séð um á dag.")
+    simAttributes["Starfsþörf"][("göngudeild","Hjúkrunarfræðingar")][0] = st.number_input("Fjöldi",value = STARFSDEMAND[("göngudeild","Hjúkrunarfræðingar")][0],max_value=40,step =1,key = 123)
 
 with legu:
     st.write("Veldu fjölda lækna á legudeild,")
@@ -32,8 +35,14 @@ with legu:
     SNL = st.number_input("Sérnámslæknir", value = 1)
     SGL = st.number_input("Deildarlæknir",value = 1)
     st.write("Veldu legurými á einni legudeild.")
-    simAttributes["Starfsþörf"]["legudeild"][0] = st.number_input("Fjöldi", value = STARFSDEMAND["legudeild"][0],max_value=40,step=1)
-    simAttributes["Starfsþörf"]["legudeild"][1] = SERF+SNL+SGL
+    simAttributes["Starfsþörf"][("legudeild","Læknar")][0] = st.number_input("Fjöldi", value = STARFSDEMAND[("legudeild","Læknar")][0],max_value=40,step=1)
+    simAttributes["Starfsþörf"][("legudeild","Hjúkrunarfræðingar")][0] = simAttributes["Starfsþörf"][("legudeild","Læknar")][0]
+    simAttributes["Starfsþörf"][("legudeild","Læknar")][1] = SERF+SNL+SGL
+    st.write("Veldu hversu marga sjúklinga á legudeild einn hjúkrunarfræðingur sér um.")
+    numPatients = st.number_input("Fjöldi sjúklinga",value = 4,max_value=10,step = 1)
+    simAttributes["Starfsþörf"][("legudeild","Hjúkrunarfræðingar")][1] = int(ceil(simAttributes["Starfsþörf"][("legudeild","Hjúkrunarfræðingar")][0]/numPatients))
+
+st.divider()
 
 st.header("Stillingar")
 forstillt, stillingar = st.tabs(["Forstillt","Stillingar"])
@@ -87,15 +96,17 @@ st.text("Sjá eina hermun með völdum hermunarstillingum")
 start = st.button("Start")
 
 if start:
-   data = sim(True,simAttributes)
-   tot_leg_age = [sum(data[(aldur, "legudeild")]) for aldur in AGE_GROUPS]
-   tot_leg = sum(tot_leg_age)
-   tot_gong_age = [sum(data[(aldur, "göngudeild")]) for aldur in AGE_GROUPS]
-   tot_gong = sum(tot_gong_age)
-   st.write(f"Meðalfjöldi á legudeild er {tot_leg/simAttributes['STOP']} og meðalfjöldi á göngudeild er {tot_gong/simAttributes['STOP']}")
-   docGong = data["Læknar"]["göngudeild"]
-   docLeg = data["Læknar"]["legudeild"]
-   st.write(f"Fjöldi lækna sem þarf á göngudeild er {docGong} og á legudeild {docLeg}")
+    data = sim(True,simAttributes)
+    tot_leg_age = [sum(data[(aldur, "legudeild")]) for aldur in AGE_GROUPS]
+    tot_leg = sum(tot_leg_age)
+    tot_gong_age = [sum(data[(aldur, "göngudeild")]) for aldur in AGE_GROUPS]
+    tot_gong = sum(tot_gong_age)
+    st.write(f"Meðalfjöldi á legudeild er {tot_leg/simAttributes['STOP']} og meðalfjöldi á göngudeild er {tot_gong/simAttributes['STOP']}")
+    st.write(f"meðal starsþörf miðað við enga bið:")
+    d = [(key_soy[0],key_soy[1],val) for key_soy,val in data["Læknar"].items()]
+    df = pd.DataFrame(d,columns = ["Deild","Starfsheiti","Fjöldi"])
+    df = df.set_index(["Deild","Starfsheiti"])
+    st.dataframe(df)
 
 st.text("Hermunarstillingar")
 
@@ -114,7 +125,7 @@ totalData = {
     "dagar yfir cap" : [],
     "CI" : [],
     "heildarsjúklingar" : [],
-    "Læknar" : {deild : [] for deild in simAttributes["Upphafsstöður"]}
+    "Læknar" : {key : [] for key in simAttributes["Starfsþörf"]}
 }
 for key in KEYS_TOT:
     totalData[key] = []
@@ -137,7 +148,7 @@ if hundur:
         st.write("Hér er meðalfjöldi fólks á legudeild eftir aldursflokki.")
         fig1 = px.box(df,labels = {"variable" : "Aldursflokkur", "value" : "meðalfjöldi á legudeild"})
         st.plotly_chart(fig1)
-        st.text(f"Hér sést meðalfjöldi innlagna á dag yfir þessar {L} hermanir.")
+        st.text(f"Hér sést meðalfjöldi einstaklinga í kerfinu á dag yfir þessar {L} hermanir ásamt 95% vikmörkum.")
         days = simAttributes["STOP"] -1
         mean_stay = totalData["meðal lega"]
         CI = totalData["CI"]
@@ -191,13 +202,18 @@ if hundur:
         fig3.update_layout(title_text="Flæði sjúklinga í gegnum kerfið")
         meanYfirCap = np.sum(totalData["dagar yfir cap"])/L
         st.plotly_chart(fig3)
-        meanDoctors_legu = sum(totalData["Læknar"]["legudeild"])/L
-        meanDoctors_gongu = sum(totalData["Læknar"]["göngudeild"])/L
+        meanWork = {}
+        for keys in simAttributes["Starfsþörf"]:
+            meanWork[keys] = sum(totalData["Læknar"][keys])/L
+        d = [(key_soy[0],key_soy[1],val) for key_soy,val in meanWork.items()]
+        df = pd.DataFrame(d,columns = ["Deild","Starfsheiti","Fjöldi"])
+        df = df.set_index(["Deild","Starfsheiti"])
+        st.write(f"meðal starsþörf miðað við enga bið:")
+        st.dataframe(df)
         meanFjoldi_patient = sum(totalData["heildarsjúklingar"])/L
-        st.write(f"Meðalfjöldi daga sem sjúklingar á spítala voru yfir hámark voru {meanYfirCap}. Heildar fjöldi sjúklinga sem komu", 
+        st.write(f"Meðalfjöldi daga sem sjúklingar á spítala voru yfir hámark voru {meanYfirCap}. Meðalfjöldi einstakra sjúklinga sem komu", 
                  f"í kerfið voru {meanFjoldi_patient}")
-        st.write(f"meðalfjöldi göngudeildalækna sem þarf til þess að það sé engin bið er {meanDoctors_gongu} og",
-                 f"meðalfjöldi legudeildalækna sem þarf er {meanDoctors_legu}")
+
     st.success("Hermun lokið")
 
 prof = st.button("Skoða tíma profile")
