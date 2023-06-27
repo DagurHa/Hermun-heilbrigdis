@@ -15,7 +15,7 @@ AGE_GROUP_AMOUNT = {
 #37% sem utskrifast af legudeild fara á göngudeild
 PROB = {
     #Færslulíkur ungra
-    (STATES[0],AGE_GROUPS[0]) : [0.0, 0.3, 0.003, 0.697],
+    (STATES[0],AGE_GROUPS[0]) : [0.0, 0.31, 0.003, 0.6969],
     (STATES[1],AGE_GROUPS[0]) : [0.05, 0.0, 0.0, 0.995],
     (STATES[2],AGE_GROUPS[0]) : [0.0, 0.0, 1.0, 0.0],
     (STATES[3],AGE_GROUPS[0]) : [0.0, 0.0, 0.0, 1.0],

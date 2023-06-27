@@ -1,9 +1,10 @@
 import numpy as np
-from random import expovariate, random
+from random import expovariate, random,choice
 from time import sleep
 from pandas import DataFrame
 from streamlit import line_chart
 from simpy import Environment,Interrupt
+#Ath þarf scipy version 1.10.1
 from scipy import stats
 from math import ceil
 
@@ -42,18 +43,13 @@ class Spitali:
         self.upphitun = env.event()
         env.process(self.upphitunWait())
         self.upphitunFlag = False
+        self.homePatientWait = False
     def patientGen(self,env):
         while True:
             try:
+                if len(self.discharged) > 0 and not self.homePatientWait:
+                    env.process(self.homeGen(env,self.discharged))
                 wait = expovariate(self.fastar["lambda"])
-                for p.numer in list(self.discharged.keys()):
-                    if random() < self.fastar["Endurkoma"][self.discharged[p.numer].aldur]:
-                        wait_endurkoma = expovariate(self.fastar["lambda"])
-                        yield env.timeout(wait_endurkoma)
-                        p = self.discharged.pop(p.numer)
-                        i_deild_upphaf = randomChoice(self.fastar["Upphafslíkur"])
-                        p.deild = self.fastar["Upphafsstöður"][i_deild_upphaf]
-                        env.process(self.addP(p,False,True))
                 #print(f"Þurfum að bíða í {wait} langann tíma eftir næsta sjúkling, liðinn tími er {env.now}")
                 yield env.timeout(wait)
                 i_aldur = randomChoice(self.p_age)
@@ -93,6 +89,19 @@ class Spitali:
         self.fjoldi[(p.aldur,prev)] -= 1
         if p.deild == self.fastar["Stöður"][3]:
             self.discharged[p.numer] = p
+    # Bíðum eftir sjúklingi sem hefur komið áður
+    def homeGen(self,env,p_Dict):
+        self.homePatientWait = True
+        mean_arr = 10.0 #Breytum þessu, þetta á að vera meðaltal koma fólks á spítala sem hefur verið þar áður á dag
+        wait = expovariate(mean_arr)
+        yield env.timeout(wait)
+        p_id = choice(list(p_Dict.keys()))
+        p = p_Dict.pop(p_id)
+        i_deild_upphaf = randomChoice(self.fastar["Upphafslíkur"])
+        deild_upphaf = self.fastar["Upphafsstöður"][i_deild_upphaf]
+        p.deild = deild_upphaf
+        env.process(self.addP(p,False,True))
+        self.homePatientWait = False
     #Bíðum eftir að upphitunartími sé búinn
     def upphitunWait(self):
         yield self.env.timeout(self.fastar["Upphitunartími"])
@@ -104,7 +113,7 @@ def interrupter(env,S,STOP,data,showSim,keys):
     for i in range(STOP):
         yield env.timeout(1)
         S.action.interrupt()
-        for key in keys[1]:
+        for key in keys[2]:
             data[key].append(S.fjoldi[key])
         data["spitaliAmount"].append(S.amount)
         if S.amount > S.cap:
@@ -113,8 +122,6 @@ def interrupter(env,S,STOP,data,showSim,keys):
             data["Læknar"][deild] = S.fjoldi["Læknar"][deild]
         if showSim:
             d = {"fjöldi á spítala": [S.amount],"capacity": S.cap}
-            d["Göngulæknar"] = data["Læknar"]["göngudeild"]
-            d["Legulæknar"] = data["Læknar"]["legudeild"]
             df = DataFrame(d,index = [i])
             if i == 0:
                 chart = line_chart(df)
@@ -147,7 +154,7 @@ def sim(showSim,simAttributes):
     fjoldi["deildaskipti"] = simAttributes["deildaskipti"]
     fjoldi["Læknar"] = {deild : simAttributes["Starfsþörf"][deild][1] for deild in simAttributes["Upphafsstöður"]}
     #Gögnin sem sim skilar
-    data = {keys : [] for keys in KEYS_LEGU}
+    data = {keys : [] for keys in KEYS_TOT}
     data["spitaliAmount"] = []
     data["deildaskipti"] = {}
     data["dagar yfir cap"] = 0
@@ -162,9 +169,13 @@ def sim(showSim,simAttributes):
     return data
 
 def hermHundur(totalData,simAttributes):
-    KEYS = [(simAttributes["Aldurshópar"][0],simAttributes["Stöður"][0]),
+    KEYS_LEGU = [(simAttributes["Aldurshópar"][0],simAttributes["Stöður"][0]),
         (simAttributes["Aldurshópar"][1],simAttributes["Stöður"][0]),
         (simAttributes["Aldurshópar"][2],simAttributes["Stöður"][0])]
+    KEYS_GONGU = [(simAttributes["Aldurshópar"][0],simAttributes["Stöður"][1]),
+        (simAttributes["Aldurshópar"][1],simAttributes["Stöður"][1]),
+        (simAttributes["Aldurshópar"][2],simAttributes["Stöður"][1])]
+    KEYS_TOT = KEYS_GONGU + KEYS_LEGU
     L = simAttributes["Fjöldi hermana"]
     days = simAttributes["STOP"]-1
     stayData = []
@@ -173,7 +184,7 @@ def hermHundur(totalData,simAttributes):
     for _ in range(L):
         data = sim(False,simAttributes)
         stayData.append(data["spitaliAmount"])
-        for key in KEYS:
+        for key in KEYS_TOT:
             totalData[key].append(np.sum(data[key])/days)
         for key in data["deildaskipti"]:
             sankeyData[key].append(data["deildaskipti"][key])

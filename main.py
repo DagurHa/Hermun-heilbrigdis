@@ -27,11 +27,11 @@ with gongu:
     simAttributes["Starfsþörf"]["göngudeild"][0] = st.number_input("Fjöldi",value = STARFSDEMAND["göngudeild"][0],max_value=40,step =1)
 
 with legu:
-    st.write("Veldu fjölda lækna á legudeild")
+    st.write("Veldu fjölda lækna á legudeild,")
     SERF = st.number_input("Sérfræðingur", value = 1)
     SNL = st.number_input("Sérnámslæknir", value = 1)
     SGL = st.number_input("Deildarlæknir",value = 1)
-    st.write("Veldu legurými á einni legudeil")
+    st.write("Veldu legurými á einni legudeild.")
     simAttributes["Starfsþörf"]["legudeild"][0] = st.number_input("Fjöldi", value = STARFSDEMAND["legudeild"][0],max_value=40,step=1)
     simAttributes["Starfsþörf"]["legudeild"][1] = SERF+SNL+SGL
 
@@ -55,15 +55,15 @@ with forstillt:
 #sliders o.fl.
 with stillingar.expander("Hermunarstillingar"):
     if scenarios == "Default":
-        simAttributes["meðalfjöldi"][AGE_GROUPS[0]] = st.number_input("Meðalfjöldi ungra á dag",min_value = 1, max_value=100,
+        simAttributes["meðalfjöldi"][AGE_GROUPS[0]] = st.number_input("Meðalfjöldi ungra á dag",min_value = 1, max_value=200,
                                                     value = copy(meanArrivaltimes[AGE_GROUPS[0]]),step = 1)
-        simAttributes["meðalfjöldi"][AGE_GROUPS[1]] = st.number_input("Meðalfjöldi miðaldra á dag",min_value = 1, max_value=100,
+        simAttributes["meðalfjöldi"][AGE_GROUPS[1]] = st.number_input("Meðalfjöldi miðaldra á dag",min_value = 1, max_value=200,
                                                     value = copy(meanArrivaltimes[AGE_GROUPS[1]]),step = 1)
-        simAttributes["meðalfjöldi"][AGE_GROUPS[2]] = st.number_input("Meðalfjöldi aldraðra á dag",min_value = 1, max_value=100,
+        simAttributes["meðalfjöldi"][AGE_GROUPS[2]] = st.number_input("Meðalfjöldi aldraðra á dag",min_value = 1, max_value=200,
                                                     value = copy(meanArrivaltimes[AGE_GROUPS[2]]),step = 1)
     simAttributes["Upphafslíkur"][0] = st.slider("Líkur á að nýr sjúklingur fari á legudeild", 
                                                     value = simAttributes["Upphafslíkur"][0])
-    simAttributes["CAP"] = st.slider("Hámarskfjöldi á spítala",min_value = 100,max_value = 1000,value = 250,step = 50)
+    simAttributes["CAP"] = st.slider("Hámarskfjöldi á spítala",min_value = 50,max_value = 500,value = 50,step = 10)
     simAttributes["STOP"] = st.number_input("Fjöldi hermunardaga",min_value=10,max_value=1095,value=100)
     simAttributes["Fjöldi hermana"] = st.number_input("Fjöldi hermana",5,100,20)
 
@@ -88,13 +88,26 @@ start = st.button("Start")
 
 if start:
    data = sim(True,simAttributes)
+   tot_leg_age = [sum(data[(aldur, "legudeild")]) for aldur in AGE_GROUPS]
+   tot_leg = sum(tot_leg_age)
+   tot_gong_age = [sum(data[(aldur, "göngudeild")]) for aldur in AGE_GROUPS]
+   tot_gong = sum(tot_gong_age)
+   st.write(f"Meðalfjöldi á legudeild er {tot_leg/simAttributes['STOP']} og meðalfjöldi á göngudeild er {tot_gong/simAttributes['STOP']}")
+   docGong = data["Læknar"]["göngudeild"]
+   docLeg = data["Læknar"]["legudeild"]
+   st.write(f"Fjöldi lækna sem þarf á göngudeild er {docGong} og á legudeild {docLeg}")
 
 st.text("Hermunarstillingar")
 
+KEYS_LEGU = [(AGE_GROUPS[0],STATES[0]),
+            (AGE_GROUPS[1],STATES[0]),
+            (AGE_GROUPS[2],STATES[0])]
+KEYS_GONGU = [(AGE_GROUPS[0],STATES[1]),
+            (AGE_GROUPS[1],STATES[1]),
+            (AGE_GROUPS[2],STATES[1])]
+KEYS_TOT = KEYS_GONGU + KEYS_LEGU
+
 totalData = {
-    (AGE_GROUPS[0],STATES[0]) : [],
-    (AGE_GROUPS[1],STATES[0]) : [],
-    (AGE_GROUPS[2],STATES[0]) : [],
     "spitaliAmount" : [],
     "meðal lega" : [],
     "Sankey" : {},
@@ -103,6 +116,8 @@ totalData = {
     "heildarsjúklingar" : [],
     "Læknar" : {deild : [] for deild in simAttributes["Upphafsstöður"]}
 }
+for key in KEYS_TOT:
+    totalData[key] = []
 
 hundur = st.button("Byrja hermun!")
 if hundur:
@@ -190,7 +205,7 @@ prof = st.button("Skoða tíma profile")
 if prof:
     pr = cProfile.Profile()
     pr.enable()
-    res = hermHundur(prof,totalData,simAttributes)
+    res = hermHundur(totalData,simAttributes)
     pr.disable()
     s = io.StringIO()
     ps = pstats.Stats(pr,stream = s).sort_stats("tottime")
