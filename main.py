@@ -9,7 +9,7 @@ import numpy as np
 import cProfile
 import pstats
 import io
-from copy import copy,deepcopy
+from copy import copy
 from math import ceil
 
 ## Hér kemur streamlit kóðinn
@@ -21,7 +21,9 @@ st.title("Hermun heilbrigðiskerfisins")
 
 st.header("Deildir")
 
-gongu,legu = st.tabs(["Göngudeild","Legudeild"])
+deildir = st.expander("Starfsupplýsingar")
+
+gongu,legu = deildir.tabs(["Göngudeild","Legudeild"])
 
 with gongu:
     st.write("Veldu hversu marga sjúklinga hver göngudeildalæknir getur séð um á dag.")
@@ -35,7 +37,7 @@ with legu:
     SNL = st.number_input("Sérnámslæknir", value = 1)
     SGL = st.number_input("Deildarlæknir",value = 1)
     st.write("Veldu legurými á einni legudeild.")
-    simAttributes["Starfsþörf"][("legudeild","Læknar")][0] = st.number_input("Fjöldi", value = STARFSDEMAND[("legudeild","Læknar")][0],max_value=40,step=1)
+    simAttributes["Starfsþörf"][("legudeild","Læknar")][0] = st.number_input("Fjöldi", value = STARFSDEMAND[("legudeild","Læknar")][0],max_value=40,step=1,key = 321)
     simAttributes["Starfsþörf"][("legudeild","Hjúkrunarfræðingar")][0] = simAttributes["Starfsþörf"][("legudeild","Læknar")][0]
     simAttributes["Starfsþörf"][("legudeild","Læknar")][1] = SERF+SNL+SGL
     st.write("Veldu hversu marga sjúklinga á legudeild einn hjúkrunarfræðingur sér um.")
@@ -44,7 +46,7 @@ with legu:
 
 st.divider()
 
-st.header("Stillingar")
+st.header("Hermunar stillingar")
 forstillt, stillingar = st.tabs(["Forstillt","Stillingar"])
 
 with forstillt:
@@ -108,7 +110,7 @@ if start:
     df = df.set_index(["Deild","Starfsheiti"])
     st.dataframe(df)
 
-st.text("Hermunarstillingar")
+st.text(f"Skoða niðurstöður úr {simAttributes['Fjöldi hermana']} hermunum.")
 
 KEYS_LEGU = [(AGE_GROUPS[0],STATES[0]),
             (AGE_GROUPS[1],STATES[0]),

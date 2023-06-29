@@ -6,29 +6,58 @@ from streamlit import line_chart
 from simpy import Environment,Interrupt
 #Ath þarf scipy version 1.10.1
 from scipy import stats
-from math import ceil
 
 class Patient:
-    def __init__(self,aldur,env,deild,numer):
+    def __init__(self,aldur,deild,numer):
         self.aldur = aldur
-        self.env = env
         self.deild = deild
         self.timiSpitala = 0 # Þetta gæti verið gott í framtíð
         self.numer = numer # breyta fyrir aflúsun
-    # Þegar sjúklingur er búinn á sinni deild finnum við hvert hann fer næst og sendum hann þangað
-    def updatePatient(self,S):
-        prev = self.deild
-        i_deild = randomChoice(S.fastar["Færslulíkur"][prev])
-        self.deild = S.fastar["Stöður"][i_deild]
-        if S.upphitunFlag:
-            S.fjoldi["deildaskipti"][(prev,self.deild)] += 1
-        if self.deild == S.fastar["Stöður"][2] or self.deild == S.fastar["Stöður"][3]:
-            S.removeP(prev,self)
-        else:
-            S.fjoldi[(self.aldur,prev)] -= 1
-            yield self.env.process(S.addP(self,True,False))
 
-class Spitali:
+class Deild:
+    def __init__(self,env,S,nafn):
+        self.env = env
+        self.S = S
+        self.nafn = nafn 
+        self.count = {age : 0 for age in S.fastar["Aldurshópar"]}
+        self.numRooms = 1
+
+    def addP(self,p,innritaður,endurkoma):
+        self.count[p.aldur] += 1
+        if not innritaður:
+            self.S.telja += 1
+            self.S.amount += 1
+            #print(f"fjöldi á spítala er núna {self.amount}, liðinn tími er {self.env.now}")
+        if endurkoma:
+            #print(self.endurkomur/self.telja)
+            self.S.fjoldi["deildaskipti"][("heim",self.nafn)] += 1
+            self.S.endurkomur += 1
+        wait = expovariate(1.0/self.S.fastar["Biðtímar"][(p.aldur,self.nafn)])
+        #print(f"Sjúklingur númer {p.numer} á {p.deild} þarf að bíða þar í {wait}, liðinn tími er {self.env.now}")
+        yield self.env.timeout(wait)
+        yield self.env.process(self.updatePatient(p))
+        self.S.CalcNumJobs()
+    
+    def updatePatient(self,p):
+        i_deild = randomChoice(self.S.fastar["Færslulíkur"][self.nafn])
+        newDeild = self.S.fastar["Stöður"][i_deild]
+        p.deild = newDeild
+        if self.S.upphitunFlag:
+            self.S.fjoldi["deildaskipti"][(self.nafn,newDeild)] += 1
+        if newDeild in self.S.fastar["Endastöður"]:
+            self.removeP(p)
+        else:
+            self.count[p.aldur] -= 1
+            yield self.env.process(self.S.deildir[newDeild].addP(p,True,False))
+        
+    def removeP(self,p):
+        #print(f"Sjúklingur númer {p.numer} fer af {prev} til {p.deild}, liðinn tími er {self.env.now}")
+        self.S.amount -= 1
+        self.count[p.aldur] -= 1
+        if p.deild == self.S.fastar["Stöður"][3]:
+            self.S.discharged[p.numer] = p
+
+class Kerfi:
     def __init__(self,fjoldi,env,simAttributes):
         self.fjoldi = fjoldi
         self.env = env
@@ -38,7 +67,10 @@ class Spitali:
         self.telja = 0
         self.amount = 0 #sum(list(fjoldi.values()))
         self.discharged = {}
+        self.deildir = {}
         self.endurkomur = 0
+        for unit in simAttributes["Upphafsstöður"]:
+            self.deildir[unit] = Deild(env,self,unit)
         self.action = env.process(self.patientGen(env))
         self.upphitun = env.event()
         env.process(self.upphitunWait())
@@ -56,39 +88,22 @@ class Spitali:
                 aldur = self.fastar["Aldurshópar"][i_aldur]
                 i_deild_upphaf = randomChoice(self.fastar["Upphafslíkur"])
                 deild_upphaf = self.fastar["Upphafsstöður"][i_deild_upphaf]
-                p = Patient(aldur,env,deild_upphaf,self.telja)
+                p = Patient(aldur,deild_upphaf,self.telja)
                 #print(f"Sjúklingur númer {p.numer} fer á {p.deild} og er {p.aldur}, liðinn tími er {env.now}")
-                env.process(self.addP(p,False,False))
+                env.process(self.deildir[deild_upphaf].addP(p,False,False))
             except Interrupt:
                 pass
-    # Bætum nýjum sjúklingi við á deildina sína og látum hann bíða þar
-    def addP(self,p,innritaður,endurkoma):
-        self.fjoldi[(p.aldur,p.deild)] += 1
-        if not innritaður:
-            self.telja += 1
-            self.amount += 1
-            #print(f"fjöldi á spítala er núna {self.amount}, liðinn tími er {self.env.now}")
-        if endurkoma:
-            #print(self.endurkomur/self.telja)
-            self.fjoldi["deildaskipti"][("heim",p.deild)] += 1
-            self.endurkomur += 1
-        wait = expovariate(1.0/self.fastar["Biðtímar"][(p.aldur,p.deild)])
-        for key in self.fastar["Starfsþörf"]:
-            fj_deild = sum(self.fjoldi[(age_grp,key[0])] for age_grp in self.fastar["Aldurshópar"])
-            load = fj_deild/((self.fastar["Starfsþörf"][key][0]/self.fastar["Starfsþörf"][key][1])*self.fjoldi["Læknar"][key])
-            while load > 1:
-                self.fjoldi["Læknar"][key] += self.fastar["Starfsþörf"][key][1]
-                load = fj_deild/((self.fastar["Starfsþörf"][key][0]/self.fastar["Starfsþörf"][key][1])*self.fjoldi["Læknar"][key])
-        #print(f"Sjúklingur númer {p.numer} á {p.deild} þarf að bíða þar í {wait}, liðinn tími er {self.env.now}")
-        yield self.env.timeout(wait)
-        yield self.env.process(p.updatePatient(self))
-    # fjarlægjum sjúkling af deildinni prev
-    def removeP(self,prev,p):
-        #print(f"Sjúklingur númer {p.numer} fer af {prev} til {p.deild}, liðinn tími er {self.env.now}")
-        self.amount -= 1
-        self.fjoldi[(p.aldur,prev)] -= 1
-        if p.deild == self.fastar["Stöður"][3]:
-            self.discharged[p.numer] = p
+    # Reiknum starfsþörf kerfisins
+    def CalcNumJobs(self):
+        for key in self.fastar["Upphafsstöður"]:
+            fj_deild = sum([self.deildir[key].count[age_grp] for age_grp in self.fastar["Aldurshópar"]])
+            for job in self.fastar["Störf"]:
+                cap_d = self.deildir[key].numRooms*self.fastar["Starfsþörf"][(key,job)][0]
+                while fj_deild > cap_d:
+                    self.deildir[key].numRooms += 1
+                    self.fjoldi["Læknar"][(key,job)] += self.fastar["Starfsþörf"][(key,job)][1]
+                    cap_d = self.deildir[key].numRooms*self.fastar["Starfsþörf"][(key,job)][0]
+
     # Bíðum eftir sjúklingi sem hefur komið áður
     def homeGen(self,env,p_Dict):
         self.homePatientWait = True
@@ -100,7 +115,7 @@ class Spitali:
         i_deild_upphaf = randomChoice(self.fastar["Upphafslíkur"])
         deild_upphaf = self.fastar["Upphafsstöður"][i_deild_upphaf]
         p.deild = deild_upphaf
-        env.process(self.addP(p,False,True))
+        env.process(self.deildir[deild_upphaf].addP(p,False,True))
         self.homePatientWait = False
     #Bíðum eftir að upphitunartími sé búinn
     def upphitunWait(self):
@@ -108,13 +123,13 @@ class Spitali:
         self.upphitunFlag = True
         self.upphitun.succeed()
 
-def interrupter(env,S,STOP,data,showSim,keys):
+def interrupter(env,S,STOP,data,showSim):
     yield S.upphitun
     for i in range(STOP):
         yield env.timeout(1)
         S.action.interrupt()
-        for key in keys[2]:
-            data[key].append(S.fjoldi[key])
+        for key in S.fastar["Lyklar"]:
+            data[key].append(S.deildir[key[1]].count[key[0]])
         data["spitaliAmount"].append(S.amount)
         if S.amount > S.cap:
             data["dagar yfir cap"] += 1
@@ -129,6 +144,8 @@ def interrupter(env,S,STOP,data,showSim,keys):
                 chart.add_rows(df)
             sleep(0.1)
 
+# Fall sem skilar tölu milli 0 og len(p)-1 með líkindadreifingu gefna í p
+# sum(p) þarf að vera 1
 def randomChoice(p):
     rnd = random()
     for i, w in enumerate(p):
@@ -136,46 +153,36 @@ def randomChoice(p):
         if rnd < 0:
             return i
 
-def sim(showSim,simAttributes):
-    #simAttributes inniheldur allar upplýsingar um forsendur hermuninnar
-    #Ef maður vill sjá þróun fjölda fólks á spítalanum er showSim = True
-    env = Environment()
-    #Þurfum að endurstilla deildaskipti töfluna í hvert sinn sem sim er kallað
-    KEYS_LEGU = [(simAttributes["Aldurshópar"][0],simAttributes["Stöður"][0]),
-        (simAttributes["Aldurshópar"][1],simAttributes["Stöður"][0]),
-        (simAttributes["Aldurshópar"][2],simAttributes["Stöður"][0])]
-    KEYS_GONGU = [(simAttributes["Aldurshópar"][0],simAttributes["Stöður"][1]),
-        (simAttributes["Aldurshópar"][1],simAttributes["Stöður"][1]),
-        (simAttributes["Aldurshópar"][2],simAttributes["Stöður"][1])]
+def HermunInit(simAttributes):
+    lyklar = simAttributes["Lyklar"]
     simAttributes["deildaskipti"] = dict.fromkeys(simAttributes["deildaskipti"].keys(),0)
     #Upprunalegur fjöldi á spítalanum
-    KEYS_TOT = KEYS_LEGU + KEYS_GONGU
-    fjoldi = {keys : 0 for keys in KEYS_TOT}
+    fjoldi = {}
     fjoldi["deildaskipti"] = simAttributes["deildaskipti"]
-    fjoldi["Læknar"] = {key : simAttributes["Starfsþörf"][key][1] for key in list(simAttributes["Starfsþörf"].keys())}
+    fjoldi["Læknar"] = {key : simAttributes["Starfsþörf"][key][1] for key in simAttributes["Starfsþörf"]}
     #Gögnin sem sim skilar
-    data = {keys : [] for keys in KEYS_TOT}
+    data = {keys : [] for keys in lyklar}
     data["spitaliAmount"] = []
     data["deildaskipti"] = {}
     data["dagar yfir cap"] = 0
     data["Læknar"] = {key : 0 for key in list(simAttributes["Starfsþörf"].keys())}
-    STOP = simAttributes["STOP"]
-    S = Spitali(fjoldi,env,simAttributes)
-    env.process(interrupter(env,S,STOP,data,showSim,[KEYS_GONGU,KEYS_LEGU,KEYS_TOT]))
-    env.run(until = STOP + simAttributes["Upphitunartími"])
+    return [data,fjoldi]
+
+# Fall sem framkvæmir eina hermun
+def sim(showSim,simAttributes):
+    [data,fjoldi] = HermunInit(simAttributes)
+    env = Environment()
+    S = Kerfi(fjoldi,env,simAttributes)
+    env.process(interrupter(env,S,simAttributes["STOP"],data,showSim))
+    env.run(until = simAttributes["STOP"] + simAttributes["Upphitunartími"])
     data["deildaskipti"] = S.fjoldi["deildaskipti"]
     data["heildarsjúklingar"] = S.telja
     #print(f"Heildar fjöldi fólks sem kom á spítalann alla hermunina er {S.telja}")
     return data
 
+# Fall sem hermir kerfið L sinnum
 def hermHundur(totalData,simAttributes):
-    KEYS_LEGU = [(simAttributes["Aldurshópar"][0],simAttributes["Stöður"][0]),
-        (simAttributes["Aldurshópar"][1],simAttributes["Stöður"][0]),
-        (simAttributes["Aldurshópar"][2],simAttributes["Stöður"][0])]
-    KEYS_GONGU = [(simAttributes["Aldurshópar"][0],simAttributes["Stöður"][1]),
-        (simAttributes["Aldurshópar"][1],simAttributes["Stöður"][1]),
-        (simAttributes["Aldurshópar"][2],simAttributes["Stöður"][1])]
-    KEYS_TOT = KEYS_GONGU + KEYS_LEGU
+    lyklar = simAttributes["Lyklar"]
     L = simAttributes["Fjöldi hermana"]
     days = simAttributes["STOP"]-1
     stayData = []
@@ -184,7 +191,7 @@ def hermHundur(totalData,simAttributes):
     for _ in range(L):
         data = sim(False,simAttributes)
         stayData.append(data["spitaliAmount"])
-        for key in KEYS_TOT:
+        for key in lyklar:
             totalData[key].append(np.sum(data[key])/days)
         for key in data["deildaskipti"]:
             sankeyData[key].append(data["deildaskipti"][key])

@@ -21,6 +21,7 @@ PROB = {
     STATES[3] : [0.0, 0.0, 0.0, 1.0]
 }
 UPPHAFSDEILD = [STATES[0],STATES[1]]
+ENDADEILD = [STATES[2],STATES[3]]
 INITIAL_PROB = [0.07, 0.93] # Upphafslíkur á að fara á legudeild og göngudeild (þessu mun verða breytt)
 # meðalbiðtímar á göngu- og legudeild, þetta verður default biðin sem byggist nú á aldri og verður vonandi byggð á gögnum.
 #Pæling að hafa dag-/göngudeild alltaf einn dag og einhverjar líkur á að göngu-/dagdeildarsjúklingar fari á legudeild
@@ -52,6 +53,7 @@ STARFSDEMAND = {
     (STATES[0],STORF[1]) : [20,5],
     (STATES[1],STORF[1]) : [12,1]
 }
+KEYS_TOT = list(product(AGE_GROUPS,UPPHAFSDEILD))
 UPPHITUN = 20 # Upphitunartími hverrar hermunar, þ.e. byrjum ekki að safna/sýna upplýsingar fyrr en svona margir dagar hafa liðið
 simAttributes = {
     "meðalfjöldi" : AGE_GROUP_AMOUNT,
@@ -63,8 +65,11 @@ simAttributes = {
     "Fjöldi hermana" : L,
     "deildaskipti" : deildaskipti,
     "Upphafsstöður" : UPPHAFSDEILD,
+    "Endastöður" : ENDADEILD,
     "Upphitunartími" : UPPHITUN,
     "Endurkoma" : ENDURKOMA,
-    "Starfsþörf" : STARFSDEMAND
+    "Starfsþörf" : STARFSDEMAND,
+    "Lyklar" : KEYS_TOT,
+    "Störf" : STORF
 }
 meanArrivaltimes = copy(simAttributes["meðalfjöldi"])
