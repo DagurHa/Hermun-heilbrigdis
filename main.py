@@ -14,8 +14,6 @@ from math import ceil
 
 ## Hér kemur streamlit kóðinn
 
-#Athuga gæti verið gott að setja default sim attributes lika
-
 start_time = time()
 st.title("Hermun heilbrigðiskerfisins")
 

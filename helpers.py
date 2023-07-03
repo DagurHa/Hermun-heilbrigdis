@@ -25,13 +25,15 @@ ENDADEILD = [STATES[2],STATES[3]]
 INITIAL_PROB = [0.07, 0.93] # Upphafslíkur á að fara á legudeild og göngudeild (þessu mun verða breytt)
 # meðalbiðtímar á göngu- og legudeild, þetta verður default biðin sem byggist nú á aldri og verður vonandi byggð á gögnum.
 #Pæling að hafa dag-/göngudeild alltaf einn dag og einhverjar líkur á að göngu-/dagdeildarsjúklingar fari á legudeild
-MEAN_WAIT_TIMES = {
-    (AGE_GROUPS[0], STATES[0]) : 3.3,
-    (AGE_GROUPS[1], STATES[0]) : 4.8,
-    (AGE_GROUPS[2], STATES[0]) : 6.6, 
-    (AGE_GROUPS[0], STATES[1]) : 0.02,
-    (AGE_GROUPS[1], STATES[1]) : 0.02,
-    (AGE_GROUPS[2], STATES[1]) : 0.03
+WAIT_GONGU = (0.01,0.03)
+WAIT_LEGU = {
+    AGE_GROUPS[0] : (0.9163,0.8444),
+    AGE_GROUPS[1] : (1.2385,0.9410),
+    AGE_GROUPS[2] : (1.5547,0.97707) 
+}
+WAIT_TIMES = {
+    STATES[0] : WAIT_LEGU,
+    STATES[1] : WAIT_GONGU
 }
 L = 20
 skiptiKeys = []
@@ -54,14 +56,14 @@ STARFSDEMAND = {
     (STATES[1],STORF[1]) : [12,1]
 }
 KEYS_TOT = list(product(AGE_GROUPS,UPPHAFSDEILD))
-UPPHITUN = 20 # Upphitunartími hverrar hermunar, þ.e. byrjum ekki að safna/sýna upplýsingar fyrr en svona margir dagar hafa liðið
+UPPHITUN = 1 # Upphitunartími hverrar hermunar, þ.e. byrjum ekki að safna/sýna upplýsingar fyrr en svona margir dagar hafa liðið
 simAttributes = {
     "meðalfjöldi" : AGE_GROUP_AMOUNT,
     "Færslulíkur" : PROB,
     "Upphafslíkur" : INITIAL_PROB,
     "Stöður" : STATES,
     "Aldurshópar" : AGE_GROUPS,
-    "Biðtímar" : MEAN_WAIT_TIMES,
+    "Biðtímar" : WAIT_TIMES,
     "Fjöldi hermana" : L,
     "deildaskipti" : deildaskipti,
     "Upphafsstöður" : UPPHAFSDEILD,

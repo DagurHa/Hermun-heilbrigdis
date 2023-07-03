@@ -32,7 +32,13 @@ class Deild:
             #print(self.endurkomur/self.telja)
             self.S.fjoldi["deildaskipti"][("heim",self.nafn)] += 1
             self.S.endurkomur += 1
-        wait = expovariate(1.0/self.S.fastar["Biðtímar"][(p.aldur,self.nafn)])
+        if self.nafn == self.S.fastar["Stöður"][0]:
+            sd = self.S.fastar["Biðtímar"][self.nafn][p.aldur][1]
+            mu = self.S.fastar["Biðtímar"][self.nafn][p.aldur][0]
+            wait = np.random.lognormal(mu,sd)
+        if self.nafn == self.S.fastar["Stöður"][1]:
+            wait = np.random.uniform(self.S.fastar["Biðtímar"][self.nafn][0],self.S.fastar["Biðtímar"][self.nafn][1])
+        #wait = expovariate(1.0/self.S.fastar["Biðtímar"][(p.aldur,self.nafn)])
         #print(f"Sjúklingur númer {p.numer} á {p.deild} þarf að bíða þar í {wait}, liðinn tími er {self.env.now}")
         yield self.env.timeout(wait)
         yield self.env.process(self.updatePatient(p))
@@ -101,7 +107,8 @@ class Kerfi:
                 cap_d = self.deildir[key].numRooms*self.fastar["Starfsþörf"][(key,job)][0]
                 while fj_deild > cap_d:
                     self.deildir[key].numRooms += 1
-                    self.fjoldi["Læknar"][(key,job)] += self.fastar["Starfsþörf"][(key,job)][1]
+                    for jobs in self.fastar["Störf"]:
+                        self.fjoldi["Læknar"][(key,jobs)] += self.fastar["Starfsþörf"][(key,job)][1]
                     cap_d = self.deildir[key].numRooms*self.fastar["Starfsþörf"][(key,job)][0]
 
     # Bíðum eftir sjúklingi sem hefur komið áður
