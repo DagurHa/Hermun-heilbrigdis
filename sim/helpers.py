@@ -1,6 +1,8 @@
 from itertools import product
 from copy import copy
-#from gogntilnotkunar import * 
+import pandas as pd
+
+d_skra = pd.read_csv("dagar.csv")
 
 #Hér eftir koma allar global breytur.
 # Mismunandi stöður sjúklings. Bætum við og breytum þegar lengra er komið.
@@ -16,13 +18,13 @@ AGE_GROUP_AMOUNT = {
 #37% sem utskrifast af legudeild fara á göngudeild
 PROB = {
     STATES[0] : [0.0, 0.31, 0.04, 0.65],
-    STATES[1] : [0.05, 0.0, 0.0, 0.995],
+    STATES[1] : [0.005, 0.0, 0.0, 0.995],
     STATES[2] : [0.0, 0.0, 1.0, 0.0],
     STATES[3] : [0.0, 0.0, 0.0, 1.0]
 }
 UPPHAFSDEILD = [STATES[0],STATES[1]]
 ENDADEILD = [STATES[2],STATES[3]]
-INITIAL_PROB = [0.07, 0.93] # Upphafslíkur á að fara á legudeild og göngudeild (þessu mun verða breytt)
+INITIAL_PROB = [0.47, 0.53] # Upphafslíkur á að fara á legudeild og göngudeild (þessu mun verða breytt)
 # meðalbiðtímar á göngu- og legudeild, þetta verður default biðin sem byggist nú á aldri og verður vonandi byggð á gögnum.
 #Pæling að hafa dag-/göngudeild alltaf einn dag og einhverjar líkur á að göngu-/dagdeildarsjúklingar fari á legudeild
 WAIT_GONGU = (0.01,0.03)
@@ -55,8 +57,10 @@ STARFSDEMAND = {
     (STATES[0],STORF[1]) : [20,5],
     (STATES[1],STORF[1]) : [12,1]
 }
+GOGN = d_skra["Fjöldi á dag"].tolist()
+print(len(GOGN))
 KEYS_TOT = list(product(AGE_GROUPS,UPPHAFSDEILD))
-UPPHITUN = 1 # Upphitunartími hverrar hermunar, þ.e. byrjum ekki að safna/sýna upplýsingar fyrr en svona margir dagar hafa liðið
+UPPHITUN = 25 # Upphitunartími hverrar hermunar, þ.e. byrjum ekki að safna/sýna upplýsingar fyrr en svona margir dagar hafa liðið
 simAttributes = {
     "meðalfjöldi" : AGE_GROUP_AMOUNT,
     "Færslulíkur" : PROB,
