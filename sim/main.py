@@ -139,14 +139,14 @@ if start:
     data1 = sim(True,simAttributes1)
     [tot_leg,tot_gong,df] = calcSimShow(data1)
     st.write(f"Meðalfjöldi á legudeild er {tot_leg/simAttributes1['STOP']} og meðalfjöldi á göngudeild er {tot_gong/simAttributes1['STOP']}")
-    st.write(f"meðal starsþörf miðað við enga bið:")
+    st.write(f"Meðal starfsþörf miðað við enga bið:")
     st.dataframe(df)
     if compare:
         st.write("Seinni hermun gefur.")
         data2 = sim(True,simAttributes2)
         [tot_leg,tot_gong,df] = calcSimShow(data2)
         st.write(f"Meðalfjöldi á legudeild er {tot_leg/simAttributes1['STOP']} og meðalfjöldi á göngudeild er {tot_gong/simAttributes1['STOP']}")
-        st.write(f"meðal starsþörf miðað við enga bið:")
+        st.write(f"Meðal starfsþörf miðað við enga bið:")
         st.dataframe(df)
 
 st.text(f"Skoða niðurstöður úr {simAttributes1['Fjöldi hermana']} hermunum.")
@@ -245,11 +245,24 @@ def calcRandom(data,simAttribs):
     meanWork = {}
     for keys in simAttribs["Starfsþörf"]:
         meanWork[keys] = sum(data["Læknar"][keys])/L
+    #for key_soy,val in simAttribs["Starfsþörf"].items():
+    #    key = key_soy[0]
+    #    soy = key_soy[1]
+    #    if key not in meanWork:
+    #        meanWork[key] = {}
+    #    meanWork[key][soy] = val
+    #for key in meanWork.keys():
+    #    for soy in meanWork[key].keys():
+    #        meanWork[key][soy]=sum(meanWork[key][soy])/len(meanWork[key][soy])
     d = [(key_soy[0],key_soy[1],val) for key_soy,val in meanWork.items()]
-    df = pd.DataFrame(d,columns = ["Deild","Starfsheiti","Fjöldi"])
-    df = df.set_index(["Deild","Starfsheiti"])
+    #df = pd.DataFrame(d,columns = ["Deild","Starfsheiti","Fjöldi"])
+    #df = df.set_index(["Deild","Starfsheiti"])
+    #d = [(key,soy,val) for key,values in meanWork.items() for soy, val in values.items()]
+    df = pd.DataFrame(d,columns=["Deild","Starfsheiti","Fjöldi"])
+    df_pivot = df.pivot(index="Deild",columns="Starfsheiti",values="Fjöldi")
+    df_pivot.columns=["Læknar","Hjúkrunarfræðingar"]
     meanFjoldi_patient = sum(totalData["heildarsjúklingar"])/L
-    return [df,meanYfirCap,meanFjoldi_patient]
+    return [df_pivot,meanYfirCap,meanFjoldi_patient]
 
 vis = st.checkbox("Sjá raungögn með hermun")
 hundur = st.button("Byrja hermun!")
@@ -290,38 +303,38 @@ if hundur:
         else:
             df_tot = df
             graf_tot = graf
-        st.write("Hér er meðalfjöldi fólks á legudeild eftir aldursflokki.")
-        if compare:
-            fig1 = px.box(df_tot,color = "Hermun")
-        else:
-            fig1 = px.box(df_tot)
-        st.plotly_chart(fig1)
-        st.text(f"Hér sést meðalfjöldi einstaklinga í kerfinu á dag yfir þessar {L}")
-        st.text(f"hermanir ásamt 95% vikmörkum.")
-        fig2 = go.Figure(
-            graf_tot
-        )
-        fig2.update_layout(
-            xaxis_title = "Dagar",
-            yaxis_title = "meðalfjöldi"
-        )
-        st.plotly_chart(fig2)
-        fig3.update_layout(title_text="Flæði sjúklinga í gegnum kerfið")
-        st.plotly_chart(fig3)
-        if compare:
-            fig3_new.update_layout(title_text="Flæði sjúklinga í gegnum kerfið í seinni hermun")
-            st.plotly_chart(fig3_new)
-        st.write(f"meðal starsþörf miðað við enga bið:")
-        st.dataframe(df_starf)
-        st.write(f"Meðalfjöldi daga sem sjúklingar á spítala voru yfir hámark voru {meanYfirCap}. Meðalfjöldi einstakra sjúklinga sem komu", 
-                 f"í kerfið voru {meanFjoldi_patient}")
-        if compare:
-            st.write(f"meðal starsþörf miðað við enga bið í seinni hermun:")
-            st.dataframe(df_starf_new)
-            st.write(f"Meðalfjöldi daga sem sjúklingar á spítala voru yfir hámark í seinni hermun voru {meanYfirCap_new}. Meðalfjöldi einstakra sjúklinga sem komu", 
-                 f"í kerfið í seinni hermun voru {meanFjoldi_patient_new}")
-
     st.success("Hermun lokið")
+    st.write("Hér er meðalfjöldi fólks á legudeild eftir aldursflokki.")
+    if compare:
+        fig1 = px.box(df_tot,color = "Hermun")
+    else:
+        fig1 = px.box(df_tot)
+    st.plotly_chart(fig1)
+    st.text(f"Hér sést meðalfjöldi einstaklinga í kerfinu á dag yfir þessar {L}")
+    st.text(f"hermanir ásamt 95% vikmörkum.")
+    fig2 = go.Figure(
+        graf_tot
+    )
+    fig2.update_layout(
+        xaxis_title = "Dagar",
+        yaxis_title = "meðalfjöldi"
+    )
+    st.plotly_chart(fig2)
+    fig3.update_layout(title_text="Flæði sjúklinga í gegnum kerfið")
+    st.plotly_chart(fig3)
+    if compare:
+        fig3_new.update_layout(title_text="Flæði sjúklinga í gegnum kerfið í seinni hermun")
+        st.plotly_chart(fig3_new)
+    st.write(f"Meðal starfsþörf miðað við enga bið:")
+    st.dataframe(df_starf)
+    st.write(f"**Meðalfjöldi daga** þar sem fjöldi sjúklinga á spítala fóru yfir hámark voru **{meanYfirCap}**.")
+    st.write(f"**Meðalfjöldi einstakra sjúklinga** sem komu í kerfið voru **{meanFjoldi_patient}**")
+    if compare:
+        st.write(f"Meðal starfsþörf miðað við enga bið í seinni hermun:")
+        st.dataframe(df_starf_new)
+        st.write(f"**Meðalfjöldi daga** þar sem fjöldi sjúklinga á spítala fóru yfir hámark voru **{meanYfirCap_new}**.")
+        st.write(f"**Meðalfjöldi einstakra sjúklinga** sem komu í kerfið voru **{meanFjoldi_patient_new}**")
+
 
 prof = st.button("Skoða tíma profile")
 
