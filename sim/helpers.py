@@ -4,9 +4,14 @@ import pandas as pd
 
 d_skra = pd.read_csv("dagar.csv")
 
+#Kóði til að lesa dict úr csv
+"""with open('dict.csv') as csv_file:
+    reader = csv.reader(csv_file)
+    mydict = dict(reader)"""
+
 #Hér eftir koma allar global breytur.
 # Mismunandi stöður sjúklings. Bætum við og breytum þegar lengra er komið.
-STATES = ["legudeild", "göngudeild", "dauði", "heim"]
+STATES = ["legudeild", "göngudeild", "bráðamóttaka", "hjúkrun", "dauði", "heim"]
 AGE_GROUPS = ["Ungur","Miðaldra","Gamall"] # mismunandi aldurshópar sjúklings. Breytum/bætum við mögulega
 # meðalfjöldi aldurshópa sem koma á spítala á dag, fáum rauntölur hér og getum síðan breytt
 AGE_GROUP_AMOUNT = {
@@ -14,37 +19,60 @@ AGE_GROUP_AMOUNT = {
     AGE_GROUPS[1] : 41,
     AGE_GROUPS[2] : 36
 }
-# færslulíkur milli deilda, hér höfum við default færslulíkur sem verða vonandi byggðar á gögnum. 
+# færslulíkur milli deilda, hér höfum við default færslulíkur sem verða vonandi byggðar á gögnum.
+# Skiptum færslulíkum eftir aldri en bara til þess að aldrað fólk geti komist á hjúkrun, einmitt nuna er hjúkrun absorbing
 #37% sem utskrifast af legudeild fara á göngudeild
 PROB = {
-    STATES[0] : [0.0, 0.31, 0.04, 0.65],
-    STATES[1] : [0.005, 0.0, 0.0, 0.995],
-    STATES[2] : [0.0, 0.0, 1.0, 0.0],
-    STATES[3] : [0.0, 0.0, 0.0, 1.0]
+    #Færslulíkur ungra
+    (STATES[0],AGE_GROUPS[0]) : [0.0, 0.31, 0.0, 0.0, 0.04, 0.65],
+    (STATES[1],AGE_GROUPS[0]) : [0.005, 0.0, 0.0, 0.0, 0.0, 0.995],
+    (STATES[2],AGE_GROUPS[0]) : [0.3, 0.3, 0.0, 0.0, 0.0, 0.4],
+    (STATES[3],AGE_GROUPS[0]) : [0.0, 0.0, 0.0, 1.0, 0.0, 0.0],
+    (STATES[4],AGE_GROUPS[0]) : [0.0, 0.0, 0.0, 0.0, 1.0, 0.0],
+    (STATES[5],AGE_GROUPS[0]) : [0.0, 0.0, 0.0, 0.0, 0.0, 1.0],
+    #Færslulíkur miðaldra
+    (STATES[0],AGE_GROUPS[1]) : [0.0, 0.31, 0.0, 0.0, 0.04, 0.65],
+    (STATES[1],AGE_GROUPS[1]) : [0.005, 0.0, 0.0, 0.0, 0.0, 0.995],
+    (STATES[2],AGE_GROUPS[1]) : [0.3, 0.3, 0.0, 0.0, 0.0, 0.4],
+    (STATES[3],AGE_GROUPS[1]) : [0.0, 0.0, 0.0, 1.0, 0.0, 0.0],
+    (STATES[4],AGE_GROUPS[1]) : [0.0, 0.0, 0.0, 0.0, 1.0, 0.0],
+    (STATES[5],AGE_GROUPS[1]) : [0.0, 0.0, 0.0, 0.0, 0.0, 1.0],
+    #Færslulíkur aldraðra (Hér breytast líkur á að fara til hjúkrunar, einmitt nuna ekki byggt á gögnum)
+    (STATES[0],AGE_GROUPS[2]) : [0.0, 0.31, 0.0, 0.1, 0.04, 0.55],
+    (STATES[1],AGE_GROUPS[2]) : [0.005, 0.0, 0.0, 0.1, 0.0, 0.895],
+    (STATES[2],AGE_GROUPS[2]) : [0.3, 0.3, 0.0, 0.0, 0.0, 0.4],
+    (STATES[3],AGE_GROUPS[2]) : [0.0, 0.0, 0.0, 1.0, 0.0, 0.0],
+    (STATES[4],AGE_GROUPS[2]) : [0.0, 0.0, 0.0, 0.0, 1.0, 0.0],
+    (STATES[5],AGE_GROUPS[2]) : [0.0, 0.0, 0.0, 0.0, 0.0, 1.0],
 }
-UPPHAFSDEILD = [STATES[0],STATES[1]]
-ENDADEILD = [STATES[2],STATES[3]]
-INITIAL_PROB = [0.47, 0.53] # Upphafslíkur á að fara á legudeild og göngudeild (þessu mun verða breytt)
+UPPHAFSDEILD = [STATES[0],STATES[1],STATES[2]]
+ENDADEILD = [STATES[3],STATES[4],STATES[5]]
+INITIAL_PROB = [0.47, 0.13, 0.4] # Upphafslíkur á að fara á legudeild ,göngudeild og bráðamóttöku
 # meðalbiðtímar á göngu- og legudeild, þetta verður default biðin sem byggist nú á aldri og verður vonandi byggð á gögnum.
-#Pæling að hafa dag-/göngudeild alltaf einn dag og einhverjar líkur á að göngu-/dagdeildarsjúklingar fari á legudeild
-WAIT_GONGU = (0.01,0.03)
+WAIT_BMT = (0.0, 0.39)
+WAIT_GONGU = (0.01, 0.03)
 WAIT_LEGU = {
-    AGE_GROUPS[0] : (0.9163,0.8444),
-    AGE_GROUPS[1] : (1.2385,0.9410),
-    AGE_GROUPS[2] : (1.5547,0.97707) 
+    AGE_GROUPS[0] : (0.9163, 0.8444),
+    AGE_GROUPS[1] : (1.2385, 0.9410),
+    AGE_GROUPS[2] : (1.5547, 0.97707)
 }
-WAIT_TIMES = {
-    STATES[0] : WAIT_LEGU,
-    STATES[1] : WAIT_GONGU
+WAIT_unif = {
+    STATES[1] : WAIT_GONGU,
+    STATES[2] : WAIT_BMT
+}
+WAIT_lognorm = {
+    STATES[0] : WAIT_LEGU
 }
 L = 20
 skiptiKeys = []
 for tvennd in product(STATES,range(len(STATES))):
-    if PROB[tvennd[0]][tvennd[1]] > 0.0:
+    if PROB[(tvennd[0],AGE_GROUPS[2])][tvennd[1]] > 0.0:
         skiptiKeys.append((tvennd[0],STATES[tvennd[1]]))
 for deild in UPPHAFSDEILD:
+    skiptiKeys.append(("hjúkrun",deild))
     skiptiKeys.append(("heim",deild))
 deildaskipti = {keys : 0 for keys in skiptiKeys}
+#Erum ekki að nota þetta einmitt nuna, kannski seinna
 ENDURKOMA = {
     AGE_GROUPS[0] : 0.02,
     AGE_GROUPS[1] : 0.04,
@@ -52,10 +80,14 @@ ENDURKOMA = {
 }
 STORF = ["Læknar","Hjúkrunarfræðingar"]
 STARFSDEMAND = {
-    (STATES[0],STORF[0]): [20,3],      #Miðum við að hver legudeild rúmi 20 sjúklinga og að hver legudeild hafi 3 lækna og 4 hjúkrunarfræðinga
+    (STATES[0],STORF[0]) : [20,3],      #Miðum við að hver legudeild rúmi 20 sjúklinga og að hver legudeild hafi 3 lækna og 4 hjúkrunarfræðinga
     (STATES[1],STORF[0]) : [12,1],      #Miðum við að hver göngudeildarlæknir geti séð 12 sjúklinga á dag og þurfi einn hjúkrunarfræðing
     (STATES[0],STORF[1]) : [20,5],
-    (STATES[1],STORF[1]) : [12,1]
+    (STATES[1],STORF[1]) : [12,1],
+    (STATES[2],STORF[0]) : [10,1],
+    (STATES[2],STORF[1]) : [1,1],
+    (STATES[3],STORF[0]) : [10,1],
+    (STATES[3],STORF[1]) : [30,1]
 }
 GOGN = d_skra["Fjöldi á dag"].tolist()
 print(len(GOGN))
@@ -67,7 +99,8 @@ simAttributes = {
     "Upphafslíkur" : INITIAL_PROB,
     "Stöður" : STATES,
     "Aldurshópar" : AGE_GROUPS,
-    "Biðtímar" : WAIT_TIMES,
+    "Biðtímar lognormal" : WAIT_lognorm,
+    "Biðtímar jöfn" : WAIT_unif,
     "Fjöldi hermana" : L,
     "deildaskipti" : deildaskipti,
     "Upphafsstöður" : UPPHAFSDEILD,

@@ -80,7 +80,10 @@ def initSimAttribs(simAttribs,tab,num_in_key,name,compare):
         vals = [1.0/simAttribs["meðalfjöldi"][age_group] for age_group in AGE_GROUPS]
 
         simAttribs["meðalbið"] = dict(zip(keys,vals))
-        simAttribs["Upphafslíkur"][1] = 1 - simAttribs["Upphafslíkur"][0]
+        #Einmitt núna er upphafslíkur á að fara inná göngudeild beint alltaf 1/4 af upphafslíkum BMT
+        simAttribs["Upphafslíkur"][1] = 1/4*(1 - simAttribs["Upphafslíkur"][0])
+        simAttribs["Upphafslíkur"][2] = 3/4*(1 - simAttribs["Upphafslíkur"][0])
+        print(simAttribs["Upphafslíkur"])
         simAttribs["lambda"] = sum([1.0/simAttribs["meðalbið"][age] for age in AGE_GROUPS])
     return simAttribs
 
@@ -130,15 +133,20 @@ def calcSimShow(data):
     tot_leg = sum(tot_leg_age)
     tot_gong_age = [sum(data[(aldur, "göngudeild")]) for aldur in AGE_GROUPS]
     tot_gong = sum(tot_gong_age)
+    tot_bmt_age = [sum(data[(aldur, "bráðamóttaka")]) for aldur in AGE_GROUPS]
+    tot_bmt = sum(tot_bmt_age)
     d = [(key_soy[0],key_soy[1],val) for key_soy,val in data["Læknar"].items()]
     df = pd.DataFrame(d,columns = ["Deild","Starfsheiti","Fjöldi"])
-    df = df.set_index(["Deild","Starfsheiti"])
-    return [tot_leg,tot_gong,df]
+    df_pivot = df.pivot(index="Deild",columns="Starfsheiti",values="Fjöldi")
+    df_pivot.columns=["Læknar","Hjúkrunarfræðingar"]
+    return [tot_leg,tot_gong,tot_bmt,df_pivot]
 
 if start:
     data1 = sim(True,simAttributes1)
-    [tot_leg,tot_gong,df] = calcSimShow(data1)
+    [tot_leg,tot_gong,tot_bmt,df] = calcSimShow(data1)
     st.write(f"Meðalfjöldi á legudeild er {tot_leg/simAttributes1['STOP']} og meðalfjöldi á göngudeild er {tot_gong/simAttributes1['STOP']}")
+    st.write(f"Meðalfjöldi á bráðamóttöku er {tot_bmt/simAttributes1['STOP']}") 
+    st.write(f"og heildarfjöldi einstakra sjúklinga sem kom í kerfið var {data1['heildarsjúklingar']}")
     st.write(f"Meðal starfsþörf miðað við enga bið:")
     st.dataframe(df)
     if compare:
@@ -151,13 +159,7 @@ if start:
 
 st.text(f"Skoða niðurstöður úr {simAttributes1['Fjöldi hermana']} hermunum.")
 
-KEYS_LEGU = [(AGE_GROUPS[0],STATES[0]),
-            (AGE_GROUPS[1],STATES[0]),
-            (AGE_GROUPS[2],STATES[0])]
-KEYS_GONGU = [(AGE_GROUPS[0],STATES[1]),
-            (AGE_GROUPS[1],STATES[1]),
-            (AGE_GROUPS[2],STATES[1])]
-KEYS_TOT = KEYS_GONGU + KEYS_LEGU
+KEYS_TOT = simAttributes1["Lyklar"]
 
 def initTotalData():
     totalData = {
@@ -220,6 +222,7 @@ def calcGraph(data,simAttribs,vis,first):
 def calcSankey(data,simAttribs):
     L = simAttribs["Fjöldi hermana"]
     sankeyData = data["Sankey"]
+    print(sankeyData)
     nodeNum = {simAttribs["Stöður"][i] : i for i in range(len(simAttribs["Stöður"]))}
     source = []
     target = []
@@ -245,19 +248,7 @@ def calcRandom(data,simAttribs):
     meanWork = {}
     for keys in simAttribs["Starfsþörf"]:
         meanWork[keys] = sum(data["Læknar"][keys])/L
-    #for key_soy,val in simAttribs["Starfsþörf"].items():
-    #    key = key_soy[0]
-    #    soy = key_soy[1]
-    #    if key not in meanWork:
-    #        meanWork[key] = {}
-    #    meanWork[key][soy] = val
-    #for key in meanWork.keys():
-    #    for soy in meanWork[key].keys():
-    #        meanWork[key][soy]=sum(meanWork[key][soy])/len(meanWork[key][soy])
     d = [(key_soy[0],key_soy[1],val) for key_soy,val in meanWork.items()]
-    #df = pd.DataFrame(d,columns = ["Deild","Starfsheiti","Fjöldi"])
-    #df = df.set_index(["Deild","Starfsheiti"])
-    #d = [(key,soy,val) for key,values in meanWork.items() for soy, val in values.items()]
     df = pd.DataFrame(d,columns=["Deild","Starfsheiti","Fjöldi"])
     df_pivot = df.pivot(index="Deild",columns="Starfsheiti",values="Fjöldi")
     df_pivot.columns=["Læknar","Hjúkrunarfræðingar"]

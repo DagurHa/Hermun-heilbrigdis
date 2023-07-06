@@ -32,12 +32,12 @@ class Deild:
             #print(self.endurkomur/self.telja)
             self.S.fjoldi["deildaskipti"][("heim",self.nafn)] += 1
             self.S.endurkomur += 1
-        if self.nafn == self.S.fastar["Stöður"][0]:
-            sd = self.S.fastar["Biðtímar"][self.nafn][p.aldur][1]
-            mu = self.S.fastar["Biðtímar"][self.nafn][p.aldur][0]
+        if self.nafn in self.S.fastar["Biðtímar lognormal"]:
+            sd = self.S.fastar["Biðtímar lognormal"][self.nafn][p.aldur][1]
+            mu = self.S.fastar["Biðtímar lognormal"][self.nafn][p.aldur][0]
             wait = np.random.lognormal(mu,sd)
-        if self.nafn == self.S.fastar["Stöður"][1]:
-            wait = np.random.uniform(self.S.fastar["Biðtímar"][self.nafn][0],self.S.fastar["Biðtímar"][self.nafn][1])
+        if self.nafn in self.S.fastar["Biðtímar jöfn"]:
+            wait = np.random.uniform(self.S.fastar["Biðtímar jöfn"][self.nafn][0],self.S.fastar["Biðtímar jöfn"][self.nafn][1])
         #wait = expovariate(1.0/self.S.fastar["Biðtímar"][(p.aldur,self.nafn)])
         #print(f"Sjúklingur númer {p.numer} á {p.deild} þarf að bíða þar í {wait}, liðinn tími er {self.env.now}")
         yield self.env.timeout(wait)
@@ -45,7 +45,7 @@ class Deild:
         self.S.CalcNumJobs()
     
     def updatePatient(self,p):
-        i_deild = randomChoice(self.S.fastar["Færslulíkur"][self.nafn])
+        i_deild = randomChoice(self.S.fastar["Færslulíkur"][(self.nafn,p.aldur)])
         newDeild = self.S.fastar["Stöður"][i_deild]
         p.deild = newDeild
         if self.S.upphitunFlag:
@@ -60,7 +60,7 @@ class Deild:
         #print(f"Sjúklingur númer {p.numer} fer af {prev} til {p.deild}, liðinn tími er {self.env.now}")
         self.S.amount -= 1
         self.count[p.aldur] -= 1
-        if p.deild == self.S.fastar["Stöður"][3]:
+        if p.deild != self.S.fastar["Stöður"][4]:
             self.S.discharged[p.numer] = p
 
 class Kerfi:
@@ -112,6 +112,7 @@ class Kerfi:
                     cap_d = self.deildir[key].numRooms*self.fastar["Starfsþörf"][(key,job)][0]
 
     # Bíðum eftir sjúklingi sem hefur komið áður
+    # Þarf aðeins að breyta þessu, gæti verið gott að velja sjúkling með meiri líkur ef hann er á hjúkrun
     def homeGen(self,env,p_Dict):
         self.homePatientWait = True
         mean_arr = 10.0 #Breytum þessu, þetta á að vera meðaltal koma fólks á spítala sem hefur verið þar áður á dag
@@ -119,8 +120,11 @@ class Kerfi:
         yield env.timeout(wait)
         p_id = choice(list(p_Dict.keys()))
         p = p_Dict.pop(p_id)
+        #print(self.endurkomur/self.telja)
+        self.endurkomur += 1
         i_deild_upphaf = randomChoice(self.fastar["Upphafslíkur"])
         deild_upphaf = self.fastar["Upphafsstöður"][i_deild_upphaf]
+        self.fjoldi["deildaskipti"][(p.deild,deild_upphaf)] += 1
         p.deild = deild_upphaf
         env.process(self.deildir[deild_upphaf].addP(p,False,True))
         self.homePatientWait = False
@@ -177,6 +181,7 @@ def HermunInit(simAttributes):
 
 # Fall sem framkvæmir eina hermun
 def sim(showSim,simAttributes):
+    print(simAttributes["Upphafslíkur"])
     [data,fjoldi] = HermunInit(simAttributes)
     env = Environment()
     S = Kerfi(fjoldi,env,simAttributes)
