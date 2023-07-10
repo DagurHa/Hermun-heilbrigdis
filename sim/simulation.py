@@ -6,6 +6,7 @@ from streamlit import line_chart
 from simpy import Environment,Interrupt
 #Ath þarf scipy version 1.10.1
 from scipy import stats
+from math import ceil
 
 class Patient:
     def __init__(self,aldur,deild,numer):
@@ -20,17 +21,19 @@ class Deild:
         self.S = S
         self.nafn = nafn 
         self.count = {age : 0 for age in S.fastar["Aldurshópar"]}
-        self.numRooms = 1
+        self.maxInni = 0 # Breyta sem heldur utan um mestann fjölda fólks sem hefur verið á deildinni á hverjum tímapunkti
 
     def addP(self,p,innritaður,endurkoma):
         self.count[p.aldur] += 1
+        inni = sum([self.count[age] for age in self.S.fastar["Aldurshópar"]])
+        if inni > self.maxInni:
+            self.maxInni = inni 
         if not innritaður:
             self.S.telja += 1
             self.S.amount += 1
             #print(f"fjöldi á spítala er núna {self.amount}, liðinn tími er {self.env.now}")
         if endurkoma:
             #print(self.endurkomur/self.telja)
-            self.S.fjoldi["deildaskipti"][("heim",self.nafn)] += 1
             self.S.endurkomur += 1
         if self.nafn in self.S.fastar["Biðtímar lognormal"]:
             sd = self.S.fastar["Biðtímar lognormal"][self.nafn][p.aldur][1]
@@ -38,11 +41,9 @@ class Deild:
             wait = np.random.lognormal(mu,sd)
         if self.nafn in self.S.fastar["Biðtímar jöfn"]:
             wait = np.random.uniform(self.S.fastar["Biðtímar jöfn"][self.nafn][0],self.S.fastar["Biðtímar jöfn"][self.nafn][1])
-        #wait = expovariate(1.0/self.S.fastar["Biðtímar"][(p.aldur,self.nafn)])
         #print(f"Sjúklingur númer {p.numer} á {p.deild} þarf að bíða þar í {wait}, liðinn tími er {self.env.now}")
         yield self.env.timeout(wait)
         yield self.env.process(self.updatePatient(p))
-        self.S.CalcNumJobs()
     
     def updatePatient(self,p):
         i_deild = randomChoice(self.S.fastar["Færslulíkur"][(self.nafn,p.aldur)])
@@ -99,17 +100,6 @@ class Kerfi:
                 env.process(self.deildir[deild_upphaf].addP(p,False,False))
             except Interrupt:
                 pass
-    # Reiknum starfsþörf kerfisins
-    def CalcNumJobs(self):
-        for key in self.fastar["Upphafsstöður"]:
-            fj_deild = sum([self.deildir[key].count[age_grp] for age_grp in self.fastar["Aldurshópar"]])
-            for job in self.fastar["Störf"]:
-                cap_d = self.deildir[key].numRooms*self.fastar["Starfsþörf"][(key,job)][0]
-                while fj_deild > cap_d:
-                    self.deildir[key].numRooms += 1
-                    for jobs in self.fastar["Störf"]:
-                        self.fjoldi["Læknar"][(key,jobs)] += self.fastar["Starfsþörf"][(key,job)][1]
-                    cap_d = self.deildir[key].numRooms*self.fastar["Starfsþörf"][(key,job)][0]
 
     # Bíðum eftir sjúklingi sem hefur komið áður
     # Þarf aðeins að breyta þessu, gæti verið gott að velja sjúkling með meiri líkur ef hann er á hjúkrun
@@ -134,6 +124,14 @@ class Kerfi:
         self.upphitunFlag = True
         self.upphitun.succeed()
 
+def CalcNumJobs(S,simAttributes):
+    job_demand = {key : 0 for key in simAttributes["Starfsþörf"]}
+    for state in S.fastar["Upphafsstöður"]:
+        for job in S.fastar["Störf"]:
+            load = ceil(S.deildir[state].maxInni/S.fastar["Starfsþörf"][(state,job)][0])
+            job_demand[(state,job)] = load*S.fastar["Starfsþörf"][(state,job)][1]
+    return job_demand
+
 def interrupter(env,S,STOP,data,showSim):
     yield S.upphitun
     for i in range(STOP):
@@ -144,8 +142,6 @@ def interrupter(env,S,STOP,data,showSim):
         data["spitaliAmount"].append(S.amount)
         if S.amount > S.cap:
             data["dagar yfir cap"] += 1
-        for key in S.fastar["Starfsþörf"]:
-            data["Læknar"][key] = S.fjoldi["Læknar"][key]
         if showSim:
             d = {"fjöldi á spítala": [S.amount],"capacity": S.cap}
             df = DataFrame(d,index = [i])
@@ -170,7 +166,6 @@ def HermunInit(simAttributes):
     #Upprunalegur fjöldi á spítalanum
     fjoldi = {}
     fjoldi["deildaskipti"] = simAttributes["deildaskipti"]
-    fjoldi["Læknar"] = {key : simAttributes["Starfsþörf"][key][1] for key in simAttributes["Starfsþörf"]}
     #Gögnin sem sim skilar
     data = {keys : [] for keys in lyklar}
     data["spitaliAmount"] = []
@@ -190,6 +185,7 @@ def sim(showSim,simAttributes):
     data["deildaskipti"] = S.fjoldi["deildaskipti"]
     data["heildarsjúklingar"] = S.telja
     #print(f"Heildar fjöldi fólks sem kom á spítalann alla hermunina er {S.telja}")
+    data["Læknar"] = CalcNumJobs(S,simAttributes)
     return data
 
 # Fall sem hermir kerfið L sinnum

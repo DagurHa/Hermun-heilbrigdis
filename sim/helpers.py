@@ -45,6 +45,9 @@ PROB = {
     (STATES[4],AGE_GROUPS[2]) : [0.0, 0.0, 0.0, 0.0, 1.0, 0.0],
     (STATES[5],AGE_GROUPS[2]) : [0.0, 0.0, 0.0, 0.0, 0.0, 1.0],
 }
+# Gott að hafa upphafsdeild : heilsugæsla og bráðamóttaka
+# millideildir : legudeild og göngudeild
+# endadeildir : hjúkrun, dauði og heim
 UPPHAFSDEILD = [STATES[0],STATES[1],STATES[2]]
 ENDADEILD = [STATES[3],STATES[4],STATES[5]]
 INITIAL_PROB = [0.47, 0.13, 0.4] # Upphafslíkur á að fara á legudeild ,göngudeild og bráðamóttöku
@@ -81,13 +84,11 @@ ENDURKOMA = {
 STORF = ["Læknar","Hjúkrunarfræðingar"]
 STARFSDEMAND = {
     (STATES[0],STORF[0]) : [20,3],      #Miðum við að hver legudeild rúmi 20 sjúklinga og að hver legudeild hafi 3 lækna og 4 hjúkrunarfræðinga
-    (STATES[1],STORF[0]) : [12,1],      #Miðum við að hver göngudeildarlæknir geti séð 12 sjúklinga á dag og þurfi einn hjúkrunarfræðing
-    (STATES[0],STORF[1]) : [20,5],
-    (STATES[1],STORF[1]) : [12,1],
+    (STATES[1],STORF[0]) : [4,1],      #Miðum við að hver göngudeildarlæknir geti séð 12 sjúklinga á dag og þurfi einn hjúkrunarfræðing
+    (STATES[0],STORF[1]) : [20,4],
+    (STATES[1],STORF[1]) : [1,1],
     (STATES[2],STORF[0]) : [10,1],
-    (STATES[2],STORF[1]) : [1,1],
-    (STATES[3],STORF[0]) : [10,1],
-    (STATES[3],STORF[1]) : [30,1]
+    (STATES[2],STORF[1]) : [5,1]
 }
 GOGN = d_skra["Fjöldi á dag"].tolist()
 print(len(GOGN))

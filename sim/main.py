@@ -15,12 +15,14 @@ from math import ceil
 def initSimAttribs(simAttribs,tab,num_in_key,name,compare):
     with tab:
         st.header("Deildir")
+        st.write("Hér getur þú valið hversu marga sjúklinga annað hvort læknir eða hjúkrúnarfræðingur"
+                "getur séð um í einu á hverri deild. Þetta er þá miðað við að hver sjúklingur þarf ekki að bíða eftir aðstoð.")
         deildir = st.expander("Starfsupplýsingar")
-        gongu,legu = deildir.tabs(["Göngudeild","Legudeild"])
+        gongu,legu,bmt = deildir.tabs(["Göngudeild","Legudeild","Bráðamóttaka"])
         with gongu:
-            st.write("Veldu hversu marga sjúklinga hver göngudeildalæknir getur séð um á dag.")
+            st.write("Veldu hversu marga sjúklinga hver göngudeildalæknir getur séð um í einu.")
             simAttribs["Starfsþörf"][("göngudeild","Læknar")][0] = st.number_input("Fjöldi sjúklinga fyrir göngudeildalækna",value = STARFSDEMAND[("göngudeild","Læknar")][0],max_value=40,step =1,key=num_in_key[name][0])
-            st.write("Veldu hversu marga sjúklinga hver göngudeildar hjúkrunarfræðingur getur séð um á dag.")
+            st.write("Veldu hversu marga sjúklinga hver göngudeildar hjúkrunarfræðingur getur séð um í einu.")
             simAttribs["Starfsþörf"][("göngudeild","Hjúkrunarfræðingar")][0] = st.number_input("Fjöldi sjúklinga fyrir göngudeilda hjúkrunarfræðinga",value = STARFSDEMAND[("göngudeild","Hjúkrunarfræðingar")][0],max_value=40,step =1,key = num_in_key[name][1])
 
         with legu:
@@ -35,6 +37,12 @@ def initSimAttribs(simAttribs,tab,num_in_key,name,compare):
             st.write("Veldu hversu marga sjúklinga á legudeild einn hjúkrunarfræðingur sér um.")
             numPatients = st.number_input("Fjöldi sjúklinga",value = 4,max_value=10,step = 1,key=num_in_key[name][6])
             simAttribs["Starfsþörf"][("legudeild","Hjúkrunarfræðingar")][1] = int(ceil(simAttribs["Starfsþörf"][("legudeild","Hjúkrunarfræðingar")][0]/numPatients))
+
+        with bmt:
+            st.write("Veldu hversu marga sjúklinga hver bráðamóttökulæknir getur séð um í einu.")
+            simAttribs["Starfsþörf"][("bráðamóttaka","Læknar")][0] = st.number_input("Fjöldi sjúklinga fyrir bráðamóttökulækna",value = STARFSDEMAND[("bráðamóttaka","Læknar")][0],max_value=40,step =1,key=num_in_key[name][19])
+            st.write("Veldu hversu marga sjúklinga hver bráðamóttöku hjúkrunarfræðingur getur séð um í einu.")
+            simAttribs["Starfsþörf"][("bráðamóttaka","Hjúkrunarfræðingar")][0] = st.number_input("Fjöldi sjúklinga fyrir bráðamóttöku hjúkrunarfræðinga",value = STARFSDEMAND[("bráðamóttaka","Hjúkrunarfræðingar")][0],max_value=40,step =1,key = num_in_key[name][20])
 
         st.divider()
 
@@ -138,7 +146,7 @@ def calcSimShow(data):
     d = [(key_soy[0],key_soy[1],val) for key_soy,val in data["Læknar"].items()]
     df = pd.DataFrame(d,columns = ["Deild","Starfsheiti","Fjöldi"])
     df_pivot = df.pivot(index="Deild",columns="Starfsheiti",values="Fjöldi")
-    df_pivot.columns=["Læknar","Hjúkrunarfræðingar"]
+    df_pivot.columns=["Hjúkrunarfræðingar","Læknar"]
     return [tot_leg,tot_gong,tot_bmt,df_pivot]
 
 if start:
@@ -231,7 +239,7 @@ def calcSankey(data,simAttribs):
         target.append(nodeNum[tvennd[1]])
     data_graph = [np.sum(sankeyData[key])/L for key in simAttribs["deildaskipti"]]
     fig3 = go.Figure(go.Sankey(
-    arrangement = "snap",
+    arrangement = "freeform",
     node = {
         "label": simAttributes["Stöður"],
         'pad':10},
@@ -251,7 +259,7 @@ def calcRandom(data,simAttribs):
     d = [(key_soy[0],key_soy[1],val) for key_soy,val in meanWork.items()]
     df = pd.DataFrame(d,columns=["Deild","Starfsheiti","Fjöldi"])
     df_pivot = df.pivot(index="Deild",columns="Starfsheiti",values="Fjöldi")
-    df_pivot.columns=["Læknar","Hjúkrunarfræðingar"]
+    df_pivot.columns=["Hjúkrunarfræðingar","Læknar"]
     meanFjoldi_patient = sum(totalData["heildarsjúklingar"])/L
     return [df_pivot,meanYfirCap,meanFjoldi_patient]
 
