@@ -18,7 +18,7 @@ def initSimAttribs(simAttribs,tab,num_in_key,name,compare):
         st.write("Hér getur þú valið hversu marga sjúklinga annað hvort læknir eða hjúkrúnarfræðingur"
                 "getur séð um í einu á hverri deild. Þetta er þá miðað við að hver sjúklingur þarf ekki að bíða eftir aðstoð.")
         deildir = st.expander("Starfsupplýsingar")
-        gongu,legu,bmt = deildir.tabs(["Göngudeild","Legudeild","Bráðamóttaka"])
+        gongu,legu,bmt,hh = deildir.tabs(["Göngudeild","Legudeild","Bráðamóttaka", "Heilsugæsla"])
         with gongu:
             st.write("Veldu hversu marga sjúklinga hver göngudeildalæknir getur séð um í einu.")
             simAttribs["Starfsþörf"][("göngudeild","Læknar")][0] = st.number_input("Fjöldi sjúklinga fyrir göngudeildalækna",value = STARFSDEMAND[("göngudeild","Læknar")][0],max_value=40,step =1,key=num_in_key[name][0])
@@ -44,6 +44,11 @@ def initSimAttribs(simAttribs,tab,num_in_key,name,compare):
             st.write("Veldu hversu marga sjúklinga hver bráðamóttöku hjúkrunarfræðingur getur séð um í einu.")
             simAttribs["Starfsþörf"][("bráðamóttaka","Hjúkrunarfræðingar")][0] = st.number_input("Fjöldi sjúklinga fyrir bráðamóttöku hjúkrunarfræðinga",value = STARFSDEMAND[("bráðamóttaka","Hjúkrunarfræðingar")][0],max_value=40,step =1,key = num_in_key[name][20])
 
+        with hh:
+            st.write("Veldu hversu marga sjúklinga hver heilsugæslulæknir getur séð um í einu.")
+            simAttribs["Starfsþörf"][("heilsugæsla","Læknar")][0] = st.number_input("Fjöldi sjúklinga fyrir heilsugæslulækna",value = STARFSDEMAND[("heilsugæsla","Læknar")][0],max_value=40,step =1,key=num_in_key[name][21])
+            st.write("Veldu hversu marga sjúklinga hver heilsugæslu hjúkrunarfræðingur getur séð um í einu.")
+            simAttribs["Starfsþörf"][("heilsugæsla","Hjúkrunarfræðingar")][0] = st.number_input("Fjöldi sjúklinga fyrir heilsugæslu hjúkrunarfræðinga",value = STARFSDEMAND[("heilsugæsla","Hjúkrunarfræðingar")][0],max_value=40,step =1,key = num_in_key[name][22])
         st.divider()
 
         st.header("Hermunar stillingar")
@@ -66,13 +71,14 @@ def initSimAttribs(simAttribs,tab,num_in_key,name,compare):
         #sliders o.fl.
         with stillingar.expander("Hermunarstillingar"):
             if scenarios == "Default":
-                simAttribs["meðalfjöldi"][AGE_GROUPS[0]] = st.number_input("Meðalfjöldi ungra á dag",min_value = 1, max_value=200,
+                st.write("Veldu meðalfjölda sem koma á heilsugæslur og bráðamóttökur á dag.")
+                simAttribs["meðalfjöldi"][AGE_GROUPS[0]] = st.number_input("Meðalfjöldi ungra á dag",min_value = 1, max_value=1500,
                                                             value = copy(meanArrivaltimes[AGE_GROUPS[0]]),step = 1,key=num_in_key[name][10])
-                simAttribs["meðalfjöldi"][AGE_GROUPS[1]] = st.number_input("Meðalfjöldi miðaldra á dag",min_value = 1, max_value=200,
+                simAttribs["meðalfjöldi"][AGE_GROUPS[1]] = st.number_input("Meðalfjöldi miðaldra á dag",min_value = 1, max_value=1500,
                                                             value = copy(meanArrivaltimes[AGE_GROUPS[1]]),step = 1,key=num_in_key[name][11])
-                simAttribs["meðalfjöldi"][AGE_GROUPS[2]] = st.number_input("Meðalfjöldi aldraðra á dag",min_value = 1, max_value=200,
+                simAttribs["meðalfjöldi"][AGE_GROUPS[2]] = st.number_input("Meðalfjöldi aldraðra á dag",min_value = 1, max_value=1500,
                                                             value = copy(meanArrivaltimes[AGE_GROUPS[2]]),step = 1,key=num_in_key[name][12])
-            simAttribs["Upphafslíkur"][0] = st.slider("Líkur á að nýr sjúklingur fari á legudeild", 
+            simAttribs["Upphafslíkur"][0] = st.slider("Líkur á að nýr sjúklingur fari á heilsugæslu", 
                                                             value = simAttribs["Upphafslíkur"][0],key=num_in_key[name][13])
             simAttribs["CAP"] = st.slider("Hámarskfjöldi á spítala",min_value = 50,max_value = 500,value = 50,step = 10,key=num_in_key[name][14])
             if not compare:
@@ -89,9 +95,7 @@ def initSimAttribs(simAttribs,tab,num_in_key,name,compare):
 
         simAttribs["meðalbið"] = dict(zip(keys,vals))
         #Einmitt núna er upphafslíkur á að fara inná göngudeild beint alltaf 1/4 af upphafslíkum BMT
-        simAttribs["Upphafslíkur"][1] = 1/4*(1 - simAttribs["Upphafslíkur"][0])
-        simAttribs["Upphafslíkur"][2] = 3/4*(1 - simAttribs["Upphafslíkur"][0])
-        print(simAttribs["Upphafslíkur"])
+        simAttribs["Upphafslíkur"][1] = 1 - simAttribs["Upphafslíkur"][0]
         simAttribs["lambda"] = sum([1.0/simAttribs["meðalbið"][age] for age in AGE_GROUPS])
     return simAttribs
 
@@ -143,17 +147,20 @@ def calcSimShow(data):
     tot_gong = sum(tot_gong_age)
     tot_bmt_age = [sum(data[(aldur, "bráðamóttaka")]) for aldur in AGE_GROUPS]
     tot_bmt = sum(tot_bmt_age)
+    tot_hh_age = [sum(data[(aldur, "heilsugæsla")]) for aldur in AGE_GROUPS]
+    tot_hh = sum(tot_hh_age)
     d = [(key_soy[0],key_soy[1],val) for key_soy,val in data["Læknar"].items()]
     df = pd.DataFrame(d,columns = ["Deild","Starfsheiti","Fjöldi"])
     df_pivot = df.pivot(index="Deild",columns="Starfsheiti",values="Fjöldi")
     df_pivot.columns=["Hjúkrunarfræðingar","Læknar"]
-    return [tot_leg,tot_gong,tot_bmt,df_pivot]
+    return [tot_leg,tot_gong,tot_bmt,tot_hh,df_pivot]
 
 if start:
     data1 = sim(True,simAttributes1)
-    [tot_leg,tot_gong,tot_bmt,df] = calcSimShow(data1)
+    [tot_leg,tot_gong,tot_bmt,tot_hh,df] = calcSimShow(data1)
     st.write(f"Meðalfjöldi á legudeild er {tot_leg/simAttributes1['STOP']} og meðalfjöldi á göngudeild er {tot_gong/simAttributes1['STOP']}")
-    st.write(f"Meðalfjöldi á bráðamóttöku er {tot_bmt/simAttributes1['STOP']}") 
+    st.write(f"Meðalfjöldi á bráðamóttökur er {tot_bmt/simAttributes1['STOP']}") 
+    st.write(f"Meðalfjöldi á heilsugæslur er {tot_hh/simAttributes1['STOP']}")
     st.write(f"og heildarfjöldi einstakra sjúklinga sem kom í kerfið var {data1['heildarsjúklingar']}")
     st.write(f"Meðal starfsþörf miðað við enga bið:")
     st.dataframe(df)
