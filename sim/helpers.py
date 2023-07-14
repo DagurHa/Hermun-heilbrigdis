@@ -1,6 +1,7 @@
 from itertools import product
 from copy import copy
 import pandas as pd
+import json
 
 d_skra = pd.read_csv("dagar.csv")
 
@@ -123,3 +124,6 @@ simAttributes = {
     "Störf" : STORF
 }
 meanArrivaltimes = copy(simAttributes["meðalfjöldi"])
+
+jsonSimAttribs = json.dumps({str(k) : v for k,v in simAttributes.items()})
+print(jsonSimAttribs)

@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "UO3ejpdxkJksEXeLvJys8bqsmL6LfyfI2j8apAovOsGhka6K6QHn1agvhNEw2O9Y383Wf5bH/VEbYAHEL0mz1Q==",
+  "success": true,
+  "projectFilePath": "C:\\skoli\\heilbgridisverkefni\\Hermun-heilbrigdis-1\\TestSimSharp\\TestSimSharp.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\dagur\\.nuget\\packages\\simsharp\\3.4.2\\simsharp.3.4.2.nupkg.sha512"
+  ],
+  "logs": []
+}

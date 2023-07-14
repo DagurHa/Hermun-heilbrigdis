@@ -69,7 +69,7 @@ def initSimAttribs(simAttribs,tab,num_in_key,name,compare):
 
 
         #sliders o.fl.
-        with stillingar.expander("Hermunarstillingar"):
+        with stillingar:
             if scenarios == "Default":
                 st.write("Veldu meðalfjölda sem koma á heilsugæslur og bráðamóttökur á dag.")
                 simAttribs["meðalfjöldi"][AGE_GROUPS[0]] = st.number_input("Meðalfjöldi ungra á dag",min_value = 1, max_value=1500,
