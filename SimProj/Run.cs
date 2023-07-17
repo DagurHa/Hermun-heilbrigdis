@@ -1,15 +1,16 @@
 ﻿using System.Diagnostics;
-
+using Newtonsoft.Json.Linq;
 namespace SimProj;
-
+//Console.OutputEncoding = System.Text.Encoding.UTF8;
 public class Run
 {
     public static bool upphitunFlag = false;
 
     public static void Main(string[] args)
     {
-        Console.WriteLine("Hello");
-        List<double> test_p = new List<double>() { 0.1,0.4,0.3,0.2};
-        Console.WriteLine(Helpers.randomChoice(test_p));
-    } 
+        Console.WriteLine("Hundur");
+        string simString = args[0];
+        JObject data = JObject.Parse(simString);
+        Console.WriteLine(data["meðalfjöldi"].ToDictionary());
+    }
 }

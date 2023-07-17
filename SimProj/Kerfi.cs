@@ -51,7 +51,7 @@ public class Kerfi
         {
             if(discharged.Count >0 & !homePatientWait)
             {
-                env.Process(homeGen(env, discharged));
+                //env.Process(homeGen(env, discharged));
             }
             yield return env.Timeout(arrive);
             int i_aldur = Helpers.randomChoice(p_age);
@@ -60,7 +60,6 @@ public class Kerfi
             string deild_upphaf = fastar.initState[i_deild_upphaf];
             Patient p = new Patient(aldur, deild_upphaf, telja);
             env.Process(deildir[deild_upphaf].addP(p, false, false, ""));
-
         }
     }
     private void CreateDeildir()
@@ -68,10 +67,10 @@ public class Kerfi
         var deild_list = fastar.initState.Concat(fastar.medState);
         foreach (string unit in deild_list)
         {
-            deildir[unit] = new Deild(env, this, unit);
+            deildir[unit] = new Deild(env, unit, fastar);
         }
     }
-    public void interrupter(DataFinal data)
+    public IEnumerable<Event> interrupter(DataFinal data)
     {
         int STOP = fastar.stop;
         yield return upphitun;
@@ -86,7 +85,7 @@ public class Kerfi
             if (fastar.showSim)
             {
                 /*
-                 Hér þarf að setja ehv pípu yfir í python til 
+                 Hér þarf að setja ehv pípu yfir í python til að færa gögn in real time
                  */
             }
         }

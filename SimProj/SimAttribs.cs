@@ -16,7 +16,7 @@ public struct SimAttribs
     public List<string> finalState;
     public int warmupTime;
     //private readonly Dictionary<string,float> endurkoma (þetta er useless einmitt nuna)
-    public Dictionary<(string, string), List<int>> jobDdemand;
+    public Dictionary<(string, string), (int,int)> jobDdemand; // Lykill er staða og starf og value er sjúklingar og fjöldi starfsmanna
     public List<(string, string)> keys;
     public List<string> jobs;
     public Dictionary<string, double> meanExp;

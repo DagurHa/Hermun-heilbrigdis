@@ -61,8 +61,9 @@ public class Deild
         if (simAttribs.finalState.Contains(newDeild)) { removeP(p); }
         else
         {
-            yield return env.Process(//addP á nýju deild)
+            //yield return env.Process(//addP á nýju deild)
         }
+        yield return env.TimeoutD(1.0); // tek þetta ut bara svo geri buildað
     }
     public void removeP(Patient p)
     {
