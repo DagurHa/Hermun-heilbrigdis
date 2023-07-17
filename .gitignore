@@ -168,3 +168,11 @@ time.txt
 test.csv
 *.xlsx
 *.pdf
+
+.vs/
+**/Backup/
+**/Backup1/
+**/UpgradeLog2.htm
+**/UpgradeLog.htm
+**/obj/
+**/.vs/
