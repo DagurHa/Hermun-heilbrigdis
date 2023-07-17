@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.CompilerServices;
 
 /* 
     Þessi class hermir kerfið í heild
@@ -23,7 +24,7 @@ public class Kerfi
     private Dictionary<int,Patient> discharged = new Dictionary<int,Patient>();
     private Dictionary<string, Deild> deildir = new Dictionary<string, Deild>();
     private int endurkomur;
-    private IEnumerable<Event> action = new List<Event>();
+    private Process action;
     private Event upphitun;
     private bool upphitunFlag;
     private bool homePatientWait;
@@ -53,9 +54,9 @@ public class Kerfi
                 env.Process(homeGen(env, discharged));
             }
             yield return env.Timeout(arrive);
-            int i_aldur = Run.randomChoice(p_age);
+            int i_aldur = Helpers.randomChoice(p_age);
             string aldur = fastar.age_grps[i_aldur];
-            int i_deild_upphaf = Run.randomChoice(fastar.initialProb);
+            int i_deild_upphaf = Helpers.randomChoice(fastar.initialProb);
             string deild_upphaf = fastar.initState[i_deild_upphaf];
             Patient p = new Patient(aldur, deild_upphaf, telja);
             env.Process(deildir[deild_upphaf].addP(p, false, false, ""));
@@ -68,6 +69,26 @@ public class Kerfi
         foreach (string unit in deild_list)
         {
             deildir[unit] = new Deild(env, this, unit);
+        }
+    }
+    public void interrupter(DataFinal data)
+    {
+        int STOP = fastar.stop;
+        yield return upphitun;
+        foreach(int i in Enumerable.Range(0, STOP))
+        {
+            yield return env.TimeoutD(1.0);
+            action.Interrupt();
+            foreach((string,string) key in fastar.keys)
+            {
+                data.deildAgeAmount[key].Add(deildir[key.Item2].dataDeild.fjoldiInni[key.Item1]);
+            }
+            if (fastar.showSim)
+            {
+                /*
+                 Hér þarf að setja ehv pípu yfir í python til 
+                 */
+            }
         }
     }
 }

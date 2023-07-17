@@ -54,6 +54,8 @@ public class RunProg
         Simulation env = new Simulation();
         Sim hund = new Sim(env);
         env.Process(hund.upphitunWait(env));
-        env.Run(hund.SIMTIME);
+        //env.Run(hund.SIMTIME);
+        LogNormal lognorm = new LogNormal(0.5, 1.0);
+        lognorm.
     }
 }
