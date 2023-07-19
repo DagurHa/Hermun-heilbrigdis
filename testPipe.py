@@ -103,28 +103,37 @@ STARFSDEMAND = {
 }
 #GOGN = d_skra["Fjöldi á dag"].tolist()
 #print(len(GOGN))
-#KEYS_TOT = list(product(AGE_GROUPS,UPPHAFSDEILD+MILLIDEILD))
-#print(KEYS_TOT)
+KEYS_TOT = list(product(AGE_GROUPS,UPPHAFSDEILD+MILLIDEILD))
+for i in range(len(KEYS_TOT)):
+    KEYS_TOT[i] = str(KEYS_TOT[i])
 UPPHITUN = 25 # Upphitunartími hverrar hermunar, þ.e. byrjum ekki að safna/sýna upplýsingar fyrr en svona margir dagar hafa liðið
 simAttributes = {
-    "meðalfjöldi" : AGE_GROUP_AMOUNT,
-    "Færslulíkur" : PROB,
-    "Upphafslíkur" : INITIAL_PROB,
-    "Stöður" : STATES,
-    "Aldurshópar" : AGE_GROUPS,
-    "Biðtímar lognormal" : WAIT_lognorm,
-    "Biðtímar jöfn" : WAIT_unif,
-    "Fjöldi hermana" : L,
-    "deildaskipti" : deildaskipti,
-    "Upphafsstöður" : UPPHAFSDEILD,
-    "Millistöður" : MILLIDEILD,
-    "Endastöður" : ENDADEILD,
-    "Upphitunartími" : UPPHITUN,
-    "Endurkoma" : ENDURKOMA,
-    "Starfsþörf" : STARFSDEMAND,
-    #"Lyklar" : KEYS_TOT,
-    "Störf" : STORF
+    "MeanArrive" : AGE_GROUP_AMOUNT,
+    "MoveProb" : PROB,
+    "InitialProb" : INITIAL_PROB,
+    "States" : STATES,
+    "AgeGroups" : AGE_GROUPS,
+    "WaitLognorm" : WAIT_lognorm,
+    "WaitUniform" : WAIT_unif,
+    "SimAmount" : L,
+    "DeildaSkipti" : deildaskipti,
+    "InitState" : UPPHAFSDEILD,
+    "MedState" : MILLIDEILD,
+    "FinalState" : ENDADEILD,
+    "WarmupTime" : UPPHITUN,
+    "ReEnter" : ENDURKOMA,
+    "JobDemand" : STARFSDEMAND,
+    "Keys" : KEYS_TOT,
+    "Jobs" : STORF
 }
+simAttributes["MeanExp"] = {
+    AGE_GROUPS[0] : 0.5,
+    AGE_GROUPS[1] : 0.7,
+    AGE_GROUPS[2] : 0.9
+}
+simAttributes["Lam"] = 25.0
+simAttributes["ShowSim"] = False
+simAttributes["Stop"] = 23
 
 simPip = json.dumps(simAttributes, ensure_ascii=False)
 

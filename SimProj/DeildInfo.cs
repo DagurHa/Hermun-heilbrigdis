@@ -13,8 +13,8 @@ public struct DeildInfo
     public List<int> deildSkipt = new List<int>(); // Deildarskipti fyrir deildina sem þetta struct sér um
     public DeildInfo(SimAttribs simAttribs)
     {
-        foreach(string age_grp in simAttribs.age_grps) { fjoldiInni[age_grp] = 0; }
-        deildSkipt.Capacity = simAttribs.states.Count;
+        foreach(string age_grp in simAttribs.AgeGroups) { fjoldiInni[age_grp] = 0; }
+        deildSkipt.Capacity = simAttribs.States.Count;
         for(int i = 0; i < deildSkipt.Capacity; i++) { deildSkipt[i] = 0; }
     }
 }

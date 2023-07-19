@@ -24,24 +24,24 @@ public class Deild
         nafn = Nafn;
         simAttribs = SimAttributes;
         dataDeild = new DeildInfo(simAttribs);
-        foreach(string age_grp in simAttribs.age_grps)
+        foreach(string age_grp in simAttribs.AgeGroups)
         {
-            LogNormal lgnrm = new LogNormal(simAttribs.waitLognorm[nafn][age_grp].Item1, simAttribs.waitLognorm[nafn][age_grp].Item2);
+            LogNormal lgnrm = new LogNormal(simAttribs.WaitLognorm[nafn][age_grp].Item1, simAttribs.WaitLognorm[nafn][age_grp].Item2);
             waitLognorm[age_grp] = lgnrm;
         }
-        Uniform waitUnif = new Uniform(simAttribs.waitUniform[nafn].Item1, simAttribs.waitUniform[nafn].Item2);
-        deildnr = Enumerable.Range(0, simAttribs.states.Count);
+        Uniform waitUnif = new Uniform(simAttribs.WaitUniform[nafn].Item1, simAttribs.WaitUniform[nafn].Item2);
+        deildnr = Enumerable.Range(0, simAttribs.States.Count);
     }
     public IEnumerable<Event> addP(Patient p, bool innrit, bool endurkoma, string prev_deild)
     {
         dataDeild.fjoldiInni[p.Aldur]++;
         dataDeild.inni++;
         if (dataDeild.inni > dataDeild.maxInni){ dataDeild.maxInni = dataDeild.inni; }
-        if (simAttribs.waitLognorm.ContainsKey(nafn))
+        if (simAttribs.WaitLognorm.ContainsKey(nafn))
         {
             wait = waitLognorm[p.Aldur].Sample(rng);
         }
-        else if (simAttribs.waitUniform.ContainsKey(nafn))
+        else if (simAttribs.WaitUniform.ContainsKey(nafn))
         {
             wait = waitUnif.Sample(rng);
         }
@@ -50,15 +50,15 @@ public class Deild
     }
     public IEnumerable<Event> updatePatient(Patient p)
     {
-        int i_deild = Helpers.randomChoice(simAttribs.moveProb[(nafn,p.Aldur)]);
-        string newDeild = simAttribs.states[i_deild];
+        int i_deild = Helpers.randomChoice(simAttribs.MoveProb[(nafn,p.Aldur)]);
+        string newDeild = simAttribs.States[i_deild];
         string prev = p.Deild;
         p.Deild = newDeild;
         if (Run.upphitunFlag)
         {
-            dataDeild.deildSkipt[Helpers.getDeildnr(prev, simAttribs.states)]++;
+            dataDeild.deildSkipt[Helpers.getDeildnr(prev, simAttribs.States)]++;
         }
-        if (simAttribs.finalState.Contains(newDeild)) { removeP(p); }
+        if (simAttribs.FinalState.Contains(newDeild)) { removeP(p); }
         else
         {
             //yield return env.Process(//addP á nýju deild)
@@ -69,7 +69,7 @@ public class Deild
     {
         dataDeild.inni--;
         dataDeild.fjoldiInni[p.Aldur]--;
-        if (p.Deild != simAttribs.states[5])
+        if (p.Deild != simAttribs.States[5])
         {
 
         }

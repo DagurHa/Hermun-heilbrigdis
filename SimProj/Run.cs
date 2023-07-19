@@ -11,6 +11,6 @@ public class Run
         Console.WriteLine("Hundur");
         string simString = args[0];
         JObject data = JObject.Parse(simString);
-        Console.WriteLine(data["meðalfjöldi"].ToDictionary());
+        SimAttribs simAttribs = Helpers.initSimattribs(data);
     }
 }

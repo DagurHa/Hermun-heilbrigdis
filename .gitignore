@@ -177,3 +177,5 @@ test.csv
 **/obj/
 **/.vs/
 **/bin/
+SimProj/bin/
+SimProj/bin
