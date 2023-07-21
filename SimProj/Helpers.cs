@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -6,6 +7,8 @@ using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Text.Json;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace SimProj;
@@ -46,22 +49,26 @@ public static class Helpers
             foreach (string job in simAttribs.Jobs)
             {
                 int nr = getDeildnr(state, simAttribs.States);
-                int load = maxIn[nr] / simAttribs.JobDemand[(state, job)].Item1;
-                starfs[(state, job)] = load * simAttribs.JobDemand[(state, job)].Item2;
+                int load = maxIn[nr] / simAttribs.JobDemand[(state, job)][0];
+                starfs[(state, job)] = load * simAttribs.JobDemand[(state, job)][1];
             }
         }
         return starfs;
     }
-    public static SimAttribs initSimattribs(JObject data)
+    public static (string,string) StringToTup(string ogString)
     {
-        //TypeDescriptor.AddAttributes(typeof((string, string)), new TypeConverterAttribute(typeof(TupleConverter<string, string>)));
+        string pattern = @"\('([^']*)', '([^']*)'\)";
+        Match match = Regex.Match(ogString, pattern);
 
-        SimAttribs simAttribs = new SimAttribs();
-        foreach (PropertyInfo prop in typeof(SimAttribs).GetProperties())
+        if (match.Success)
         {
-            Console.WriteLine($"Key er {prop.Name} og value er {data[prop.Name]} og value type er {prop.PropertyType}");
-            //prop.SetValue(simAttribs, data[prop.Name].ToObject(prop.PropertyType));
+            string string1 = match.Groups[1].Value;
+            string string2 = match.Groups[2].Value;
+            return (string1, string2);
         }
-        return simAttribs;
+        else
+        {
+            throw new ArgumentException("Input string format is not valid.");
+        }
     }
 }

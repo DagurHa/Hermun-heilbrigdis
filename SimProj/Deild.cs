@@ -16,7 +16,7 @@ public class Deild
     private Dictionary<string,LogNormal> waitLognorm = new Dictionary<string, LogNormal>();
     private Uniform waitUnif;
     private double wait = 0;
-    private IEnumerable<int> deildnr;
+    private readonly IEnumerable<int> deildnr;
     public Deild(Simulation envment, /*Kerfi kerfi,*/ string Nafn, SimAttribs SimAttributes)
     {
         env = envment;
@@ -24,13 +24,18 @@ public class Deild
         nafn = Nafn;
         simAttribs = SimAttributes;
         dataDeild = new DeildInfo(simAttribs);
-        foreach(string age_grp in simAttribs.AgeGroups)
-        {
-            LogNormal lgnrm = new LogNormal(simAttribs.WaitLognorm[nafn][age_grp].Item1, simAttribs.WaitLognorm[nafn][age_grp].Item2);
-            waitLognorm[age_grp] = lgnrm;
+        if(simAttribs.WaitLognorm.ContainsKey(nafn)){
+            foreach (string age_grp in simAttribs.AgeGroups)
+            {
+                LogNormal lgnrm = new LogNormal(simAttribs.WaitLognorm[nafn][age_grp][0], simAttribs.WaitLognorm[nafn][age_grp][1]);
+                waitLognorm[age_grp] = lgnrm;
+            }
         }
-        Uniform waitUnif = new Uniform(simAttribs.WaitUniform[nafn].Item1, simAttribs.WaitUniform[nafn].Item2);
-        deildnr = Enumerable.Range(0, simAttribs.States.Count);
+        if (simAttribs.WaitUniform.ContainsKey(nafn))
+        {
+            Uniform waitUnif = new Uniform(simAttribs.WaitUniform[nafn][0], simAttribs.WaitUniform[nafn][1]);
+            deildnr = Enumerable.Range(0, simAttribs.States.Count);
+        }
     }
     public IEnumerable<Event> addP(Patient p, bool innrit, bool endurkoma, string prev_deild)
     {

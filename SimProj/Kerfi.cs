@@ -26,9 +26,8 @@ public class Kerfi
     private int endurkomur;
     private Process action;
     private Event upphitun;
-    private bool upphitunFlag;
     private bool homePatientWait;
-    private IDistribution<TimeSpan> arrive;
+    private IDistribution<double> arrive;
     public Kerfi(Simulation envment, SimAttribs simAttributes) {
         env = envment;
         fastar = simAttributes;
@@ -39,11 +38,11 @@ public class Kerfi
         telja = 0;
         amount = 0;
         endurkomur = 0;
-        action = env.Process(patientGen(env));
-        upphitunFlag = false;
         homePatientWait = false;
-        arrive = EXP(TimeSpan.FromHours(fastar.Lam));
+        arrive = EXP(fastar.Lam);
         CreateDeildir();
+        action = env.Process(patientGen(env));
+        env.Process(upphitunWait());
     }
     private IEnumerable<Event> patientGen(Simulation env)
     {
@@ -53,7 +52,7 @@ public class Kerfi
             {
                 //env.Process(homeGen(env, discharged));
             }
-            yield return env.Timeout(arrive);
+            yield return env.TimeoutD(arrive);
             int i_aldur = Helpers.randomChoice(p_age);
             string aldur = fastar.AgeGroups[i_aldur];
             int i_deild_upphaf = Helpers.randomChoice(fastar.InitialProb);
@@ -78,9 +77,9 @@ public class Kerfi
         {
             yield return env.TimeoutD(1.0);
             action.Interrupt();
-            foreach((string,string) key in fastar.Keys)
+            foreach (List<string> key_list in fastar.Keys)
             {
-                data.deildAgeAmount[key].Add(deildir[key.Item2].dataDeild.fjoldiInni[key.Item1]);
+                data.deildAgeAmount[(key_list[0], key_list[1])].Add(deildir[key_list[1]].dataDeild.fjoldiInni[key_list[0]]);
             }
             if (fastar.ShowSim)
             {
@@ -89,5 +88,11 @@ public class Kerfi
                  */
             }
         }
+    }
+    private IEnumerable<Event> upphitunWait()
+    {
+        yield return env.TimeoutD(fastar.WarmupTime);
+        Run.upphitunFlag = true;
+        upphitun.Succeed();
     }
 }
