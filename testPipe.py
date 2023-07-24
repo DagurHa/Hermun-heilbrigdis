@@ -121,7 +121,7 @@ simAttributes_nontuple["MeanExp"] = {
     AGE_GROUPS[1] : 0.7,
     AGE_GROUPS[2] : 0.9
 }
-simAttributes_nontuple["Lam"] = 25.0
+simAttributes_nontuple["Lam"] = sum([1.0/simAttributes_nontuple["MeanArrive"][age] for age in AGE_GROUPS])
 simAttributes_nontuple["ShowSim"] = False
 simAttributes_nontuple["Stop"] = 23
 

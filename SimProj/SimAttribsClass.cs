@@ -73,17 +73,115 @@ public class SimAttribs : SimAttribsNontuples
     }
     public void Log()
     {
-        Type type = typeof(SimAttribs);
-
-        // Get all the properties of the parent class
-        PropertyInfo[] Props = type.GetProperties(BindingFlags.Public | BindingFlags.Instance);
-
-        // Iterate over the properties and set the corresponding properties of the child class
-        foreach (var prop in Props)
+        Console.WriteLine("MoveProb:");
+        foreach((string,string) key in MoveProb.Keys)
         {
-            var value = prop.GetValue(this);
-            Console.WriteLine($"Prop : {prop.Name} með val : {value}");
+            Console.WriteLine($"Lykill: {key}");
+            foreach(double item in MoveProb[key])
+            {
+                Console.WriteLine($"Item: {item}");
+            }
         }
+        Console.WriteLine("Deildaskipti:");
+        foreach ((string, string) key in DeildaSkipti.Keys)
+        {
+            Console.WriteLine($"Lykill: {key} og value {DeildaSkipti[key]}");
+        }
+        Console.WriteLine("JobDemand:");
+        foreach((string,string) key in JobDemand.Keys)
+        {
+            Console.WriteLine($"Lykill: {key}");
+            foreach(int item in JobDemand[key])
+            {
+                Console.WriteLine($"Item: {item}");
+            }
+        }
+        Console.WriteLine("MeanArrive:");
+        foreach(string key in MeanArrive.Keys)
+        {
+            Console.WriteLine($"Lykill: {key} Item: {MeanArrive[key]}");
+        }
+        Console.WriteLine("InitialProb:");
+        foreach(double item in InitialProb)
+        {
+            Console.WriteLine($"Item: {item}");
+        }
+        Console.WriteLine("States:");
+        foreach(string item in States)
+        {
+            Console.WriteLine($"Item: {item}");
+        }
+        Console.WriteLine("AgeGroups:");
+        foreach(string item in AgeGroups)
+        {
+            Console.WriteLine($"Item: {item}");
+        }
+        Console.WriteLine("WaitLognorm:");
+        foreach(string key1 in WaitLognorm.Keys)
+        {
+            Console.WriteLine($"Lykill 1 : {key1}");
+            foreach(string key2 in WaitLognorm[key1].Keys)
+            {
+                Console.WriteLine($"Lykill 2: {key2}");
+                foreach(double item in WaitLognorm[key1][key2])
+                {
+                    Console.WriteLine($"Item: {item}");
+                }
+            }
+        }
+        Console.WriteLine("WaitUniform:");
+        foreach(string key in WaitUniform.Keys)
+        {
+            Console.WriteLine($"Lykill: {key}");
+            foreach(double item in WaitUniform[key])
+            {
+                Console.WriteLine($"Item : {item}");
+            }
+        }
+        Console.WriteLine($"SimAmount: {SimAmount}");
+        Console.WriteLine("InitState:");
+        foreach(string item in InitState)
+        {
+            Console.WriteLine($"Item: {item}");
+        }
+        Console.WriteLine("MedState:");
+        foreach(string item in MedState)
+        {
+            Console.WriteLine($"Item: {item}");
+        }
+        Console.WriteLine("FinalState:");
+        foreach(string item in FinalState)
+        {
+            Console.WriteLine($"Item: {item}");
+        }
+        Console.WriteLine($"WarmupTime: {WarmupTime}");
+        Console.WriteLine("ReEnter:");
+        foreach(string key in ReEnter.Keys)
+        {
+            Console.WriteLine($"Lykill: {key} og Item: {ReEnter[key]}");
+        }
+        Console.WriteLine("Keys:");
+        foreach(List<string> lstKey in Keys)
+        {
+            Console.WriteLine("Listi:");
+            foreach(string item in lstKey)
+            {
+                Console.WriteLine($"Item: {item}");
+            }
+        }
+        Console.WriteLine("Jobs:");
+        foreach(string item in Jobs)
+        {
+            Console.WriteLine($"Item: {item}");
+        }
+        Console.WriteLine("MeanExp:");
+        foreach(string key in MeanExp.Keys)
+        {
+            Console.WriteLine($"Lykill: {key} og Item: {MeanExp[key]}");
+        }
+        Console.WriteLine($"Lam: {Lam}");
+        Console.WriteLine($"ShowSim: {ShowSim}");
+        Console.WriteLine($"Stop: {Stop}");
     }
 }
 

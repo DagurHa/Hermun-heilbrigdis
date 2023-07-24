@@ -16,7 +16,6 @@ public class DeildInfo
         foreach(string age_grp in simAttribs.AgeGroups) { fjoldiInni[age_grp] = 0; }
         int arrLen = simAttribs.States.Count;
         deildSkipt = new int[arrLen];
-        foreach(string key in simAttribs.States) { Console.WriteLine($"STATE: {key}"); }
         for(int i = 0; i < arrLen; i++) { deildSkipt[i] = 0; }
     }
 }

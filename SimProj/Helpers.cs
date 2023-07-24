@@ -41,8 +41,9 @@ public static class Helpers
     /*Reiknum starfsþörf út frá hámarki sjúklinga sem komu í kerfið fyrir hverja deild
      Input: Listi af ints og SimAttribs struct
      */
-    public static Dictionary<(string, string), int> CalcNumJobs(List<int> maxIn, SimAttribs simAttribs)
+    public static Dictionary<(string, string), int> CalcNumJobs(int[] maxIn, SimAttribs simAttribs)
     {
+        starfs = new Dictionary<(string, string), int>();
         IEnumerable<string> deildir = simAttribs.InitState.Concat(simAttribs.MedState);
         foreach (string state in deildir)
         {
@@ -50,7 +51,7 @@ public static class Helpers
             {
                 int nr = getDeildnr(state, simAttribs.States);
                 int load = maxIn[nr] / simAttribs.JobDemand[(state, job)][0];
-                starfs[(state, job)] = load * simAttribs.JobDemand[(state, job)][1];
+                starfs.Add((state, job), load * simAttribs.JobDemand[(state, job)][1]);
             }
         }
         return starfs;

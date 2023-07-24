@@ -1,11 +1,4 @@
 ﻿using SimSharp;
-using static SimSharp.Distributions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Runtime.CompilerServices;
 
 /* 
     Þessi class hermir kerfið í heild
@@ -15,19 +8,19 @@ namespace SimProj;
 
 public class Kerfi
 {
-    private Dictionary<string, DeildInfo> data = new Dictionary<string, DeildInfo>();
+    public Dictionary<string, DeildInfo> data = new Dictionary<string, DeildInfo>();
     private Simulation env;
-    private SimAttribs fastar;
+    public SimAttribs fastar;
     private List<double> p_age = new List<double>();
-    private int telja;
-    private int amount;
+    public int telja;
+    public int amount;
     private Dictionary<int,Patient> discharged = new Dictionary<int,Patient>();
-    private Dictionary<string, Deild> deildir = new Dictionary<string, Deild>();
-    private int endurkomur;
+    public Dictionary<string, Deild> deildir = new Dictionary<string, Deild>();
+    public int endurkomur;
     private Process action;
     private Event upphitun;
     private bool homePatientWait;
-    private IDistribution<double> arrive;
+    private MathNet.Numerics.Distributions.Exponential arrive;
     public Kerfi(Simulation envment, SimAttribs simAttributes) {
         env = envment;
         fastar = simAttributes;
@@ -35,11 +28,13 @@ public class Kerfi
         {
             p_age.Add((1.0 / fastar.MeanExp[age_grp]) / fastar.Lam);
         }
+        foreach (string state in fastar.States) { data[state] = new DeildInfo(fastar); }
         telja = 0;
         amount = 0;
         endurkomur = 0;
         homePatientWait = false;
-        arrive = EXP(fastar.Lam);
+        upphitun = new Event(env);
+        arrive = new MathNet.Numerics.Distributions.Exponential(1.0/fastar.Lam);
         CreateDeildir();
         action = env.Process(patientGen(env));
         env.Process(upphitunWait());
@@ -48,17 +43,26 @@ public class Kerfi
     {
         while (true)
         {
-            if(discharged.Count >0 & !homePatientWait)
+            if (!env.ActiveProcess.HandleFault())
             {
-                //env.Process(homeGen(env, discharged));
+                if (discharged.Count > 0 & !homePatientWait)
+                {
+                    //env.Process(homeGen(env, discharged));
+                }
+                double wait = arrive.Sample();
+                env.Log($"Þurfum að bíða í {wait} langann tima eftir næsta sjukling");
+                File.AppendAllText(Run.pth, $"Þurfum að bíða í {wait} langann tima eftir næsta sjukling" + System.Environment.NewLine);
+                yield return env.TimeoutD(wait);
+                int i_aldur = Helpers.randomChoice(p_age);
+                string aldur = fastar.AgeGroups[i_aldur];
+                int i_deild_upphaf = Helpers.randomChoice(fastar.InitialProb);
+                string deild_upphaf = fastar.InitState[i_deild_upphaf];
+                Patient p = new Patient(aldur, deild_upphaf, telja);
+                env.Log($"Sjúklingur numer {p.Numer} fer á {p.Deild} og er {p.Aldur}, liðinn tími er {env.NowD}");
+                File.AppendAllText(Run.pth, $"Sjúklingur numer {p.Numer} fer á {p.Deild} og er {p.Aldur}, liðinn tími er {env.NowD}" + System.Environment.NewLine);
+                env.Process(deildir[deild_upphaf].addP(p, false, false, ""));
             }
-            yield return env.TimeoutD(arrive);
-            int i_aldur = Helpers.randomChoice(p_age);
-            string aldur = fastar.AgeGroups[i_aldur];
-            int i_deild_upphaf = Helpers.randomChoice(fastar.InitialProb);
-            string deild_upphaf = fastar.InitState[i_deild_upphaf];
-            Patient p = new Patient(aldur, deild_upphaf, telja);
-            env.Process(deildir[deild_upphaf].addP(p, false, false, ""));
+            else { File.AppendAllText(Run.pth, "Interrupted!" + System.Environment.NewLine); }
         }
     }
     private void CreateDeildir()
@@ -66,7 +70,7 @@ public class Kerfi
         var deild_list = fastar.InitState.Concat(fastar.MedState);
         foreach (string unit in deild_list)
         {
-            deildir[unit] = new Deild(env, unit, fastar);
+            deildir[unit] = new Deild(env, unit, fastar, data[unit]);
         }
     }
     public IEnumerable<Event> interrupter(DataFinal data)
@@ -81,6 +85,7 @@ public class Kerfi
             {
                 data.deildAgeAmount[(key_list[0], key_list[1])].Add(deildir[key_list[1]].dataDeild.fjoldiInni[key_list[0]]);
             }
+            data.LeguAmount.Add(deildir["legudeild"].dataDeild.inni);
         }
     }
     private IEnumerable<Event> upphitunWait()

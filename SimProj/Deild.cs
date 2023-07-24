@@ -2,54 +2,56 @@
  * 
  */
 using SimSharp;
-using static SimSharp.Distributions;
 
 namespace SimProj;
 public class Deild
 {
-    private IRandom rng;
     public DeildInfo dataDeild;
     public SimAttribs simAttribs;
-    //private Kerfi S; //Sleppa þessu?
     private string nafn;
     private Simulation env;
-    private Dictionary<string,LogNormal> waitLognorm = new Dictionary<string, LogNormal>();
-    private Uniform waitUnif;
+    private Dictionary<string,MathNet.Numerics.Distributions.LogNormal> waitLognorm = new Dictionary<string, MathNet.Numerics.Distributions.LogNormal>();
+    private MathNet.Numerics.Distributions.ContinuousUniform WaitUnif;
     private double wait = 0;
-    private readonly IEnumerable<int> deildnr;
-    public Deild(Simulation envment, /*Kerfi kerfi,*/ string Nafn, SimAttribs SimAttributes)
+    private readonly IEnumerable<int>? deildnr;
+    public Deild(Simulation envment, string Nafn, SimAttribs SimAttributes,DeildInfo DataDeild)
     {
         env = envment;
-        //S = kerfi;
         nafn = Nafn;
         simAttribs = SimAttributes;
-        dataDeild = new DeildInfo(simAttribs);
+        dataDeild = DataDeild;
         if(simAttribs.WaitLognorm.ContainsKey(nafn)){
             foreach (string age_grp in simAttribs.AgeGroups)
             {
-                LogNormal lgnrm = new LogNormal(simAttribs.WaitLognorm[nafn][age_grp][0], simAttribs.WaitLognorm[nafn][age_grp][1]);
+                //Þarf að tjekka hvort sé verið að nota retta mu og sd
+                MathNet.Numerics.Distributions.LogNormal lgnrm = new MathNet.Numerics.Distributions.LogNormal(simAttribs.WaitLognorm[nafn][age_grp][0], simAttribs.WaitLognorm[nafn][age_grp][1]);
                 waitLognorm[age_grp] = lgnrm;
             }
         }
         if (simAttribs.WaitUniform.ContainsKey(nafn))
         {
-            Uniform waitUnif = new Uniform(simAttribs.WaitUniform[nafn][0], simAttribs.WaitUniform[nafn][1]);
+            WaitUnif = new MathNet.Numerics.Distributions.ContinuousUniform(simAttribs.WaitUniform[nafn][0], simAttribs.WaitUniform[nafn][1]);
             deildnr = Enumerable.Range(0, simAttribs.States.Count);
         }
     }
     public IEnumerable<Event> addP(Patient p, bool innrit, bool endurkoma, string prev_deild)
     {
+        if (innrit)
+        {
+            Run.kerfi.deildir[prev_deild].dataDeild.fjoldiInni[p.Aldur]--;
+            Run.kerfi.deildir[prev_deild].dataDeild.inni--;
+        }
+        else
+        {
+            Run.kerfi.telja++;
+            Run.kerfi.amount++;
+        }
+        if (endurkoma) { Run.kerfi.endurkomur++; }
         dataDeild.fjoldiInni[p.Aldur]++;
         dataDeild.inni++;
         if (dataDeild.inni > dataDeild.maxInni){ dataDeild.maxInni = dataDeild.inni; }
-        if (simAttribs.WaitLognorm.ContainsKey(nafn))
-        {
-            wait = waitLognorm[p.Aldur].Sample(rng);
-        }
-        else if (simAttribs.WaitUniform.ContainsKey(nafn))
-        {
-            wait = waitUnif.Sample(rng);
-        }
+        if (simAttribs.WaitLognorm.ContainsKey(nafn)){ wait = waitLognorm[p.Aldur].Sample(); }
+        else if (simAttribs.WaitUniform.ContainsKey(nafn)){ wait = WaitUnif.Sample(); }
         yield return env.TimeoutD(wait);
         yield return env.Process(updatePatient(p));
     }
@@ -66,9 +68,8 @@ public class Deild
         if (simAttribs.FinalState.Contains(newDeild)) { removeP(p); }
         else
         {
-            //yield return env.Process(//addP á nýju deild)
+            yield return env.Process(Run.kerfi.deildir[newDeild].addP(p,true,false,prev));
         }
-        yield return env.TimeoutD(1.0); // tek þetta ut bara svo geri buildað
     }
     public void removeP(Patient p)
     {
