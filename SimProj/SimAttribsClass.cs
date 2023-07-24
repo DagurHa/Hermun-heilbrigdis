@@ -49,34 +49,6 @@ public class SimAttribs : SimAttribsNontuples
         }
     }
 
-    /*
-     Geyma
-     Type nonTupType = typeof(SimAttribsTuples);
-
-        // Get all the properties of the parent class
-        PropertyInfo[] nonTupProperties = nonTupType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
-
-        // Iterate over the properties and set the corresponding properties of the child class
-        foreach (var property in nonTupProperties)
-        {
-            if (property.PropertyType.IsGenericType &&
-                property.PropertyType.GetGenericTypeDefinition() == typeof(Dictionary<,>) &&
-                property.PropertyType.GetGenericArguments()[0] == typeof(string))
-            {
-                var PropDict = property.GetValue(simAttr);
-                if (property.CanRead && property.CanWrite)
-                {
-                    Dictionary<(string, string), object> TupDict = new Dictionary<(string, string), object>();
-                    foreach(string key in PropDict.Keys)
-                    {
-                        (string,string) keyTup = Helpers.StringToTup(key);
-                        TupDict[keyTup] = PropDict[key];
-                    }
-                    property.SetValue(this, TupDict);        // Set the value in the current instance (child object)
-                }
-            }
-        }
-     */
     public void initTuple(SimAttribsTuples simAttr)
     {
         //Höfum basic til að byrja með

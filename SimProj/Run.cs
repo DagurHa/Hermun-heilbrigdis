@@ -26,7 +26,7 @@ public class Run
         Kerfi kerfi = new Kerfi(env, simAttr);
         env.Process(kerfi.interrupter(data));
         Console.WriteLine($"Simtime : {simAttr.Stop} og upphitun : {simAttr.WarmupTime}");
-        //env.RunD((double?)(simAttr.Stop + simAttr.WarmupTime));
+        env.RunD((double?)(simAttr.Stop + simAttr.WarmupTime));
         data.Log();
         }
     }

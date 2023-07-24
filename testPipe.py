@@ -1,6 +1,4 @@
 ﻿from itertools import product
-from copy import copy
-#import pandas as pd
 import json
 import subprocess
 
@@ -94,27 +92,22 @@ STARFSDEMAND = {
     (STATES[3],STORF[0]): (10,1),
     (STATES[3],STORF[1]): (1,1)
 }
-#GOGN = d_skra["Fjöldi á dag"].tolist()
-#print(len(GOGN))
 KEYS_TOT = list(product(AGE_GROUPS,UPPHAFSDEILD+MILLIDEILD))
 
 UPPHITUN = 25 # Upphitunartími hverrar hermunar, þ.e. byrjum ekki að safna/sýna upplýsingar fyrr en svona margir dagar hafa liðið
 simAttributes_nontuple = {
     "MeanArrive" : AGE_GROUP_AMOUNT,
-    #"MoveProb" : PROB,
     "InitialProb" : INITIAL_PROB,
     "States" : STATES,
     "AgeGroups" : AGE_GROUPS,
     "WaitLognorm" : WAIT_lognorm,
     "WaitUniform" : WAIT_unif,
     "SimAmount" : L,
-    #"DeildaSkipti" : deildaskipti,
     "InitState" : UPPHAFSDEILD,
     "MedState" : MILLIDEILD,
     "FinalState" : ENDADEILD,
     "WarmupTime" : UPPHITUN,
     "ReEnter" : ENDURKOMA,
-    #"JobDemand" : STARFSDEMAND,
     "Keys" : KEYS_TOT,
     "Jobs" : STORF
 }

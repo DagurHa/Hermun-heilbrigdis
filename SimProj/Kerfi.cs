@@ -81,12 +81,6 @@ public class Kerfi
             {
                 data.deildAgeAmount[(key_list[0], key_list[1])].Add(deildir[key_list[1]].dataDeild.fjoldiInni[key_list[0]]);
             }
-            if (fastar.ShowSim)
-            {
-                /*
-                 Hér þarf að setja ehv pípu yfir í python til að færa gögn in real time
-                 */
-            }
         }
     }
     private IEnumerable<Event> upphitunWait()
