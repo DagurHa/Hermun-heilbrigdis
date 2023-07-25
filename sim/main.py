@@ -69,7 +69,7 @@ def initSimAttribs(simAttribs,tab,num_in_key,name,compare):
 
 
         #sliders o.fl.
-        with stillingar.expander("Hermunarstillingar"):
+        with stillingar:
             if scenarios == "Default":
                 st.write("Veldu meðalfjölda sem koma á heilsugæslur og bráðamóttökur á dag.")
                 simAttribs["meðalfjöldi"][AGE_GROUPS[0]] = st.number_input("Meðalfjöldi ungra á dag",min_value = 1, max_value=1500,
@@ -323,7 +323,8 @@ if hundur:
     )
     fig2.update_layout(
         xaxis_title = "Dagar",
-        yaxis_title = "meðalfjöldi"
+        yaxis_title = "Meðalfjöldi",
+        title="Meðalfjöldi inniliggjandi sjúklinga á legudeild"
     )
     st.plotly_chart(fig2)
     fig3.update_layout(title_text="Flæði sjúklinga í gegnum kerfið")

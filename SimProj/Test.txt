@@ -1,0 +1,1527 @@
+Þurfum að bíða í 0.07040038348405915 langann tima eftir næsta sjukling
+Sjúklingur numer 0 fer á bráðamóttaka og er Ungur, liðinn tími er 0.0704003
+Þurfum að bíða í 0.022952474318773904 langann tima eftir næsta sjukling
+Sjúklingur numer 1 fer á bráðamóttaka og er Ungur, liðinn tími er 0.0933527
+Þurfum að bíða í 0.12959074690189487 langann tima eftir næsta sjukling
+Sjúklingur numer 2 fer á heilsugæsla og er Ungur, liðinn tími er 0.2229434
+Þurfum að bíða í 0.07488363836452233 langann tima eftir næsta sjukling
+Sjúklingur numer 3 fer á heilsugæsla og er Ungur, liðinn tími er 0.297827
+Þurfum að bíða í 0.036914060522806276 langann tima eftir næsta sjukling
+Sjúklingur numer 4 fer á heilsugæsla og er Ungur, liðinn tími er 0.334741
+Þurfum að bíða í 0.010409517877503141 langann tima eftir næsta sjukling
+Sjúklingur numer 5 fer á bráðamóttaka og er Ungur, liðinn tími er 0.3451505
+Þurfum að bíða í 0.049069469441419614 langann tima eftir næsta sjukling
+Sjúklingur numer 6 fer á bráðamóttaka og er Ungur, liðinn tími er 0.3942199
+Þurfum að bíða í 0.07371078211951558 langann tima eftir næsta sjukling
+Sjúklingur numer 7 fer á heilsugæsla og er Ungur, liðinn tími er 0.4679306
+Þurfum að bíða í 0.12368407399391529 langann tima eftir næsta sjukling
+Sjúklingur numer 8 fer á bráðamóttaka og er Ungur, liðinn tími er 0.5916146
+Þurfum að bíða í 0.26113204889469355 langann tima eftir næsta sjukling
+Sjúklingur numer 9 fer á bráðamóttaka og er Ungur, liðinn tími er 0.8527466
+Þurfum að bíða í 0.0986498523201208 langann tima eftir næsta sjukling
+Sjúklingur numer 10 fer á bráðamóttaka og er Ungur, liðinn tími er 0.9513964
+Þurfum að bíða í 0.16610732947861376 langann tima eftir næsta sjukling
+Sjúklingur numer 11 fer á bráðamóttaka og er Ungur, liðinn tími er 1.1175037
+Þurfum að bíða í 0.10422635108303442 langann tima eftir næsta sjukling
+Sjúklingur numer 12 fer á bráðamóttaka og er Ungur, liðinn tími er 1.22173
+Þurfum að bíða í 0.0448969077308386 langann tima eftir næsta sjukling
+Sjúklingur numer 13 fer á heilsugæsla og er Ungur, liðinn tími er 1.2666269
+Þurfum að bíða í 0.046326535335375126 langann tima eftir næsta sjukling
+Sjúklingur numer 14 fer á bráðamóttaka og er Ungur, liðinn tími er 1.3129534
+Þurfum að bíða í 0.07375114099984123 langann tima eftir næsta sjukling
+Sjúklingur numer 15 fer á heilsugæsla og er Ungur, liðinn tími er 1.3867045
+Þurfum að bíða í 0.03634538265042757 langann tima eftir næsta sjukling
+Sjúklingur numer 16 fer á bráðamóttaka og er Ungur, liðinn tími er 1.4230498
+Þurfum að bíða í 0.035374148584335345 langann tima eftir næsta sjukling
+Sjúklingur numer 17 fer á bráðamóttaka og er Ungur, liðinn tími er 1.4584239
+Þurfum að bíða í 0.12630516858281565 langann tima eftir næsta sjukling
+Sjúklingur numer 18 fer á bráðamóttaka og er Ungur, liðinn tími er 1.584729
+Þurfum að bíða í 0.015626372742338284 langann tima eftir næsta sjukling
+Sjúklingur numer 19 fer á bráðamóttaka og er Ungur, liðinn tími er 1.6003553
+Þurfum að bíða í 0.019957924034338406 langann tima eftir næsta sjukling
+Sjúklingur numer 20 fer á bráðamóttaka og er Ungur, liðinn tími er 1.6203132
+Þurfum að bíða í 0.0017799414819979261 langann tima eftir næsta sjukling
+Sjúklingur numer 21 fer á bráðamóttaka og er Ungur, liðinn tími er 1.6220931
+Þurfum að bíða í 0.1444333273281393 langann tima eftir næsta sjukling
+Sjúklingur numer 22 fer á heilsugæsla og er Ungur, liðinn tími er 1.7665264
+Þurfum að bíða í 0.03295638990932848 langann tima eftir næsta sjukling
+Sjúklingur numer 23 fer á bráðamóttaka og er Ungur, liðinn tími er 1.7994827
+Þurfum að bíða í 0.056810407656753735 langann tima eftir næsta sjukling
+Sjúklingur numer 24 fer á heilsugæsla og er Ungur, liðinn tími er 1.8562931
+Þurfum að bíða í 0.03656533241884377 langann tima eftir næsta sjukling
+Sjúklingur numer 25 fer á bráðamóttaka og er Ungur, liðinn tími er 1.8928584
+Þurfum að bíða í 0.1080576235403785 langann tima eftir næsta sjukling
+Sjúklingur numer 26 fer á bráðamóttaka og er Ungur, liðinn tími er 2.000916
+Þurfum að bíða í 0.012896674227351022 langann tima eftir næsta sjukling
+Sjúklingur numer 27 fer á bráðamóttaka og er Ungur, liðinn tími er 2.0138126
+Þurfum að bíða í 0.013894686827051988 langann tima eftir næsta sjukling
+Sjúklingur numer 28 fer á bráðamóttaka og er Ungur, liðinn tími er 2.0277072
+Þurfum að bíða í 0.1633600384202456 langann tima eftir næsta sjukling
+Sjúklingur numer 29 fer á bráðamóttaka og er Ungur, liðinn tími er 2.1910672
+Þurfum að bíða í 0.07113944396198932 langann tima eftir næsta sjukling
+Sjúklingur numer 30 fer á heilsugæsla og er Ungur, liðinn tími er 2.2622066
+Þurfum að bíða í 0.06113603824684773 langann tima eftir næsta sjukling
+Sjúklingur numer 31 fer á bráðamóttaka og er Ungur, liðinn tími er 2.3233426
+Þurfum að bíða í 0.008132259711413072 langann tima eftir næsta sjukling
+Sjúklingur numer 32 fer á bráðamóttaka og er Ungur, liðinn tími er 2.3314748
+Þurfum að bíða í 0.09424068050585872 langann tima eftir næsta sjukling
+Sjúklingur numer 33 fer á bráðamóttaka og er Ungur, liðinn tími er 2.4257154
+Þurfum að bíða í 0.07071137599878168 langann tima eftir næsta sjukling
+Sjúklingur numer 34 fer á heilsugæsla og er Ungur, liðinn tími er 2.4964267
+Þurfum að bíða í 0.09693641560215754 langann tima eftir næsta sjukling
+Sjúklingur numer 35 fer á bráðamóttaka og er Ungur, liðinn tími er 2.5933631
+Þurfum að bíða í 0.03130946923953065 langann tima eftir næsta sjukling
+Sjúklingur numer 36 fer á bráðamóttaka og er Ungur, liðinn tími er 2.6246725
+Þurfum að bíða í 0.13394983429054894 langann tima eftir næsta sjukling
+Sjúklingur numer 37 fer á bráðamóttaka og er Ungur, liðinn tími er 2.7586223
+Þurfum að bíða í 0.15816103592854996 langann tima eftir næsta sjukling
+Sjúklingur numer 38 fer á bráðamóttaka og er Ungur, liðinn tími er 2.9167833
+Þurfum að bíða í 0.039566445184093274 langann tima eftir næsta sjukling
+Sjúklingur numer 39 fer á bráðamóttaka og er Ungur, liðinn tími er 2.9563497
+Þurfum að bíða í 0.08058252288921575 langann tima eftir næsta sjukling
+Sjúklingur numer 40 fer á heilsugæsla og er Ungur, liðinn tími er 3.0369322
+Þurfum að bíða í 0.0049423989462169405 langann tima eftir næsta sjukling
+Sjúklingur numer 41 fer á bráðamóttaka og er Ungur, liðinn tími er 3.0418745
+Þurfum að bíða í 0.009360036982703768 langann tima eftir næsta sjukling
+Sjúklingur numer 42 fer á bráðamóttaka og er Ungur, liðinn tími er 3.0512345
+Þurfum að bíða í 0.01902133492471753 langann tima eftir næsta sjukling
+Sjúklingur numer 43 fer á bráðamóttaka og er Ungur, liðinn tími er 3.0702558
+Þurfum að bíða í 0.07227867426439535 langann tima eftir næsta sjukling
+Sjúklingur numer 44 fer á bráðamóttaka og er Ungur, liðinn tími er 3.1425344
+Þurfum að bíða í 0.017096462686053717 langann tima eftir næsta sjukling
+Sjúklingur numer 45 fer á heilsugæsla og er Ungur, liðinn tími er 3.1596308
+Þurfum að bíða í 0.004925818933390249 langann tima eftir næsta sjukling
+Sjúklingur numer 46 fer á bráðamóttaka og er Ungur, liðinn tími er 3.1645566
+Þurfum að bíða í 0.08277118513988649 langann tima eftir næsta sjukling
+Sjúklingur numer 47 fer á bráðamóttaka og er Ungur, liðinn tími er 3.2473277
+Þurfum að bíða í 0.03981163005323835 langann tima eftir næsta sjukling
+Sjúklingur numer 48 fer á bráðamóttaka og er Ungur, liðinn tími er 3.2871393
+Þurfum að bíða í 0.03473009964205141 langann tima eftir næsta sjukling
+Sjúklingur numer 49 fer á heilsugæsla og er Ungur, liðinn tími er 3.3218693
+Þurfum að bíða í 0.003712377832118331 langann tima eftir næsta sjukling
+Sjúklingur numer 50 fer á bráðamóttaka og er Ungur, liðinn tími er 3.3255816
+Þurfum að bíða í 0.09554567546062315 langann tima eftir næsta sjukling
+Sjúklingur numer 51 fer á bráðamóttaka og er Ungur, liðinn tími er 3.4211272
+Þurfum að bíða í 0.034589886687648286 langann tima eftir næsta sjukling
+Sjúklingur numer 52 fer á bráðamóttaka og er Ungur, liðinn tími er 3.455717
+Þurfum að bíða í 0.06862346954628488 langann tima eftir næsta sjukling
+Sjúklingur numer 53 fer á bráðamóttaka og er Ungur, liðinn tími er 3.5243404
+Þurfum að bíða í 0.05182938333449888 langann tima eftir næsta sjukling
+Sjúklingur numer 54 fer á heilsugæsla og er Ungur, liðinn tími er 3.5761697
+Þurfum að bíða í 0.07121157058535707 langann tima eftir næsta sjukling
+Sjúklingur numer 55 fer á bráðamóttaka og er Ungur, liðinn tími er 3.6473812
+Þurfum að bíða í 0.09487124579714021 langann tima eftir næsta sjukling
+Sjúklingur numer 56 fer á heilsugæsla og er Ungur, liðinn tími er 3.7422524
+Þurfum að bíða í 0.18315106627562033 langann tima eftir næsta sjukling
+Sjúklingur numer 57 fer á bráðamóttaka og er Ungur, liðinn tími er 3.9254034
+Þurfum að bíða í 0.03565428043486639 langann tima eftir næsta sjukling
+Sjúklingur numer 58 fer á heilsugæsla og er Ungur, liðinn tími er 3.9610576
+Þurfum að bíða í 0.04825552195136788 langann tima eftir næsta sjukling
+Sjúklingur numer 59 fer á heilsugæsla og er Ungur, liðinn tími er 4.0093131
+Þurfum að bíða í 0.04760436088169951 langann tima eftir næsta sjukling
+Sjúklingur numer 60 fer á heilsugæsla og er Ungur, liðinn tími er 4.0569174
+Þurfum að bíða í 0.004880435891128729 langann tima eftir næsta sjukling
+Sjúklingur numer 61 fer á heilsugæsla og er Ungur, liðinn tími er 4.0617978
+Þurfum að bíða í 0.02296960623319195 langann tima eftir næsta sjukling
+Sjúklingur numer 62 fer á bráðamóttaka og er Ungur, liðinn tími er 4.0847674
+Þurfum að bíða í 0.028476886642223347 langann tima eftir næsta sjukling
+Sjúklingur numer 63 fer á bráðamóttaka og er Ungur, liðinn tími er 4.1132442
+Þurfum að bíða í 0.42015176556793227 langann tima eftir næsta sjukling
+Sjúklingur numer 64 fer á bráðamóttaka og er Ungur, liðinn tími er 4.5333959
+Þurfum að bíða í 0.038057887000658784 langann tima eftir næsta sjukling
+Sjúklingur numer 65 fer á bráðamóttaka og er Ungur, liðinn tími er 4.5714537
+Þurfum að bíða í 0.17444383783920062 langann tima eftir næsta sjukling
+Sjúklingur numer 66 fer á heilsugæsla og er Ungur, liðinn tími er 4.7458975
+Þurfum að bíða í 0.03748156867933894 langann tima eftir næsta sjukling
+Sjúklingur numer 67 fer á bráðamóttaka og er Ungur, liðinn tími er 4.783379
+Þurfum að bíða í 0.04667614273565968 langann tima eftir næsta sjukling
+Sjúklingur numer 68 fer á bráðamóttaka og er Ungur, liðinn tími er 4.8300551
+Þurfum að bíða í 0.45322186774866263 langann tima eftir næsta sjukling
+Sjúklingur numer 69 fer á heilsugæsla og er Ungur, liðinn tími er 5.2832769
+Þurfum að bíða í 0.009938906568123828 langann tima eftir næsta sjukling
+Sjúklingur numer 70 fer á heilsugæsla og er Ungur, liðinn tími er 5.2932158
+Þurfum að bíða í 0.04263667253856049 langann tima eftir næsta sjukling
+Sjúklingur numer 71 fer á heilsugæsla og er Ungur, liðinn tími er 5.3358524
+Þurfum að bíða í 0.029738768813906677 langann tima eftir næsta sjukling
+Sjúklingur numer 72 fer á bráðamóttaka og er Ungur, liðinn tími er 5.3655911
+Þurfum að bíða í 0.005808437348879062 langann tima eftir næsta sjukling
+Sjúklingur numer 73 fer á bráðamóttaka og er Ungur, liðinn tími er 5.3713995
+Þurfum að bíða í 0.041842986995959106 langann tima eftir næsta sjukling
+Sjúklingur numer 74 fer á bráðamóttaka og er Ungur, liðinn tími er 5.4132424
+Þurfum að bíða í 0.023529809442763925 langann tima eftir næsta sjukling
+Sjúklingur numer 75 fer á heilsugæsla og er Ungur, liðinn tími er 5.4367722
+Þurfum að bíða í 0.02703711623170507 langann tima eftir næsta sjukling
+Sjúklingur numer 76 fer á bráðamóttaka og er Ungur, liðinn tími er 5.4638093
+Þurfum að bíða í 0.20627615445905953 langann tima eftir næsta sjukling
+Sjúklingur numer 77 fer á bráðamóttaka og er Ungur, liðinn tími er 5.6700854
+Þurfum að bíða í 0.06123656251773848 langann tima eftir næsta sjukling
+Sjúklingur numer 78 fer á bráðamóttaka og er Ungur, liðinn tími er 5.7313219
+Þurfum að bíða í 0.061894620593909634 langann tima eftir næsta sjukling
+Sjúklingur numer 79 fer á bráðamóttaka og er Ungur, liðinn tími er 5.7932165
+Þurfum að bíða í 0.02451510279545154 langann tima eftir næsta sjukling
+Sjúklingur numer 80 fer á bráðamóttaka og er Ungur, liðinn tími er 5.8177316
+Þurfum að bíða í 0.011618028191395232 langann tima eftir næsta sjukling
+Sjúklingur numer 81 fer á bráðamóttaka og er Ungur, liðinn tími er 5.8293496
+Þurfum að bíða í 0.02422166061387248 langann tima eftir næsta sjukling
+Sjúklingur numer 82 fer á bráðamóttaka og er Ungur, liðinn tími er 5.8535712
+Þurfum að bíða í 0.11109269307039496 langann tima eftir næsta sjukling
+Sjúklingur numer 83 fer á bráðamóttaka og er Ungur, liðinn tími er 5.9646638
+Þurfum að bíða í 0.01172448326009546 langann tima eftir næsta sjukling
+Sjúklingur numer 84 fer á bráðamóttaka og er Ungur, liðinn tími er 5.9763882
+Þurfum að bíða í 0.13317807014254163 langann tima eftir næsta sjukling
+Sjúklingur numer 85 fer á bráðamóttaka og er Ungur, liðinn tími er 6.1095662
+Þurfum að bíða í 0.021061747715445018 langann tima eftir næsta sjukling
+Sjúklingur numer 86 fer á bráðamóttaka og er Ungur, liðinn tími er 6.1306279
+Þurfum að bíða í 0.17480816803462879 langann tima eftir næsta sjukling
+Sjúklingur numer 87 fer á bráðamóttaka og er Ungur, liðinn tími er 6.305436
+Þurfum að bíða í 0.16573251479532994 langann tima eftir næsta sjukling
+Sjúklingur numer 88 fer á bráðamóttaka og er Ungur, liðinn tími er 6.4711685
+Þurfum að bíða í 0.02416819003876558 langann tima eftir næsta sjukling
+Sjúklingur numer 89 fer á bráðamóttaka og er Ungur, liðinn tími er 6.4953366
+Þurfum að bíða í 0.0038234114731456577 langann tima eftir næsta sjukling
+Sjúklingur numer 90 fer á heilsugæsla og er Ungur, liðinn tími er 6.49916
+Þurfum að bíða í 0.14396309231548635 langann tima eftir næsta sjukling
+Sjúklingur numer 91 fer á heilsugæsla og er Ungur, liðinn tími er 6.643123
+Þurfum að bíða í 0.03844818403994912 langann tima eftir næsta sjukling
+Sjúklingur numer 92 fer á bráðamóttaka og er Ungur, liðinn tími er 6.6815711
+Þurfum að bíða í 0.07419359039521471 langann tima eftir næsta sjukling
+Sjúklingur numer 93 fer á heilsugæsla og er Ungur, liðinn tími er 6.7557646
+Þurfum að bíða í 0.03151008903895102 langann tima eftir næsta sjukling
+Sjúklingur numer 94 fer á heilsugæsla og er Ungur, liðinn tími er 6.7872746
+Þurfum að bíða í 0.007285895656048952 langann tima eftir næsta sjukling
+Sjúklingur numer 95 fer á bráðamóttaka og er Ungur, liðinn tími er 6.7945604
+Þurfum að bíða í 0.061935950133414124 langann tima eftir næsta sjukling
+Sjúklingur numer 96 fer á bráðamóttaka og er Ungur, liðinn tími er 6.8564963
+Þurfum að bíða í 0.09608253560750567 langann tima eftir næsta sjukling
+Sjúklingur numer 97 fer á heilsugæsla og er Ungur, liðinn tími er 6.9525788
+Þurfum að bíða í 0.0505003846019326 langann tima eftir næsta sjukling
+Sjúklingur numer 98 fer á bráðamóttaka og er Ungur, liðinn tími er 7.0030791
+Þurfum að bíða í 0.09729315961213866 langann tima eftir næsta sjukling
+Sjúklingur numer 99 fer á heilsugæsla og er Ungur, liðinn tími er 7.1003722
+Þurfum að bíða í 0.07260730009935726 langann tima eftir næsta sjukling
+Sjúklingur numer 100 fer á bráðamóttaka og er Ungur, liðinn tími er 7.1729795
+Þurfum að bíða í 0.1687583494978742 langann tima eftir næsta sjukling
+Sjúklingur numer 101 fer á heilsugæsla og er Ungur, liðinn tími er 7.3417378
+Þurfum að bíða í 0.007462281362596828 langann tima eftir næsta sjukling
+Sjúklingur numer 102 fer á heilsugæsla og er Ungur, liðinn tími er 7.3492
+Þurfum að bíða í 0.2713995716998551 langann tima eftir næsta sjukling
+Sjúklingur numer 103 fer á bráðamóttaka og er Ungur, liðinn tími er 7.6205995
+Þurfum að bíða í 0.11670950522805736 langann tima eftir næsta sjukling
+Sjúklingur numer 104 fer á bráðamóttaka og er Ungur, liðinn tími er 7.737309
+Þurfum að bíða í 0.08733757766371229 langann tima eftir næsta sjukling
+Sjúklingur numer 105 fer á bráðamóttaka og er Ungur, liðinn tími er 7.8246465
+Þurfum að bíða í 0.024985259233404514 langann tima eftir næsta sjukling
+Sjúklingur numer 106 fer á bráðamóttaka og er Ungur, liðinn tími er 7.8496317
+Þurfum að bíða í 0.028414573329110182 langann tima eftir næsta sjukling
+Sjúklingur numer 107 fer á heilsugæsla og er Ungur, liðinn tími er 7.8780462
+Þurfum að bíða í 0.10421254992212273 langann tima eftir næsta sjukling
+Sjúklingur numer 108 fer á bráðamóttaka og er Ungur, liðinn tími er 7.9822587
+Þurfum að bíða í 0.08197770438634273 langann tima eftir næsta sjukling
+Sjúklingur numer 109 fer á bráðamóttaka og er Ungur, liðinn tími er 8.0642364
+Þurfum að bíða í 0.06749997176162899 langann tima eftir næsta sjukling
+Sjúklingur numer 110 fer á heilsugæsla og er Ungur, liðinn tími er 8.1317363
+Þurfum að bíða í 0.07601846843116153 langann tima eftir næsta sjukling
+Sjúklingur numer 111 fer á bráðamóttaka og er Ungur, liðinn tími er 8.2077547
+Þurfum að bíða í 0.08051510694240736 langann tima eftir næsta sjukling
+Sjúklingur numer 112 fer á bráðamóttaka og er Ungur, liðinn tími er 8.2882698
+Þurfum að bíða í 0.017709255292358252 langann tima eftir næsta sjukling
+Sjúklingur numer 113 fer á bráðamóttaka og er Ungur, liðinn tími er 8.305979
+Þurfum að bíða í 0.12556223831656502 langann tima eftir næsta sjukling
+Sjúklingur numer 114 fer á heilsugæsla og er Ungur, liðinn tími er 8.4315412
+Þurfum að bíða í 0.23210489004084192 langann tima eftir næsta sjukling
+Sjúklingur numer 115 fer á bráðamóttaka og er Ungur, liðinn tími er 8.663646
+Þurfum að bíða í 0.12699172951733648 langann tima eftir næsta sjukling
+Sjúklingur numer 116 fer á heilsugæsla og er Ungur, liðinn tími er 8.7906377
+Þurfum að bíða í 0.0257765775229242 langann tima eftir næsta sjukling
+Sjúklingur numer 117 fer á bráðamóttaka og er Ungur, liðinn tími er 8.8164142
+Þurfum að bíða í 0.07920609294618328 langann tima eftir næsta sjukling
+Sjúklingur numer 118 fer á bráðamóttaka og er Ungur, liðinn tími er 8.8956202
+Þurfum að bíða í 0.02672236948519989 langann tima eftir næsta sjukling
+Sjúklingur numer 119 fer á heilsugæsla og er Ungur, liðinn tími er 8.9223425
+Þurfum að bíða í 0.012658296869504777 langann tima eftir næsta sjukling
+Sjúklingur numer 120 fer á heilsugæsla og er Ungur, liðinn tími er 8.9350007
+Þurfum að bíða í 0.257106691571344 langann tima eftir næsta sjukling
+Sjúklingur numer 121 fer á bráðamóttaka og er Ungur, liðinn tími er 9.1921073
+Þurfum að bíða í 0.012430577578577863 langann tima eftir næsta sjukling
+Sjúklingur numer 122 fer á bráðamóttaka og er Ungur, liðinn tími er 9.2045378
+Þurfum að bíða í 0.04789943410876028 langann tima eftir næsta sjukling
+Sjúklingur numer 123 fer á heilsugæsla og er Ungur, liðinn tími er 9.2524372
+Þurfum að bíða í 0.018396868964137215 langann tima eftir næsta sjukling
+Sjúklingur numer 124 fer á bráðamóttaka og er Ungur, liðinn tími er 9.270834
+Þurfum að bíða í 0.06243078619966548 langann tima eftir næsta sjukling
+Sjúklingur numer 125 fer á heilsugæsla og er Ungur, liðinn tími er 9.3332647
+Þurfum að bíða í 0.1490469955040869 langann tima eftir næsta sjukling
+Sjúklingur numer 126 fer á bráðamóttaka og er Ungur, liðinn tími er 9.4823116
+Þurfum að bíða í 0.028863765689925828 langann tima eftir næsta sjukling
+Sjúklingur numer 127 fer á bráðamóttaka og er Ungur, liðinn tími er 9.5111753
+Þurfum að bíða í 0.03463243959893704 langann tima eftir næsta sjukling
+Sjúklingur numer 128 fer á bráðamóttaka og er Ungur, liðinn tími er 9.5458077
+Þurfum að bíða í 0.1310277992013641 langann tima eftir næsta sjukling
+Sjúklingur numer 129 fer á heilsugæsla og er Ungur, liðinn tími er 9.6768354
+Þurfum að bíða í 0.015096635302894866 langann tima eftir næsta sjukling
+Sjúklingur numer 130 fer á bráðamóttaka og er Ungur, liðinn tími er 9.691932
+Þurfum að bíða í 0.09348264800780477 langann tima eftir næsta sjukling
+Sjúklingur numer 131 fer á bráðamóttaka og er Ungur, liðinn tími er 9.7854146
+Þurfum að bíða í 0.10412679473056952 langann tima eftir næsta sjukling
+Sjúklingur numer 132 fer á bráðamóttaka og er Ungur, liðinn tími er 9.8895413
+Þurfum að bíða í 0.016037261353773966 langann tima eftir næsta sjukling
+Sjúklingur numer 133 fer á bráðamóttaka og er Ungur, liðinn tími er 9.9055785
+Þurfum að bíða í 0.007308116268199453 langann tima eftir næsta sjukling
+Sjúklingur numer 134 fer á bráðamóttaka og er Ungur, liðinn tími er 9.9128866
+Þurfum að bíða í 0.06975913973338801 langann tima eftir næsta sjukling
+Sjúklingur numer 135 fer á bráðamóttaka og er Ungur, liðinn tími er 9.9826457
+Þurfum að bíða í 0.009117393669565063 langann tima eftir næsta sjukling
+Sjúklingur numer 136 fer á bráðamóttaka og er Ungur, liðinn tími er 9.991763
+Þurfum að bíða í 0.006273395844389347 langann tima eftir næsta sjukling
+Sjúklingur numer 137 fer á bráðamóttaka og er Ungur, liðinn tími er 9.9980363
+Þurfum að bíða í 0.0054162481221567225 langann tima eftir næsta sjukling
+Sjúklingur numer 138 fer á bráðamóttaka og er Ungur, liðinn tími er 10.0034525
+Þurfum að bíða í 0.015084362251137245 langann tima eftir næsta sjukling
+Sjúklingur numer 139 fer á bráðamóttaka og er Ungur, liðinn tími er 10.0185368
+Þurfum að bíða í 0.016990615221792488 langann tima eftir næsta sjukling
+Sjúklingur numer 140 fer á bráðamóttaka og er Ungur, liðinn tími er 10.0355274
+Þurfum að bíða í 0.04870849585529136 langann tima eftir næsta sjukling
+Sjúklingur numer 141 fer á bráðamóttaka og er Ungur, liðinn tími er 10.0842358
+Þurfum að bíða í 0.0530549469722913 langann tima eftir næsta sjukling
+Sjúklingur numer 142 fer á bráðamóttaka og er Ungur, liðinn tími er 10.1372907
+Þurfum að bíða í 0.027505081993459066 langann tima eftir næsta sjukling
+Sjúklingur numer 143 fer á bráðamóttaka og er Ungur, liðinn tími er 10.1647957
+Þurfum að bíða í 0.024443839198373184 langann tima eftir næsta sjukling
+Sjúklingur numer 144 fer á bráðamóttaka og er Ungur, liðinn tími er 10.1892395
+Þurfum að bíða í 0.007040284907425474 langann tima eftir næsta sjukling
+Sjúklingur numer 145 fer á bráðamóttaka og er Ungur, liðinn tími er 10.1962797
+Þurfum að bíða í 0.17267412184930253 langann tima eftir næsta sjukling
+Sjúklingur numer 146 fer á bráðamóttaka og er Ungur, liðinn tími er 10.3689538
+Þurfum að bíða í 0.0012204668803450585 langann tima eftir næsta sjukling
+Sjúklingur numer 147 fer á bráðamóttaka og er Ungur, liðinn tími er 10.3701742
+Þurfum að bíða í 0.010946153113909248 langann tima eftir næsta sjukling
+Sjúklingur numer 148 fer á heilsugæsla og er Ungur, liðinn tími er 10.3811203
+Þurfum að bíða í 0.05757133919787323 langann tima eftir næsta sjukling
+Sjúklingur numer 149 fer á heilsugæsla og er Ungur, liðinn tími er 10.4386916
+Þurfum að bíða í 0.030528985947698744 langann tima eftir næsta sjukling
+Sjúklingur numer 150 fer á bráðamóttaka og er Ungur, liðinn tími er 10.4692205
+Þurfum að bíða í 0.059710232062637515 langann tima eftir næsta sjukling
+Sjúklingur numer 151 fer á bráðamóttaka og er Ungur, liðinn tími er 10.5289307
+Þurfum að bíða í 0.013129179603380857 langann tima eftir næsta sjukling
+Sjúklingur numer 152 fer á bráðamóttaka og er Ungur, liðinn tími er 10.5420598
+Þurfum að bíða í 0.051555617226836985 langann tima eftir næsta sjukling
+Sjúklingur numer 153 fer á bráðamóttaka og er Ungur, liðinn tími er 10.5936154
+Þurfum að bíða í 0.10505805441496434 langann tima eftir næsta sjukling
+Sjúklingur numer 154 fer á bráðamóttaka og er Ungur, liðinn tími er 10.6986734
+Þurfum að bíða í 0.11437354972939859 langann tima eftir næsta sjukling
+Sjúklingur numer 155 fer á bráðamóttaka og er Ungur, liðinn tími er 10.8130469
+Þurfum að bíða í 0.037002285352932845 langann tima eftir næsta sjukling
+Sjúklingur numer 156 fer á bráðamóttaka og er Ungur, liðinn tími er 10.8500491
+Þurfum að bíða í 0.014269503364312507 langann tima eftir næsta sjukling
+Sjúklingur numer 157 fer á heilsugæsla og er Ungur, liðinn tími er 10.8643186
+Þurfum að bíða í 0.04976621629425728 langann tima eftir næsta sjukling
+Sjúklingur numer 158 fer á heilsugæsla og er Ungur, liðinn tími er 10.9140848
+Þurfum að bíða í 0.076808793490797 langann tima eftir næsta sjukling
+Sjúklingur numer 159 fer á bráðamóttaka og er Ungur, liðinn tími er 10.9908935
+Þurfum að bíða í 0.018602201840495946 langann tima eftir næsta sjukling
+Sjúklingur numer 160 fer á bráðamóttaka og er Ungur, liðinn tími er 11.0094957
+Þurfum að bíða í 0.11094454927367903 langann tima eftir næsta sjukling
+Sjúklingur numer 161 fer á heilsugæsla og er Ungur, liðinn tími er 11.1204402
+Þurfum að bíða í 0.040720075183248994 langann tima eftir næsta sjukling
+Sjúklingur numer 162 fer á bráðamóttaka og er Ungur, liðinn tími er 11.1611602
+Þurfum að bíða í 0.06126591145028196 langann tima eftir næsta sjukling
+Sjúklingur numer 163 fer á bráðamóttaka og er Ungur, liðinn tími er 11.2224261
+Þurfum að bíða í 0.021002826850113995 langann tima eftir næsta sjukling
+Sjúklingur numer 164 fer á heilsugæsla og er Ungur, liðinn tími er 11.2434289
+Þurfum að bíða í 0.24342959616959567 langann tima eftir næsta sjukling
+Sjúklingur numer 165 fer á heilsugæsla og er Ungur, liðinn tími er 11.4868584
+Þurfum að bíða í 0.1689253542305019 langann tima eftir næsta sjukling
+Sjúklingur numer 166 fer á bráðamóttaka og er Ungur, liðinn tími er 11.6557837
+Þurfum að bíða í 0.11377529909621306 langann tima eftir næsta sjukling
+Sjúklingur numer 167 fer á bráðamóttaka og er Ungur, liðinn tími er 11.7695589
+Þurfum að bíða í 0.012033369315824905 langann tima eftir næsta sjukling
+Sjúklingur numer 168 fer á bráðamóttaka og er Ungur, liðinn tími er 11.7815922
+Þurfum að bíða í 0.002825788464266347 langann tima eftir næsta sjukling
+Sjúklingur numer 169 fer á bráðamóttaka og er Ungur, liðinn tími er 11.7844179
+Þurfum að bíða í 0.008804869582717914 langann tima eftir næsta sjukling
+Sjúklingur numer 170 fer á bráðamóttaka og er Ungur, liðinn tími er 11.7932227
+Þurfum að bíða í 0.07567596336211763 langann tima eftir næsta sjukling
+Sjúklingur numer 171 fer á bráðamóttaka og er Ungur, liðinn tími er 11.8688986
+Þurfum að bíða í 0.05406478075994947 langann tima eftir næsta sjukling
+Sjúklingur numer 172 fer á bráðamóttaka og er Ungur, liðinn tími er 11.9229633
+Þurfum að bíða í 0.035905765203815866 langann tima eftir næsta sjukling
+Sjúklingur numer 173 fer á heilsugæsla og er Ungur, liðinn tími er 11.958869
+Þurfum að bíða í 0.006790209389971514 langann tima eftir næsta sjukling
+Sjúklingur numer 174 fer á bráðamóttaka og er Ungur, liðinn tími er 11.9656592
+Þurfum að bíða í 0.013041413641234607 langann tima eftir næsta sjukling
+Sjúklingur numer 175 fer á bráðamóttaka og er Ungur, liðinn tími er 11.9787006
+Þurfum að bíða í 0.007984286156017846 langann tima eftir næsta sjukling
+Sjúklingur numer 176 fer á bráðamóttaka og er Ungur, liðinn tími er 11.9866848
+Þurfum að bíða í 0.044771616654637164 langann tima eftir næsta sjukling
+Sjúklingur numer 177 fer á bráðamóttaka og er Ungur, liðinn tími er 12.0314564
+Þurfum að bíða í 0.06032133774676012 langann tima eftir næsta sjukling
+Sjúklingur numer 178 fer á bráðamóttaka og er Ungur, liðinn tími er 12.0917777
+Þurfum að bíða í 0.15561518572698577 langann tima eftir næsta sjukling
+Sjúklingur numer 179 fer á bráðamóttaka og er Ungur, liðinn tími er 12.2473928
+Þurfum að bíða í 0.03990275722715852 langann tima eftir næsta sjukling
+Sjúklingur numer 180 fer á heilsugæsla og er Ungur, liðinn tími er 12.2872955
+Þurfum að bíða í 0.043866074822514395 langann tima eftir næsta sjukling
+Sjúklingur numer 181 fer á heilsugæsla og er Ungur, liðinn tími er 12.3311615
+Þurfum að bíða í 0.05271960517632505 langann tima eftir næsta sjukling
+Sjúklingur numer 182 fer á heilsugæsla og er Ungur, liðinn tími er 12.3838811
+Þurfum að bíða í 0.04637851137889073 langann tima eftir næsta sjukling
+Sjúklingur numer 183 fer á bráðamóttaka og er Ungur, liðinn tími er 12.4302596
+Þurfum að bíða í 0.024690442824909092 langann tima eftir næsta sjukling
+Sjúklingur numer 184 fer á bráðamóttaka og er Ungur, liðinn tími er 12.45495
+Þurfum að bíða í 0.0044226516857178025 langann tima eftir næsta sjukling
+Sjúklingur numer 185 fer á bráðamóttaka og er Ungur, liðinn tími er 12.4593726
+Þurfum að bíða í 0.004386997146973571 langann tima eftir næsta sjukling
+Sjúklingur numer 186 fer á bráðamóttaka og er Ungur, liðinn tími er 12.4637595
+Þurfum að bíða í 0.027879915672429742 langann tima eftir næsta sjukling
+Sjúklingur numer 187 fer á bráðamóttaka og er Ungur, liðinn tími er 12.4916394
+Þurfum að bíða í 0.011633184947234039 langann tima eftir næsta sjukling
+Sjúklingur numer 188 fer á bráðamóttaka og er Ungur, liðinn tími er 12.5032725
+Þurfum að bíða í 0.013450087305528506 langann tima eftir næsta sjukling
+Sjúklingur numer 189 fer á bráðamóttaka og er Ungur, liðinn tími er 12.5167225
+Þurfum að bíða í 0.0063239801290570444 langann tima eftir næsta sjukling
+Sjúklingur numer 190 fer á bráðamóttaka og er Ungur, liðinn tími er 12.5230464
+Þurfum að bíða í 0.1888990324614784 langann tima eftir næsta sjukling
+Sjúklingur numer 191 fer á bráðamóttaka og er Ungur, liðinn tími er 12.7119454
+Þurfum að bíða í 0.01755314754766655 langann tima eftir næsta sjukling
+Sjúklingur numer 192 fer á bráðamóttaka og er Ungur, liðinn tími er 12.7294985
+Þurfum að bíða í 0.045752767326076485 langann tima eftir næsta sjukling
+Sjúklingur numer 193 fer á bráðamóttaka og er Ungur, liðinn tími er 12.7752512
+Þurfum að bíða í 0.1942129394610346 langann tima eftir næsta sjukling
+Sjúklingur numer 194 fer á bráðamóttaka og er Ungur, liðinn tími er 12.9694641
+Þurfum að bíða í 0.12692551662332213 langann tima eftir næsta sjukling
+Sjúklingur numer 195 fer á heilsugæsla og er Ungur, liðinn tími er 13.0963896
+Þurfum að bíða í 0.11491884026932217 langann tima eftir næsta sjukling
+Sjúklingur numer 196 fer á bráðamóttaka og er Ungur, liðinn tími er 13.2113084
+Þurfum að bíða í 0.0332855516935767 langann tima eftir næsta sjukling
+Sjúklingur numer 197 fer á bráðamóttaka og er Ungur, liðinn tími er 13.2445939
+Þurfum að bíða í 0.015061111630417396 langann tima eftir næsta sjukling
+Sjúklingur numer 198 fer á heilsugæsla og er Ungur, liðinn tími er 13.259655
+Þurfum að bíða í 0.024186972886131603 langann tima eftir næsta sjukling
+Sjúklingur numer 199 fer á bráðamóttaka og er Ungur, liðinn tími er 13.2838419
+Þurfum að bíða í 0.03774608780608513 langann tima eftir næsta sjukling
+Sjúklingur numer 200 fer á bráðamóttaka og er Ungur, liðinn tími er 13.3215879
+Þurfum að bíða í 0.03964259497262262 langann tima eftir næsta sjukling
+Sjúklingur numer 201 fer á bráðamóttaka og er Ungur, liðinn tími er 13.3612304
+Þurfum að bíða í 0.061938059948540444 langann tima eftir næsta sjukling
+Sjúklingur numer 202 fer á bráðamóttaka og er Ungur, liðinn tími er 13.4231684
+Þurfum að bíða í 0.062305258956423124 langann tima eftir næsta sjukling
+Sjúklingur numer 203 fer á bráðamóttaka og er Ungur, liðinn tími er 13.4854736
+Þurfum að bíða í 0.25763262081829297 langann tima eftir næsta sjukling
+Sjúklingur numer 204 fer á heilsugæsla og er Ungur, liðinn tími er 13.7431062
+Þurfum að bíða í 0.15232533640760523 langann tima eftir næsta sjukling
+Sjúklingur numer 205 fer á bráðamóttaka og er Ungur, liðinn tími er 13.8954315
+Þurfum að bíða í 0.09873432417088572 langann tima eftir næsta sjukling
+Sjúklingur numer 206 fer á bráðamóttaka og er Ungur, liðinn tími er 13.9941658
+Þurfum að bíða í 0.0644157799484345 langann tima eftir næsta sjukling
+Sjúklingur numer 207 fer á bráðamóttaka og er Ungur, liðinn tími er 14.0585815
+Þurfum að bíða í 0.038098525055668374 langann tima eftir næsta sjukling
+Sjúklingur numer 208 fer á bráðamóttaka og er Ungur, liðinn tími er 14.09668
+Þurfum að bíða í 0.009904583980441186 langann tima eftir næsta sjukling
+Sjúklingur numer 209 fer á heilsugæsla og er Ungur, liðinn tími er 14.1065845
+Þurfum að bíða í 0.03663598287596022 langann tima eftir næsta sjukling
+Sjúklingur numer 210 fer á bráðamóttaka og er Ungur, liðinn tími er 14.1432204
+Þurfum að bíða í 0.013979406116858755 langann tima eftir næsta sjukling
+Sjúklingur numer 211 fer á heilsugæsla og er Ungur, liðinn tími er 14.1571998
+Þurfum að bíða í 0.007742868333422484 langann tima eftir næsta sjukling
+Sjúklingur numer 212 fer á heilsugæsla og er Ungur, liðinn tími er 14.1649426
+Þurfum að bíða í 0.022888720786382034 langann tima eftir næsta sjukling
+Sjúklingur numer 213 fer á bráðamóttaka og er Ungur, liðinn tími er 14.1878313
+Þurfum að bíða í 0.2953845498002322 langann tima eftir næsta sjukling
+Sjúklingur numer 214 fer á bráðamóttaka og er Ungur, liðinn tími er 14.4832158
+Þurfum að bíða í 0.016162656954342842 langann tima eftir næsta sjukling
+Sjúklingur numer 215 fer á heilsugæsla og er Ungur, liðinn tími er 14.4993784
+Þurfum að bíða í 0.03287388320365753 langann tima eftir næsta sjukling
+Sjúklingur numer 216 fer á heilsugæsla og er Ungur, liðinn tími er 14.5322522
+Þurfum að bíða í 0.04164462153509576 langann tima eftir næsta sjukling
+Sjúklingur numer 217 fer á bráðamóttaka og er Ungur, liðinn tími er 14.5738968
+Þurfum að bíða í 0.03222706686555644 langann tima eftir næsta sjukling
+Sjúklingur numer 218 fer á bráðamóttaka og er Ungur, liðinn tími er 14.6061238
+Þurfum að bíða í 0.17003548158613682 langann tima eftir næsta sjukling
+Sjúklingur numer 219 fer á bráðamóttaka og er Ungur, liðinn tími er 14.7761592
+Þurfum að bíða í 0.125782168963215 langann tima eftir næsta sjukling
+Sjúklingur numer 220 fer á bráðamóttaka og er Ungur, liðinn tími er 14.9019413
+Þurfum að bíða í 0.042633606030979564 langann tima eftir næsta sjukling
+Sjúklingur numer 221 fer á heilsugæsla og er Ungur, liðinn tími er 14.9445749
+Þurfum að bíða í 0.29951379290633845 langann tima eftir næsta sjukling
+Sjúklingur numer 222 fer á bráðamóttaka og er Ungur, liðinn tími er 15.2440886
+Þurfum að bíða í 0.04830534449983464 langann tima eftir næsta sjukling
+Sjúklingur numer 223 fer á bráðamóttaka og er Ungur, liðinn tími er 15.2923939
+Þurfum að bíða í 0.0844624385584328 langann tima eftir næsta sjukling
+Sjúklingur numer 224 fer á bráðamóttaka og er Ungur, liðinn tími er 15.3768563
+Þurfum að bíða í 0.013933197137378485 langann tima eftir næsta sjukling
+Sjúklingur numer 225 fer á bráðamóttaka og er Ungur, liðinn tími er 15.3907894
+Þurfum að bíða í 0.3554334087607143 langann tima eftir næsta sjukling
+Sjúklingur numer 226 fer á bráðamóttaka og er Ungur, liðinn tími er 15.7462228
+Þurfum að bíða í 0.0227972657054393 langann tima eftir næsta sjukling
+Sjúklingur numer 227 fer á bráðamóttaka og er Ungur, liðinn tími er 15.76902
+Þurfum að bíða í 0.03979277006916861 langann tima eftir næsta sjukling
+Sjúklingur numer 228 fer á bráðamóttaka og er Ungur, liðinn tími er 15.8088127
+Þurfum að bíða í 0.059510122243524075 langann tima eftir næsta sjukling
+Sjúklingur numer 229 fer á bráðamóttaka og er Ungur, liðinn tími er 15.8683228
+Þurfum að bíða í 0.11220712403948024 langann tima eftir næsta sjukling
+Sjúklingur numer 230 fer á bráðamóttaka og er Ungur, liðinn tími er 15.9805299
+Þurfum að bíða í 0.0566743590105428 langann tima eftir næsta sjukling
+Sjúklingur numer 231 fer á bráðamóttaka og er Ungur, liðinn tími er 16.0372042
+Þurfum að bíða í 0.010965775011642977 langann tima eftir næsta sjukling
+Sjúklingur numer 232 fer á bráðamóttaka og er Ungur, liðinn tími er 16.0481699
+Þurfum að bíða í 0.04585567323272502 langann tima eftir næsta sjukling
+Sjúklingur numer 233 fer á heilsugæsla og er Ungur, liðinn tími er 16.0940255
+Þurfum að bíða í 0.014709450331158013 langann tima eftir næsta sjukling
+Sjúklingur numer 234 fer á heilsugæsla og er Ungur, liðinn tími er 16.1087349
+Þurfum að bíða í 0.022768588791865392 langann tima eftir næsta sjukling
+Sjúklingur numer 235 fer á bráðamóttaka og er Ungur, liðinn tími er 16.1315034
+Þurfum að bíða í 0.08733200369865349 langann tima eftir næsta sjukling
+Sjúklingur numer 236 fer á bráðamóttaka og er Ungur, liðinn tími er 16.2188354
+Þurfum að bíða í 0.13630708454645413 langann tima eftir næsta sjukling
+Sjúklingur numer 237 fer á heilsugæsla og er Ungur, liðinn tími er 16.3551424
+Þurfum að bíða í 0.032961288327057726 langann tima eftir næsta sjukling
+Sjúklingur numer 238 fer á bráðamóttaka og er Ungur, liðinn tími er 16.3881036
+Þurfum að bíða í 0.061192461937926226 langann tima eftir næsta sjukling
+Sjúklingur numer 239 fer á bráðamóttaka og er Ungur, liðinn tími er 16.449296
+Þurfum að bíða í 0.17426919257923304 langann tima eftir næsta sjukling
+Sjúklingur numer 240 fer á heilsugæsla og er Ungur, liðinn tími er 16.6235651
+Þurfum að bíða í 0.04863820027246989 langann tima eftir næsta sjukling
+Sjúklingur numer 241 fer á bráðamóttaka og er Ungur, liðinn tími er 16.6722033
+Þurfum að bíða í 0.011616793518115474 langann tima eftir næsta sjukling
+Sjúklingur numer 242 fer á bráðamóttaka og er Ungur, liðinn tími er 16.68382
+Þurfum að bíða í 0.07618083973787121 langann tima eftir næsta sjukling
+Sjúklingur numer 243 fer á bráðamóttaka og er Ungur, liðinn tími er 16.7600008
+Þurfum að bíða í 0.006125760039921858 langann tima eftir næsta sjukling
+Sjúklingur numer 244 fer á bráðamóttaka og er Ungur, liðinn tími er 16.7661265
+Þurfum að bíða í 0.0012580451683275732 langann tima eftir næsta sjukling
+Sjúklingur numer 245 fer á bráðamóttaka og er Ungur, liðinn tími er 16.7673845
+Þurfum að bíða í 0.002533267832310853 langann tima eftir næsta sjukling
+Sjúklingur numer 246 fer á bráðamóttaka og er Ungur, liðinn tími er 16.7699177
+Þurfum að bíða í 0.05131926567698706 langann tima eftir næsta sjukling
+Sjúklingur numer 247 fer á heilsugæsla og er Ungur, liðinn tími er 16.8212369
+Þurfum að bíða í 0.04941524035664783 langann tima eftir næsta sjukling
+Sjúklingur numer 248 fer á heilsugæsla og er Ungur, liðinn tími er 16.8706521
+Þurfum að bíða í 0.08860507464998746 langann tima eftir næsta sjukling
+Sjúklingur numer 249 fer á bráðamóttaka og er Ungur, liðinn tími er 16.9592571
+Þurfum að bíða í 0.03672368135704006 langann tima eftir næsta sjukling
+Sjúklingur numer 250 fer á heilsugæsla og er Ungur, liðinn tími er 16.9959807
+Þurfum að bíða í 0.03812156759210827 langann tima eftir næsta sjukling
+Sjúklingur numer 251 fer á heilsugæsla og er Ungur, liðinn tími er 17.0341022
+Þurfum að bíða í 0.1080699730430486 langann tima eftir næsta sjukling
+Sjúklingur numer 252 fer á bráðamóttaka og er Ungur, liðinn tími er 17.1421721
+Þurfum að bíða í 0.2265049512916726 langann tima eftir næsta sjukling
+Sjúklingur numer 253 fer á bráðamóttaka og er Ungur, liðinn tími er 17.368677
+Þurfum að bíða í 0.13976476698443013 langann tima eftir næsta sjukling
+Sjúklingur numer 254 fer á bráðamóttaka og er Ungur, liðinn tími er 17.5084417
+Þurfum að bíða í 0.010061245656315724 langann tima eftir næsta sjukling
+Sjúklingur numer 255 fer á heilsugæsla og er Ungur, liðinn tími er 17.5185029
+Þurfum að bíða í 0.12821245000097783 langann tima eftir næsta sjukling
+Sjúklingur numer 256 fer á heilsugæsla og er Ungur, liðinn tími er 17.6467153
+Þurfum að bíða í 0.01857541578184365 langann tima eftir næsta sjukling
+Sjúklingur numer 257 fer á bráðamóttaka og er Ungur, liðinn tími er 17.6652907
+Þurfum að bíða í 0.1372406872199287 langann tima eftir næsta sjukling
+Sjúklingur numer 258 fer á bráðamóttaka og er Ungur, liðinn tími er 17.8025313
+Þurfum að bíða í 0.026723456024068042 langann tima eftir næsta sjukling
+Sjúklingur numer 259 fer á bráðamóttaka og er Ungur, liðinn tími er 17.8292547
+Þurfum að bíða í 0.007024579207559695 langann tima eftir næsta sjukling
+Sjúklingur numer 260 fer á bráðamóttaka og er Ungur, liðinn tími er 17.8362792
+Þurfum að bíða í 0.02348362815553046 langann tima eftir næsta sjukling
+Sjúklingur numer 261 fer á bráðamóttaka og er Ungur, liðinn tími er 17.8597628
+Þurfum að bíða í 0.04061451762338584 langann tima eftir næsta sjukling
+Sjúklingur numer 262 fer á bráðamóttaka og er Ungur, liðinn tími er 17.9003773
+Þurfum að bíða í 0.009875426928677442 langann tima eftir næsta sjukling
+Sjúklingur numer 263 fer á heilsugæsla og er Ungur, liðinn tími er 17.9102527
+Þurfum að bíða í 0.22314578485831882 langann tima eftir næsta sjukling
+Sjúklingur numer 264 fer á bráðamóttaka og er Ungur, liðinn tími er 18.1333984
+Þurfum að bíða í 0.05514636575615841 langann tima eftir næsta sjukling
+Sjúklingur numer 265 fer á bráðamóttaka og er Ungur, liðinn tími er 18.1885447
+Þurfum að bíða í 0.014889343532987272 langann tima eftir næsta sjukling
+Sjúklingur numer 266 fer á bráðamóttaka og er Ungur, liðinn tími er 18.203434
+Þurfum að bíða í 0.006056967380188513 langann tima eftir næsta sjukling
+Sjúklingur numer 267 fer á bráðamóttaka og er Ungur, liðinn tími er 18.2094909
+Þurfum að bíða í 0.14843092209584668 langann tima eftir næsta sjukling
+Sjúklingur numer 268 fer á heilsugæsla og er Ungur, liðinn tími er 18.3579218
+Þurfum að bíða í 0.16881524677900234 langann tima eftir næsta sjukling
+Sjúklingur numer 269 fer á bráðamóttaka og er Ungur, liðinn tími er 18.526737
+Þurfum að bíða í 0.06045259483706693 langann tima eftir næsta sjukling
+Sjúklingur numer 270 fer á bráðamóttaka og er Ungur, liðinn tími er 18.5871895
+Þurfum að bíða í 0.01783286866669226 langann tima eftir næsta sjukling
+Sjúklingur numer 271 fer á bráðamóttaka og er Ungur, liðinn tími er 18.6050223
+Þurfum að bíða í 0.01345655179725356 langann tima eftir næsta sjukling
+Sjúklingur numer 272 fer á bráðamóttaka og er Ungur, liðinn tími er 18.6184788
+Þurfum að bíða í 0.09524786942018211 langann tima eftir næsta sjukling
+Sjúklingur numer 273 fer á bráðamóttaka og er Ungur, liðinn tími er 18.7137266
+Þurfum að bíða í 0.005831041339336628 langann tima eftir næsta sjukling
+Sjúklingur numer 274 fer á bráðamóttaka og er Ungur, liðinn tími er 18.7195576
+Þurfum að bíða í 0.04543349935267615 langann tima eftir næsta sjukling
+Sjúklingur numer 275 fer á bráðamóttaka og er Ungur, liðinn tími er 18.764991
+Þurfum að bíða í 0.04785255766739212 langann tima eftir næsta sjukling
+Sjúklingur numer 276 fer á heilsugæsla og er Ungur, liðinn tími er 18.8128435
+Þurfum að bíða í 0.18578434092601537 langann tima eftir næsta sjukling
+Sjúklingur numer 277 fer á bráðamóttaka og er Ungur, liðinn tími er 18.9986278
+Þurfum að bíða í 0.020647965673987266 langann tima eftir næsta sjukling
+Sjúklingur numer 278 fer á bráðamóttaka og er Ungur, liðinn tími er 19.0192757
+Þurfum að bíða í 0.003466239694657587 langann tima eftir næsta sjukling
+Sjúklingur numer 279 fer á heilsugæsla og er Ungur, liðinn tími er 19.0227419
+Þurfum að bíða í 0.029652144031655364 langann tima eftir næsta sjukling
+Sjúklingur numer 280 fer á bráðamóttaka og er Ungur, liðinn tími er 19.052394
+Þurfum að bíða í 0.0477746929826213 langann tima eftir næsta sjukling
+Sjúklingur numer 281 fer á bráðamóttaka og er Ungur, liðinn tími er 19.1001686
+Þurfum að bíða í 0.1261894144617199 langann tima eftir næsta sjukling
+Sjúklingur numer 282 fer á heilsugæsla og er Ungur, liðinn tími er 19.226358
+Þurfum að bíða í 0.38674424030802035 langann tima eftir næsta sjukling
+Sjúklingur numer 283 fer á heilsugæsla og er Ungur, liðinn tími er 19.6131022
+Þurfum að bíða í 0.061446025729324075 langann tima eftir næsta sjukling
+Sjúklingur numer 284 fer á heilsugæsla og er Ungur, liðinn tími er 19.6745482
+Þurfum að bíða í 0.06430869575612695 langann tima eftir næsta sjukling
+Sjúklingur numer 285 fer á heilsugæsla og er Ungur, liðinn tími er 19.7388568
+Þurfum að bíða í 0.057968234097262074 langann tima eftir næsta sjukling
+Sjúklingur numer 286 fer á bráðamóttaka og er Ungur, liðinn tími er 19.796825
+Þurfum að bíða í 0.04138454340363508 langann tima eftir næsta sjukling
+Sjúklingur numer 287 fer á bráðamóttaka og er Ungur, liðinn tími er 19.8382095
+Þurfum að bíða í 0.011249177091761998 langann tima eftir næsta sjukling
+Sjúklingur numer 288 fer á bráðamóttaka og er Ungur, liðinn tími er 19.8494586
+Þurfum að bíða í 0.15739657654731623 langann tima eftir næsta sjukling
+Sjúklingur numer 289 fer á heilsugæsla og er Ungur, liðinn tími er 20.0068551
+Þurfum að bíða í 0.010699309769689986 langann tima eftir næsta sjukling
+Sjúklingur numer 290 fer á bráðamóttaka og er Ungur, liðinn tími er 20.0175544
+Þurfum að bíða í 0.007906143861865302 langann tima eftir næsta sjukling
+Sjúklingur numer 291 fer á heilsugæsla og er Ungur, liðinn tími er 20.0254605
+Þurfum að bíða í 0.27799004228476576 langann tima eftir næsta sjukling
+Sjúklingur numer 292 fer á bráðamóttaka og er Ungur, liðinn tími er 20.3034505
+Þurfum að bíða í 0.038210975132857365 langann tima eftir næsta sjukling
+Sjúklingur numer 293 fer á bráðamóttaka og er Ungur, liðinn tími er 20.3416614
+Þurfum að bíða í 0.020497411120423276 langann tima eftir næsta sjukling
+Sjúklingur numer 294 fer á bráðamóttaka og er Ungur, liðinn tími er 20.3621588
+Þurfum að bíða í 0.041948885037718944 langann tima eftir næsta sjukling
+Sjúklingur numer 295 fer á bráðamóttaka og er Ungur, liðinn tími er 20.4041076
+Þurfum að bíða í 0.04834220216104561 langann tima eftir næsta sjukling
+Sjúklingur numer 296 fer á bráðamóttaka og er Ungur, liðinn tími er 20.4524498
+Þurfum að bíða í 0.058712158408819076 langann tima eftir næsta sjukling
+Sjúklingur numer 297 fer á bráðamóttaka og er Ungur, liðinn tími er 20.5111619
+Þurfum að bíða í 0.020088413081878687 langann tima eftir næsta sjukling
+Sjúklingur numer 298 fer á bráðamóttaka og er Ungur, liðinn tími er 20.5312503
+Þurfum að bíða í 0.05867270059675583 langann tima eftir næsta sjukling
+Sjúklingur numer 299 fer á bráðamóttaka og er Ungur, liðinn tími er 20.589923
+Þurfum að bíða í 0.11744982860194726 langann tima eftir næsta sjukling
+Sjúklingur numer 300 fer á heilsugæsla og er Ungur, liðinn tími er 20.7073728
+Þurfum að bíða í 0.01398208124760865 langann tima eftir næsta sjukling
+Sjúklingur numer 301 fer á heilsugæsla og er Ungur, liðinn tími er 20.7213548
+Þurfum að bíða í 0.010478599126136731 langann tima eftir næsta sjukling
+Sjúklingur numer 302 fer á bráðamóttaka og er Ungur, liðinn tími er 20.7318333
+Þurfum að bíða í 0.07663941023861984 langann tima eftir næsta sjukling
+Sjúklingur numer 303 fer á heilsugæsla og er Ungur, liðinn tími er 20.8084727
+Þurfum að bíða í 0.29075049214990306 langann tima eftir næsta sjukling
+Sjúklingur numer 304 fer á bráðamóttaka og er Ungur, liðinn tími er 21.0992231
+Þurfum að bíða í 0.14843950239642426 langann tima eftir næsta sjukling
+Sjúklingur numer 305 fer á heilsugæsla og er Ungur, liðinn tími er 21.2476626
+Þurfum að bíða í 0.027751281730274302 langann tima eftir næsta sjukling
+Sjúklingur numer 306 fer á heilsugæsla og er Ungur, liðinn tími er 21.2754138
+Þurfum að bíða í 0.04830886657011082 langann tima eftir næsta sjukling
+Sjúklingur numer 307 fer á heilsugæsla og er Ungur, liðinn tími er 21.3237226
+Þurfum að bíða í 0.09606400744306472 langann tima eftir næsta sjukling
+Sjúklingur numer 308 fer á bráðamóttaka og er Ungur, liðinn tími er 21.4197866
+Þurfum að bíða í 0.016784124361621064 langann tima eftir næsta sjukling
+Sjúklingur numer 309 fer á heilsugæsla og er Ungur, liðinn tími er 21.4365707
+Þurfum að bíða í 0.026360562181731727 langann tima eftir næsta sjukling
+Sjúklingur numer 310 fer á bráðamóttaka og er Ungur, liðinn tími er 21.4629312
+Þurfum að bíða í 0.009221246955411941 langann tima eftir næsta sjukling
+Sjúklingur numer 311 fer á bráðamóttaka og er Ungur, liðinn tími er 21.4721524
+Þurfum að bíða í 0.11332236053217191 langann tima eftir næsta sjukling
+Sjúklingur numer 312 fer á bráðamóttaka og er Ungur, liðinn tími er 21.5854747
+Þurfum að bíða í 0.0036812097308187458 langann tima eftir næsta sjukling
+Sjúklingur numer 313 fer á bráðamóttaka og er Ungur, liðinn tími er 21.5891559
+Þurfum að bíða í 0.008551187296590277 langann tima eftir næsta sjukling
+Sjúklingur numer 314 fer á heilsugæsla og er Ungur, liðinn tími er 21.597707
+Þurfum að bíða í 0.10890006613554222 langann tima eftir næsta sjukling
+Sjúklingur numer 315 fer á bráðamóttaka og er Ungur, liðinn tími er 21.706607
+Þurfum að bíða í 0.050670973759854895 langann tima eftir næsta sjukling
+Sjúklingur numer 316 fer á heilsugæsla og er Ungur, liðinn tími er 21.7572779
+Þurfum að bíða í 0.09317577915856376 langann tima eftir næsta sjukling
+Sjúklingur numer 317 fer á heilsugæsla og er Ungur, liðinn tími er 21.8504536
+Þurfum að bíða í 0.0819772020968709 langann tima eftir næsta sjukling
+Sjúklingur numer 318 fer á bráðamóttaka og er Ungur, liðinn tími er 21.9324308
+Þurfum að bíða í 0.04696970951930307 langann tima eftir næsta sjukling
+Sjúklingur numer 319 fer á heilsugæsla og er Ungur, liðinn tími er 21.9794005
+Þurfum að bíða í 0.0367730896276843 langann tima eftir næsta sjukling
+Sjúklingur numer 320 fer á heilsugæsla og er Ungur, liðinn tími er 22.0161735
+Þurfum að bíða í 0.00264647014333141 langann tima eftir næsta sjukling
+Sjúklingur numer 321 fer á bráðamóttaka og er Ungur, liðinn tími er 22.0188199
+Þurfum að bíða í 0.06614963040737408 langann tima eftir næsta sjukling
+Sjúklingur numer 322 fer á heilsugæsla og er Ungur, liðinn tími er 22.0849695
+Þurfum að bíða í 0.010290627499446347 langann tima eftir næsta sjukling
+Sjúklingur numer 323 fer á heilsugæsla og er Ungur, liðinn tími er 22.0952601
+Þurfum að bíða í 0.009087106346960432 langann tima eftir næsta sjukling
+Sjúklingur numer 324 fer á heilsugæsla og er Ungur, liðinn tími er 22.1043472
+Þurfum að bíða í 0.12314156515693143 langann tima eftir næsta sjukling
+Sjúklingur numer 325 fer á heilsugæsla og er Ungur, liðinn tími er 22.2274887
+Þurfum að bíða í 0.03391153077153806 langann tima eftir næsta sjukling
+Sjúklingur numer 326 fer á bráðamóttaka og er Ungur, liðinn tími er 22.2614002
+Þurfum að bíða í 0.26886327489465506 langann tima eftir næsta sjukling
+Sjúklingur numer 327 fer á bráðamóttaka og er Ungur, liðinn tími er 22.5302634
+Þurfum að bíða í 0.0020450483818122913 langann tima eftir næsta sjukling
+Sjúklingur numer 328 fer á bráðamóttaka og er Ungur, liðinn tími er 22.5323084
+Þurfum að bíða í 0.023099488424768118 langann tima eftir næsta sjukling
+Sjúklingur numer 329 fer á bráðamóttaka og er Ungur, liðinn tími er 22.5554078
+Þurfum að bíða í 0.024494179645072958 langann tima eftir næsta sjukling
+Sjúklingur numer 330 fer á heilsugæsla og er Ungur, liðinn tími er 22.5799019
+Þurfum að bíða í 0.04853113259793081 langann tima eftir næsta sjukling
+Sjúklingur numer 331 fer á bráðamóttaka og er Ungur, liðinn tími er 22.628433
+Þurfum að bíða í 0.0784976992644952 langann tima eftir næsta sjukling
+Sjúklingur numer 332 fer á bráðamóttaka og er Ungur, liðinn tími er 22.7069306
+Þurfum að bíða í 0.03330046725048318 langann tima eftir næsta sjukling
+Sjúklingur numer 333 fer á bráðamóttaka og er Ungur, liðinn tími er 22.740231
+Þurfum að bíða í 0.03915020224703366 langann tima eftir næsta sjukling
+Sjúklingur numer 334 fer á bráðamóttaka og er Ungur, liðinn tími er 22.7793812
+Þurfum að bíða í 0.03530111517324526 langann tima eftir næsta sjukling
+Sjúklingur numer 335 fer á bráðamóttaka og er Ungur, liðinn tími er 22.8146823
+Þurfum að bíða í 0.005112166759450997 langann tima eftir næsta sjukling
+Sjúklingur numer 336 fer á heilsugæsla og er Ungur, liðinn tími er 22.8197944
+Þurfum að bíða í 0.02582737170435486 langann tima eftir næsta sjukling
+Sjúklingur numer 337 fer á heilsugæsla og er Ungur, liðinn tími er 22.8456217
+Þurfum að bíða í 0.06940455392749671 langann tima eftir næsta sjukling
+Sjúklingur numer 338 fer á bráðamóttaka og er Ungur, liðinn tími er 22.9150262
+Þurfum að bíða í 0.028689275253249588 langann tima eftir næsta sjukling
+Sjúklingur numer 339 fer á bráðamóttaka og er Ungur, liðinn tími er 22.9437154
+Þurfum að bíða í 0.07687629729543008 langann tima eftir næsta sjukling
+Sjúklingur numer 340 fer á heilsugæsla og er Ungur, liðinn tími er 23.0205916
+Þurfum að bíða í 0.01679739195030976 langann tima eftir næsta sjukling
+Sjúklingur numer 341 fer á heilsugæsla og er Ungur, liðinn tími er 23.0373889
+Þurfum að bíða í 0.07804999923832143 langann tima eftir næsta sjukling
+Sjúklingur numer 342 fer á bráðamóttaka og er Ungur, liðinn tími er 23.1154388
+Þurfum að bíða í 0.003602950493859961 langann tima eftir næsta sjukling
+Sjúklingur numer 343 fer á bráðamóttaka og er Ungur, liðinn tími er 23.1190417
+Þurfum að bíða í 0.026730956230309653 langann tima eftir næsta sjukling
+Sjúklingur numer 344 fer á bráðamóttaka og er Ungur, liðinn tími er 23.1457726
+Þurfum að bíða í 0.11656620300730965 langann tima eftir næsta sjukling
+Sjúklingur numer 345 fer á bráðamóttaka og er Ungur, liðinn tími er 23.2623388
+Þurfum að bíða í 0.07184422518402327 langann tima eftir næsta sjukling
+Sjúklingur numer 346 fer á bráðamóttaka og er Ungur, liðinn tími er 23.334183
+Þurfum að bíða í 0.03737899709403437 langann tima eftir næsta sjukling
+Sjúklingur numer 347 fer á bráðamóttaka og er Ungur, liðinn tími er 23.3715619
+Þurfum að bíða í 0.07411991242872024 langann tima eftir næsta sjukling
+Sjúklingur numer 348 fer á heilsugæsla og er Ungur, liðinn tími er 23.4456818
+Þurfum að bíða í 0.03898352313963144 langann tima eftir næsta sjukling
+Sjúklingur numer 349 fer á bráðamóttaka og er Ungur, liðinn tími er 23.4846653
+Þurfum að bíða í 0.01757172297787043 langann tima eftir næsta sjukling
+Sjúklingur numer 350 fer á bráðamóttaka og er Ungur, liðinn tími er 23.502237
+Þurfum að bíða í 0.02970167234559035 langann tima eftir næsta sjukling
+Sjúklingur numer 351 fer á bráðamóttaka og er Ungur, liðinn tími er 23.5319386
+Þurfum að bíða í 0.11774183964363703 langann tima eftir næsta sjukling
+Sjúklingur numer 352 fer á bráðamóttaka og er Ungur, liðinn tími er 23.6496804
+Þurfum að bíða í 0.0005423257492440816 langann tima eftir næsta sjukling
+Sjúklingur numer 353 fer á bráðamóttaka og er Ungur, liðinn tími er 23.6502227
+Þurfum að bíða í 0.012676888471476883 langann tima eftir næsta sjukling
+Sjúklingur numer 354 fer á bráðamóttaka og er Ungur, liðinn tími er 23.6628995
+Þurfum að bíða í 0.09992905560604061 langann tima eftir næsta sjukling
+Sjúklingur numer 355 fer á heilsugæsla og er Ungur, liðinn tími er 23.7628285
+Þurfum að bíða í 0.07912853519304236 langann tima eftir næsta sjukling
+Sjúklingur numer 356 fer á bráðamóttaka og er Ungur, liðinn tími er 23.841957
+Þurfum að bíða í 0.004427056541253209 langann tima eftir næsta sjukling
+Sjúklingur numer 357 fer á heilsugæsla og er Ungur, liðinn tími er 23.846384
+Þurfum að bíða í 0.2914282910680933 langann tima eftir næsta sjukling
+Sjúklingur numer 358 fer á bráðamóttaka og er Ungur, liðinn tími er 24.1378122
+Þurfum að bíða í 0.01809177818516621 langann tima eftir næsta sjukling
+Sjúklingur numer 359 fer á bráðamóttaka og er Ungur, liðinn tími er 24.1559039
+Þurfum að bíða í 0.18115669505780646 langann tima eftir næsta sjukling
+Sjúklingur numer 360 fer á bráðamóttaka og er Ungur, liðinn tími er 24.3370605
+Þurfum að bíða í 0.0009537564863287695 langann tima eftir næsta sjukling
+Sjúklingur numer 361 fer á bráðamóttaka og er Ungur, liðinn tími er 24.3380142
+Þurfum að bíða í 0.12473108175677386 langann tima eftir næsta sjukling
+Sjúklingur numer 362 fer á bráðamóttaka og er Ungur, liðinn tími er 24.4627452
+Þurfum að bíða í 0.08209256717019302 langann tima eftir næsta sjukling
+Sjúklingur numer 363 fer á bráðamóttaka og er Ungur, liðinn tími er 24.5448377
+Þurfum að bíða í 0.026386813759667102 langann tima eftir næsta sjukling
+Sjúklingur numer 364 fer á bráðamóttaka og er Ungur, liðinn tími er 24.5712245
+Þurfum að bíða í 0.006621032367869155 langann tima eftir næsta sjukling
+Sjúklingur numer 365 fer á heilsugæsla og er Ungur, liðinn tími er 24.5778455
+Þurfum að bíða í 0.004726430405691303 langann tima eftir næsta sjukling
+Sjúklingur numer 366 fer á heilsugæsla og er Ungur, liðinn tími er 24.5825719
+Þurfum að bíða í 0.17276882284260942 langann tima eftir næsta sjukling
+Sjúklingur numer 367 fer á bráðamóttaka og er Ungur, liðinn tími er 24.7553407
+Þurfum að bíða í 0.009025707954625782 langann tima eftir næsta sjukling
+Sjúklingur numer 368 fer á bráðamóttaka og er Ungur, liðinn tími er 24.7643664
+Þurfum að bíða í 0.04119418254161342 langann tima eftir næsta sjukling
+Sjúklingur numer 369 fer á bráðamóttaka og er Ungur, liðinn tími er 24.8055605
+Þurfum að bíða í 0.019416318349422177 langann tima eftir næsta sjukling
+Sjúklingur numer 370 fer á bráðamóttaka og er Ungur, liðinn tími er 24.8249768
+Þurfum að bíða í 0.36452701474059557 langann tima eftir næsta sjukling
+Sjúklingur numer 371 fer á bráðamóttaka og er Ungur, liðinn tími er 25.1895038
+Þurfum að bíða í 0.25098303352499096 langann tima eftir næsta sjukling
+Sjúklingur numer 372 fer á bráðamóttaka og er Ungur, liðinn tími er 25.4404868
+Þurfum að bíða í 0.01129399104886962 langann tima eftir næsta sjukling
+Sjúklingur numer 373 fer á heilsugæsla og er Ungur, liðinn tími er 25.4517807
+Þurfum að bíða í 0.2777576233741795 langann tima eftir næsta sjukling
+Sjúklingur numer 374 fer á heilsugæsla og er Ungur, liðinn tími er 25.7295383
+Þurfum að bíða í 0.06182696603851089 langann tima eftir næsta sjukling
+Sjúklingur numer 375 fer á bráðamóttaka og er Ungur, liðinn tími er 25.7913652
+Þurfum að bíða í 0.19105757522133007 langann tima eftir næsta sjukling
+Sjúklingur numer 376 fer á bráðamóttaka og er Ungur, liðinn tími er 25.9824227
+Þurfum að bíða í 0.00269245379592061 langann tima eftir næsta sjukling
+Sjúklingur numer 377 fer á bráðamóttaka og er Ungur, liðinn tími er 25.9851151
+Þurfum að bíða í 0.049946784254306015 langann tima eftir næsta sjukling
+Sjúklingur numer 378 fer á bráðamóttaka og er Ungur, liðinn tími er 26
+Interrupted!
+Þurfum að bíða í 0.08259722794377998 langann tima eftir næsta sjukling
+Sjúklingur numer 379 fer á bráðamóttaka og er Ungur, liðinn tími er 26.0825972
+Þurfum að bíða í 0.020225589826088793 langann tima eftir næsta sjukling
+Sjúklingur numer 380 fer á heilsugæsla og er Ungur, liðinn tími er 26.1028227
+Þurfum að bíða í 0.01628422281329128 langann tima eftir næsta sjukling
+Sjúklingur numer 381 fer á bráðamóttaka og er Ungur, liðinn tími er 26.1191069
+Þurfum að bíða í 0.0366387191143541 langann tima eftir næsta sjukling
+Sjúklingur numer 382 fer á bráðamóttaka og er Ungur, liðinn tími er 26.1557456
+Þurfum að bíða í 0.043948473324475705 langann tima eftir næsta sjukling
+Sjúklingur numer 383 fer á heilsugæsla og er Ungur, liðinn tími er 26.199694
+Þurfum að bíða í 0.019896727910317494 langann tima eftir næsta sjukling
+Sjúklingur numer 384 fer á bráðamóttaka og er Ungur, liðinn tími er 26.2195907
+Þurfum að bíða í 0.018402697653746386 langann tima eftir næsta sjukling
+Sjúklingur numer 385 fer á bráðamóttaka og er Ungur, liðinn tími er 26.2379933
+Þurfum að bíða í 0.06729353709405309 langann tima eftir næsta sjukling
+Sjúklingur numer 386 fer á bráðamóttaka og er Ungur, liðinn tími er 26.3052868
+Þurfum að bíða í 0.044549662600050416 langann tima eftir næsta sjukling
+Sjúklingur numer 387 fer á bráðamóttaka og er Ungur, liðinn tími er 26.3498364
+Þurfum að bíða í 0.055671177346369456 langann tima eftir næsta sjukling
+Sjúklingur numer 388 fer á bráðamóttaka og er Ungur, liðinn tími er 26.4055075
+Þurfum að bíða í 0.22220083251359804 langann tima eftir næsta sjukling
+Sjúklingur numer 389 fer á bráðamóttaka og er Ungur, liðinn tími er 26.6277083
+Þurfum að bíða í 0.03386477109635129 langann tima eftir næsta sjukling
+Sjúklingur numer 390 fer á bráðamóttaka og er Ungur, liðinn tími er 26.661573
+Þurfum að bíða í 0.05625520789589082 langann tima eftir næsta sjukling
+Sjúklingur numer 391 fer á bráðamóttaka og er Ungur, liðinn tími er 26.7178282
+Þurfum að bíða í 0.025894695963852712 langann tima eftir næsta sjukling
+Sjúklingur numer 392 fer á bráðamóttaka og er Ungur, liðinn tími er 26.7437228
+Þurfum að bíða í 0.05396413157177635 langann tima eftir næsta sjukling
+Sjúklingur numer 393 fer á bráðamóttaka og er Ungur, liðinn tími er 26.7976869
+Þurfum að bíða í 0.030751141342171787 langann tima eftir næsta sjukling
+Sjúklingur numer 394 fer á bráðamóttaka og er Ungur, liðinn tími er 26.828438
+Þurfum að bíða í 0.028547985209032407 langann tima eftir næsta sjukling
+Sjúklingur numer 395 fer á bráðamóttaka og er Ungur, liðinn tími er 26.8569859
+Þurfum að bíða í 0.021154249472396938 langann tima eftir næsta sjukling
+Sjúklingur numer 396 fer á bráðamóttaka og er Ungur, liðinn tími er 26.8781401
+Þurfum að bíða í 0.03320501025935166 langann tima eftir næsta sjukling
+Sjúklingur numer 397 fer á heilsugæsla og er Ungur, liðinn tími er 26.9113451
+Þurfum að bíða í 0.11649696437248941 langann tima eftir næsta sjukling
+Sjúklingur numer 398 fer á heilsugæsla og er Ungur, liðinn tími er 27
+Interrupted!
+Þurfum að bíða í 0.03013676574690535 langann tima eftir næsta sjukling
+Sjúklingur numer 399 fer á bráðamóttaka og er Ungur, liðinn tími er 27.0301367
+Þurfum að bíða í 0.007234700526952908 langann tima eftir næsta sjukling
+Sjúklingur numer 400 fer á bráðamóttaka og er Ungur, liðinn tími er 27.0373714
+Þurfum að bíða í 0.04986706342110817 langann tima eftir næsta sjukling
+Sjúklingur numer 401 fer á bráðamóttaka og er Ungur, liðinn tími er 27.0872384
+Þurfum að bíða í 0.038088430305843454 langann tima eftir næsta sjukling
+Sjúklingur numer 402 fer á bráðamóttaka og er Ungur, liðinn tími er 27.1253268
+Þurfum að bíða í 0.07997999598838833 langann tima eftir næsta sjukling
+Sjúklingur numer 403 fer á bráðamóttaka og er Ungur, liðinn tími er 27.2053067
+Þurfum að bíða í 0.00725189256798273 langann tima eftir næsta sjukling
+Sjúklingur numer 404 fer á bráðamóttaka og er Ungur, liðinn tími er 27.2125585
+Þurfum að bíða í 0.07351923947619023 langann tima eftir næsta sjukling
+Sjúklingur numer 405 fer á bráðamóttaka og er Ungur, liðinn tími er 27.2860777
+Þurfum að bíða í 0.023853448737880076 langann tima eftir næsta sjukling
+Sjúklingur numer 406 fer á bráðamóttaka og er Ungur, liðinn tími er 27.3099311
+Þurfum að bíða í 0.05023589881304746 langann tima eftir næsta sjukling
+Sjúklingur numer 407 fer á heilsugæsla og er Ungur, liðinn tími er 27.3601669
+Þurfum að bíða í 0.053902034382937704 langann tima eftir næsta sjukling
+Sjúklingur numer 408 fer á bráðamóttaka og er Ungur, liðinn tími er 27.4140689
+Þurfum að bíða í 0.07897992483759543 langann tima eftir næsta sjukling
+Sjúklingur numer 409 fer á heilsugæsla og er Ungur, liðinn tími er 27.4930488
+Þurfum að bíða í 0.10392687850885438 langann tima eftir næsta sjukling
+Sjúklingur numer 410 fer á bráðamóttaka og er Ungur, liðinn tími er 27.5969756
+Þurfum að bíða í 0.020979141683083645 langann tima eftir næsta sjukling
+Sjúklingur numer 411 fer á bráðamóttaka og er Ungur, liðinn tími er 27.6179547
+Þurfum að bíða í 0.11254334009820625 langann tima eftir næsta sjukling
+Sjúklingur numer 412 fer á heilsugæsla og er Ungur, liðinn tími er 27.730498
+Þurfum að bíða í 0.029795602533068462 langann tima eftir næsta sjukling
+Sjúklingur numer 413 fer á heilsugæsla og er Ungur, liðinn tími er 27.7602936
+Þurfum að bíða í 0.21231451762314854 langann tima eftir næsta sjukling
+Sjúklingur numer 414 fer á heilsugæsla og er Ungur, liðinn tími er 27.9726081
+Þurfum að bíða í 0.08449444400615601 langann tima eftir næsta sjukling
+Sjúklingur numer 415 fer á heilsugæsla og er Ungur, liðinn tími er 28
+Interrupted!
+Þurfum að bíða í 0.07934288911203342 langann tima eftir næsta sjukling
+Sjúklingur numer 416 fer á bráðamóttaka og er Ungur, liðinn tími er 28.0793428
+Þurfum að bíða í 0.011713695117263598 langann tima eftir næsta sjukling
+Sjúklingur numer 417 fer á bráðamóttaka og er Ungur, liðinn tími er 28.0910564
+Þurfum að bíða í 0.07870439307588312 langann tima eftir næsta sjukling
+Sjúklingur numer 418 fer á bráðamóttaka og er Ungur, liðinn tími er 28.1697607
+Þurfum að bíða í 0.048777653441036115 langann tima eftir næsta sjukling
+Sjúklingur numer 419 fer á bráðamóttaka og er Ungur, liðinn tími er 28.2185383
+Þurfum að bíða í 0.048133875532667625 langann tima eftir næsta sjukling
+Sjúklingur numer 420 fer á bráðamóttaka og er Ungur, liðinn tími er 28.2666721
+Þurfum að bíða í 0.2542686175524639 langann tima eftir næsta sjukling
+Sjúklingur numer 421 fer á bráðamóttaka og er Ungur, liðinn tími er 28.5209407
+Þurfum að bíða í 0.0942894464264501 langann tima eftir næsta sjukling
+Sjúklingur numer 422 fer á bráðamóttaka og er Ungur, liðinn tími er 28.6152301
+Þurfum að bíða í 0.10516321826728209 langann tima eftir næsta sjukling
+Sjúklingur numer 423 fer á bráðamóttaka og er Ungur, liðinn tími er 28.7203933
+Þurfum að bíða í 0.051367657368732667 langann tima eftir næsta sjukling
+Sjúklingur numer 424 fer á bráðamóttaka og er Ungur, liðinn tími er 28.7717609
+Þurfum að bíða í 0.15548918506450388 langann tima eftir næsta sjukling
+Sjúklingur numer 425 fer á bráðamóttaka og er Ungur, liðinn tími er 28.92725
+Þurfum að bíða í 0.06553493878783417 langann tima eftir næsta sjukling
+Sjúklingur numer 426 fer á bráðamóttaka og er Ungur, liðinn tími er 28.9927849
+Þurfum að bíða í 0.006362165627260219 langann tima eftir næsta sjukling
+Sjúklingur numer 427 fer á bráðamóttaka og er Ungur, liðinn tími er 28.999147
+Þurfum að bíða í 0.0022266343752765467 langann tima eftir næsta sjukling
+Sjúklingur numer 428 fer á bráðamóttaka og er Ungur, liðinn tími er 29
+Interrupted!
+Þurfum að bíða í 0.06133085212769478 langann tima eftir næsta sjukling
+Sjúklingur numer 429 fer á bráðamóttaka og er Ungur, liðinn tími er 29.0613308
+Þurfum að bíða í 0.0381992516449833 langann tima eftir næsta sjukling
+Sjúklingur numer 430 fer á bráðamóttaka og er Ungur, liðinn tími er 29.09953
+Þurfum að bíða í 0.14601997145383191 langann tima eftir næsta sjukling
+Sjúklingur numer 431 fer á heilsugæsla og er Ungur, liðinn tími er 29.2455499
+Þurfum að bíða í 0.17160960644815057 langann tima eftir næsta sjukling
+Sjúklingur numer 432 fer á heilsugæsla og er Ungur, liðinn tími er 29.4171595
+Þurfum að bíða í 0.1931863931226558 langann tima eftir næsta sjukling
+Sjúklingur numer 433 fer á heilsugæsla og er Ungur, liðinn tími er 29.6103458
+Þurfum að bíða í 0.168543220030957 langann tima eftir næsta sjukling
+Sjúklingur numer 434 fer á bráðamóttaka og er Ungur, liðinn tími er 29.778889
+Þurfum að bíða í 0.010037454377693118 langann tima eftir næsta sjukling
+Sjúklingur numer 435 fer á bráðamóttaka og er Ungur, liðinn tími er 29.7889264
+Þurfum að bíða í 0.0624387892486861 langann tima eftir næsta sjukling
+Sjúklingur numer 436 fer á bráðamóttaka og er Ungur, liðinn tími er 29.8513651
+Þurfum að bíða í 0.1814955638491605 langann tima eftir næsta sjukling
+Sjúklingur numer 437 fer á bráðamóttaka og er Ungur, liðinn tími er 30
+Interrupted!
+Þurfum að bíða í 0.012158506598169855 langann tima eftir næsta sjukling
+Sjúklingur numer 438 fer á bráðamóttaka og er Ungur, liðinn tími er 30.0121585
+Þurfum að bíða í 0.049330459159385116 langann tima eftir næsta sjukling
+Sjúklingur numer 439 fer á heilsugæsla og er Ungur, liðinn tími er 30.0614889
+Þurfum að bíða í 0.10604869425727602 langann tima eftir næsta sjukling
+Sjúklingur numer 440 fer á bráðamóttaka og er Ungur, liðinn tími er 30.1675375
+Þurfum að bíða í 0.02133484857776258 langann tima eftir næsta sjukling
+Sjúklingur numer 441 fer á bráðamóttaka og er Ungur, liðinn tími er 30.1888723
+Þurfum að bíða í 0.01882827009251212 langann tima eftir næsta sjukling
+Sjúklingur numer 442 fer á bráðamóttaka og er Ungur, liðinn tími er 30.2077005
+Þurfum að bíða í 0.03161751556535923 langann tima eftir næsta sjukling
+Sjúklingur numer 443 fer á bráðamóttaka og er Ungur, liðinn tími er 30.239318
+Þurfum að bíða í 0.03692172776398546 langann tima eftir næsta sjukling
+Sjúklingur numer 444 fer á bráðamóttaka og er Ungur, liðinn tími er 30.2762397
+Þurfum að bíða í 0.016589510183969865 langann tima eftir næsta sjukling
+Sjúklingur numer 445 fer á heilsugæsla og er Ungur, liðinn tími er 30.2928292
+Þurfum að bíða í 0.16335951791270337 langann tima eftir næsta sjukling
+Sjúklingur numer 446 fer á bráðamóttaka og er Ungur, liðinn tími er 30.4561887
+Þurfum að bíða í 0.19664515698001547 langann tima eftir næsta sjukling
+Sjúklingur numer 447 fer á heilsugæsla og er Ungur, liðinn tími er 30.6528338
+Þurfum að bíða í 0.03591473282973715 langann tima eftir næsta sjukling
+Sjúklingur numer 448 fer á bráðamóttaka og er Ungur, liðinn tími er 30.6887485
+Þurfum að bíða í 0.05062075624641382 langann tima eftir næsta sjukling
+Sjúklingur numer 449 fer á bráðamóttaka og er Ungur, liðinn tími er 30.7393692
+Þurfum að bíða í 0.07135455851033137 langann tima eftir næsta sjukling
+Sjúklingur numer 450 fer á heilsugæsla og er Ungur, liðinn tími er 30.8107237
+Þurfum að bíða í 0.1182303046425608 langann tima eftir næsta sjukling
+Sjúklingur numer 451 fer á bráðamóttaka og er Ungur, liðinn tími er 30.928954
+Þurfum að bíða í 0.1258405548400203 langann tima eftir næsta sjukling
+Sjúklingur numer 452 fer á heilsugæsla og er Ungur, liðinn tími er 31
+Interrupted!
+Þurfum að bíða í 0.041942845140439215 langann tima eftir næsta sjukling
+Sjúklingur numer 453 fer á bráðamóttaka og er Ungur, liðinn tími er 31.0419428
+Þurfum að bíða í 0.024512980556911687 langann tima eftir næsta sjukling
+Sjúklingur numer 454 fer á heilsugæsla og er Ungur, liðinn tími er 31.0664557
+Þurfum að bíða í 0.01962694103346958 langann tima eftir næsta sjukling
+Sjúklingur numer 455 fer á bráðamóttaka og er Ungur, liðinn tími er 31.0860826
+Þurfum að bíða í 0.1946224831656066 langann tima eftir næsta sjukling
+Sjúklingur numer 456 fer á bráðamóttaka og er Ungur, liðinn tími er 31.280705
+Þurfum að bíða í 0.09138771144566032 langann tima eftir næsta sjukling
+Sjúklingur numer 457 fer á bráðamóttaka og er Ungur, liðinn tími er 31.3720927
+Þurfum að bíða í 0.1383322569337573 langann tima eftir næsta sjukling
+Sjúklingur numer 458 fer á bráðamóttaka og er Ungur, liðinn tími er 31.5104249
+Þurfum að bíða í 0.09218352184715109 langann tima eftir næsta sjukling
+Sjúklingur numer 459 fer á heilsugæsla og er Ungur, liðinn tími er 31.6026084
+Þurfum að bíða í 0.07776261176051558 langann tima eftir næsta sjukling
+Sjúklingur numer 460 fer á bráðamóttaka og er Ungur, liðinn tími er 31.680371
+Þurfum að bíða í 0.06487772821291324 langann tima eftir næsta sjukling
+Sjúklingur numer 461 fer á bráðamóttaka og er Ungur, liðinn tími er 31.7452487
+Þurfum að bíða í 0.008028222502054004 langann tima eftir næsta sjukling
+Sjúklingur numer 462 fer á bráðamóttaka og er Ungur, liðinn tími er 31.7532769
+Þurfum að bíða í 0.126031966798665 langann tima eftir næsta sjukling
+Sjúklingur numer 463 fer á heilsugæsla og er Ungur, liðinn tími er 31.8793088
+Þurfum að bíða í 0.00368247481216904 langann tima eftir næsta sjukling
+Sjúklingur numer 464 fer á bráðamóttaka og er Ungur, liðinn tími er 31.8829912
+Þurfum að bíða í 0.04268542746186221 langann tima eftir næsta sjukling
+Sjúklingur numer 465 fer á heilsugæsla og er Ungur, liðinn tími er 31.9256766
+Þurfum að bíða í 0.02640243551608669 langann tima eftir næsta sjukling
+Sjúklingur numer 466 fer á bráðamóttaka og er Ungur, liðinn tími er 31.952079
+Þurfum að bíða í 0.19522769353871425 langann tima eftir næsta sjukling
+Sjúklingur numer 467 fer á bráðamóttaka og er Ungur, liðinn tími er 32
+Interrupted!
+Þurfum að bíða í 0.05133194753876556 langann tima eftir næsta sjukling
+Sjúklingur numer 468 fer á heilsugæsla og er Ungur, liðinn tími er 32.0513319
+Þurfum að bíða í 0.09729136916051458 langann tima eftir næsta sjukling
+Sjúklingur numer 469 fer á bráðamóttaka og er Ungur, liðinn tími er 32.1486232
+Þurfum að bíða í 0.02049798623205481 langann tima eftir næsta sjukling
+Sjúklingur numer 470 fer á bráðamóttaka og er Ungur, liðinn tími er 32.1691211
+Þurfum að bíða í 0.01107975562469105 langann tima eftir næsta sjukling
+Sjúklingur numer 471 fer á bráðamóttaka og er Ungur, liðinn tími er 32.1802008
+Þurfum að bíða í 0.01854786151923647 langann tima eftir næsta sjukling
+Sjúklingur numer 472 fer á bráðamóttaka og er Ungur, liðinn tími er 32.1987486
+Þurfum að bíða í 0.05359441084666502 langann tima eftir næsta sjukling
+Sjúklingur numer 473 fer á heilsugæsla og er Ungur, liðinn tími er 32.252343
+Þurfum að bíða í 0.1813760475325354 langann tima eftir næsta sjukling
+Sjúklingur numer 474 fer á bráðamóttaka og er Ungur, liðinn tími er 32.433719
+Þurfum að bíða í 0.0310304481051718 langann tima eftir næsta sjukling
+Sjúklingur numer 475 fer á heilsugæsla og er Ungur, liðinn tími er 32.4647494
+Þurfum að bíða í 0.0335904529193646 langann tima eftir næsta sjukling
+Sjúklingur numer 476 fer á bráðamóttaka og er Ungur, liðinn tími er 32.4983398
+Þurfum að bíða í 0.027955244812048974 langann tima eftir næsta sjukling
+Sjúklingur numer 477 fer á bráðamóttaka og er Ungur, liðinn tími er 32.526295
+Þurfum að bíða í 0.05951471646089417 langann tima eftir næsta sjukling
+Sjúklingur numer 478 fer á bráðamóttaka og er Ungur, liðinn tími er 32.5858097
+Þurfum að bíða í 0.01954851348266926 langann tima eftir næsta sjukling
+Sjúklingur numer 479 fer á heilsugæsla og er Ungur, liðinn tími er 32.6053582
+Þurfum að bíða í 0.011275843253031135 langann tima eftir næsta sjukling
+Sjúklingur numer 480 fer á bráðamóttaka og er Ungur, liðinn tími er 32.616634
+Þurfum að bíða í 0.03612721368419466 langann tima eftir næsta sjukling
+Sjúklingur numer 481 fer á heilsugæsla og er Ungur, liðinn tími er 32.6527612
+Þurfum að bíða í 0.10110046136727406 langann tima eftir næsta sjukling
+Sjúklingur numer 482 fer á heilsugæsla og er Ungur, liðinn tími er 32.7538616
+Þurfum að bíða í 0.04625827897345376 langann tima eftir næsta sjukling
+Sjúklingur numer 483 fer á bráðamóttaka og er Ungur, liðinn tími er 32.8001198
+Þurfum að bíða í 0.05345890344743188 langann tima eftir næsta sjukling
+Sjúklingur numer 484 fer á heilsugæsla og er Ungur, liðinn tími er 32.8535787
+Þurfum að bíða í 0.015414537560489308 langann tima eftir næsta sjukling
+Sjúklingur numer 485 fer á bráðamóttaka og er Ungur, liðinn tími er 32.8689932
+Þurfum að bíða í 0.11692787169995615 langann tima eftir næsta sjukling
+Sjúklingur numer 486 fer á bráðamóttaka og er Ungur, liðinn tími er 32.985921
+Þurfum að bíða í 0.015559294955209184 langann tima eftir næsta sjukling
+Sjúklingur numer 487 fer á bráðamóttaka og er Ungur, liðinn tími er 33
+Interrupted!
+Þurfum að bíða í 0.13191941206930347 langann tima eftir næsta sjukling
+Sjúklingur numer 488 fer á heilsugæsla og er Ungur, liðinn tími er 33.1319194
+Þurfum að bíða í 0.022672289336057767 langann tima eftir næsta sjukling
+Sjúklingur numer 489 fer á bráðamóttaka og er Ungur, liðinn tími er 33.1545916
+Þurfum að bíða í 0.0265484358418856 langann tima eftir næsta sjukling
+Sjúklingur numer 490 fer á heilsugæsla og er Ungur, liðinn tími er 33.18114
+Þurfum að bíða í 0.030047720314679095 langann tima eftir næsta sjukling
+Sjúklingur numer 491 fer á heilsugæsla og er Ungur, liðinn tími er 33.2111877
+Þurfum að bíða í 0.0077478453063762835 langann tima eftir næsta sjukling
+Sjúklingur numer 492 fer á bráðamóttaka og er Ungur, liðinn tími er 33.2189355
+Þurfum að bíða í 0.12558297060263923 langann tima eftir næsta sjukling
+Sjúklingur numer 493 fer á heilsugæsla og er Ungur, liðinn tími er 33.3445184
+Þurfum að bíða í 0.06602384691194751 langann tima eftir næsta sjukling
+Sjúklingur numer 494 fer á heilsugæsla og er Ungur, liðinn tími er 33.4105422
+Þurfum að bíða í 0.010686182442945552 langann tima eftir næsta sjukling
+Sjúklingur numer 495 fer á bráðamóttaka og er Ungur, liðinn tími er 33.4212283
+Þurfum að bíða í 0.05546759193183668 langann tima eftir næsta sjukling
+Sjúklingur numer 496 fer á bráðamóttaka og er Ungur, liðinn tími er 33.4766958
+Þurfum að bíða í 0.1470207889069861 langann tima eftir næsta sjukling
+Sjúklingur numer 497 fer á bráðamóttaka og er Ungur, liðinn tími er 33.6237165
+Þurfum að bíða í 0.13300199047632352 langann tima eftir næsta sjukling
+Sjúklingur numer 498 fer á bráðamóttaka og er Ungur, liðinn tími er 33.7567184
+Þurfum að bíða í 0.01925360309385685 langann tima eftir næsta sjukling
+Sjúklingur numer 499 fer á bráðamóttaka og er Ungur, liðinn tími er 33.775972
+Þurfum að bíða í 0.05396411356235144 langann tima eftir næsta sjukling
+Sjúklingur numer 500 fer á heilsugæsla og er Ungur, liðinn tími er 33.8299361
+Þurfum að bíða í 0.14995924089832324 langann tima eftir næsta sjukling
+Sjúklingur numer 501 fer á bráðamóttaka og er Ungur, liðinn tími er 33.9798953
+Þurfum að bíða í 0.0686195057445544 langann tima eftir næsta sjukling
+Sjúklingur numer 502 fer á heilsugæsla og er Ungur, liðinn tími er 34
+Interrupted!
+Þurfum að bíða í 0.07422106094778083 langann tima eftir næsta sjukling
+Sjúklingur numer 503 fer á bráðamóttaka og er Ungur, liðinn tími er 34.074221
+Þurfum að bíða í 2.4244147075843692E-05 langann tima eftir næsta sjukling
+Sjúklingur numer 504 fer á bráðamóttaka og er Ungur, liðinn tími er 34.0742452
+Þurfum að bíða í 0.08718774147824211 langann tima eftir næsta sjukling
+Sjúklingur numer 505 fer á heilsugæsla og er Ungur, liðinn tími er 34.1614329
+Þurfum að bíða í 0.01015490466042499 langann tima eftir næsta sjukling
+Sjúklingur numer 506 fer á bráðamóttaka og er Ungur, liðinn tími er 34.1715878
+Þurfum að bíða í 0.023225346135795782 langann tima eftir næsta sjukling
+Sjúklingur numer 507 fer á bráðamóttaka og er Ungur, liðinn tími er 34.1948131
+Þurfum að bíða í 0.24090902791632524 langann tima eftir næsta sjukling
+Sjúklingur numer 508 fer á heilsugæsla og er Ungur, liðinn tími er 34.4357221
+Þurfum að bíða í 0.015107420230912152 langann tima eftir næsta sjukling
+Sjúklingur numer 509 fer á bráðamóttaka og er Ungur, liðinn tími er 34.4508295
+Þurfum að bíða í 0.05327208333605216 langann tima eftir næsta sjukling
+Sjúklingur numer 510 fer á bráðamóttaka og er Ungur, liðinn tími er 34.5041015
+Þurfum að bíða í 0.11827144268853779 langann tima eftir næsta sjukling
+Sjúklingur numer 511 fer á heilsugæsla og er Ungur, liðinn tími er 34.6223729
+Þurfum að bíða í 0.024676904874338167 langann tima eftir næsta sjukling
+Sjúklingur numer 512 fer á bráðamóttaka og er Ungur, liðinn tími er 34.6470498
+Þurfum að bíða í 0.2194449883097251 langann tima eftir næsta sjukling
+Sjúklingur numer 513 fer á bráðamóttaka og er Ungur, liðinn tími er 34.8664947
+Þurfum að bíða í 0.03906553419410143 langann tima eftir næsta sjukling
+Sjúklingur numer 514 fer á heilsugæsla og er Ungur, liðinn tími er 34.9055602
+Þurfum að bíða í 0.07358023153575892 langann tima eftir næsta sjukling
+Sjúklingur numer 515 fer á bráðamóttaka og er Ungur, liðinn tími er 34.9791404
+Þurfum að bíða í 0.11973947847367275 langann tima eftir næsta sjukling
+Sjúklingur numer 516 fer á bráðamóttaka og er Ungur, liðinn tími er 35
+Interrupted!
+Þurfum að bíða í 0.09035213303434336 langann tima eftir næsta sjukling
+Sjúklingur numer 517 fer á bráðamóttaka og er Ungur, liðinn tími er 35.0903521
+Þurfum að bíða í 0.019802345977162288 langann tima eftir næsta sjukling
+Sjúklingur numer 518 fer á heilsugæsla og er Ungur, liðinn tími er 35.1101544
+Þurfum að bíða í 0.057680210209436346 langann tima eftir næsta sjukling
+Sjúklingur numer 519 fer á bráðamóttaka og er Ungur, liðinn tími er 35.1678346
+Þurfum að bíða í 0.04232976030961789 langann tima eftir næsta sjukling
+Sjúklingur numer 520 fer á bráðamóttaka og er Ungur, liðinn tími er 35.2101643
+Þurfum að bíða í 0.0837677677163528 langann tima eftir næsta sjukling
+Sjúklingur numer 521 fer á bráðamóttaka og er Ungur, liðinn tími er 35.293932
+Þurfum að bíða í 0.046002118380422355 langann tima eftir næsta sjukling
+Sjúklingur numer 522 fer á bráðamóttaka og er Ungur, liðinn tími er 35.3399341
+Þurfum að bíða í 0.038913224219483275 langann tima eftir næsta sjukling
+Sjúklingur numer 523 fer á bráðamóttaka og er Ungur, liðinn tími er 35.3788473
+Þurfum að bíða í 0.13535733572829145 langann tima eftir næsta sjukling
+Sjúklingur numer 524 fer á bráðamóttaka og er Ungur, liðinn tími er 35.5142046
+Þurfum að bíða í 0.0008351141528792501 langann tima eftir næsta sjukling
+Sjúklingur numer 525 fer á bráðamóttaka og er Ungur, liðinn tími er 35.5150397
+Þurfum að bíða í 0.015155223053626357 langann tima eftir næsta sjukling
+Sjúklingur numer 526 fer á bráðamóttaka og er Ungur, liðinn tími er 35.5301949
+Þurfum að bíða í 0.022878256881077967 langann tima eftir næsta sjukling
+Sjúklingur numer 527 fer á bráðamóttaka og er Ungur, liðinn tími er 35.5530731
+Þurfum að bíða í 0.052440259261527095 langann tima eftir næsta sjukling
+Sjúklingur numer 528 fer á bráðamóttaka og er Ungur, liðinn tími er 35.6055133
+Þurfum að bíða í 0.07305259706895308 langann tima eftir næsta sjukling
+Sjúklingur numer 529 fer á bráðamóttaka og er Ungur, liðinn tími er 35.6785658
+Þurfum að bíða í 0.1139468321024233 langann tima eftir næsta sjukling
+Sjúklingur numer 530 fer á bráðamóttaka og er Ungur, liðinn tími er 35.7925126
+Þurfum að bíða í 0.059333660587710065 langann tima eftir næsta sjukling
+Sjúklingur numer 531 fer á heilsugæsla og er Ungur, liðinn tími er 35.8518462
+Þurfum að bíða í 0.0213681991900815 langann tima eftir næsta sjukling
+Sjúklingur numer 532 fer á bráðamóttaka og er Ungur, liðinn tími er 35.8732143
+Þurfum að bíða í 0.10995501308549602 langann tima eftir næsta sjukling
+Sjúklingur numer 533 fer á heilsugæsla og er Ungur, liðinn tími er 35.9831693
+Þurfum að bíða í 0.022688684157965697 langann tima eftir næsta sjukling
+Sjúklingur numer 534 fer á heilsugæsla og er Ungur, liðinn tími er 36
+Interrupted!
+Þurfum að bíða í 0.022043140447732326 langann tima eftir næsta sjukling
+Sjúklingur numer 535 fer á bráðamóttaka og er Ungur, liðinn tími er 36.0220431
+Þurfum að bíða í 0.13958033285471652 langann tima eftir næsta sjukling
+Sjúklingur numer 536 fer á bráðamóttaka og er Ungur, liðinn tími er 36.1616234
+Þurfum að bíða í 0.000348102485585048 langann tima eftir næsta sjukling
+Sjúklingur numer 537 fer á bráðamóttaka og er Ungur, liðinn tími er 36.1619715
+Þurfum að bíða í 0.05477536928427907 langann tima eftir næsta sjukling
+Sjúklingur numer 538 fer á bráðamóttaka og er Ungur, liðinn tími er 36.2167468
+Þurfum að bíða í 0.0036288303530349966 langann tima eftir næsta sjukling
+Sjúklingur numer 539 fer á heilsugæsla og er Ungur, liðinn tími er 36.2203756
+Þurfum að bíða í 0.01558411298030682 langann tima eftir næsta sjukling
+Sjúklingur numer 540 fer á bráðamóttaka og er Ungur, liðinn tími er 36.2359597
+Þurfum að bíða í 0.08007032519177822 langann tima eftir næsta sjukling
+Sjúklingur numer 541 fer á bráðamóttaka og er Ungur, liðinn tími er 36.31603
+Þurfum að bíða í 0.028132844855267247 langann tima eftir næsta sjukling
+Sjúklingur numer 542 fer á heilsugæsla og er Ungur, liðinn tími er 36.3441628
+Þurfum að bíða í 0.022542174513305497 langann tima eftir næsta sjukling
+Sjúklingur numer 543 fer á bráðamóttaka og er Ungur, liðinn tími er 36.3667049
+Þurfum að bíða í 0.012626117205726763 langann tima eftir næsta sjukling
+Sjúklingur numer 544 fer á heilsugæsla og er Ungur, liðinn tími er 36.379331
+Þurfum að bíða í 0.05632781564854325 langann tima eftir næsta sjukling
+Sjúklingur numer 545 fer á bráðamóttaka og er Ungur, liðinn tími er 36.4356588
+Þurfum að bíða í 0.06459054249385174 langann tima eftir næsta sjukling
+Sjúklingur numer 546 fer á heilsugæsla og er Ungur, liðinn tími er 36.5002493
+Þurfum að bíða í 0.028338642088032023 langann tima eftir næsta sjukling
+Sjúklingur numer 547 fer á bráðamóttaka og er Ungur, liðinn tími er 36.5285879
+Þurfum að bíða í 0.10489604584269603 langann tima eftir næsta sjukling
+Sjúklingur numer 548 fer á bráðamóttaka og er Ungur, liðinn tími er 36.6334839
+Þurfum að bíða í 0.12957123522445796 langann tima eftir næsta sjukling
+Sjúklingur numer 549 fer á bráðamóttaka og er Ungur, liðinn tími er 36.7630551
+Þurfum að bíða í 0.004711587140939353 langann tima eftir næsta sjukling
+Sjúklingur numer 550 fer á bráðamóttaka og er Ungur, liðinn tími er 36.7677666
+Þurfum að bíða í 0.07779061856916214 langann tima eftir næsta sjukling
+Sjúklingur numer 551 fer á bráðamóttaka og er Ungur, liðinn tími er 36.8455572
+Þurfum að bíða í 0.0922007548327794 langann tima eftir næsta sjukling
+Sjúklingur numer 552 fer á heilsugæsla og er Ungur, liðinn tími er 36.9377579
+Þurfum að bíða í 0.01785696217681672 langann tima eftir næsta sjukling
+Sjúklingur numer 553 fer á bráðamóttaka og er Ungur, liðinn tími er 36.9556148
+Þurfum að bíða í 0.14376294795221228 langann tima eftir næsta sjukling
+Sjúklingur numer 554 fer á heilsugæsla og er Ungur, liðinn tími er 37
+Interrupted!
+Þurfum að bíða í 0.12163379658553987 langann tima eftir næsta sjukling
+Sjúklingur numer 555 fer á heilsugæsla og er Ungur, liðinn tími er 37.1216337
+Þurfum að bíða í 0.05353603303650577 langann tima eftir næsta sjukling
+Sjúklingur numer 556 fer á heilsugæsla og er Ungur, liðinn tími er 37.1751697
+Þurfum að bíða í 0.1893173754572521 langann tima eftir næsta sjukling
+Sjúklingur numer 557 fer á heilsugæsla og er Ungur, liðinn tími er 37.364487
+Þurfum að bíða í 0.003332301352481681 langann tima eftir næsta sjukling
+Sjúklingur numer 558 fer á heilsugæsla og er Ungur, liðinn tími er 37.3678193
+Þurfum að bíða í 0.11654924199462677 langann tima eftir næsta sjukling
+Sjúklingur numer 559 fer á bráðamóttaka og er Ungur, liðinn tími er 37.4843685
+Þurfum að bíða í 0.024646159077177206 langann tima eftir næsta sjukling
+Sjúklingur numer 560 fer á heilsugæsla og er Ungur, liðinn tími er 37.5090146
+Þurfum að bíða í 0.07598565016554322 langann tima eftir næsta sjukling
+Sjúklingur numer 561 fer á bráðamóttaka og er Ungur, liðinn tími er 37.5850002
+Þurfum að bíða í 0.02797746053328292 langann tima eftir næsta sjukling
+Sjúklingur numer 562 fer á bráðamóttaka og er Ungur, liðinn tími er 37.6129776
+Þurfum að bíða í 0.034825427418099346 langann tima eftir næsta sjukling
+Sjúklingur numer 563 fer á bráðamóttaka og er Ungur, liðinn tími er 37.647803
+Þurfum að bíða í 0.0719522441474444 langann tima eftir næsta sjukling
+Sjúklingur numer 564 fer á bráðamóttaka og er Ungur, liðinn tími er 37.7197552
+Þurfum að bíða í 0.021028996162077075 langann tima eftir næsta sjukling
+Sjúklingur numer 565 fer á bráðamóttaka og er Ungur, liðinn tími er 37.7407841
+Þurfum að bíða í 0.05489413158446967 langann tima eftir næsta sjukling
+Sjúklingur numer 566 fer á bráðamóttaka og er Ungur, liðinn tími er 37.7956782
+Þurfum að bíða í 0.018147084144290487 langann tima eftir næsta sjukling
+Sjúklingur numer 567 fer á bráðamóttaka og er Ungur, liðinn tími er 37.8138252
+Þurfum að bíða í 0.003561324640871133 langann tima eftir næsta sjukling
+Sjúklingur numer 568 fer á bráðamóttaka og er Ungur, liðinn tími er 37.8173865
+Þurfum að bíða í 0.26516359037285947 langann tima eftir næsta sjukling
+Sjúklingur numer 569 fer á bráðamóttaka og er Ungur, liðinn tími er 38
+Interrupted!
+Þurfum að bíða í 0.06862763640944594 langann tima eftir næsta sjukling
+Sjúklingur numer 570 fer á bráðamóttaka og er Ungur, liðinn tími er 38.0686276
+Þurfum að bíða í 0.17936257102809083 langann tima eftir næsta sjukling
+Sjúklingur numer 571 fer á bráðamóttaka og er Ungur, liðinn tími er 38.2479901
+Þurfum að bíða í 6.156046814648513E-05 langann tima eftir næsta sjukling
+Sjúklingur numer 572 fer á heilsugæsla og er Ungur, liðinn tími er 38.2480516
+Þurfum að bíða í 0.05247197690616158 langann tima eftir næsta sjukling
+Sjúklingur numer 573 fer á heilsugæsla og er Ungur, liðinn tími er 38.3005235
+Þurfum að bíða í 0.17055519776140796 langann tima eftir næsta sjukling
+Sjúklingur numer 574 fer á bráðamóttaka og er Ungur, liðinn tími er 38.4710786
+Þurfum að bíða í 0.06800279082078596 langann tima eftir næsta sjukling
+Sjúklingur numer 575 fer á bráðamóttaka og er Ungur, liðinn tími er 38.5390813
+Þurfum að bíða í 0.07217700597126896 langann tima eftir næsta sjukling
+Sjúklingur numer 576 fer á heilsugæsla og er Ungur, liðinn tími er 38.6112583
+Þurfum að bíða í 0.02018102510008058 langann tima eftir næsta sjukling
+Sjúklingur numer 577 fer á bráðamóttaka og er Ungur, liðinn tími er 38.6314393
+Þurfum að bíða í 0.018756579603189397 langann tima eftir næsta sjukling
+Sjúklingur numer 578 fer á bráðamóttaka og er Ungur, liðinn tími er 38.6501958
+Þurfum að bíða í 0.09681386014405924 langann tima eftir næsta sjukling
+Sjúklingur numer 579 fer á bráðamóttaka og er Ungur, liðinn tími er 38.7470096
+Þurfum að bíða í 0.01988795712212532 langann tima eftir næsta sjukling
+Sjúklingur numer 580 fer á heilsugæsla og er Ungur, liðinn tími er 38.7668975
+Þurfum að bíða í 0.08102561860073426 langann tima eftir næsta sjukling
+Sjúklingur numer 581 fer á heilsugæsla og er Ungur, liðinn tími er 38.8479231
+Þurfum að bíða í 0.07241418830501871 langann tima eftir næsta sjukling
+Sjúklingur numer 582 fer á bráðamóttaka og er Ungur, liðinn tími er 38.9203372
+Þurfum að bíða í 0.06114762519011127 langann tima eftir næsta sjukling
+Sjúklingur numer 583 fer á bráðamóttaka og er Ungur, liðinn tími er 38.9814848
+Þurfum að bíða í 0.005230079072963278 langann tima eftir næsta sjukling
+Sjúklingur numer 584 fer á heilsugæsla og er Ungur, liðinn tími er 38.9867148
+Þurfum að bíða í 0.11783934980453371 langann tima eftir næsta sjukling
+Sjúklingur numer 585 fer á bráðamóttaka og er Ungur, liðinn tími er 39
+Interrupted!
+Þurfum að bíða í 0.40369223117025355 langann tima eftir næsta sjukling
+Sjúklingur numer 586 fer á bráðamóttaka og er Ungur, liðinn tími er 39.4036922
+Þurfum að bíða í 0.04703902440619045 langann tima eftir næsta sjukling
+Sjúklingur numer 587 fer á bráðamóttaka og er Ungur, liðinn tími er 39.4507312
+Þurfum að bíða í 0.020744808740578685 langann tima eftir næsta sjukling
+Sjúklingur numer 588 fer á bráðamóttaka og er Ungur, liðinn tími er 39.471476
+Þurfum að bíða í 0.06846975808590537 langann tima eftir næsta sjukling
+Sjúklingur numer 589 fer á bráðamóttaka og er Ungur, liðinn tími er 39.5399457
+Þurfum að bíða í 0.036900561509469874 langann tima eftir næsta sjukling
+Sjúklingur numer 590 fer á bráðamóttaka og er Ungur, liðinn tími er 39.5768462
+Þurfum að bíða í 0.008096555145227063 langann tima eftir næsta sjukling
+Sjúklingur numer 591 fer á bráðamóttaka og er Ungur, liðinn tími er 39.5849427
+Þurfum að bíða í 0.10972773507052677 langann tima eftir næsta sjukling
+Sjúklingur numer 592 fer á bráðamóttaka og er Ungur, liðinn tími er 39.6946704
+Þurfum að bíða í 0.027172071482998463 langann tima eftir næsta sjukling
+Sjúklingur numer 593 fer á bráðamóttaka og er Ungur, liðinn tími er 39.7218424
+Þurfum að bíða í 0.02581129490830484 langann tima eftir næsta sjukling
+Sjúklingur numer 594 fer á heilsugæsla og er Ungur, liðinn tími er 39.7476536
+Þurfum að bíða í 0.02336735868926575 langann tima eftir næsta sjukling
+Sjúklingur numer 595 fer á heilsugæsla og er Ungur, liðinn tími er 39.7710209
+Þurfum að bíða í 0.014007459288450192 langann tima eftir næsta sjukling
+Sjúklingur numer 596 fer á bráðamóttaka og er Ungur, liðinn tími er 39.7850283
+Þurfum að bíða í 0.08730786919022057 langann tima eftir næsta sjukling
+Sjúklingur numer 597 fer á bráðamóttaka og er Ungur, liðinn tími er 39.8723361
+Þurfum að bíða í 0.11360274012832519 langann tima eftir næsta sjukling
+Sjúklingur numer 598 fer á heilsugæsla og er Ungur, liðinn tími er 39.9859388
+Þurfum að bíða í 0.0276313259396786 langann tima eftir næsta sjukling
+Sjúklingur numer 599 fer á bráðamóttaka og er Ungur, liðinn tími er 40
+Interrupted!
+Þurfum að bíða í 0.06456094721817046 langann tima eftir næsta sjukling
+Sjúklingur numer 600 fer á bráðamóttaka og er Ungur, liðinn tími er 40.0645609
+Þurfum að bíða í 0.006293360919444733 langann tima eftir næsta sjukling
+Sjúklingur numer 601 fer á heilsugæsla og er Ungur, liðinn tími er 40.0708542
+Þurfum að bíða í 0.07013050118865197 langann tima eftir næsta sjukling
+Sjúklingur numer 602 fer á heilsugæsla og er Ungur, liðinn tími er 40.1409847
+Þurfum að bíða í 0.012430511922425074 langann tima eftir næsta sjukling
+Sjúklingur numer 603 fer á bráðamóttaka og er Ungur, liðinn tími er 40.1534152
+Þurfum að bíða í 0.04880062750603597 langann tima eftir næsta sjukling
+Sjúklingur numer 604 fer á bráðamóttaka og er Ungur, liðinn tími er 40.2022158
+Þurfum að bíða í 0.040894910558730124 langann tima eftir næsta sjukling
+Sjúklingur numer 605 fer á bráðamóttaka og er Ungur, liðinn tími er 40.2431107
+Þurfum að bíða í 0.06429777751809362 langann tima eftir næsta sjukling
+Sjúklingur numer 606 fer á bráðamóttaka og er Ungur, liðinn tími er 40.3074084
+Þurfum að bíða í 0.04557687747304921 langann tima eftir næsta sjukling
+Sjúklingur numer 607 fer á bráðamóttaka og er Ungur, liðinn tími er 40.3529852
+Þurfum að bíða í 0.03849456297672358 langann tima eftir næsta sjukling
+Sjúklingur numer 608 fer á bráðamóttaka og er Ungur, liðinn tími er 40.3914797
+Þurfum að bíða í 0.005674247214074389 langann tima eftir næsta sjukling
+Sjúklingur numer 609 fer á bráðamóttaka og er Ungur, liðinn tími er 40.3971539
+Þurfum að bíða í 0.03202932884125857 langann tima eftir næsta sjukling
+Sjúklingur numer 610 fer á bráðamóttaka og er Ungur, liðinn tími er 40.4291832
+Þurfum að bíða í 0.04150731643897399 langann tima eftir næsta sjukling
+Sjúklingur numer 611 fer á bráðamóttaka og er Ungur, liðinn tími er 40.4706905
+Þurfum að bíða í 0.10084326961743954 langann tima eftir næsta sjukling
+Sjúklingur numer 612 fer á bráðamóttaka og er Ungur, liðinn tími er 40.5715337
+Þurfum að bíða í 0.08161935999156207 langann tima eftir næsta sjukling
+Sjúklingur numer 613 fer á bráðamóttaka og er Ungur, liðinn tími er 40.653153
+Þurfum að bíða í 0.004991295786370643 langann tima eftir næsta sjukling
+Sjúklingur numer 614 fer á heilsugæsla og er Ungur, liðinn tími er 40.6581442
+Þurfum að bíða í 0.0634089475493035 langann tima eftir næsta sjukling
+Sjúklingur numer 615 fer á bráðamóttaka og er Ungur, liðinn tími er 40.7215531
+Þurfum að bíða í 0.04901867773228099 langann tima eftir næsta sjukling
+Sjúklingur numer 616 fer á bráðamóttaka og er Ungur, liðinn tími er 40.7705717
+Þurfum að bíða í 0.045160990214729024 langann tima eftir næsta sjukling
+Sjúklingur numer 617 fer á bráðamóttaka og er Ungur, liðinn tími er 40.8157326
+Þurfum að bíða í 0.015501691046079758 langann tima eftir næsta sjukling
+Sjúklingur numer 618 fer á bráðamóttaka og er Ungur, liðinn tími er 40.8312342
+Þurfum að bíða í 0.0320847163641633 langann tima eftir næsta sjukling
+Sjúklingur numer 619 fer á bráðamóttaka og er Ungur, liðinn tími er 40.8633189
+Þurfum að bíða í 0.0016065064955104568 langann tima eftir næsta sjukling
+Sjúklingur numer 620 fer á bráðamóttaka og er Ungur, liðinn tími er 40.8649254
+Þurfum að bíða í 0.008322977661293274 langann tima eftir næsta sjukling
+Sjúklingur numer 621 fer á bráðamóttaka og er Ungur, liðinn tími er 40.8732483
+Þurfum að bíða í 0.09128214807784542 langann tima eftir næsta sjukling
+Sjúklingur numer 622 fer á heilsugæsla og er Ungur, liðinn tími er 40.9645304
+Þurfum að bíða í 0.10286657626542035 langann tima eftir næsta sjukling
+Sjúklingur numer 623 fer á bráðamóttaka og er Ungur, liðinn tími er 41
+Interrupted!
+Þurfum að bíða í 0.01446842601096662 langann tima eftir næsta sjukling
+Sjúklingur numer 624 fer á heilsugæsla og er Ungur, liðinn tími er 41.0144684
+Þurfum að bíða í 0.06139401293631097 langann tima eftir næsta sjukling
+Sjúklingur numer 625 fer á bráðamóttaka og er Ungur, liðinn tími er 41.0758624
+Þurfum að bíða í 0.0037673708982134085 langann tima eftir næsta sjukling
+Sjúklingur numer 626 fer á bráðamóttaka og er Ungur, liðinn tími er 41.0796297
+Þurfum að bíða í 0.06804764791330781 langann tima eftir næsta sjukling
+Sjúklingur numer 627 fer á bráðamóttaka og er Ungur, liðinn tími er 41.1476773
+Þurfum að bíða í 0.08030124185568063 langann tima eftir næsta sjukling
+Sjúklingur numer 628 fer á bráðamóttaka og er Ungur, liðinn tími er 41.2279785
+Þurfum að bíða í 0.1074130848959347 langann tima eftir næsta sjukling
+Sjúklingur numer 629 fer á bráðamóttaka og er Ungur, liðinn tími er 41.3353915
+Þurfum að bíða í 0.060278154907096 langann tima eftir næsta sjukling
+Sjúklingur numer 630 fer á bráðamóttaka og er Ungur, liðinn tími er 41.3956696
+Þurfum að bíða í 0.012901220162311733 langann tima eftir næsta sjukling
+Sjúklingur numer 631 fer á bráðamóttaka og er Ungur, liðinn tími er 41.4085708
+Þurfum að bíða í 0.13868628795975638 langann tima eftir næsta sjukling
+Sjúklingur numer 632 fer á heilsugæsla og er Ungur, liðinn tími er 41.547257
+Þurfum að bíða í 0.05485873680203145 langann tima eftir næsta sjukling
+Sjúklingur numer 633 fer á bráðamóttaka og er Ungur, liðinn tími er 41.6021157
+Þurfum að bíða í 0.20177604325240847 langann tima eftir næsta sjukling
+Sjúklingur numer 634 fer á bráðamóttaka og er Ungur, liðinn tími er 41.8038917
+Þurfum að bíða í 0.029754271918536666 langann tima eftir næsta sjukling
+Sjúklingur numer 635 fer á heilsugæsla og er Ungur, liðinn tími er 41.8336459
+Þurfum að bíða í 0.043079370148516594 langann tima eftir næsta sjukling
+Sjúklingur numer 636 fer á bráðamóttaka og er Ungur, liðinn tími er 41.8767252
+Þurfum að bíða í 0.04066259465942522 langann tima eftir næsta sjukling
+Sjúklingur numer 637 fer á bráðamóttaka og er Ungur, liðinn tími er 41.9173877
+Þurfum að bíða í 0.0894923738090773 langann tima eftir næsta sjukling
+Sjúklingur numer 638 fer á bráðamóttaka og er Ungur, liðinn tími er 42
+Interrupted!
+Þurfum að bíða í 0.058834300729542356 langann tima eftir næsta sjukling
+Sjúklingur numer 639 fer á bráðamóttaka og er Ungur, liðinn tími er 42.0588343
+Þurfum að bíða í 0.00419452157187882 langann tima eftir næsta sjukling
+Sjúklingur numer 640 fer á heilsugæsla og er Ungur, liðinn tími er 42.0630288
+Þurfum að bíða í 0.018537782892352816 langann tima eftir næsta sjukling
+Sjúklingur numer 641 fer á bráðamóttaka og er Ungur, liðinn tími er 42.0815665
+Þurfum að bíða í 0.10511371441117177 langann tima eftir næsta sjukling
+Sjúklingur numer 642 fer á bráðamóttaka og er Ungur, liðinn tími er 42.1866802
+Þurfum að bíða í 0.13318520835294234 langann tima eftir næsta sjukling
+Sjúklingur numer 643 fer á bráðamóttaka og er Ungur, liðinn tími er 42.3198654
+Þurfum að bíða í 0.03986309258490066 langann tima eftir næsta sjukling
+Sjúklingur numer 644 fer á bráðamóttaka og er Ungur, liðinn tími er 42.3597284
+Þurfum að bíða í 0.0088286859941931 langann tima eftir næsta sjukling
+Sjúklingur numer 645 fer á heilsugæsla og er Ungur, liðinn tími er 42.368557
+Þurfum að bíða í 0.1668611821862183 langann tima eftir næsta sjukling
+Sjúklingur numer 646 fer á bráðamóttaka og er Ungur, liðinn tími er 42.5354181
+Þurfum að bíða í 0.025484952065817832 langann tima eftir næsta sjukling
+Sjúklingur numer 647 fer á bráðamóttaka og er Ungur, liðinn tími er 42.560903
+Þurfum að bíða í 0.07562860472540728 langann tima eftir næsta sjukling
+Sjúklingur numer 648 fer á heilsugæsla og er Ungur, liðinn tími er 42.6365316
+Þurfum að bíða í 0.20017266968372896 langann tima eftir næsta sjukling
+Sjúklingur numer 649 fer á bráðamóttaka og er Ungur, liðinn tími er 42.8367042
+Þurfum að bíða í 0.004619109732299823 langann tima eftir næsta sjukling
+Sjúklingur numer 650 fer á bráðamóttaka og er Ungur, liðinn tími er 42.8413233
+Þurfum að bíða í 0.026694634964000045 langann tima eftir næsta sjukling
+Sjúklingur numer 651 fer á heilsugæsla og er Ungur, liðinn tími er 42.8680179
+Þurfum að bíða í 0.05248545794106792 langann tima eftir næsta sjukling
+Sjúklingur numer 652 fer á heilsugæsla og er Ungur, liðinn tími er 42.9205033
+Þurfum að bíða í 0.004683699958277476 langann tima eftir næsta sjukling
+Sjúklingur numer 653 fer á bráðamóttaka og er Ungur, liðinn tími er 42.9251869
+Þurfum að bíða í 0.04044637857422262 langann tima eftir næsta sjukling
+Sjúklingur numer 654 fer á bráðamóttaka og er Ungur, liðinn tími er 42.9656332
+Þurfum að bíða í 0.014454164312421263 langann tima eftir næsta sjukling
+Sjúklingur numer 655 fer á bráðamóttaka og er Ungur, liðinn tími er 42.9800873
+Þurfum að bíða í 0.08920818160097548 langann tima eftir næsta sjukling
+Sjúklingur numer 656 fer á bráðamóttaka og er Ungur, liðinn tími er 43
+Interrupted!
+Þurfum að bíða í 0.21542913134347075 langann tima eftir næsta sjukling
+Sjúklingur numer 657 fer á bráðamóttaka og er Ungur, liðinn tími er 43.2154291
+Þurfum að bíða í 0.11329317055115855 langann tima eftir næsta sjukling
+Sjúklingur numer 658 fer á bráðamóttaka og er Ungur, liðinn tími er 43.3287222
+Þurfum að bíða í 0.05141015145577221 langann tima eftir næsta sjukling
+Sjúklingur numer 659 fer á bráðamóttaka og er Ungur, liðinn tími er 43.3801323
+Þurfum að bíða í 0.09394585182623781 langann tima eftir næsta sjukling
+Sjúklingur numer 660 fer á bráðamóttaka og er Ungur, liðinn tími er 43.4740781
+Þurfum að bíða í 0.11365819750951218 langann tima eftir næsta sjukling
+Sjúklingur numer 661 fer á heilsugæsla og er Ungur, liðinn tími er 43.5877362
+Þurfum að bíða í 0.008756299216061702 langann tima eftir næsta sjukling
+Sjúklingur numer 662 fer á bráðamóttaka og er Ungur, liðinn tími er 43.5964924
+Þurfum að bíða í 0.10287921398060057 langann tima eftir næsta sjukling
+Sjúklingur numer 663 fer á bráðamóttaka og er Ungur, liðinn tími er 43.6993716
+Þurfum að bíða í 0.04486678327858462 langann tima eftir næsta sjukling
+Sjúklingur numer 664 fer á heilsugæsla og er Ungur, liðinn tími er 43.7442383
+Þurfum að bíða í 0.007110167096806175 langann tima eftir næsta sjukling
+Sjúklingur numer 665 fer á bráðamóttaka og er Ungur, liðinn tími er 43.7513484
+Þurfum að bíða í 0.0002179147578027667 langann tima eftir næsta sjukling
+Sjúklingur numer 666 fer á bráðamóttaka og er Ungur, liðinn tími er 43.7515663
+Þurfum að bíða í 0.021718933634199692 langann tima eftir næsta sjukling
+Sjúklingur numer 667 fer á bráðamóttaka og er Ungur, liðinn tími er 43.7732852
+Þurfum að bíða í 0.06336789904375059 langann tima eftir næsta sjukling
+Sjúklingur numer 668 fer á heilsugæsla og er Ungur, liðinn tími er 43.836653
+Þurfum að bíða í 0.007905320875194365 langann tima eftir næsta sjukling
+Sjúklingur numer 669 fer á bráðamóttaka og er Ungur, liðinn tími er 43.8445583
+Þurfum að bíða í 0.09375865229033545 langann tima eftir næsta sjukling
+Sjúklingur numer 670 fer á bráðamóttaka og er Ungur, liðinn tími er 43.9383169
+Þurfum að bíða í 0.009160616248778333 langann tima eftir næsta sjukling
+Sjúklingur numer 671 fer á bráðamóttaka og er Ungur, liðinn tími er 43.9474775
+Þurfum að bíða í 0.023652747370091404 langann tima eftir næsta sjukling
+Sjúklingur numer 672 fer á bráðamóttaka og er Ungur, liðinn tími er 43.9711302
+Þurfum að bíða í 0.10692007598870482 langann tima eftir næsta sjukling
+Sjúklingur numer 673 fer á bráðamóttaka og er Ungur, liðinn tími er 44
+Interrupted!
+Þurfum að bíða í 0.06170789809836897 langann tima eftir næsta sjukling
+Sjúklingur numer 674 fer á bráðamóttaka og er Ungur, liðinn tími er 44.0617078
+Þurfum að bíða í 0.002295971543925935 langann tima eftir næsta sjukling
+Sjúklingur numer 675 fer á bráðamóttaka og er Ungur, liðinn tími er 44.0640037
+Þurfum að bíða í 0.02865471037830344 langann tima eftir næsta sjukling
+Sjúklingur numer 676 fer á bráðamóttaka og er Ungur, liðinn tími er 44.0926584
+Þurfum að bíða í 0.012560324178757618 langann tima eftir næsta sjukling
+Sjúklingur numer 677 fer á bráðamóttaka og er Ungur, liðinn tími er 44.1052187
+Þurfum að bíða í 0.05096130361061267 langann tima eftir næsta sjukling
+Sjúklingur numer 678 fer á bráðamóttaka og er Ungur, liðinn tími er 44.15618
+Þurfum að bíða í 0.02142070087730723 langann tima eftir næsta sjukling
+Sjúklingur numer 679 fer á bráðamóttaka og er Ungur, liðinn tími er 44.1776007
+Þurfum að bíða í 0.14240458618458335 langann tima eftir næsta sjukling
+Sjúklingur numer 680 fer á bráðamóttaka og er Ungur, liðinn tími er 44.3200052
+Þurfum að bíða í 0.02298375331214943 langann tima eftir næsta sjukling
+Sjúklingur numer 681 fer á bráðamóttaka og er Ungur, liðinn tími er 44.3429889
+Þurfum að bíða í 0.03239938753574333 langann tima eftir næsta sjukling
+Sjúklingur numer 682 fer á bráðamóttaka og er Ungur, liðinn tími er 44.3753882
+Þurfum að bíða í 0.0054230199303726655 langann tima eftir næsta sjukling
+Sjúklingur numer 683 fer á bráðamóttaka og er Ungur, liðinn tími er 44.3808112
+Þurfum að bíða í 0.13425774848074082 langann tima eftir næsta sjukling
+Sjúklingur numer 684 fer á bráðamóttaka og er Ungur, liðinn tími er 44.5150689
+Þurfum að bíða í 0.05561469626642683 langann tima eftir næsta sjukling
+Sjúklingur numer 685 fer á heilsugæsla og er Ungur, liðinn tími er 44.5706835
+Þurfum að bíða í 0.004357734012087272 langann tima eftir næsta sjukling
+Sjúklingur numer 686 fer á bráðamóttaka og er Ungur, liðinn tími er 44.5750412
+Þurfum að bíða í 0.036986532567257174 langann tima eftir næsta sjukling
+Sjúklingur numer 687 fer á bráðamóttaka og er Ungur, liðinn tími er 44.6120277
+Þurfum að bíða í 0.10561196732938093 langann tima eftir næsta sjukling
+Sjúklingur numer 688 fer á bráðamóttaka og er Ungur, liðinn tími er 44.7176396
+Þurfum að bíða í 0.015051066476344006 langann tima eftir næsta sjukling
+Sjúklingur numer 689 fer á bráðamóttaka og er Ungur, liðinn tími er 44.7326906
+Þurfum að bíða í 0.02751477879122874 langann tima eftir næsta sjukling
+Sjúklingur numer 690 fer á heilsugæsla og er Ungur, liðinn tími er 44.7602053
+Þurfum að bíða í 0.09071882478935142 langann tima eftir næsta sjukling
+Sjúklingur numer 691 fer á bráðamóttaka og er Ungur, liðinn tími er 44.8509241
+Þurfum að bíða í 0.07302539006460329 langann tima eftir næsta sjukling
+Sjúklingur numer 692 fer á heilsugæsla og er Ungur, liðinn tími er 44.9239494
+Þurfum að bíða í 0.012649359933062354 langann tima eftir næsta sjukling
+Sjúklingur numer 693 fer á bráðamóttaka og er Ungur, liðinn tími er 44.9365987
+Þurfum að bíða í 0.027537343996509738 langann tima eftir næsta sjukling
+Sjúklingur numer 694 fer á bráðamóttaka og er Ungur, liðinn tími er 44.964136
+Þurfum að bíða í 0.29514447093444823 langann tima eftir næsta sjukling
+Sjúklingur numer 695 fer á bráðamóttaka og er Ungur, liðinn tími er 45
+Interrupted!
+Þurfum að bíða í 0.07398917251241308 langann tima eftir næsta sjukling
+Sjúklingur numer 696 fer á bráðamóttaka og er Ungur, liðinn tími er 45.0739891
+Þurfum að bíða í 0.05157738383199635 langann tima eftir næsta sjukling
+Sjúklingur numer 697 fer á bráðamóttaka og er Ungur, liðinn tími er 45.1255664
+Þurfum að bíða í 0.09014969439395713 langann tima eftir næsta sjukling
+Sjúklingur numer 698 fer á bráðamóttaka og er Ungur, liðinn tími er 45.215716
+Þurfum að bíða í 0.049715541938380056 langann tima eftir næsta sjukling
+Sjúklingur numer 699 fer á bráðamóttaka og er Ungur, liðinn tími er 45.2654315
+Þurfum að bíða í 0.02442846061233947 langann tima eftir næsta sjukling
+Sjúklingur numer 700 fer á bráðamóttaka og er Ungur, liðinn tími er 45.2898599
+Þurfum að bíða í 0.20042177865161415 langann tima eftir næsta sjukling
+Sjúklingur numer 701 fer á bráðamóttaka og er Ungur, liðinn tími er 45.4902816
+Þurfum að bíða í 0.07934320939552433 langann tima eftir næsta sjukling
+Sjúklingur numer 702 fer á bráðamóttaka og er Ungur, liðinn tími er 45.5696248
+Þurfum að bíða í 0.01195914551790042 langann tima eftir næsta sjukling
+Sjúklingur numer 703 fer á bráðamóttaka og er Ungur, liðinn tími er 45.5815839
+Þurfum að bíða í 0.008911985742993794 langann tima eftir næsta sjukling
+Sjúklingur numer 704 fer á bráðamóttaka og er Ungur, liðinn tími er 45.5904958
+Þurfum að bíða í 0.010039088204193943 langann tima eftir næsta sjukling
+Sjúklingur numer 705 fer á bráðamóttaka og er Ungur, liðinn tími er 45.6005348
+Þurfum að bíða í 0.09055698003407298 langann tima eftir næsta sjukling
+Sjúklingur numer 706 fer á heilsugæsla og er Ungur, liðinn tími er 45.6910917
+Þurfum að bíða í 0.013082532592444941 langann tima eftir næsta sjukling
+Sjúklingur numer 707 fer á bráðamóttaka og er Ungur, liðinn tími er 45.7041742
+Þurfum að bíða í 0.01487090828010105 langann tima eftir næsta sjukling
+Sjúklingur numer 708 fer á bráðamóttaka og er Ungur, liðinn tími er 45.7190451
+Þurfum að bíða í 0.007242146332750751 langann tima eftir næsta sjukling
+Sjúklingur numer 709 fer á bráðamóttaka og er Ungur, liðinn tími er 45.7262872
+Þurfum að bíða í 0.011446507287068596 langann tima eftir næsta sjukling
+Sjúklingur numer 710 fer á bráðamóttaka og er Ungur, liðinn tími er 45.7377337
+Þurfum að bíða í 0.08260942822818342 langann tima eftir næsta sjukling
+Sjúklingur numer 711 fer á bráðamóttaka og er Ungur, liðinn tími er 45.8203431
+Þurfum að bíða í 0.0306571820118925 langann tima eftir næsta sjukling
+Sjúklingur numer 712 fer á bráðamóttaka og er Ungur, liðinn tími er 45.8510002
+Þurfum að bíða í 0.017794319010700443 langann tima eftir næsta sjukling
+Sjúklingur numer 713 fer á bráðamóttaka og er Ungur, liðinn tími er 45.8687945
+Þurfum að bíða í 0.048427632665604674 langann tima eftir næsta sjukling
+Sjúklingur numer 714 fer á bráðamóttaka og er Ungur, liðinn tími er 45.9172221
+Þurfum að bíða í 0.009020428941969113 langann tima eftir næsta sjukling
+Sjúklingur numer 715 fer á bráðamóttaka og er Ungur, liðinn tími er 45.9262425
+Þurfum að bíða í 0.2590491497922264 langann tima eftir næsta sjukling
+Sjúklingur numer 716 fer á bráðamóttaka og er Ungur, liðinn tími er 46
+Interrupted!
+Þurfum að bíða í 0.057532946798376804 langann tima eftir næsta sjukling
+Sjúklingur numer 717 fer á bráðamóttaka og er Ungur, liðinn tími er 46.0575329
+Þurfum að bíða í 0.01780132335371197 langann tima eftir næsta sjukling
+Sjúklingur numer 718 fer á bráðamóttaka og er Ungur, liðinn tími er 46.0753342
+Þurfum að bíða í 0.28176546579309564 langann tima eftir næsta sjukling
+Sjúklingur numer 719 fer á heilsugæsla og er Ungur, liðinn tími er 46.3570996
+Þurfum að bíða í 0.08636580548912144 langann tima eftir næsta sjukling
+Sjúklingur numer 720 fer á heilsugæsla og er Ungur, liðinn tími er 46.4434654
+Þurfum að bíða í 0.08339769530615028 langann tima eftir næsta sjukling
+Sjúklingur numer 721 fer á bráðamóttaka og er Ungur, liðinn tími er 46.526863
+Þurfum að bíða í 0.1700905649915297 langann tima eftir næsta sjukling
+Sjúklingur numer 722 fer á bráðamóttaka og er Ungur, liðinn tími er 46.6969535
+Þurfum að bíða í 0.018136848285744023 langann tima eftir næsta sjukling
+Sjúklingur numer 723 fer á heilsugæsla og er Ungur, liðinn tími er 46.7150903
+Þurfum að bíða í 0.01947661496395297 langann tima eftir næsta sjukling
+Sjúklingur numer 724 fer á bráðamóttaka og er Ungur, liðinn tími er 46.7345669
+Þurfum að bíða í 0.018580336741439673 langann tima eftir næsta sjukling
+Sjúklingur numer 725 fer á bráðamóttaka og er Ungur, liðinn tími er 46.7531472
+Þurfum að bíða í 0.016900520427512014 langann tima eftir næsta sjukling
+Sjúklingur numer 726 fer á bráðamóttaka og er Ungur, liðinn tími er 46.7700477
+Þurfum að bíða í 0.14465174579463494 langann tima eftir næsta sjukling
+Sjúklingur numer 727 fer á bráðamóttaka og er Ungur, liðinn tími er 46.9146994
+Þurfum að bíða í 0.01003433076891731 langann tima eftir næsta sjukling
+Sjúklingur numer 728 fer á bráðamóttaka og er Ungur, liðinn tími er 46.9247337
+Þurfum að bíða í 0.051083889593221764 langann tima eftir næsta sjukling
+Sjúklingur numer 729 fer á heilsugæsla og er Ungur, liðinn tími er 46.9758175
+Þurfum að bíða í 0.019693206527250356 langann tima eftir næsta sjukling
+Sjúklingur numer 730 fer á bráðamóttaka og er Ungur, liðinn tími er 46.9955107
+Þurfum að bíða í 0.017228625822097828 langann tima eftir næsta sjukling
+Sjúklingur numer 731 fer á bráðamóttaka og er Ungur, liðinn tími er 47
+Interrupted!
+Þurfum að bíða í 0.02868587264676596 langann tima eftir næsta sjukling
+Sjúklingur numer 732 fer á bráðamóttaka og er Ungur, liðinn tími er 47.0286858
+Þurfum að bíða í 0.1051152336778447 langann tima eftir næsta sjukling
+Sjúklingur numer 733 fer á bráðamóttaka og er Ungur, liðinn tími er 47.133801
+Þurfum að bíða í 0.017496494618720923 langann tima eftir næsta sjukling
+Sjúklingur numer 734 fer á bráðamóttaka og er Ungur, liðinn tími er 47.1512974
+Þurfum að bíða í 0.21516581938520524 langann tima eftir næsta sjukling
+Sjúklingur numer 735 fer á bráðamóttaka og er Ungur, liðinn tími er 47.3664632
+Þurfum að bíða í 0.06014640729242089 langann tima eftir næsta sjukling
+Sjúklingur numer 736 fer á bráðamóttaka og er Ungur, liðinn tími er 47.4266096
+Þurfum að bíða í 0.013865572433289758 langann tima eftir næsta sjukling
+Sjúklingur numer 737 fer á bráðamóttaka og er Ungur, liðinn tími er 47.4404751
+Þurfum að bíða í 0.1623181743095638 langann tima eftir næsta sjukling
+Sjúklingur numer 738 fer á bráðamóttaka og er Ungur, liðinn tími er 47.6027932
+Þurfum að bíða í 0.06294025086614881 langann tima eftir næsta sjukling
+Sjúklingur numer 739 fer á bráðamóttaka og er Ungur, liðinn tími er 47.6657334
+Þurfum að bíða í 0.15505111983122746 langann tima eftir næsta sjukling
+Sjúklingur numer 740 fer á bráðamóttaka og er Ungur, liðinn tími er 47.8207845
+Þurfum að bíða í 0.12250268673042752 langann tima eftir næsta sjukling
+Sjúklingur numer 741 fer á bráðamóttaka og er Ungur, liðinn tími er 47.9432871
+Þurfum að bíða í 0.006917454170754253 langann tima eftir næsta sjukling
+Sjúklingur numer 742 fer á bráðamóttaka og er Ungur, liðinn tími er 47.9502045
+Þurfum að bíða í 0.033431192138697594 langann tima eftir næsta sjukling
+Sjúklingur numer 743 fer á bráðamóttaka og er Ungur, liðinn tími er 47.9836356
+Þurfum að bíða í 0.03043277810282151 langann tima eftir næsta sjukling
+Gögn um kerfið:
+Lykill legudeild og max inni eru 21
+Lykill göngudeild og max inni eru 3
+Lykill bráðamóttaka og max inni eru 10
+Lykill heilsugæsla og max inni eru 4
+Lykill hjúkrun og max inni eru 0
+Lykill dauði og max inni eru 0
+Lykill heim og max inni eru 0
+Lykill (bráðamóttaka, Læknar) og starfsþörf: 1
+Lykill (bráðamóttaka, Hjúkrunarfræðingar) og starfsþörf: 2
+Lykill (heilsugæsla, Læknar) og starfsþörf: 0
+Lykill (heilsugæsla, Hjúkrunarfræðingar) og starfsþörf: 4
+Lykill (legudeild, Læknar) og starfsþörf: 3
+Lykill (legudeild, Hjúkrunarfræðingar) og starfsþörf: 4
+Lykill (göngudeild, Læknar) og starfsþörf: 0
+Lykill (göngudeild, Hjúkrunarfræðingar) og starfsþörf: 3
