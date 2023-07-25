@@ -6,6 +6,7 @@ using SimSharp;
 namespace SimProj;
 public class Deild
 {
+    private Kerfi kerfi;
     public DeildInfo dataDeild;
     public SimAttribs simAttribs;
     private string nafn;
@@ -14,8 +15,9 @@ public class Deild
     private MathNet.Numerics.Distributions.ContinuousUniform WaitUnif;
     private double wait = 0;
     private readonly IEnumerable<int>? deildnr;
-    public Deild(Simulation envment, string Nafn, SimAttribs SimAttributes,DeildInfo DataDeild)
+    public Deild(Simulation envment, string Nafn, SimAttribs SimAttributes,DeildInfo DataDeild, Kerfi Kerfi)
     {
+        kerfi = Kerfi;
         env = envment;
         nafn = Nafn;
         simAttribs = SimAttributes;
@@ -38,20 +40,23 @@ public class Deild
     {
         if (innrit)
         {
-            Run.kerfi.deildir[prev_deild].dataDeild.fjoldiInni[p.Aldur]--;
-            Run.kerfi.deildir[prev_deild].dataDeild.inni--;
+            kerfi.deildir[prev_deild].dataDeild.fjoldiInni[p.Aldur]--;
+            kerfi.deildir[prev_deild].dataDeild.inni--;
         }
         else
         {
-            Run.kerfi.telja++;
-            Run.kerfi.amount++;
+            kerfi.telja++;
+            kerfi.amount++;
+            File.AppendAllText(Run.pth, $"Fjöldi á spítala er núna {kerfi.amount}, liðinn tími er {env.NowD}" + System.Environment.NewLine);
         }
-        if (endurkoma) { Run.kerfi.endurkomur++; }
+        if (endurkoma) { kerfi.endurkomur++; }
         dataDeild.fjoldiInni[p.Aldur]++;
         dataDeild.inni++;
+        dataDeild.fjoldiDag[kerfi.Dagur]++;
         if (dataDeild.inni > dataDeild.maxInni){ dataDeild.maxInni = dataDeild.inni; }
         if (simAttribs.WaitLognorm.ContainsKey(nafn)){ wait = waitLognorm[p.Aldur].Sample(); }
         else if (simAttribs.WaitUniform.ContainsKey(nafn)){ wait = WaitUnif.Sample(); }
+        File.AppendAllText(Run.pth, $"Sjúklingur númer {p.Numer} á {p.Deild} þarf að bíða þar í {wait}, liðinn tími er {env.NowD}" + System.Environment.NewLine);
         yield return env.TimeoutD(wait);
         yield return env.Process(updatePatient(p));
     }
@@ -68,7 +73,8 @@ public class Deild
         if (simAttribs.FinalState.Contains(newDeild)) { removeP(p); }
         else
         {
-            yield return env.Process(Run.kerfi.deildir[newDeild].addP(p,true,false,prev));
+            File.AppendAllText(Run.pth, $"Sjúklingur númer {p.Numer} fer af {prev} til {p.Deild}, liðinn tími er {env.NowD}" + System.Environment.NewLine);
+            yield return env.Process(kerfi.deildir[newDeild].addP(p,true,false,prev));
         }
     }
     public void removeP(Patient p)

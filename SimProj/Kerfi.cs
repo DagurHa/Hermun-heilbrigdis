@@ -14,6 +14,7 @@ public class Kerfi
     private List<double> p_age = new List<double>();
     public int telja;
     public int amount;
+    public int Dagur;
     private Dictionary<int,Patient> discharged = new Dictionary<int,Patient>();
     public Dictionary<string, Deild> deildir = new Dictionary<string, Deild>();
     public int endurkomur;
@@ -30,6 +31,7 @@ public class Kerfi
         }
         foreach (string state in fastar.States) { data[state] = new DeildInfo(fastar); }
         telja = 0;
+        Dagur = 0;
         amount = 0;
         endurkomur = 0;
         homePatientWait = false;
@@ -50,7 +52,6 @@ public class Kerfi
                     //env.Process(homeGen(env, discharged));
                 }
                 double wait = arrive.Sample();
-                env.Log($"Þurfum að bíða í {wait} langann tima eftir næsta sjukling");
                 File.AppendAllText(Run.pth, $"Þurfum að bíða í {wait} langann tima eftir næsta sjukling" + System.Environment.NewLine);
                 yield return env.TimeoutD(wait);
                 int i_aldur = Helpers.randomChoice(p_age);
@@ -58,11 +59,14 @@ public class Kerfi
                 int i_deild_upphaf = Helpers.randomChoice(fastar.InitialProb);
                 string deild_upphaf = fastar.InitState[i_deild_upphaf];
                 Patient p = new Patient(aldur, deild_upphaf, telja);
-                env.Log($"Sjúklingur numer {p.Numer} fer á {p.Deild} og er {p.Aldur}, liðinn tími er {env.NowD}");
                 File.AppendAllText(Run.pth, $"Sjúklingur numer {p.Numer} fer á {p.Deild} og er {p.Aldur}, liðinn tími er {env.NowD}" + System.Environment.NewLine);
                 env.Process(deildir[deild_upphaf].addP(p, false, false, ""));
             }
-            else { File.AppendAllText(Run.pth, "Interrupted!" + System.Environment.NewLine); }
+            else 
+            {
+                File.AppendAllText(Run.pth, "Interrupted!" + System.Environment.NewLine);
+                Dagur++;
+            }
         }
     }
     private void CreateDeildir()
@@ -70,7 +74,7 @@ public class Kerfi
         var deild_list = fastar.InitState.Concat(fastar.MedState);
         foreach (string unit in deild_list)
         {
-            deildir[unit] = new Deild(env, unit, fastar, data[unit]);
+            deildir[unit] = new Deild(env, unit, fastar, data[unit], this);
         }
     }
     public IEnumerable<Event> interrupter(DataFinal data)

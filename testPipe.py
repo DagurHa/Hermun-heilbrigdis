@@ -8,9 +8,9 @@ STATES = ["legudeild", "göngudeild", "bráðamóttaka", "heilsugæsla", "hjúkr
 AGE_GROUPS = ["Ungur","Miðaldra","Gamall"] # mismunandi aldurshópar sjúklings. Breytum/bætum við mögulega
 # meðalfjöldi aldurshópa sem koma á spítala á dag, fáum rauntölur hér og getum síðan breytt
 AGE_GROUP_AMOUNT = {
-    AGE_GROUPS[0] : 54,
-    AGE_GROUPS[1] : 41,
-    AGE_GROUPS[2] : 36
+    AGE_GROUPS[0] : 20,
+    AGE_GROUPS[1] : 10,
+    AGE_GROUPS[2] : 5
 }
 # færslulíkur milli deilda, hér höfum við default færslulíkur sem verða vonandi byggðar á gögnum.
 # Skiptum færslulíkum eftir aldri en bara til þess að aldrað fólk geti komist á hjúkrun, einmitt nuna er hjúkrun absorbing
@@ -94,7 +94,7 @@ STARFSDEMAND = {
 }
 KEYS_TOT = list(product(AGE_GROUPS,UPPHAFSDEILD+MILLIDEILD))
 
-UPPHITUN = 25 # Upphitunartími hverrar hermunar, þ.e. byrjum ekki að safna/sýna upplýsingar fyrr en svona margir dagar hafa liðið
+UPPHITUN = 0 # Upphitunartími hverrar hermunar, þ.e. byrjum ekki að safna/sýna upplýsingar fyrr en svona margir dagar hafa liðið
 simAttributes_nontuple = {
     "MeanArrive" : AGE_GROUP_AMOUNT,
     "InitialProb" : INITIAL_PROB,
@@ -123,7 +123,7 @@ simAttributes_nontuple["MeanExp"] = {
 }
 simAttributes_nontuple["Lam"] = sum([1.0/simAttributes_nontuple["MeanArrive"][age] for age in AGE_GROUPS])
 simAttributes_nontuple["ShowSim"] = False
-simAttributes_nontuple["Stop"] = 23
+simAttributes_nontuple["Stop"] = 20
 
 def tup_to_string(dict):
     return {str(key):dict[key] for key in dict}
