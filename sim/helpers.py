@@ -12,39 +12,41 @@ d_skra = pd.read_csv("dagar.csv")
 
 #Hér eftir koma allar global breytur.
 # Mismunandi stöður sjúklings. Bætum við og breytum þegar lengra er komið.
-STATES = ["legudeild", "göngudeild", "bráðamóttaka", "heilsugæsla", "hjúkrun", "dauði", "heim"]
+STATES = ["legudeild", "göngudeild", 
+          "bráðamóttaka", "heilsugæsla", 
+          "hjúkrun", "dauði", "heim"]
 AGE_GROUPS = ["Ungur","Miðaldra","Gamall"] # mismunandi aldurshópar sjúklings. Breytum/bætum við mögulega
 # meðalfjöldi aldurshópa sem koma á spítala á dag, fáum rauntölur hér og getum síðan breytt
 AGE_GROUP_AMOUNT = {
-    AGE_GROUPS[0] : 54,
-    AGE_GROUPS[1] : 41,
-    AGE_GROUPS[2] : 36
+    AGE_GROUPS[0] : 1392,
+    AGE_GROUPS[1] : 450,
+    AGE_GROUPS[2] : 205
 }
 # færslulíkur milli deilda, hér höfum við default færslulíkur sem verða vonandi byggðar á gögnum.
 # Skiptum færslulíkum eftir aldri en bara til þess að aldrað fólk geti komist á hjúkrun, einmitt nuna er hjúkrun absorbing
 #37% sem utskrifast af legudeild fara á göngudeild
 PROB = {
-    #Færslulíkur ungra
+    #Færslulíkur ungra          LD     GD   BMT  HH   HJ    D     H
     (STATES[0],AGE_GROUPS[0]) : [0.0, 0.31, 0.0, 0.0, 0.0, 0.04, 0.65],
     (STATES[1],AGE_GROUPS[0]) : [0.005, 0.0, 0.0, 0.0, 0.0, 0.0, 0.995],
-    (STATES[2],AGE_GROUPS[0]) : [0.3, 0.3, 0.0, 0.0, 0.0, 0.0, 0.4],
-    (STATES[3],AGE_GROUPS[0]) : [0.03, 0.1, 0.005, 0.0, 0.0, 0.0, 0.865],
+    (STATES[2],AGE_GROUPS[0]) : [0.1620, 0.3, 0.0, 0.0, 0.0, 0.0, 0.538],
+    (STATES[3],AGE_GROUPS[0]) : [0.0857, 0.0217, 0.005, 0.0, 0.0, 0.0, 0.8876],
     (STATES[4],AGE_GROUPS[0]) : [0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0],
     (STATES[5],AGE_GROUPS[0]) : [0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0],
     (STATES[6],AGE_GROUPS[0]) : [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0],
     #Færslulíkur miðaldra
     (STATES[0],AGE_GROUPS[1]) : [0.0, 0.31, 0.0, 0.0, 0.0, 0.04, 0.65],
     (STATES[1],AGE_GROUPS[1]) : [0.005, 0.0, 0.0, 0.0, 0.0, 0.0, 0.995],
-    (STATES[2],AGE_GROUPS[1]) : [0.3, 0.3, 0.0, 0.0, 0.0, 0.0, 0.4],
-    (STATES[3],AGE_GROUPS[1]) : [0.03, 0.1, 0.005, 0.0, 0.0, 0.0, 0.865],
+    (STATES[2],AGE_GROUPS[1]) : [0.1620, 0.3, 0.0, 0.0, 0.0, 0.0, 0.538],
+    (STATES[3],AGE_GROUPS[1]) : [0.0857, 0.0217, 0.005, 0.0, 0.0, 0.0, 0.8876],
     (STATES[4],AGE_GROUPS[1]) : [0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0],
     (STATES[5],AGE_GROUPS[1]) : [0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0],
     (STATES[6],AGE_GROUPS[1]) : [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0],
     #Færslulíkur aldraðra (Hér breytast líkur á að fara til hjúkrunar, einmitt nuna ekki byggt á gögnum)
     (STATES[0],AGE_GROUPS[2]) : [0.0, 0.31, 0.0, 0.0, 0.1, 0.04, 0.55],
     (STATES[1],AGE_GROUPS[2]) : [0.005, 0.0, 0.0, 0.0, 0.1, 0.0, 0.895],
-    (STATES[2],AGE_GROUPS[2]) : [0.3, 0.3, 0.0, 0.0, 0.0, 0.0, 0.4],
-    (STATES[3],AGE_GROUPS[2]) : [0.03, 0.1, 0.005, 0.0, 0.0, 0.0, 0.865],
+    (STATES[2],AGE_GROUPS[2]) : [0.1620, 0.3, 0.0, 0.0, 0.0, 0.0, 0.538],
+    (STATES[3],AGE_GROUPS[2]) : [0.0857, 0.0217, 0.005, 0.0, 0.017, 0.0, 0.8706],
     (STATES[4],AGE_GROUPS[2]) : [0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0],
     (STATES[5],AGE_GROUPS[2]) : [0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0],
     (STATES[6],AGE_GROUPS[2]) : [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0]
@@ -55,7 +57,7 @@ PROB = {
 UPPHAFSDEILD = [STATES[2],STATES[3]]
 MILLIDEILD = [STATES[0],STATES[1]]
 ENDADEILD = [STATES[4],STATES[5],STATES[6]]
-INITIAL_PROB = [0.75, 0.25] # Upphafslíkur á að fara á legudeild ,göngudeild og bráðamóttöku
+INITIAL_PROB = [0.88, 0.12] # Upphafslíkur á að fara á legudeild ,göngudeild og bráðamóttöku
 # meðalbiðtímar á göngu- og legudeild, þetta verður default biðin sem byggist nú á aldri og verður vonandi byggð á gögnum.
 WAIT_BMT = (0.0, 0.39) # Þarf að finna gögn um þetta (biðtími á bráðamóttöku)
 WAIT_HH = (0.0, 0.2) # Þarf að finna gögn um þetta (Biðtími á heilsugæslu)
@@ -121,9 +123,9 @@ simAttributes = {
     "Endurkoma" : ENDURKOMA,
     "Starfsþörf" : STARFSDEMAND,
     "Lyklar" : KEYS_TOT,
-    "Störf" : STORF
+    "Störf" : STORF,
 }
 meanArrivaltimes = copy(simAttributes["meðalfjöldi"])
 
-jsonSimAttribs = json.dumps({str(k) : v for k,v in simAttributes.items()})
-print(jsonSimAttribs)
+#jsonSimAttribs = json.dumps({str(k) : v for k,v in simAttributes.items()})
+#print(jsonSimAttribs)

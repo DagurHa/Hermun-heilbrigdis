@@ -323,7 +323,8 @@ if hundur:
     )
     fig2.update_layout(
         xaxis_title = "Dagar",
-        yaxis_title = "meðalfjöldi"
+        yaxis_title = "Meðalfjöldi",
+        title="Meðalfjöldi inniliggjandi sjúklinga á legudeild"
     )
     st.plotly_chart(fig2)
     fig3.update_layout(title_text="Flæði sjúklinga í gegnum kerfið")
