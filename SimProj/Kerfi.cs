@@ -87,7 +87,8 @@ public class Kerfi
             action.Interrupt();
             foreach (List<string> key_list in fastar.Keys)
             {
-                data.deildAgeAmount[(key_list[0], key_list[1])].Add(deildir[key_list[1]].dataDeild.fjoldiInni[key_list[0]]);
+                string[] keyArr = { key_list[0], key_list[1] };
+                data.deildAgeAmount[keyArr].Add(deildir[key_list[1]].dataDeild.fjoldiInni[key_list[0]]);
             }
             data.LeguAmount.Add(deildir["legudeild"].dataDeild.inni);
         }

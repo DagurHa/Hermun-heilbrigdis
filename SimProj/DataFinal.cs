@@ -10,18 +10,20 @@ public class DataFinal
 {
     public Dictionary<string, int[]> fjoldiDag;
     public Dictionary<string, int> maxInni = new Dictionary<string, int>();
-    public Dictionary<(string, string), List<int>> deildAgeAmount;
+    public Dictionary<string[], List<int>> deildAgeAmount;
     public List<int> LeguAmount;
     public int HeildarPatient;
-    public Dictionary<(string, string), int> JobNum;
-
+    public Dictionary<string[], int> JobNum;
+    public Dictionary<string[], int> SankeyData;
     public DataFinal(List<List<string>> keys)
     {
+        SankeyData = new Dictionary<string[], int>();
         fjoldiDag = new Dictionary<string, int[]>();
-        deildAgeAmount = new Dictionary<(string, string), List<int>>();
+        deildAgeAmount = new Dictionary<string[], List<int>>();
         foreach(List<string> lst_key in keys)
         {
-            deildAgeAmount.Add((lst_key[0], lst_key[1]), new List<int>());
+            string[] keyArr = { lst_key[0] , lst_key[1] };
+            deildAgeAmount.Add(keyArr, new List<int>());
         }
         LeguAmount = new List<int>();
     }
@@ -33,7 +35,7 @@ public class DataFinal
         {
             File.AppendAllText(Run.pth,$"Lykill {key} og max inni eru {maxInni[key]}" + Environment.NewLine);
         }
-        foreach((string,string) key in JobNum.Keys)
+        foreach(string[] key in JobNum.Keys)
         {
             File.AppendAllText(Run.pth, $"Lykill {key} og starfsþörf: {JobNum[key]}" + Environment.NewLine);
         }

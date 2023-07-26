@@ -18,12 +18,41 @@ public class Run
         string simString_nontup = args[0];
         string simString_tup = args[1];
         SimAttribs simAttr = Helpers.InitSimAttr(simString_tup, simString_nontup);
+        DataFinal data = sim(simAttr);
+        data.Log();
+    }
+    //Fall sem hermir kerfið einu sinni með völdum stillingum.
+    private static DataFinal sim(SimAttribs simAttr)
+    {
+        DataFinal data = new DataFinal(simAttr.Keys);
         Simulation env = new Simulation();
         Kerfi kerfi = new Kerfi(env, simAttr);
-        DataFinal data = new DataFinal(simAttr.Keys);
         env.Process(kerfi.interrupter(data));
         env.RunD((double?)(simAttr.Stop + simAttr.WarmupTime));
         Helpers.CalcData(simAttr, kerfi, data);
-        data.Log();
+        return data;
+    }
+    private static TotalData hermHundur(SimAttribs simAttr)
+    {
+        int L = simAttr.SimAmount;
+        int days = simAttr.Stop - 1;
+        List<List<int>> stayData = new List<List<int>>();
+        TotalData totalData = new TotalData(simAttr);
+        for(int i = 0; i < L; i++)
+        {
+            DataFinal data = sim(simAttr);
+            stayData.Add(data.LeguAmount);
+            foreach(List<string> key in simAttr.Keys)
+            {
+                string[] keyArr = { key[0], key[1] };
+                totalData.BoxPlot.Add(keyArr, (double)data.deildAgeAmount[keyArr].Sum()/days);
+            }
+            foreach((string,string) JobKey in simAttr.JobDemand.Keys)
+            {
+                string[] newKey = { JobKey.Item1, JobKey.Item2 };
+                totalData.StarfsInfo[newKey].Add(data.SankeyData[newKey]);
+            }
+            totalData.Sankey = data.SankeyData;
+        }
     }
 }

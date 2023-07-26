@@ -1,502 +1,576 @@
-Þurfum að bíða í 0.5888640512008563 langann tima eftir næsta sjukling
-Sjúklingur numer 0 fer á bráðamóttaka og er Ungur, liðinn tími er 0.588864
-Þurfum að bíða í 0.4177389936916601 langann tima eftir næsta sjukling
-Fjöldi á spítala er núna 1, liðinn tími er 0.588864
-Sjúklingur númer 0 á bráðamóttaka þarf að bíða þar í 0.1956602232696769, liðinn tími er 0.588864
-Sjúklingur númer 0 fer af bráðamóttaka til legudeild, liðinn tími er 0.7845242
-Sjúklingur númer 0 á legudeild þarf að bíða þar í 0.6813100840497173, liðinn tími er 0.7845242
-Sjúklingur numer 1 fer á heilsugæsla og er Ungur, liðinn tími er 1
+Þurfum að bíða í 0.002033241030551061 langann tima eftir næsta sjukling
+Sjúklingur numer 0 fer á heilsugæsla og er Ungur, liðinn tími er 0.0020332
+Þurfum að bíða í 0.3256563353101013 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 1, liðinn tími er 0.0020332
+Sjúklingur númer 0 á heilsugæsla þarf að bíða þar í 0.03133365345715249, liðinn tími er 0.0020332
+Sjúklingur numer 1 fer á bráðamóttaka og er Ungur, liðinn tími er 0.3276895
+Þurfum að bíða í 0.107286227388421 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 2, liðinn tími er 0.3276895
+Sjúklingur númer 1 á bráðamóttaka þarf að bíða þar í 0.30546241306954175, liðinn tími er 0.3276895
+Sjúklingur numer 2 fer á heilsugæsla og er Ungur, liðinn tími er 0.4349757
+Þurfum að bíða í 0.10821986364025894 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 3, liðinn tími er 0.4349757
+Sjúklingur númer 2 á heilsugæsla þarf að bíða þar í 0.010313121047948078, liðinn tími er 0.4349757
+Sjúklingur numer 3 fer á bráðamóttaka og er Ungur, liðinn tími er 0.5431955
+Þurfum að bíða í 0.14691364330505485 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 4, liðinn tími er 0.5431955
+Sjúklingur númer 3 á bráðamóttaka þarf að bíða þar í 0.012278916701804341, liðinn tími er 0.5431955
+Sjúklingur númer 3 fer af bráðamóttaka til legudeild, liðinn tími er 0.5554744
+Sjúklingur númer 3 á legudeild þarf að bíða þar í 3.705706198989834, liðinn tími er 0.5554744
+Sjúklingur númer 1 fer af bráðamóttaka til legudeild, liðinn tími er 0.6331519
+Sjúklingur númer 1 á legudeild þarf að bíða þar í 6.863963443538516, liðinn tími er 0.6331519
+Sjúklingur numer 4 fer á bráðamóttaka og er Ungur, liðinn tími er 0.6901091
+Þurfum að bíða í 0.18099111794404957 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 5, liðinn tími er 0.6901091
+Sjúklingur númer 4 á bráðamóttaka þarf að bíða þar í 0.12478554672784431, liðinn tími er 0.6901091
+Sjúklingur numer 5 fer á bráðamóttaka og er Ungur, liðinn tími er 0.8711002
+Þurfum að bíða í 0.09181902116740802 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 6, liðinn tími er 0.8711002
+Sjúklingur númer 5 á bráðamóttaka þarf að bíða þar í 0.16391733237258965, liðinn tími er 0.8711002
+Sjúklingur numer 6 fer á bráðamóttaka og er Ungur, liðinn tími er 0.9629192
+Þurfum að bíða í 0.588230452017862 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 7, liðinn tími er 0.9629192
+Sjúklingur númer 6 á bráðamóttaka þarf að bíða þar í 0.18574937045841916, liðinn tími er 0.9629192
+Sjúklingur numer 7 fer á heilsugæsla og er Ungur, liðinn tími er 1
 Interrupted!
-Þurfum að bíða í 0.005491516740490446 langann tima eftir næsta sjukling
-Fjöldi á spítala er núna 2, liðinn tími er 1
-Sjúklingur númer 1 á heilsugæsla þarf að bíða þar í 0.07820217342963544, liðinn tími er 1
-Sjúklingur numer 2 fer á bráðamóttaka og er Ungur, liðinn tími er 1.0054915
-Þurfum að bíða í 0.41084955838532156 langann tima eftir næsta sjukling
-Fjöldi á spítala er núna 3, liðinn tími er 1.0054915
-Sjúklingur númer 2 á bráðamóttaka þarf að bíða þar í 0.22410976764006066, liðinn tími er 1.0054915
-Sjúklingur numer 3 fer á bráðamóttaka og er Ungur, liðinn tími er 1.416341
-Þurfum að bíða í 0.14306045708620327 langann tima eftir næsta sjukling
-Fjöldi á spítala er núna 4, liðinn tími er 1.416341
-Sjúklingur númer 3 á bráðamóttaka þarf að bíða þar í 0.2665331316769743, liðinn tími er 1.416341
-Sjúklingur numer 4 fer á bráðamóttaka og er Ungur, liðinn tími er 1.5594014
-Þurfum að bíða í 0.6707481373233384 langann tima eftir næsta sjukling
-Fjöldi á spítala er núna 5, liðinn tími er 1.5594014
-Sjúklingur númer 4 á bráðamóttaka þarf að bíða þar í 0.18127262961178675, liðinn tími er 1.5594014
-Sjúklingur númer 4 fer af bráðamóttaka til göngudeild, liðinn tími er 1.740674
-Sjúklingur númer 4 á göngudeild þarf að bíða þar í 0.022364638742229267, liðinn tími er 1.740674
-Sjúklingur numer 5 fer á heilsugæsla og er Ungur, liðinn tími er 2
+Þurfum að bíða í 0.007653868892859513 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 8, liðinn tími er 1
+Sjúklingur númer 7 á heilsugæsla þarf að bíða þar í 0.0837183988111645, liðinn tími er 1
+Sjúklingur numer 8 fer á heilsugæsla og er Ungur, liðinn tími er 1.0076538
+Þurfum að bíða í 1.4478239133596151 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 9, liðinn tími er 1.0076538
+Sjúklingur númer 8 á heilsugæsla þarf að bíða þar í 0.15381233000839703, liðinn tími er 1.0076538
+Sjúklingur númer 5 fer af bráðamóttaka til legudeild, liðinn tími er 1.0350175
+Sjúklingur númer 5 á legudeild þarf að bíða þar í 2.873655011548678, liðinn tími er 1.0350175
+Sjúklingur numer 9 fer á bráðamóttaka og er Ungur, liðinn tími er 2
 Interrupted!
-Þurfum að bíða í 0.015681035763113773 langann tima eftir næsta sjukling
-Fjöldi á spítala er núna 6, liðinn tími er 2
-Sjúklingur númer 5 á heilsugæsla þarf að bíða þar í 0.10651388089475869, liðinn tími er 2
-Sjúklingur numer 6 fer á heilsugæsla og er Ungur, liðinn tími er 2.015681
-Þurfum að bíða í 0.05765879136525859 langann tima eftir næsta sjukling
-Fjöldi á spítala er núna 7, liðinn tími er 2.015681
-Sjúklingur númer 6 á heilsugæsla þarf að bíða þar í 0.09104499429978663, liðinn tími er 2.015681
-Sjúklingur numer 7 fer á bráðamóttaka og er Ungur, liðinn tími er 2.0733397
-Þurfum að bíða í 0.05363071767500259 langann tima eftir næsta sjukling
-Fjöldi á spítala er núna 8, liðinn tími er 2.0733397
-Sjúklingur númer 7 á bráðamóttaka þarf að bíða þar í 0.20015482561670003, liðinn tími er 2.0733397
-Sjúklingur numer 8 fer á bráðamóttaka og er Ungur, liðinn tími er 2.1269704
-Þurfum að bíða í 0.5704524041987136 langann tima eftir næsta sjukling
-Fjöldi á spítala er núna 9, liðinn tími er 2.1269704
-Sjúklingur númer 8 á bráðamóttaka þarf að bíða þar í 0.17302912058449776, liðinn tími er 2.1269704
-Sjúklingur númer 7 fer af bráðamóttaka til göngudeild, liðinn tími er 2.2734945
-Sjúklingur númer 7 á göngudeild þarf að bíða þar í 0.017303488220695166, liðinn tími er 2.2734945
-Sjúklingur númer 8 fer af bráðamóttaka til göngudeild, liðinn tími er 2.2999995
-Sjúklingur númer 8 á göngudeild þarf að bíða þar í 0.02579827305665159, liðinn tími er 2.2999995
-Sjúklingur numer 9 fer á heilsugæsla og er Ungur, liðinn tími er 2.6974228
-Þurfum að bíða í 1.440192363560635 langann tima eftir næsta sjukling
-Fjöldi á spítala er núna 10, liðinn tími er 2.6974228
-Sjúklingur númer 9 á heilsugæsla þarf að bíða þar í 0.008349019106640024, liðinn tími er 2.6974228
-Sjúklingur númer 9 fer af heilsugæsla til göngudeild, liðinn tími er 2.7057718
-Sjúklingur númer 9 á göngudeild þarf að bíða þar í 0.021762842345872356, liðinn tími er 2.7057718
-Sjúklingur numer 10 fer á bráðamóttaka og er Ungur, liðinn tími er 3
+Þurfum að bíða í 0.08750036558149711 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 10, liðinn tími er 2
+Sjúklingur númer 9 á bráðamóttaka þarf að bíða þar í 0.07391431828211728, liðinn tími er 2
+Sjúklingur númer 9 fer af bráðamóttaka til göngudeild, liðinn tími er 2.0739143
+Sjúklingur númer 9 á göngudeild þarf að bíða þar í 0.026323704587446387, liðinn tími er 2.0739143
+Sjúklingur numer 10 fer á bráðamóttaka og er Ungur, liðinn tími er 2.0875003
+Þurfum að bíða í 0.4830554484840072 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 11, liðinn tími er 2.0875003
+Sjúklingur númer 10 á bráðamóttaka þarf að bíða þar í 0.08137832660292198, liðinn tími er 2.0875003
+Sjúklingur numer 11 fer á heilsugæsla og er Ungur, liðinn tími er 2.5705557
+Þurfum að bíða í 0.2603682528641804 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 12, liðinn tími er 2.5705557
+Sjúklingur númer 11 á heilsugæsla þarf að bíða þar í 0.01105226167061006, liðinn tími er 2.5705557
+Sjúklingur numer 12 fer á bráðamóttaka og er Ungur, liðinn tími er 2.8309239
+Þurfum að bíða í 0.03303247709573503 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 13, liðinn tími er 2.8309239
+Sjúklingur númer 12 á bráðamóttaka þarf að bíða þar í 0.36804201937655084, liðinn tími er 2.8309239
+Sjúklingur numer 13 fer á bráðamóttaka og er Ungur, liðinn tími er 2.8639563
+Þurfum að bíða í 0.01156433645662355 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 14, liðinn tími er 2.8639563
+Sjúklingur númer 13 á bráðamóttaka þarf að bíða þar í 0.23688901084330355, liðinn tími er 2.8639563
+Sjúklingur numer 14 fer á bráðamóttaka og er Ungur, liðinn tími er 2.8755206
+Þurfum að bíða í 0.7899481218263841 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 15, liðinn tími er 2.8755206
+Sjúklingur númer 14 á bráðamóttaka þarf að bíða þar í 0.23007619524843814, liðinn tími er 2.8755206
+Sjúklingur numer 15 fer á bráðamóttaka og er Ungur, liðinn tími er 3
 Interrupted!
-Þurfum að bíða í 0.002004340367481267 langann tima eftir næsta sjukling
-Fjöldi á spítala er núna 11, liðinn tími er 3
-Sjúklingur númer 10 á bráðamóttaka þarf að bíða þar í 0.1861881017341223, liðinn tími er 3
-Sjúklingur numer 11 fer á heilsugæsla og er Ungur, liðinn tími er 3.0020043
-Þurfum að bíða í 1.0388922872521116 langann tima eftir næsta sjukling
-Fjöldi á spítala er núna 12, liðinn tími er 3.0020043
-Sjúklingur númer 11 á heilsugæsla þarf að bíða þar í 0.14058858395581533, liðinn tími er 3.0020043
-Sjúklingur númer 10 fer af bráðamóttaka til legudeild, liðinn tími er 3.1861881
-Sjúklingur númer 10 á legudeild þarf að bíða þar í 7.890648332683881, liðinn tími er 3.1861881
-Sjúklingur numer 12 fer á bráðamóttaka og er Ungur, liðinn tími er 4
+Þurfum að bíða í 0.378603287271254 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 16, liðinn tími er 3
+Sjúklingur númer 15 á bráðamóttaka þarf að bíða þar í 0.3435964251046984, liðinn tími er 3
+Sjúklingur númer 13 fer af bráðamóttaka til legudeild, liðinn tími er 3.1008453
+Sjúklingur númer 13 á legudeild þarf að bíða þar í 2.5145651519203804, liðinn tími er 3.1008453
+Sjúklingur númer 12 fer af bráðamóttaka til legudeild, liðinn tími er 3.1989659
+Sjúklingur númer 12 á legudeild þarf að bíða þar í 1.3317735486835443, liðinn tími er 3.1989659
+Sjúklingur númer 15 fer af bráðamóttaka til göngudeild, liðinn tími er 3.3435964
+Sjúklingur númer 15 á göngudeild þarf að bíða þar í 0.01318036765939573, liðinn tími er 3.3435964
+Sjúklingur numer 16 fer á bráðamóttaka og er Ungur, liðinn tími er 3.3786032
+Þurfum að bíða í 0.6448237133185448 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 17, liðinn tími er 3.3786032
+Sjúklingur númer 16 á bráðamóttaka þarf að bíða þar í 0.06587107845855461, liðinn tími er 3.3786032
+Sjúklingur númer 16 fer af bráðamóttaka til göngudeild, liðinn tími er 3.4444742
+Sjúklingur númer 16 á göngudeild þarf að bíða þar í 0.01695582788761511, liðinn tími er 3.4444742
+Sjúklingur numer 17 fer á bráðamóttaka og er Ungur, liðinn tími er 4
 Interrupted!
-Þurfum að bíða í 0.5947933757109941 langann tima eftir næsta sjukling
-Fjöldi á spítala er núna 13, liðinn tími er 4
-Sjúklingur númer 12 á bráðamóttaka þarf að bíða þar í 0.2702415012941889, liðinn tími er 4
-Sjúklingur númer 12 fer af bráðamóttaka til göngudeild, liðinn tími er 4.2702415
-Sjúklingur númer 12 á göngudeild þarf að bíða þar í 0.0259499770756578, liðinn tími er 4.2702415
-Sjúklingur numer 13 fer á bráðamóttaka og er Ungur, liðinn tími er 4.5947933
-Þurfum að bíða í 0.30542859972353903 langann tima eftir næsta sjukling
-Fjöldi á spítala er núna 14, liðinn tími er 4.5947933
-Sjúklingur númer 13 á bráðamóttaka þarf að bíða þar í 0.3410130314487093, liðinn tími er 4.5947933
-Sjúklingur numer 14 fer á bráðamóttaka og er Ungur, liðinn tími er 4.9002218
-Þurfum að bíða í 0.4994441429118911 langann tima eftir næsta sjukling
-Fjöldi á spítala er núna 15, liðinn tími er 4.9002218
-Sjúklingur númer 14 á bráðamóttaka þarf að bíða þar í 0.3681552317450546, liðinn tími er 4.9002218
-Sjúklingur numer 15 fer á bráðamóttaka og er Ungur, liðinn tími er 5
+Þurfum að bíða í 0.08093897875906483 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 18, liðinn tími er 4
+Sjúklingur númer 17 á bráðamóttaka þarf að bíða þar í 0.012600717913639136, liðinn tími er 4
+Sjúklingur númer 17 fer af bráðamóttaka til legudeild, liðinn tími er 4.0126007
+Sjúklingur númer 17 á legudeild þarf að bíða þar í 1.4984044138302988, liðinn tími er 4.0126007
+Sjúklingur numer 18 fer á bráðamóttaka og er Ungur, liðinn tími er 4.0809389
+Þurfum að bíða í 0.029908251171174675 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 19, liðinn tími er 4.0809389
+Sjúklingur númer 18 á bráðamóttaka þarf að bíða þar í 0.0695366445460993, liðinn tími er 4.0809389
+Sjúklingur numer 19 fer á bráðamóttaka og er Ungur, liðinn tími er 4.1108471
+Þurfum að bíða í 0.4016541511841378 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 20, liðinn tími er 4.1108471
+Sjúklingur númer 19 á bráðamóttaka þarf að bíða þar í 0.29923159904276564, liðinn tími er 4.1108471
+Sjúklingur númer 3 fer af legudeild til göngudeild, liðinn tími er 4.2611805
+Sjúklingur númer 3 á göngudeild þarf að bíða þar í 0.029299451689840966, liðinn tími er 4.2611805
+Sjúklingur numer 20 fer á bráðamóttaka og er Ungur, liðinn tími er 4.5125012
+Þurfum að bíða í 0.29538062221842865 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 21, liðinn tími er 4.5125012
+Sjúklingur númer 20 á bráðamóttaka þarf að bíða þar í 0.28046530937797637, liðinn tími er 4.5125012
+Sjúklingur númer 20 fer af bráðamóttaka til legudeild, liðinn tími er 4.7929665
+Sjúklingur númer 20 á legudeild þarf að bíða þar í 0.9292888058264822, liðinn tími er 4.7929665
+Sjúklingur numer 21 fer á bráðamóttaka og er Ungur, liðinn tími er 4.8078818
+Þurfum að bíða í 0.7732800837071729 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 22, liðinn tími er 4.8078818
+Sjúklingur númer 21 á bráðamóttaka þarf að bíða þar í 0.2146650859688712, liðinn tími er 4.8078818
+Sjúklingur numer 22 fer á bráðamóttaka og er Ungur, liðinn tími er 5
 Interrupted!
-Þurfum að bíða í 0.03458962319746562 langann tima eftir næsta sjukling
-Fjöldi á spítala er núna 16, liðinn tími er 5
-Sjúklingur númer 15 á bráðamóttaka þarf að bíða þar í 0.29402936822456743, liðinn tími er 5
-Sjúklingur numer 16 fer á heilsugæsla og er Ungur, liðinn tími er 5.0345896
-Þurfum að bíða í 0.11734274261365939 langann tima eftir næsta sjukling
-Fjöldi á spítala er núna 17, liðinn tími er 5.0345896
-Sjúklingur númer 16 á heilsugæsla þarf að bíða þar í 0.03368745298762221, liðinn tími er 5.0345896
-Sjúklingur numer 17 fer á bráðamóttaka og er Ungur, liðinn tími er 5.1519323
-Þurfum að bíða í 0.3003493438020076 langann tima eftir næsta sjukling
-Fjöldi á spítala er núna 18, liðinn tími er 5.1519323
-Sjúklingur númer 17 á bráðamóttaka þarf að bíða þar í 0.017806768127627097, liðinn tími er 5.1519323
-Sjúklingur númer 14 fer af bráðamóttaka til göngudeild, liðinn tími er 5.268377
-Sjúklingur númer 14 á göngudeild þarf að bíða þar í 0.029527172688174605, liðinn tími er 5.268377
-Sjúklingur númer 15 fer af bráðamóttaka til legudeild, liðinn tími er 5.2940293
-Sjúklingur númer 15 á legudeild þarf að bíða þar í 8.312728667427114, liðinn tími er 5.2940293
-Sjúklingur numer 18 fer á heilsugæsla og er Ungur, liðinn tími er 5.4522816
-Þurfum að bíða í 0.47220065740012024 langann tima eftir næsta sjukling
-Fjöldi á spítala er núna 19, liðinn tími er 5.4522816
-Sjúklingur númer 18 á heilsugæsla þarf að bíða þar í 0.015586771543876627, liðinn tími er 5.4522816
-Sjúklingur númer 18 fer af heilsugæsla til göngudeild, liðinn tími er 5.4678683
-Sjúklingur númer 18 á göngudeild þarf að bíða þar í 0.023230678808517136, liðinn tími er 5.4678683
-Sjúklingur numer 19 fer á heilsugæsla og er Ungur, liðinn tími er 5.9244822
-Þurfum að bíða í 0.3022746382801195 langann tima eftir næsta sjukling
-Fjöldi á spítala er núna 20, liðinn tími er 5.9244822
-Sjúklingur númer 19 á heilsugæsla þarf að bíða þar í 0.14845000540299808, liðinn tími er 5.9244822
-Sjúklingur numer 20 fer á bráðamóttaka og er Ungur, liðinn tími er 6
+Þurfum að bíða í 0.07092647043565369 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 23, liðinn tími er 5
+Sjúklingur númer 22 á bráðamóttaka þarf að bíða þar í 0.17052290393063935, liðinn tími er 5
+Sjúklingur numer 23 fer á bráðamóttaka og er Ungur, liðinn tími er 5.0709264
+Þurfum að bíða í 0.14409557761371156 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 24, liðinn tími er 5.0709264
+Sjúklingur númer 23 á bráðamóttaka þarf að bíða þar í 0.35394668459144735, liðinn tími er 5.0709264
+Sjúklingur númer 22 fer af bráðamóttaka til göngudeild, liðinn tími er 5.1705229
+Sjúklingur númer 22 á göngudeild þarf að bíða þar í 0.018961940179095575, liðinn tími er 5.1705229
+Sjúklingur numer 24 fer á bráðamóttaka og er Ungur, liðinn tími er 5.2150219
+Þurfum að bíða í 0.16241433147744905 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 25, liðinn tími er 5.2150219
+Sjúklingur númer 24 á bráðamóttaka þarf að bíða þar í 0.2778965358845408, liðinn tími er 5.2150219
+Sjúklingur numer 25 fer á bráðamóttaka og er Ungur, liðinn tími er 5.3774362
+Þurfum að bíða í 0.1430074674437856 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 26, liðinn tími er 5.3774362
+Sjúklingur númer 25 á bráðamóttaka þarf að bíða þar í 0.3238411371241515, liðinn tími er 5.3774362
+Sjúklingur numer 26 fer á heilsugæsla og er Ungur, liðinn tími er 5.5204436
+Þurfum að bíða í 0.05801968686882601 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 27, liðinn tími er 5.5204436
+Sjúklingur númer 26 á heilsugæsla þarf að bíða þar í 0.11905279248908758, liðinn tími er 5.5204436
+Sjúklingur numer 27 fer á heilsugæsla og er Ungur, liðinn tími er 5.5784632
+Þurfum að bíða í 0.2690324848849917 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 28, liðinn tími er 5.5784632
+Sjúklingur númer 27 á heilsugæsla þarf að bíða þar í 0.08507594935832358, liðinn tími er 5.5784632
+Sjúklingur númer 13 fer af legudeild til göngudeild, liðinn tími er 5.6154104
+Sjúklingur númer 13 á göngudeild þarf að bíða þar í 0.02519909117147284, liðinn tími er 5.6154104
+Sjúklingur númer 25 fer af bráðamóttaka til göngudeild, liðinn tími er 5.7012773
+Sjúklingur númer 25 á göngudeild þarf að bíða þar í 0.029930806979504787, liðinn tími er 5.7012773
+Sjúklingur numer 28 fer á heilsugæsla og er Ungur, liðinn tími er 5.8474956
+Þurfum að bíða í 0.269860594932537 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 29, liðinn tími er 5.8474956
+Sjúklingur númer 28 á heilsugæsla þarf að bíða þar í 0.15592460844475992, liðinn tími er 5.8474956
+Sjúklingur numer 29 fer á bráðamóttaka og er Ungur, liðinn tími er 6
 Interrupted!
-Þurfum að bíða í 0.022412380887109444 langann tima eftir næsta sjukling
-Fjöldi á spítala er núna 21, liðinn tími er 6
-Sjúklingur númer 20 á bráðamóttaka þarf að bíða þar í 0.2775938986649708, liðinn tími er 6
-Sjúklingur numer 21 fer á bráðamóttaka og er Ungur, liðinn tími er 6.0224123
-Þurfum að bíða í 0.3290885879849603 langann tima eftir næsta sjukling
-Fjöldi á spítala er núna 22, liðinn tími er 6.0224123
-Sjúklingur númer 21 á bráðamóttaka þarf að bíða þar í 0.21815801649268626, liðinn tími er 6.0224123
-Sjúklingur númer 21 fer af bráðamóttaka til göngudeild, liðinn tími er 6.2405703
-Sjúklingur númer 21 á göngudeild þarf að bíða þar í 0.01792580564875426, liðinn tími er 6.2405703
-Sjúklingur númer 20 fer af bráðamóttaka til legudeild, liðinn tími er 6.2775938
-Sjúklingur númer 20 á legudeild þarf að bíða þar í 1.846854854485461, liðinn tími er 6.2775938
-Sjúklingur numer 22 fer á heilsugæsla og er Ungur, liðinn tími er 6.3515008
-Þurfum að bíða í 0.22669493368312738 langann tima eftir næsta sjukling
-Fjöldi á spítala er núna 23, liðinn tími er 6.3515008
-Sjúklingur númer 22 á heilsugæsla þarf að bíða þar í 0.19230825807541063, liðinn tími er 6.3515008
-Sjúklingur numer 23 fer á heilsugæsla og er Ungur, liðinn tími er 6.5781957
-Þurfum að bíða í 0.04729308468519612 langann tima eftir næsta sjukling
-Fjöldi á spítala er núna 24, liðinn tími er 6.5781957
-Sjúklingur númer 23 á heilsugæsla þarf að bíða þar í 0.12156317044122292, liðinn tími er 6.5781957
-Sjúklingur numer 24 fer á bráðamóttaka og er Ungur, liðinn tími er 6.6254887
-Þurfum að bíða í 0.4430342006324963 langann tima eftir næsta sjukling
-Fjöldi á spítala er núna 25, liðinn tími er 6.6254887
-Sjúklingur númer 24 á bráðamóttaka þarf að bíða þar í 0.36086895417928183, liðinn tími er 6.6254887
-Sjúklingur númer 24 fer af bráðamóttaka til legudeild, liðinn tími er 6.9863576
-Sjúklingur númer 24 á legudeild þarf að bíða þar í 4.771696420215345, liðinn tími er 6.9863576
-Sjúklingur numer 25 fer á heilsugæsla og er Ungur, liðinn tími er 7
+Þurfum að bíða í 0.173061227281091 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 30, liðinn tími er 6
+Sjúklingur númer 29 á bráðamóttaka þarf að bíða þar í 0.32827567447362266, liðinn tími er 6
+Sjúklingur numer 30 fer á heilsugæsla og er Ungur, liðinn tími er 6.1730612
+Þurfum að bíða í 1.3256966291941825 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 31, liðinn tími er 6.1730612
+Sjúklingur númer 30 á heilsugæsla þarf að bíða þar í 0.04384583339274201, liðinn tími er 6.1730612
+Sjúklingur númer 29 fer af bráðamóttaka til göngudeild, liðinn tími er 6.3282756
+Sjúklingur númer 29 á göngudeild þarf að bíða þar í 0.02820371167650619, liðinn tími er 6.3282756
+Sjúklingur numer 31 fer á bráðamóttaka og er Ungur, liðinn tími er 7
 Interrupted!
-Þurfum að bíða í 0.28572836271738855 langann tima eftir næsta sjukling
-Fjöldi á spítala er núna 26, liðinn tími er 7
-Sjúklingur númer 25 á heilsugæsla þarf að bíða þar í 0.14570316995759644, liðinn tími er 7
-Sjúklingur numer 26 fer á heilsugæsla og er Ungur, liðinn tími er 7.2857283
-Þurfum að bíða í 0.56906035373835 langann tima eftir næsta sjukling
-Fjöldi á spítala er núna 27, liðinn tími er 7.2857283
-Sjúklingur númer 26 á heilsugæsla þarf að bíða þar í 0.07319283460881228, liðinn tími er 7.2857283
-Sjúklingur númer 26 fer af heilsugæsla til göngudeild, liðinn tími er 7.3589211
-Sjúklingur númer 26 á göngudeild þarf að bíða þar í 0.029413404985989162, liðinn tími er 7.3589211
-Sjúklingur numer 27 fer á bráðamóttaka og er Ungur, liðinn tími er 7.8547886
-Þurfum að bíða í 0.9546040204383421 langann tima eftir næsta sjukling
-Fjöldi á spítala er núna 28, liðinn tími er 7.8547886
-Sjúklingur númer 27 á bráðamóttaka þarf að bíða þar í 0.19945852294073374, liðinn tími er 7.8547886
-Sjúklingur numer 28 fer á bráðamóttaka og er Ungur, liðinn tími er 8
+Þurfum að bíða í 0.14158249208241339 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 32, liðinn tími er 7
+Sjúklingur númer 31 á bráðamóttaka þarf að bíða þar í 0.053494050448524795, liðinn tími er 7
+Sjúklingur numer 32 fer á bráðamóttaka og er Ungur, liðinn tími er 7.1415824
+Þurfum að bíða í 0.10936372807015395 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 33, liðinn tími er 7.1415824
+Sjúklingur númer 32 á bráðamóttaka þarf að bíða þar í 0.24425488279399227, liðinn tími er 7.1415824
+Sjúklingur numer 33 fer á bráðamóttaka og er Ungur, liðinn tími er 7.2509461
+Þurfum að bíða í 0.5628862856563813 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 34, liðinn tími er 7.2509461
+Sjúklingur númer 33 á bráðamóttaka þarf að bíða þar í 0.2505497028914046, liðinn tími er 7.2509461
+Sjúklingur númer 32 fer af bráðamóttaka til göngudeild, liðinn tími er 7.3858372
+Sjúklingur númer 32 á göngudeild þarf að bíða þar í 0.023493072611043726, liðinn tími er 7.3858372
+Sjúklingur númer 33 fer af bráðamóttaka til göngudeild, liðinn tími er 7.5014958
+Sjúklingur númer 33 á göngudeild þarf að bíða þar í 0.027415942865151886, liðinn tími er 7.5014958
+Sjúklingur numer 34 fer á bráðamóttaka og er Ungur, liðinn tími er 7.8138323
+Þurfum að bíða í 0.8573675674760078 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 35, liðinn tími er 7.8138323
+Sjúklingur númer 34 á bráðamóttaka þarf að bíða þar í 0.08180274572307372, liðinn tími er 7.8138323
+Sjúklingur numer 35 fer á heilsugæsla og er Ungur, liðinn tími er 8
 Interrupted!
-Þurfum að bíða í 0.07576891518772635 langann tima eftir næsta sjukling
-Fjöldi á spítala er núna 29, liðinn tími er 8
-Sjúklingur númer 28 á bráðamóttaka þarf að bíða þar í 0.3518552344161343, liðinn tími er 8
-Sjúklingur numer 29 fer á heilsugæsla og er Ungur, liðinn tími er 8.0757689
-Þurfum að bíða í 0.15037183668988408 langann tima eftir næsta sjukling
-Fjöldi á spítala er núna 30, liðinn tími er 8.0757689
-Sjúklingur númer 29 á heilsugæsla þarf að bíða þar í 0.08869616905632251, liðinn tími er 8.0757689
-Sjúklingur numer 30 fer á bráðamóttaka og er Ungur, liðinn tími er 8.2261407
-Þurfum að bíða í 0.10925043180661427 langann tima eftir næsta sjukling
-Fjöldi á spítala er núna 31, liðinn tími er 8.2261407
-Sjúklingur númer 30 á bráðamóttaka þarf að bíða þar í 0.3423351691208478, liðinn tími er 8.2261407
-Sjúklingur numer 31 fer á bráðamóttaka og er Ungur, liðinn tími er 8.3353911
-Þurfum að bíða í 0.09551559779917587 langann tima eftir næsta sjukling
-Fjöldi á spítala er núna 32, liðinn tími er 8.3353911
-Sjúklingur númer 31 á bráðamóttaka þarf að bíða þar í 0.37076399075834265, liðinn tími er 8.3353911
-Sjúklingur númer 28 fer af bráðamóttaka til legudeild, liðinn tími er 8.3518552
-Sjúklingur númer 28 á legudeild þarf að bíða þar í 4.717355488519904, liðinn tími er 8.3518552
-Sjúklingur numer 32 fer á bráðamóttaka og er Ungur, liðinn tími er 8.4309066
-Þurfum að bíða í 0.2540834167661879 langann tima eftir næsta sjukling
-Fjöldi á spítala er núna 33, liðinn tími er 8.4309066
-Sjúklingur númer 32 á bráðamóttaka þarf að bíða þar í 0.2654544415769421, liðinn tími er 8.4309066
-Sjúklingur númer 30 fer af bráðamóttaka til göngudeild, liðinn tími er 8.5684758
-Sjúklingur númer 30 á göngudeild þarf að bíða þar í 0.020953949825351103, liðinn tími er 8.5684758
-Sjúklingur numer 33 fer á heilsugæsla og er Ungur, liðinn tími er 8.68499
-Þurfum að bíða í 0.23623531824428937 langann tima eftir næsta sjukling
-Fjöldi á spítala er núna 34, liðinn tími er 8.68499
-Sjúklingur númer 33 á heilsugæsla þarf að bíða þar í 0.18443086770569483, liðinn tími er 8.68499
-Sjúklingur númer 32 fer af bráðamóttaka til legudeild, liðinn tími er 8.696361
-Sjúklingur númer 32 á legudeild þarf að bíða þar í 1.5279381191574601, liðinn tími er 8.696361
-Sjúklingur numer 34 fer á bráðamóttaka og er Ungur, liðinn tími er 8.9212253
-Þurfum að bíða í 0.20902594429150734 langann tima eftir næsta sjukling
-Fjöldi á spítala er núna 35, liðinn tími er 8.9212253
-Sjúklingur númer 34 á bráðamóttaka þarf að bíða þar í 0.1707585857672424, liðinn tími er 8.9212253
-Sjúklingur numer 35 fer á heilsugæsla og er Ungur, liðinn tími er 9
+Þurfum að bíða í 0.3163818533687874 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 36, liðinn tími er 8
+Sjúklingur númer 35 á heilsugæsla þarf að bíða þar í 0.08855778998162495, liðinn tími er 8
+Sjúklingur numer 36 fer á bráðamóttaka og er Ungur, liðinn tími er 8.3163818
+Þurfum að bíða í 0.28777658897644864 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 37, liðinn tími er 8.3163818
+Sjúklingur númer 36 á bráðamóttaka þarf að bíða þar í 0.13076040348539147, liðinn tími er 8.3163818
+Sjúklingur númer 36 fer af bráðamóttaka til göngudeild, liðinn tími er 8.4471422
+Sjúklingur númer 36 á göngudeild þarf að bíða þar í 0.019929929464091514, liðinn tími er 8.4471422
+Sjúklingur numer 37 fer á bráðamóttaka og er Ungur, liðinn tími er 8.6041583
+Þurfum að bíða í 0.4839613419536014 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 38, liðinn tími er 8.6041583
+Sjúklingur númer 37 á bráðamóttaka þarf að bíða þar í 0.2811132449661909, liðinn tími er 8.6041583
+Sjúklingur númer 37 fer af bráðamóttaka til göngudeild, liðinn tími er 8.8852715
+Sjúklingur númer 37 á göngudeild þarf að bíða þar í 0.024381071708342555, liðinn tími er 8.8852715
+Sjúklingur numer 38 fer á bráðamóttaka og er Ungur, liðinn tími er 9
 Interrupted!
-Þurfum að bíða í 0.12767348737299394 langann tima eftir næsta sjukling
-Fjöldi á spítala er núna 36, liðinn tími er 9
-Sjúklingur númer 35 á heilsugæsla þarf að bíða þar í 0.03028099929461302, liðinn tími er 9
-Sjúklingur numer 36 fer á bráðamóttaka og er Ungur, liðinn tími er 9.1276734
-Þurfum að bíða í 1.2243198044853394 langann tima eftir næsta sjukling
-Fjöldi á spítala er núna 37, liðinn tími er 9.1276734
-Sjúklingur númer 36 á bráðamóttaka þarf að bíða þar í 0.17958897852785372, liðinn tími er 9.1276734
-Sjúklingur númer 36 fer af bráðamóttaka til göngudeild, liðinn tími er 9.3072623
-Sjúklingur númer 36 á göngudeild þarf að bíða þar í 0.018538456442085308, liðinn tími er 9.3072623
-Sjúklingur numer 37 fer á heilsugæsla og er Ungur, liðinn tími er 10
+Þurfum að bíða í 0.8797328423058344 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 39, liðinn tími er 9
+Sjúklingur númer 38 á bráðamóttaka þarf að bíða þar í 0.14341263811262914, liðinn tími er 9
+Sjúklingur númer 38 fer af bráðamóttaka til legudeild, liðinn tími er 9.1434126
+Sjúklingur númer 38 á legudeild þarf að bíða þar í 2.419199839506549, liðinn tími er 9.1434126
+Sjúklingur numer 39 fer á bráðamóttaka og er Ungur, liðinn tími er 9.8797328
+Þurfum að bíða í 0.395716917484262 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 40, liðinn tími er 9.8797328
+Sjúklingur númer 39 á bráðamóttaka þarf að bíða þar í 0.27872018220309175, liðinn tími er 9.8797328
+Sjúklingur numer 40 fer á bráðamóttaka og er Ungur, liðinn tími er 10
 Interrupted!
-Þurfum að bíða í 1.0911143476557932 langann tima eftir næsta sjukling
-Fjöldi á spítala er núna 38, liðinn tími er 10
-Sjúklingur númer 37 á heilsugæsla þarf að bíða þar í 0.03279795806519592, liðinn tími er 10
-Sjúklingur númer 32 fer af legudeild til göngudeild, liðinn tími er 10.2242991
-Sjúklingur númer 32 á göngudeild þarf að bíða þar í 0.011084308112545082, liðinn tími er 10.2242991
-Sjúklingur numer 38 fer á heilsugæsla og er Ungur, liðinn tími er 11
+Þurfum að bíða í 0.03999211096314036 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 41, liðinn tími er 10
+Sjúklingur númer 40 á bráðamóttaka þarf að bíða þar í 0.0028493211990452006, liðinn tími er 10
+Sjúklingur númer 40 fer af bráðamóttaka til legudeild, liðinn tími er 10.0028493
+Sjúklingur númer 40 á legudeild þarf að bíða þar í 3.9238120980683058, liðinn tími er 10.0028493
+Sjúklingur numer 41 fer á heilsugæsla og er Ungur, liðinn tími er 10.0399921
+Þurfum að bíða í 0.06541218954829754 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 42, liðinn tími er 10.0399921
+Sjúklingur númer 41 á heilsugæsla þarf að bíða þar í 0.017424414501257434, liðinn tími er 10.0399921
+Sjúklingur numer 42 fer á bráðamóttaka og er Ungur, liðinn tími er 10.1054042
+Þurfum að bíða í 0.38676770260566673 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 43, liðinn tími er 10.1054042
+Sjúklingur númer 42 á bráðamóttaka þarf að bíða þar í 0.3534885147323313, liðinn tími er 10.1054042
+Sjúklingur númer 39 fer af bráðamóttaka til legudeild, liðinn tími er 10.1584529
+Sjúklingur númer 39 á legudeild þarf að bíða þar í 9.315438078399469, liðinn tími er 10.1584529
+Sjúklingur númer 42 fer af bráðamóttaka til legudeild, liðinn tími er 10.4588927
+Sjúklingur númer 42 á legudeild þarf að bíða þar í 1.7431377555734409, liðinn tími er 10.4588927
+Sjúklingur numer 43 fer á bráðamóttaka og er Ungur, liðinn tími er 10.4921719
+Þurfum að bíða í 0.2966130871144357 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 44, liðinn tími er 10.4921719
+Sjúklingur númer 43 á bráðamóttaka þarf að bíða þar í 0.02734683299313618, liðinn tími er 10.4921719
+Sjúklingur numer 44 fer á heilsugæsla og er Ungur, liðinn tími er 10.7887849
+Þurfum að bíða í 0.00354194535617344 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 45, liðinn tími er 10.7887849
+Sjúklingur númer 44 á heilsugæsla þarf að bíða þar í 0.19191294936086656, liðinn tími er 10.7887849
+Sjúklingur numer 45 fer á bráðamóttaka og er Ungur, liðinn tími er 10.7923268
+Þurfum að bíða í 0.0956320528036068 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 46, liðinn tími er 10.7923268
+Sjúklingur númer 45 á bráðamóttaka þarf að bíða þar í 0.15035019963064705, liðinn tími er 10.7923268
+Sjúklingur numer 46 fer á heilsugæsla og er Ungur, liðinn tími er 10.8879588
+Þurfum að bíða í 0.9925731947478144 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 47, liðinn tími er 10.8879588
+Sjúklingur númer 46 á heilsugæsla þarf að bíða þar í 0.19651815937669864, liðinn tími er 10.8879588
+Sjúklingur númer 45 fer af bráðamóttaka til göngudeild, liðinn tími er 10.9426769
+Sjúklingur númer 45 á göngudeild þarf að bíða þar í 0.016409981235121367, liðinn tími er 10.9426769
+Sjúklingur númer 44 fer af heilsugæsla til göngudeild, liðinn tími er 10.9806978
+Sjúklingur númer 44 á göngudeild þarf að bíða þar í 0.023225145262305225, liðinn tími er 10.9806978
+Sjúklingur numer 47 fer á bráðamóttaka og er Ungur, liðinn tími er 11
 Interrupted!
-Þurfum að bíða í 0.007217749636025841 langann tima eftir næsta sjukling
-Fjöldi á spítala er núna 39, liðinn tími er 11
-Sjúklingur númer 38 á heilsugæsla þarf að bíða þar í 0.002746835445401648, liðinn tími er 11
-Sjúklingur numer 39 fer á heilsugæsla og er Ungur, liðinn tími er 11.0072177
-Þurfum að bíða í 0.10480330210996679 langann tima eftir næsta sjukling
-Fjöldi á spítala er núna 40, liðinn tími er 11.0072177
-Sjúklingur númer 39 á heilsugæsla þarf að bíða þar í 0.06916301086040354, liðinn tími er 11.0072177
-Sjúklingur numer 40 fer á heilsugæsla og er Ungur, liðinn tími er 11.112021
-Þurfum að bíða í 0.30374294572232924 langann tima eftir næsta sjukling
-Fjöldi á spítala er núna 41, liðinn tími er 11.112021
-Sjúklingur númer 40 á heilsugæsla þarf að bíða þar í 0.09879861366879131, liðinn tími er 11.112021
-Sjúklingur numer 41 fer á bráðamóttaka og er Ungur, liðinn tími er 11.4157639
-Þurfum að bíða í 0.042814766423561273 langann tima eftir næsta sjukling
-Fjöldi á spítala er núna 42, liðinn tími er 11.4157639
-Sjúklingur númer 41 á bráðamóttaka þarf að bíða þar í 0.23063611420366734, liðinn tími er 11.4157639
-Sjúklingur numer 42 fer á bráðamóttaka og er Ungur, liðinn tími er 11.4585786
-Þurfum að bíða í 0.025560022848233048 langann tima eftir næsta sjukling
-Fjöldi á spítala er núna 43, liðinn tími er 11.4585786
-Sjúklingur númer 42 á bráðamóttaka þarf að bíða þar í 0.3402752420819715, liðinn tími er 11.4585786
-Sjúklingur numer 43 fer á bráðamóttaka og er Ungur, liðinn tími er 11.4841386
-Þurfum að bíða í 0.2301821739549122 langann tima eftir næsta sjukling
-Fjöldi á spítala er núna 44, liðinn tími er 11.4841386
-Sjúklingur númer 43 á bráðamóttaka þarf að bíða þar í 0.05527559727210346, liðinn tími er 11.4841386
-Sjúklingur númer 43 fer af bráðamóttaka til göngudeild, liðinn tími er 11.5394141
-Sjúklingur númer 43 á göngudeild þarf að bíða þar í 0.024600667345617278, liðinn tími er 11.5394141
-Sjúklingur númer 41 fer af bráðamóttaka til legudeild, liðinn tími er 11.6464
-Sjúklingur númer 41 á legudeild þarf að bíða þar í 2.5422522572212696, liðinn tími er 11.6464
-Sjúklingur numer 44 fer á bráðamóttaka og er Ungur, liðinn tími er 11.7143207
-Þurfum að bíða í 0.4223718766937553 langann tima eftir næsta sjukling
-Fjöldi á spítala er núna 45, liðinn tími er 11.7143207
-Sjúklingur númer 44 á bráðamóttaka þarf að bíða þar í 0.15937960850045998, liðinn tími er 11.7143207
-Sjúklingur númer 44 fer af bráðamóttaka til legudeild, liðinn tími er 11.8737003
-Sjúklingur númer 44 á legudeild þarf að bíða þar í 1.1555748025068517, liðinn tími er 11.8737003
-Sjúklingur numer 45 fer á bráðamóttaka og er Ungur, liðinn tími er 12
+Þurfum að bíða í 0.012092581433682208 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 48, liðinn tími er 11
+Sjúklingur númer 47 á bráðamóttaka þarf að bíða þar í 0.2062064743676253, liðinn tími er 11
+Sjúklingur numer 48 fer á bráðamóttaka og er Ungur, liðinn tími er 11.0120925
+Þurfum að bíða í 0.041142295151759205 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 49, liðinn tími er 11.0120925
+Sjúklingur númer 48 á bráðamóttaka þarf að bíða þar í 0.04784477616094275, liðinn tími er 11.0120925
+Sjúklingur numer 49 fer á bráðamóttaka og er Ungur, liðinn tími er 11.0532347
+Þurfum að bíða í 0.021036976875997777 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 50, liðinn tími er 11.0532347
+Sjúklingur númer 49 á bráðamóttaka þarf að bíða þar í 0.33208673700321784, liðinn tími er 11.0532347
+Sjúklingur númer 48 fer af bráðamóttaka til legudeild, liðinn tími er 11.0599372
+Sjúklingur númer 48 á legudeild þarf að bíða þar í 1.6435788482669587, liðinn tími er 11.0599372
+Sjúklingur numer 50 fer á heilsugæsla og er Ungur, liðinn tími er 11.0742716
+Þurfum að bíða í 0.07188587591733593 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 51, liðinn tími er 11.0742716
+Sjúklingur númer 50 á heilsugæsla þarf að bíða þar í 0.0033944115058492925, liðinn tími er 11.0742716
+Sjúklingur numer 51 fer á bráðamóttaka og er Ungur, liðinn tími er 11.1461574
+Þurfum að bíða í 0.10810679559495524 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 52, liðinn tími er 11.1461574
+Sjúklingur númer 51 á bráðamóttaka þarf að bíða þar í 0.07524366197420455, liðinn tími er 11.1461574
+Sjúklingur númer 47 fer af bráðamóttaka til legudeild, liðinn tími er 11.2062064
+Sjúklingur númer 47 á legudeild þarf að bíða þar í 5.855941322620402, liðinn tími er 11.2062064
+Sjúklingur numer 52 fer á heilsugæsla og er Ungur, liðinn tími er 11.2542641
+Þurfum að bíða í 0.024918967154533095 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 53, liðinn tími er 11.2542641
+Sjúklingur númer 52 á heilsugæsla þarf að bíða þar í 0.08870831611040436, liðinn tími er 11.2542641
+Sjúklingur numer 53 fer á bráðamóttaka og er Ungur, liðinn tími er 11.279183
+Þurfum að bíða í 0.338454336256975 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 54, liðinn tími er 11.279183
+Sjúklingur númer 53 á bráðamóttaka þarf að bíða þar í 0.12395976560840373, liðinn tími er 11.279183
+Sjúklingur númer 53 fer af bráðamóttaka til legudeild, liðinn tími er 11.4031427
+Sjúklingur númer 53 á legudeild þarf að bíða þar í 1.0797394347111768, liðinn tími er 11.4031427
+Sjúklingur númer 38 fer af legudeild til göngudeild, liðinn tími er 11.5626124
+Sjúklingur númer 38 á göngudeild þarf að bíða þar í 0.02130681938086954, liðinn tími er 11.5626124
+Sjúklingur numer 54 fer á bráðamóttaka og er Ungur, liðinn tími er 11.6176373
+Þurfum að bíða í 0.010250058094050444 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 55, liðinn tími er 11.6176373
+Sjúklingur númer 54 á bráðamóttaka þarf að bíða þar í 0.02923911214770708, liðinn tími er 11.6176373
+Sjúklingur numer 55 fer á heilsugæsla og er Ungur, liðinn tími er 11.6278873
+Þurfum að bíða í 0.03726499182295925 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 56, liðinn tími er 11.6278873
+Sjúklingur númer 55 á heilsugæsla þarf að bíða þar í 0.058110838969289716, liðinn tími er 11.6278873
+Sjúklingur numer 56 fer á heilsugæsla og er Ungur, liðinn tími er 11.6651522
+Þurfum að bíða í 1.5828568485675967 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 57, liðinn tími er 11.6651522
+Sjúklingur númer 56 á heilsugæsla þarf að bíða þar í 0.07555870473178045, liðinn tími er 11.6651522
+Sjúklingur numer 57 fer á bráðamóttaka og er Ungur, liðinn tími er 12
 Interrupted!
-Þurfum að bíða í 0.3515569635047416 langann tima eftir næsta sjukling
-Fjöldi á spítala er núna 46, liðinn tími er 12
-Sjúklingur númer 45 á bráðamóttaka þarf að bíða þar í 0.038274894728453315, liðinn tími er 12
-Sjúklingur númer 45 fer af bráðamóttaka til göngudeild, liðinn tími er 12.0382748
-Sjúklingur númer 45 á göngudeild þarf að bíða þar í 0.020397608489914613, liðinn tími er 12.0382748
-Sjúklingur numer 46 fer á bráðamóttaka og er Ungur, liðinn tími er 12.3515569
-Þurfum að bíða í 0.21786587202493987 langann tima eftir næsta sjukling
-Fjöldi á spítala er núna 47, liðinn tími er 12.3515569
-Sjúklingur númer 46 á bráðamóttaka þarf að bíða þar í 0.3860380568988799, liðinn tími er 12.3515569
-Sjúklingur numer 47 fer á bráðamóttaka og er Ungur, liðinn tími er 12.5694227
-Þurfum að bíða í 0.07133103934872517 langann tima eftir næsta sjukling
-Fjöldi á spítala er núna 48, liðinn tími er 12.5694227
-Sjúklingur númer 47 á bráðamóttaka þarf að bíða þar í 0.20780281145954635, liðinn tími er 12.5694227
-Sjúklingur numer 48 fer á bráðamóttaka og er Ungur, liðinn tími er 12.6407537
-Þurfum að bíða í 0.34700774355225456 langann tima eftir næsta sjukling
-Fjöldi á spítala er núna 49, liðinn tími er 12.6407537
-Sjúklingur númer 48 á bráðamóttaka þarf að bíða þar í 0.14041057431623832, liðinn tími er 12.6407537
-Sjúklingur númer 46 fer af bráðamóttaka til göngudeild, liðinn tími er 12.7375949
-Sjúklingur númer 46 á göngudeild þarf að bíða þar í 0.02550180818676101, liðinn tími er 12.7375949
-Sjúklingur númer 47 fer af bráðamóttaka til legudeild, liðinn tími er 12.7772255
-Sjúklingur númer 47 á legudeild þarf að bíða þar í 1.9204824022737688, liðinn tími er 12.7772255
-Sjúklingur númer 48 fer af bráðamóttaka til legudeild, liðinn tími er 12.7811642
-Sjúklingur númer 48 á legudeild þarf að bíða þar í 0.4725497079619775, liðinn tími er 12.7811642
-Sjúklingur numer 49 fer á heilsugæsla og er Ungur, liðinn tími er 12.9877614
-Þurfum að bíða í 0.06793859671878756 langann tima eftir næsta sjukling
-Fjöldi á spítala er núna 50, liðinn tími er 12.9877614
-Sjúklingur númer 49 á heilsugæsla þarf að bíða þar í 0.15631571205161313, liðinn tími er 12.9877614
-Sjúklingur numer 50 fer á bráðamóttaka og er Ungur, liðinn tími er 13
+Þurfum að bíða í 0.23666700214601916 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 58, liðinn tími er 12
+Sjúklingur númer 57 á bráðamóttaka þarf að bíða þar í 0.07792249693904188, liðinn tími er 12
+Sjúklingur númer 57 fer af bráðamóttaka til legudeild, liðinn tími er 12.0779224
+Sjúklingur númer 57 á legudeild þarf að bíða þar í 3.854139781669637, liðinn tími er 12.0779224
+Sjúklingur numer 58 fer á bráðamóttaka og er Ungur, liðinn tími er 12.236667
+Þurfum að bíða í 0.03322712491846419 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 59, liðinn tími er 12.236667
+Sjúklingur númer 58 á bráðamóttaka þarf að bíða þar í 0.26785468711417854, liðinn tími er 12.236667
+Sjúklingur numer 59 fer á bráðamóttaka og er Ungur, liðinn tími er 12.2698941
+Þurfum að bíða í 0.4131182128760855 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 60, liðinn tími er 12.2698941
+Sjúklingur númer 59 á bráðamóttaka þarf að bíða þar í 0.0005595878840235938, liðinn tími er 12.2698941
+Sjúklingur númer 59 fer af bráðamóttaka til göngudeild, liðinn tími er 12.2704536
+Sjúklingur númer 59 á göngudeild þarf að bíða þar í 0.01821568454067022, liðinn tími er 12.2704536
+Sjúklingur numer 60 fer á heilsugæsla og er Ungur, liðinn tími er 12.6830123
+Þurfum að bíða í 0.09897183573271691 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 61, liðinn tími er 12.6830123
+Sjúklingur númer 60 á heilsugæsla þarf að bíða þar í 0.14137088653695346, liðinn tími er 12.6830123
+Sjúklingur numer 61 fer á bráðamóttaka og er Ungur, liðinn tími er 12.7819841
+Þurfum að bíða í 0.674756098275718 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 62, liðinn tími er 12.7819841
+Sjúklingur númer 61 á bráðamóttaka þarf að bíða þar í 0.18707897384980646, liðinn tími er 12.7819841
+Sjúklingur númer 61 fer af bráðamóttaka til legudeild, liðinn tími er 12.969063
+Sjúklingur númer 61 á legudeild þarf að bíða þar í 2.3780524615265004, liðinn tími er 12.969063
+Sjúklingur numer 62 fer á bráðamóttaka og er Ungur, liðinn tími er 13
 Interrupted!
-Þurfum að bíða í 0.02279659465441289 langann tima eftir næsta sjukling
-Fjöldi á spítala er núna 51, liðinn tími er 13
-Sjúklingur númer 50 á bráðamóttaka þarf að bíða þar í 0.04613402100565565, liðinn tími er 13
-Sjúklingur numer 51 fer á bráðamóttaka og er Ungur, liðinn tími er 13.0227965
-Þurfum að bíða í 0.3573376830096537 langann tima eftir næsta sjukling
-Fjöldi á spítala er núna 52, liðinn tími er 13.0227965
-Sjúklingur númer 51 á bráðamóttaka þarf að bíða þar í 0.02496182690139945, liðinn tími er 13.0227965
-Sjúklingur númer 44 fer af legudeild til göngudeild, liðinn tími er 13.0292751
-Sjúklingur númer 44 á göngudeild þarf að bíða þar í 0.013733186919117898, liðinn tími er 13.0292751
-Sjúklingur númer 51 fer af bráðamóttaka til legudeild, liðinn tími er 13.0477583
-Sjúklingur númer 51 á legudeild þarf að bíða þar í 3.0607844197367986, liðinn tími er 13.0477583
-Sjúklingur numer 52 fer á bráðamóttaka og er Ungur, liðinn tími er 13.3801341
-Þurfum að bíða í 0.002606637369666201 langann tima eftir næsta sjukling
-Fjöldi á spítala er núna 53, liðinn tími er 13.3801341
-Sjúklingur númer 52 á bráðamóttaka þarf að bíða þar í 0.12456599149134288, liðinn tími er 13.3801341
-Sjúklingur numer 53 fer á bráðamóttaka og er Ungur, liðinn tími er 13.3827407
-Þurfum að bíða í 0.13046346092936417 langann tima eftir næsta sjukling
-Fjöldi á spítala er núna 54, liðinn tími er 13.3827407
-Sjúklingur númer 53 á bráðamóttaka þarf að bíða þar í 0.15935743762615948, liðinn tími er 13.3827407
-Sjúklingur númer 52 fer af bráðamóttaka til göngudeild, liðinn tími er 13.5047
-Sjúklingur númer 52 á göngudeild þarf að bíða þar í 0.024156183206548998, liðinn tími er 13.5047
-Sjúklingur numer 54 fer á heilsugæsla og er Ungur, liðinn tími er 13.5132041
-Þurfum að bíða í 0.6130404587960443 langann tima eftir næsta sjukling
-Fjöldi á spítala er núna 55, liðinn tími er 13.5132041
-Sjúklingur númer 54 á heilsugæsla þarf að bíða þar í 0.03535537702746474, liðinn tími er 13.5132041
-Sjúklingur númer 53 fer af bráðamóttaka til legudeild, liðinn tími er 13.5420981
-Sjúklingur númer 53 á legudeild þarf að bíða þar í 4.641310713520134, liðinn tími er 13.5420981
-Sjúklingur númer 15 fer af legudeild til göngudeild, liðinn tími er 13.6067579
-Sjúklingur númer 15 á göngudeild þarf að bíða þar í 0.02595486428400262, liðinn tími er 13.6067579
-Sjúklingur numer 55 fer á bráðamóttaka og er Ungur, liðinn tími er 14
+Þurfum að bíða í 0.1193659229557858 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 63, liðinn tími er 13
+Sjúklingur númer 62 á bráðamóttaka þarf að bíða þar í 0.06198829751554332, liðinn tími er 13
+Sjúklingur numer 63 fer á bráðamóttaka og er Ungur, liðinn tími er 13.1193659
+Þurfum að bíða í 0.8525166561986588 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 64, liðinn tími er 13.1193659
+Sjúklingur númer 63 á bráðamóttaka þarf að bíða þar í 0.09187110034836042, liðinn tími er 13.1193659
+Sjúklingur númer 63 fer af bráðamóttaka til göngudeild, liðinn tími er 13.211237
+Sjúklingur númer 63 á göngudeild þarf að bíða þar í 0.01792234368991216, liðinn tími er 13.211237
+Sjúklingur numer 64 fer á heilsugæsla og er Ungur, liðinn tími er 13.9718825
+Þurfum að bíða í 0.44211452011818586 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 65, liðinn tími er 13.9718825
+Sjúklingur númer 64 á heilsugæsla þarf að bíða þar í 0.005657276048165409, liðinn tími er 13.9718825
+Sjúklingur numer 65 fer á bráðamóttaka og er Ungur, liðinn tími er 14
 Interrupted!
-Þurfum að bíða í 0.015721749153574056 langann tima eftir næsta sjukling
-Fjöldi á spítala er núna 56, liðinn tími er 14
-Sjúklingur númer 55 á bráðamóttaka þarf að bíða þar í 0.1792863601955056, liðinn tími er 14
-Sjúklingur numer 56 fer á bráðamóttaka og er Ungur, liðinn tími er 14.0157217
-Þurfum að bíða í 0.2589963241919641 langann tima eftir næsta sjukling
-Fjöldi á spítala er núna 57, liðinn tími er 14.0157217
-Sjúklingur númer 56 á bráðamóttaka þarf að bíða þar í 0.29304346559710964, liðinn tími er 14.0157217
-Sjúklingur numer 57 fer á bráðamóttaka og er Ungur, liðinn tími er 14.274718
-Þurfum að bíða í 0.2220806282489675 langann tima eftir næsta sjukling
-Fjöldi á spítala er núna 58, liðinn tími er 14.274718
-Sjúklingur númer 57 á bráðamóttaka þarf að bíða þar í 0.34594209220071426, liðinn tími er 14.274718
-Sjúklingur númer 56 fer af bráðamóttaka til göngudeild, liðinn tími er 14.3087651
-Sjúklingur númer 56 á göngudeild þarf að bíða þar í 0.012459100625691517, liðinn tími er 14.3087651
-Sjúklingur numer 58 fer á bráðamóttaka og er Ungur, liðinn tími er 14.4967986
-Þurfum að bíða í 0.22563760139401615 langann tima eftir næsta sjukling
-Fjöldi á spítala er núna 59, liðinn tími er 14.4967986
-Sjúklingur númer 58 á bráðamóttaka þarf að bíða þar í 0.31835085456182755, liðinn tími er 14.4967986
-Sjúklingur numer 59 fer á heilsugæsla og er Ungur, liðinn tími er 14.7224362
-Þurfum að bíða í 0.25120017487851937 langann tima eftir næsta sjukling
-Fjöldi á spítala er núna 60, liðinn tími er 14.7224362
-Sjúklingur númer 59 á heilsugæsla þarf að bíða þar í 0.1297352200978134, liðinn tími er 14.7224362
-Sjúklingur numer 60 fer á bráðamóttaka og er Ungur, liðinn tími er 14.9736363
-Þurfum að bíða í 0.7454665655034094 langann tima eftir næsta sjukling
-Fjöldi á spítala er núna 61, liðinn tími er 14.9736363
-Sjúklingur númer 60 á bráðamóttaka þarf að bíða þar í 0.22379995055207982, liðinn tími er 14.9736363
-Sjúklingur numer 61 fer á bráðamóttaka og er Ungur, liðinn tími er 15
+Þurfum að bíða í 0.40168735979682646 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 66, liðinn tími er 14
+Sjúklingur númer 65 á bráðamóttaka þarf að bíða þar í 0.002065458815575325, liðinn tími er 14
+Sjúklingur númer 65 fer af bráðamóttaka til legudeild, liðinn tími er 14.0020654
+Sjúklingur númer 65 á legudeild þarf að bíða þar í 3.449647566023169, liðinn tími er 14.0020654
+Sjúklingur numer 66 fer á bráðamóttaka og er Ungur, liðinn tími er 14.4016873
+Þurfum að bíða í 0.08364578198204613 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 67, liðinn tími er 14.4016873
+Sjúklingur númer 66 á bráðamóttaka þarf að bíða þar í 0.037407354687995914, liðinn tími er 14.4016873
+Sjúklingur numer 67 fer á heilsugæsla og er Ungur, liðinn tími er 14.485333
+Þurfum að bíða í 0.0017892097388169956 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 68, liðinn tími er 14.485333
+Sjúklingur númer 67 á heilsugæsla þarf að bíða þar í 0.09075249344611191, liðinn tími er 14.485333
+Sjúklingur numer 68 fer á heilsugæsla og er Ungur, liðinn tími er 14.4871222
+Þurfum að bíða í 0.00348374283997196 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 69, liðinn tími er 14.4871222
+Sjúklingur númer 68 á heilsugæsla þarf að bíða þar í 0.16642494367734761, liðinn tími er 14.4871222
+Sjúklingur numer 69 fer á heilsugæsla og er Ungur, liðinn tími er 14.4906059
+Þurfum að bíða í 0.025097802197147405 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 70, liðinn tími er 14.4906059
+Sjúklingur númer 69 á heilsugæsla þarf að bíða þar í 0.09474218603910049, liðinn tími er 14.4906059
+Sjúklingur numer 70 fer á bráðamóttaka og er Ungur, liðinn tími er 14.5157037
+Þurfum að bíða í 0.02407731458619501 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 71, liðinn tími er 14.5157037
+Sjúklingur númer 70 á bráðamóttaka þarf að bíða þar í 0.1976438760793041, liðinn tími er 14.5157037
+Sjúklingur numer 71 fer á bráðamóttaka og er Ungur, liðinn tími er 14.539781
+Þurfum að bíða í 0.04593237615215802 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 72, liðinn tími er 14.539781
+Sjúklingur númer 71 á bráðamóttaka þarf að bíða þar í 0.1407780086904662, liðinn tími er 14.539781
+Sjúklingur numer 72 fer á bráðamóttaka og er Ungur, liðinn tími er 14.5857133
+Þurfum að bíða í 0.06739845807526841 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 73, liðinn tími er 14.5857133
+Sjúklingur númer 72 á bráðamóttaka þarf að bíða þar í 0.19738897486002605, liðinn tími er 14.5857133
+Sjúklingur numer 73 fer á bráðamóttaka og er Ungur, liðinn tími er 14.6531117
+Þurfum að bíða í 0.3510018409550798 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 74, liðinn tími er 14.6531117
+Sjúklingur númer 73 á bráðamóttaka þarf að bíða þar í 0.2752402135800757, liðinn tími er 14.6531117
+Sjúklingur númer 68 fer af heilsugæsla til legudeild, liðinn tími er 14.6535471
+Sjúklingur númer 68 á legudeild þarf að bíða þar í 2.9865625947740706, liðinn tími er 14.6535471
+Sjúklingur númer 71 fer af bráðamóttaka til göngudeild, liðinn tími er 14.680559
+Sjúklingur númer 71 á göngudeild þarf að bíða þar í 0.023467257029128843, liðinn tími er 14.680559
+Sjúklingur númer 72 fer af bráðamóttaka til legudeild, liðinn tími er 14.7831022
+Sjúklingur númer 72 á legudeild þarf að bíða þar í 0.992622128303408, liðinn tími er 14.7831022
+Sjúklingur numer 74 fer á bráðamóttaka og er Ungur, liðinn tími er 15
 Interrupted!
-Þurfum að bíða í 0.034370503540399666 langann tima eftir næsta sjukling
-Fjöldi á spítala er núna 62, liðinn tími er 15
-Sjúklingur númer 61 á bráðamóttaka þarf að bíða þar í 0.2883129792838883, liðinn tími er 15
-Sjúklingur numer 62 fer á bráðamóttaka og er Ungur, liðinn tími er 15.0343705
-Þurfum að bíða í 1.1474689850718114 langann tima eftir næsta sjukling
-Fjöldi á spítala er núna 63, liðinn tími er 15.0343705
-Sjúklingur númer 62 á bráðamóttaka þarf að bíða þar í 0.07053837212293333, liðinn tími er 15.0343705
-Sjúklingur númer 60 fer af bráðamóttaka til legudeild, liðinn tími er 15.1974362
-Sjúklingur númer 60 á legudeild þarf að bíða þar í 1.5225619296102266, liðinn tími er 15.1974362
-Sjúklingur númer 61 fer af bráðamóttaka til legudeild, liðinn tími er 15.2883129
-Sjúklingur númer 61 á legudeild þarf að bíða þar í 1.087550681864746, liðinn tími er 15.2883129
-Sjúklingur numer 63 fer á bráðamóttaka og er Ungur, liðinn tími er 16
+Þurfum að bíða í 0.9369733505833641 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 75, liðinn tími er 15
+Sjúklingur númer 74 á bráðamóttaka þarf að bíða þar í 0.19577192538686652, liðinn tími er 15
+Sjúklingur númer 74 fer af bráðamóttaka til göngudeild, liðinn tími er 15.1957719
+Sjúklingur númer 74 á göngudeild þarf að bíða þar í 0.015202244708874376, liðinn tími er 15.1957719
+Sjúklingur númer 61 fer af legudeild til göngudeild, liðinn tími er 15.3471154
+Sjúklingur númer 61 á göngudeild þarf að bíða þar í 0.02832055459652122, liðinn tími er 15.3471154
+Sjúklingur numer 75 fer á heilsugæsla og er Ungur, liðinn tími er 15.9369733
+Þurfum að bíða í 0.07311787196520976 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 76, liðinn tími er 15.9369733
+Sjúklingur númer 75 á heilsugæsla þarf að bíða þar í 0.010997454175258733, liðinn tími er 15.9369733
+Sjúklingur numer 76 fer á bráðamóttaka og er Ungur, liðinn tími er 16
 Interrupted!
-Þurfum að bíða í 0.5995235650339724 langann tima eftir næsta sjukling
-Fjöldi á spítala er núna 64, liðinn tími er 16
-Sjúklingur númer 63 á bráðamóttaka þarf að bíða þar í 0.20564711530955843, liðinn tími er 16
-Sjúklingur númer 63 fer af bráðamóttaka til legudeild, liðinn tími er 16.2056471
-Sjúklingur númer 63 á legudeild þarf að bíða þar í 1.080654646563132, liðinn tími er 16.2056471
-Sjúklingur numer 64 fer á bráðamóttaka og er Ungur, liðinn tími er 16.5995235
-Þurfum að bíða í 0.31461748424802666 langann tima eftir næsta sjukling
-Fjöldi á spítala er núna 65, liðinn tími er 16.5995235
-Sjúklingur númer 64 á bráðamóttaka þarf að bíða þar í 0.3217572389318409, liðinn tími er 16.5995235
-Sjúklingur numer 65 fer á heilsugæsla og er Ungur, liðinn tími er 16.9141409
-Þurfum að bíða í 0.5676487442662903 langann tima eftir næsta sjukling
-Fjöldi á spítala er núna 66, liðinn tími er 16.9141409
-Sjúklingur númer 65 á heilsugæsla þarf að bíða þar í 0.03665004569881133, liðinn tími er 16.9141409
-Sjúklingur numer 66 fer á bráðamóttaka og er Ungur, liðinn tími er 17
+Þurfum að bíða í 0.17029158415434123 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 77, liðinn tími er 16
+Sjúklingur númer 76 á bráðamóttaka þarf að bíða þar í 0.0370661118054139, liðinn tími er 16
+Sjúklingur numer 77 fer á heilsugæsla og er Ungur, liðinn tími er 16.1702915
+Þurfum að bíða í 0.2566969281885393 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 78, liðinn tími er 16.1702915
+Sjúklingur númer 77 á heilsugæsla þarf að bíða þar í 0.17648569484077659, liðinn tími er 16.1702915
+Sjúklingur numer 78 fer á bráðamóttaka og er Ungur, liðinn tími er 16.4269884
+Þurfum að bíða í 0.024638949875915864 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 79, liðinn tími er 16.4269884
+Sjúklingur númer 78 á bráðamóttaka þarf að bíða þar í 0.35692177089719185, liðinn tími er 16.4269884
+Sjúklingur numer 79 fer á heilsugæsla og er Ungur, liðinn tími er 16.4516273
+Þurfum að bíða í 1.1405626843691568 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 80, liðinn tími er 16.4516273
+Sjúklingur númer 79 á heilsugæsla þarf að bíða þar í 0.1798765036183766, liðinn tími er 16.4516273
+Sjúklingur numer 80 fer á heilsugæsla og er Ungur, liðinn tími er 17
 Interrupted!
-Þurfum að bíða í 1.0932935967645654 langann tima eftir næsta sjukling
-Fjöldi á spítala er núna 67, liðinn tími er 17
-Sjúklingur númer 66 á bráðamóttaka þarf að bíða þar í 0.15205688586088684, liðinn tími er 17
-Sjúklingur númer 66 fer af bráðamóttaka til göngudeild, liðinn tími er 17.1520568
-Sjúklingur númer 66 á göngudeild þarf að bíða þar í 0.01573521177551486, liðinn tími er 17.1520568
-Sjúklingur numer 67 fer á heilsugæsla og er Ungur, liðinn tími er 18
+Þurfum að bíða í 0.5441351764581945 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 81, liðinn tími er 17
+Sjúklingur númer 80 á heilsugæsla þarf að bíða þar í 0.0013067648752158345, liðinn tími er 17
+Sjúklingur numer 81 fer á bráðamóttaka og er Ungur, liðinn tími er 17.5441351
+Þurfum að bíða í 0.01537520259503571 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 82, liðinn tími er 17.5441351
+Sjúklingur númer 81 á bráðamóttaka þarf að bíða þar í 0.2978009837017399, liðinn tími er 17.5441351
+Sjúklingur numer 82 fer á bráðamóttaka og er Ungur, liðinn tími er 17.5595103
+Þurfum að bíða í 0.046844118400950284 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 83, liðinn tími er 17.5595103
+Sjúklingur númer 82 á bráðamóttaka þarf að bíða þar í 0.08371521005114317, liðinn tími er 17.5595103
+Sjúklingur numer 83 fer á bráðamóttaka og er Ungur, liðinn tími er 17.6063544
+Þurfum að bíða í 1.7918405311541419 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 84, liðinn tími er 17.6063544
+Sjúklingur númer 83 á bráðamóttaka þarf að bíða þar í 0.20700794345559922, liðinn tími er 17.6063544
+Sjúklingur númer 83 fer af bráðamóttaka til göngudeild, liðinn tími er 17.8133623
+Sjúklingur númer 83 á göngudeild þarf að bíða þar í 0.02113165007491207, liðinn tími er 17.8133623
+Sjúklingur numer 84 fer á heilsugæsla og er Ungur, liðinn tími er 18
 Interrupted!
-Þurfum að bíða í 0.04099006567873523 langann tima eftir næsta sjukling
-Fjöldi á spítala er núna 68, liðinn tími er 18
-Sjúklingur númer 67 á heilsugæsla þarf að bíða þar í 0.15402861188819103, liðinn tími er 18
-Sjúklingur numer 68 fer á heilsugæsla og er Ungur, liðinn tími er 18.04099
-Þurfum að bíða í 0.0497519729466329 langann tima eftir næsta sjukling
-Fjöldi á spítala er núna 69, liðinn tími er 18.04099
-Sjúklingur númer 68 á heilsugæsla þarf að bíða þar í 0.06437398887443077, liðinn tími er 18.04099
-Sjúklingur numer 69 fer á bráðamóttaka og er Ungur, liðinn tími er 18.0907419
-Þurfum að bíða í 0.27191917041548747 langann tima eftir næsta sjukling
-Fjöldi á spítala er núna 70, liðinn tími er 18.0907419
-Sjúklingur númer 69 á bráðamóttaka þarf að bíða þar í 0.14309055540854604, liðinn tími er 18.0907419
-Sjúklingur númer 68 fer af heilsugæsla til göngudeild, liðinn tími er 18.1053639
-Sjúklingur númer 68 á göngudeild þarf að bíða þar í 0.026601104129385718, liðinn tími er 18.1053639
-Sjúklingur númer 53 fer af legudeild til göngudeild, liðinn tími er 18.1834088
-Sjúklingur númer 53 á göngudeild þarf að bíða þar í 0.013539473574394115, liðinn tími er 18.1834088
-Sjúklingur númer 69 fer af bráðamóttaka til göngudeild, liðinn tími er 18.2338324
-Sjúklingur númer 69 á göngudeild þarf að bíða þar í 0.011274086293426383, liðinn tími er 18.2338324
-Sjúklingur numer 70 fer á bráðamóttaka og er Ungur, liðinn tími er 18.362661
-Þurfum að bíða í 0.6931546086009136 langann tima eftir næsta sjukling
-Fjöldi á spítala er núna 71, liðinn tími er 18.362661
-Sjúklingur númer 70 á bráðamóttaka þarf að bíða þar í 0.03959236507750692, liðinn tími er 18.362661
-Sjúklingur númer 70 fer af bráðamóttaka til legudeild, liðinn tími er 18.4022533
-Sjúklingur númer 70 á legudeild þarf að bíða þar í 2.6237741303592, liðinn tími er 18.4022533
-Sjúklingur numer 71 fer á heilsugæsla og er Ungur, liðinn tími er 19
+Þurfum að bíða í 0.06352626808140838 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 85, liðinn tími er 18
+Sjúklingur númer 84 á heilsugæsla þarf að bíða þar í 0.15959501991029598, liðinn tími er 18
+Sjúklingur numer 85 fer á heilsugæsla og er Ungur, liðinn tími er 18.0635262
+Þurfum að bíða í 0.46787056139170813 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 86, liðinn tími er 18.0635262
+Sjúklingur númer 85 á heilsugæsla þarf að bíða þar í 0.14588826948119712, liðinn tími er 18.0635262
+Sjúklingur númer 84 fer af heilsugæsla til göngudeild, liðinn tími er 18.159595
+Sjúklingur númer 84 á göngudeild þarf að bíða þar í 0.01058578513589957, liðinn tími er 18.159595
+Sjúklingur númer 85 fer af heilsugæsla til legudeild, liðinn tími er 18.2094144
+Sjúklingur númer 85 á legudeild þarf að bíða þar í 24.81043804689523, liðinn tími er 18.2094144
+Sjúklingur numer 86 fer á heilsugæsla og er Ungur, liðinn tími er 18.5313967
+Þurfum að bíða í 0.16309329410213516 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 87, liðinn tími er 18.5313967
+Sjúklingur númer 86 á heilsugæsla þarf að bíða þar í 0.06638663935772453, liðinn tími er 18.5313967
+Sjúklingur numer 87 fer á bráðamóttaka og er Ungur, liðinn tími er 18.6944899
+Þurfum að bíða í 0.19770683070309802 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 88, liðinn tími er 18.6944899
+Sjúklingur númer 87 á bráðamóttaka þarf að bíða þar í 0.09324542541207999, liðinn tími er 18.6944899
+Sjúklingur númer 87 fer af bráðamóttaka til legudeild, liðinn tími er 18.7877353
+Sjúklingur númer 87 á legudeild þarf að bíða þar í 9.518777197621475, liðinn tími er 18.7877353
+Sjúklingur numer 88 fer á bráðamóttaka og er Ungur, liðinn tími er 18.8921967
+Þurfum að bíða í 0.10786026789386031 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 89, liðinn tími er 18.8921967
+Sjúklingur númer 88 á bráðamóttaka þarf að bíða þar í 0.20971654758775446, liðinn tími er 18.8921967
+Sjúklingur numer 89 fer á heilsugæsla og er Ungur, liðinn tími er 19
 Interrupted!
-Þurfum að bíða í 0.19674967581528796 langann tima eftir næsta sjukling
-Fjöldi á spítala er núna 72, liðinn tími er 19
-Sjúklingur númer 71 á heilsugæsla þarf að bíða þar í 0.16695255747388704, liðinn tími er 19
-Sjúklingur numer 72 fer á heilsugæsla og er Ungur, liðinn tími er 19.1967496
-Þurfum að bíða í 0.07751322884963403 langann tima eftir næsta sjukling
-Fjöldi á spítala er núna 73, liðinn tími er 19.1967496
-Sjúklingur númer 72 á heilsugæsla þarf að bíða þar í 0.08684835298305767, liðinn tími er 19.1967496
-Sjúklingur numer 73 fer á bráðamóttaka og er Ungur, liðinn tími er 19.2742628
-Þurfum að bíða í 0.6904181613416662 langann tima eftir næsta sjukling
-Fjöldi á spítala er núna 74, liðinn tími er 19.2742628
-Sjúklingur númer 73 á bráðamóttaka þarf að bíða þar í 0.21458912410521375, liðinn tími er 19.2742628
-Sjúklingur númer 73 fer af bráðamóttaka til göngudeild, liðinn tími er 19.4888519
-Sjúklingur númer 73 á göngudeild þarf að bíða þar í 0.010068008750708778, liðinn tími er 19.4888519
-Sjúklingur numer 74 fer á bráðamóttaka og er Ungur, liðinn tími er 19.9646809
-Þurfum að bíða í 0.234841373162424 langann tima eftir næsta sjukling
-Fjöldi á spítala er núna 75, liðinn tími er 19.9646809
-Sjúklingur númer 74 á bráðamóttaka þarf að bíða þar í 0.06312039468582738, liðinn tími er 19.9646809
+Þurfum að bíða í 0.6028611674902882 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 90, liðinn tími er 19
+Sjúklingur númer 89 á heilsugæsla þarf að bíða þar í 0.15542748950208887, liðinn tími er 19
+Sjúklingur númer 88 fer af bráðamóttaka til göngudeild, liðinn tími er 19.1019132
+Sjúklingur númer 88 á göngudeild þarf að bíða þar í 0.01632114861454868, liðinn tími er 19.1019132
+Sjúklingur numer 90 fer á bráðamóttaka og er Ungur, liðinn tími er 19.6028611
+Þurfum að bíða í 0.33988191115143024 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 91, liðinn tími er 19.6028611
+Sjúklingur númer 90 á bráðamóttaka þarf að bíða þar í 0.17677013313247364, liðinn tími er 19.6028611
+Sjúklingur numer 91 fer á bráðamóttaka og er Ungur, liðinn tími er 19.942743
+Þurfum að bíða í 0.16486506991330854 langann tima eftir næsta sjukling
+Fjöldi á spítala er núna 92, liðinn tími er 19.942743
+Sjúklingur númer 91 á bráðamóttaka þarf að bíða þar í 0.3685451651590621, liðinn tími er 19.942743
 Gögn um kerfið:
-Lykill legudeild og max inni eru 6
+Lykill legudeild og max inni eru 7
 Lykill göngudeild og max inni eru 1
-Lykill bráðamóttaka og max inni eru 3
-Lykill heilsugæsla og max inni eru 2
+Lykill bráðamóttaka og max inni eru 4
+Lykill heilsugæsla og max inni eru 3
 Lykill hjúkrun og max inni eru 0
 Lykill dauði og max inni eru 0
 Lykill heim og max inni eru 0
 Lykill (bráðamóttaka, Læknar) og starfsþörf: 1
 Lykill (bráðamóttaka, Hjúkrunarfræðingar) og starfsþörf: 1
 Lykill (heilsugæsla, Læknar) og starfsþörf: 1
-Lykill (heilsugæsla, Hjúkrunarfræðingar) og starfsþörf: 2
+Lykill (heilsugæsla, Hjúkrunarfræðingar) og starfsþörf: 3
 Lykill (legudeild, Læknar) og starfsþörf: 3
 Lykill (legudeild, Hjúkrunarfræðingar) og starfsþörf: 4
 Lykill (göngudeild, Læknar) og starfsþörf: 1
 Lykill (göngudeild, Hjúkrunarfræðingar) og starfsþörf: 1
 Deild bráðamóttaka og fjöldi sem kom inn á hverjum degi:
-1
-3
-2
-1
-3
-2
-3
-1
 5
-1
 0
-4
-4
-4
 5
 2
-2
+5
+4
 1
+4
+2
+2
+4
+6
+4
+2
+6
+1
+2
+3
 2
 2
 Deild heilsugæsla og fjöldi sem kom inn á hverjum degi:
-0
+2
+2
 1
+0
+0
 3
 1
 0
-3
-2
-2
-2
-1
-1
-3
-1
-1
 1
 0
+3
+4
 1
-0
+1
+3
+1
 2
-2
+1
+3
+1
 Deild legudeild og fjöldi sem kom inn á hverjum degi:
-1
-0
-0
-1
-0
-1
-2
-0
-2
-0
-0
-2
-2
-2
-0
 2
 1
 0
+2
+2
+0
+0
+0
+0
 1
+3
+3
+2
+0
+3
+0
+0
+0
+2
 0
 Deild göngudeild og fjöldi sem kom inn á hverjum degi:
 0
-1
-3
 0
 1
+2
+1
+3
+1
+2
+2
+0
 2
 1
 1
 1
 1
-1
-1
 2
-3
-1
-0
 0
 1
-3
+1
 1
