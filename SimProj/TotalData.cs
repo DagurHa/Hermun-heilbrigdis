@@ -9,16 +9,17 @@ public class TotalData
     public List<double> ConfInter;
     public List<int> totalPatient;
     public Dictionary<string[],double> BoxPlot;
-    public Dictionary<string[], List<int>> StarfsInfo;
+    public Dictionary<(string,string), List<int>> StarfsInfo;
 
     public TotalData(SimAttribs simAttr)
     {
+        MeanLega = new List<double>();
+        totalPatient = new List<int>();
         BoxPlot = new Dictionary<string[], double>();
-        StarfsInfo = new Dictionary<string[], List<int>>();
+        StarfsInfo = new Dictionary<(string,string), List<int>>();
         foreach ((string,string) keys in simAttr.JobDemand.Keys)
         {
-            string[] sInfoKey = {keys.Item1,keys.Item2};
-            StarfsInfo.Add(sInfoKey, new List<int>());
+            StarfsInfo.Add(keys, new List<int>());
         }
     }
 }

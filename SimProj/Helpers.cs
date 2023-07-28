@@ -15,7 +15,7 @@ namespace SimProj;
 
 public static class Helpers
 {
-    private static Dictionary<string[], int> starfs;
+    private static Dictionary<(string,string), int> starfs;
     private static Random rnd = new Random();
     public static int randomChoice(List<double> p)
     {
@@ -42,9 +42,9 @@ public static class Helpers
      Reiknum starfsþörf út frá hámarki sjúklinga sem komu í kerfið fyrir hverja deild
      Input: Listi af ints og SimAttribs struct
      */
-    public static Dictionary<string[], int> CalcNumJobs(int[] maxIn, SimAttribs simAttribs)
+    public static Dictionary<(string,string), int> CalcNumJobs(int[] maxIn, SimAttribs simAttribs)
     {
-        starfs = new Dictionary<string[], int>();
+        starfs = new Dictionary<(string,string), int>();
         IEnumerable<string> deildir = simAttribs.InitState.Concat(simAttribs.MedState);
         foreach (string state in deildir)
         {
@@ -52,8 +52,7 @@ public static class Helpers
             {
                 int nr = getDeildnr(state, simAttribs.States);
                 double load = Math.Ceiling((double)maxIn[nr] / simAttribs.JobDemand[(state, job)][0]);
-                string[] State_Job_Arr = { state, job };
-                starfs.Add(State_Job_Arr, (int)load * simAttribs.JobDemand[(state, job)][1]);
+                starfs.Add((state,job), (int)load * simAttribs.JobDemand[(state, job)][1]);
             }
         }
         return starfs;
@@ -100,7 +99,9 @@ public static class Helpers
         foreach((string,string) key in simAttr.DeildaSkipti.Keys)
         {
             string[] sankKey = { key.Item1, key.Item2 };
-            data.SankeyData.Add(sankKey, kerfi.deildir[key.Item1].dataDeild.deildSkipt[getDeildnr(key.Item2,simAttr.States)]);
+            if (kerfi.deildir.ContainsKey(key.Item1)){
+                data.SankeyData.Add(sankKey, kerfi.deildir[key.Item1].dataDeild.deildSkipt[getDeildnr(key.Item2, simAttr.States)]);
+            }
         }
     }
 }

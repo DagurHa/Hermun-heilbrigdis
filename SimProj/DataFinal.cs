@@ -13,7 +13,7 @@ public class DataFinal
     public Dictionary<string[], List<int>> deildAgeAmount;
     public List<int> LeguAmount;
     public int HeildarPatient;
-    public Dictionary<string[], int> JobNum;
+    public Dictionary<(string,string), int> JobNum;
     public Dictionary<string[], int> SankeyData;
     public DataFinal(List<List<string>> keys)
     {
@@ -35,7 +35,7 @@ public class DataFinal
         {
             File.AppendAllText(Run.pth,$"Lykill {key} og max inni eru {maxInni[key]}" + Environment.NewLine);
         }
-        foreach(string[] key in JobNum.Keys)
+        foreach((string,string) key in JobNum.Keys)
         {
             File.AppendAllText(Run.pth, $"Lykill {key} og starfsþörf: {JobNum[key]}" + Environment.NewLine);
         }

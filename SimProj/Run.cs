@@ -18,8 +18,10 @@ public class Run
         string simString_nontup = args[0];
         string simString_tup = args[1];
         SimAttribs simAttr = Helpers.InitSimAttr(simString_tup, simString_nontup);
-        DataFinal data = sim(simAttr);
-        data.Log();
+        TotalData retData = hermHundur(simAttr);
+        var jsonRetString = JsonConvert.SerializeObject(retData,Formatting.Indented);
+        string jsonPth = "JSONOUTPUT.json";
+        File.WriteAllText(jsonPth, jsonRetString);
     }
     //Fall sem hermir kerfið einu sinni með völdum stillingum.
     private static DataFinal sim(SimAttribs simAttr)
@@ -42,17 +44,21 @@ public class Run
         {
             DataFinal data = sim(simAttr);
             stayData.Add(data.LeguAmount);
-            foreach(List<string> key in simAttr.Keys)
+            foreach(string[] key in data.deildAgeAmount.Keys)
             {
-                string[] keyArr = { key[0], key[1] };
-                totalData.BoxPlot.Add(keyArr, (double)data.deildAgeAmount[keyArr].Sum()/days);
+                totalData.BoxPlot.Add(key, (double)data.deildAgeAmount[key].Sum()/days);
             }
-            foreach((string,string) JobKey in simAttr.JobDemand.Keys)
+            foreach ((string,string) JobKey in data.JobNum.Keys)
             {
-                string[] newKey = { JobKey.Item1, JobKey.Item2 };
-                totalData.StarfsInfo[newKey].Add(data.SankeyData[newKey]);
+                totalData.StarfsInfo[JobKey].Add(data.JobNum[JobKey]);
             }
             totalData.Sankey = data.SankeyData;
+            totalData.totalPatient.Add(data.HeildarPatient);
         }
+        foreach(List<int> legaHerm in stayData)
+        {
+            totalData.MeanLega.Add(legaHerm.Sum()/legaHerm.Count());
+        }
+        return totalData;
     }
 }
