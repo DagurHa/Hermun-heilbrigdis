@@ -1,22 +1,17 @@
-﻿using System.Diagnostics;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using SimSharp;
-using System.IO.Enumeration;
-using System.IO;
 
 namespace SimProj;
 //Console.OutputEncoding = System.Text.Encoding.UTF8;
 public class Run
 {
     public static bool upphitunFlag = false;
-    public const string pth = @"./SimProj/Test.txt";
+    public const string pth = "Test.txt";
     public static void Main(string[] args)
     {
-        //Gera file empty fyrir næstu hermun
-        File.WriteAllText(pth, string.Empty);
-        string simString_nontup = args[0];
-        string simString_tup = args[1];
+        File.WriteAllText(pth,string.Empty);
+        string simString_tup = File.ReadAllText("InputTuple.json");
+        string simString_nontup = File.ReadAllText("InputNonTuple.json");
         SimAttribs simAttr = Helpers.InitSimAttr(simString_tup, simString_nontup);
         TotalData retData = hermHundur(simAttr);
         var jsonRetString = JsonConvert.SerializeObject(retData,Formatting.Indented);
@@ -38,8 +33,10 @@ public class Run
     {
         int L = simAttr.SimAmount;
         int days = simAttr.Stop - 1;
-        List<List<int>> stayData = new List<List<int>>();
+        List<List<double>> stayData = new List<List<double>>();
         TotalData totalData = new TotalData(simAttr);
+        Dictionary<(string, string), List<int>> SankeyData = new Dictionary<(string, string), List<int>>();
+        foreach((string,string) key in simAttr.DeildaSkipti.Keys) { SankeyData.Add(key, new List<int>()); }
         for(int i = 0; i < L; i++)
         {
             DataFinal data = sim(simAttr);
@@ -52,12 +49,16 @@ public class Run
             {
                 totalData.StarfsInfo[JobKey].Add(data.JobNum[JobKey]);
             }
-            totalData.Sankey = data.SankeyData;
+            foreach((string,string) SankeyKey in data.SankeyData.Keys)
+            {
+                SankeyData[SankeyKey].Add(data.SankeyData[SankeyKey]);
+            }
             totalData.totalPatient.Add(data.HeildarPatient);
         }
-        foreach(List<int> legaHerm in stayData)
+        totalData.Sankey = SankeyData;
+        foreach (List<double> legaHerm in stayData)
         {
-            totalData.MeanLega.Add(legaHerm.Sum()/legaHerm.Count());
+            totalData.MeanLega.Add(legaHerm.Sum()/legaHerm.Count);
         }
         return totalData;
     }

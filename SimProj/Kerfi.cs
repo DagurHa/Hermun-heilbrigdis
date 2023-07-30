@@ -8,7 +8,6 @@ namespace SimProj;
 
 public class Kerfi
 {
-    public Dictionary<string, DeildInfo> data = new Dictionary<string, DeildInfo>();
     private Simulation env;
     public SimAttribs fastar;
     private List<double> p_age = new List<double>();
@@ -29,7 +28,6 @@ public class Kerfi
         {
             p_age.Add((1.0 / fastar.MeanExp[age_grp]) / fastar.Lam);
         }
-        foreach (string state in fastar.States) { data[state] = new DeildInfo(fastar); }
         telja = 0;
         Dagur = 0;
         amount = 0;
@@ -74,7 +72,7 @@ public class Kerfi
         var deild_list = fastar.InitState.Concat(fastar.MedState);
         foreach (string unit in deild_list)
         {
-            deildir[unit] = new Deild(env, unit, fastar, data[unit], this);
+            deildir[unit] = new Deild(env, unit, fastar, this);
         }
     }
     public IEnumerable<Event> interrupter(DataFinal data)

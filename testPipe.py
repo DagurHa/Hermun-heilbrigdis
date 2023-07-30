@@ -8,9 +8,9 @@ STATES = ["legudeild", "göngudeild", "bráðamóttaka", "heilsugæsla", "hjúkr
 AGE_GROUPS = ["Ungur","Miðaldra","Gamall"] # mismunandi aldurshópar sjúklings. Breytum/bætum við mögulega
 # meðalfjöldi aldurshópa sem koma á spítala á dag, fáum rauntölur hér og getum síðan breytt
 AGE_GROUP_AMOUNT = {
-    AGE_GROUPS[0] : 20,
-    AGE_GROUPS[1] : 10,
-    AGE_GROUPS[2] : 5
+    AGE_GROUPS[0] : 1392,
+    AGE_GROUPS[1] : 450,
+    AGE_GROUPS[2] : 205
 }
 # færslulíkur milli deilda, hér höfum við default færslulíkur sem verða vonandi byggðar á gögnum.
 # Skiptum færslulíkum eftir aldri en bara til þess að aldrað fólk geti komist á hjúkrun, einmitt nuna er hjúkrun absorbing
@@ -19,24 +19,24 @@ PROB = {
     #Færslulíkur ungra
     (STATES[0],AGE_GROUPS[0]) : [0.0, 0.31, 0.0, 0.0, 0.0, 0.04, 0.65],
     (STATES[1],AGE_GROUPS[0]) : [0.005, 0.0, 0.0, 0.0, 0.0, 0.0, 0.995],
-    (STATES[2],AGE_GROUPS[0]) : [0.3, 0.3, 0.0, 0.0, 0.0, 0.0, 0.4],
-    (STATES[3],AGE_GROUPS[0]) : [0.03, 0.1, 0.005, 0.0, 0.0, 0.0, 0.865],
+    (STATES[2],AGE_GROUPS[0]) : [0.162, 0.3, 0.0, 0.0, 0.0, 0.0, 0.538],
+    (STATES[3],AGE_GROUPS[0]) : [0.0857, 0.0217, 0.005, 0.0, 0.0, 0.0, 0.8876],
     (STATES[4],AGE_GROUPS[0]) : [0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0],
     (STATES[5],AGE_GROUPS[0]) : [0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0],
     (STATES[6],AGE_GROUPS[0]) : [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0],
     #Færslulíkur miðaldra
     (STATES[0],AGE_GROUPS[1]) : [0.0, 0.31, 0.0, 0.0, 0.0, 0.04, 0.65],
     (STATES[1],AGE_GROUPS[1]) : [0.005, 0.0, 0.0, 0.0, 0.0, 0.0, 0.995],
-    (STATES[2],AGE_GROUPS[1]) : [0.3, 0.3, 0.0, 0.0, 0.0, 0.0, 0.4],
-    (STATES[3],AGE_GROUPS[1]) : [0.03, 0.1, 0.005, 0.0, 0.0, 0.0, 0.865],
+    (STATES[2],AGE_GROUPS[1]) : [0.162, 0.3, 0.0, 0.0, 0.0, 0.0, 0.538],
+    (STATES[3],AGE_GROUPS[1]) : [0.0857, 0.0217, 0.005, 0.0, 0.0, 0.0, 0.8876],
     (STATES[4],AGE_GROUPS[1]) : [0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0],
     (STATES[5],AGE_GROUPS[1]) : [0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0],
     (STATES[6],AGE_GROUPS[1]) : [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0],
     #Færslulíkur aldraðra (Hér breytast líkur á að fara til hjúkrunar, einmitt nuna ekki byggt á gögnum)
     (STATES[0],AGE_GROUPS[2]) : [0.0, 0.31, 0.0, 0.0, 0.1, 0.04, 0.55],
     (STATES[1],AGE_GROUPS[2]) : [0.005, 0.0, 0.0, 0.0, 0.1, 0.0, 0.895],
-    (STATES[2],AGE_GROUPS[2]) : [0.3, 0.3, 0.0, 0.0, 0.0, 0.0, 0.4],
-    (STATES[3],AGE_GROUPS[2]) : [0.03, 0.1, 0.005, 0.0, 0.0, 0.0, 0.865],
+    (STATES[2],AGE_GROUPS[2]) : [0.162, 0.3, 0.0, 0.0, 0.0, 0.0, 0.538],
+    (STATES[3],AGE_GROUPS[2]) : [0.0857, 0.0217, 0.005, 0.0, 0.0, 0.0, 0.8876],
     (STATES[4],AGE_GROUPS[2]) : [0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0],
     (STATES[5],AGE_GROUPS[2]) : [0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0],
     (STATES[6],AGE_GROUPS[2]) : [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0]
@@ -47,7 +47,7 @@ PROB = {
 UPPHAFSDEILD = [STATES[2],STATES[3]]
 MILLIDEILD = [STATES[0],STATES[1]]
 ENDADEILD = [STATES[4],STATES[5],STATES[6]]
-INITIAL_PROB = [0.75, 0.25] # Upphafslíkur á að fara á legudeild ,göngudeild og bráðamóttöku
+INITIAL_PROB = [0.88, 0.12] # Upphafslíkur á að fara á legudeild ,göngudeild og bráðamóttöku
 # meðalbiðtímar á göngu- og legudeild, þetta verður default biðin sem byggist nú á aldri og verður vonandi byggð á gögnum.
 WAIT_BMT = (0.0, 0.39) # Þarf að finna gögn um þetta (biðtími á bráðamóttöku)
 WAIT_HH = (0.0, 0.2) # Þarf að finna gögn um þetta (Biðtími á heilsugæslu)
@@ -94,7 +94,7 @@ STARFSDEMAND = {
 }
 KEYS_TOT = list(product(AGE_GROUPS,UPPHAFSDEILD+MILLIDEILD))
 
-UPPHITUN = 0 # Upphitunartími hverrar hermunar, þ.e. byrjum ekki að safna/sýna upplýsingar fyrr en svona margir dagar hafa liðið
+UPPHITUN = 25 # Upphitunartími hverrar hermunar, þ.e. byrjum ekki að safna/sýna upplýsingar fyrr en svona margir dagar hafa liðið
 simAttributes_nontuple = {
     "MeanArrive" : AGE_GROUP_AMOUNT,
     "InitialProb" : INITIAL_PROB,
@@ -123,7 +123,7 @@ simAttributes_nontuple["MeanExp"] = {
 }
 simAttributes_nontuple["Lam"] = sum([1.0/simAttributes_nontuple["MeanArrive"][age] for age in AGE_GROUPS])
 simAttributes_nontuple["ShowSim"] = False
-simAttributes_nontuple["Stop"] = 20
+simAttributes_nontuple["Stop"] = 100
 
 def tup_to_string(dict):
     return {str(key):dict[key] for key in dict}
@@ -132,10 +132,16 @@ simAttrib_tuple = {}
 for key in simAttributes_tuple:
     simAttrib_tuple[key] = tup_to_string(simAttributes_tuple[key])
 
-simPip_nontuple = json.dumps(simAttributes_nontuple,ensure_ascii=True)
-simPip_tuple = json.dumps(simAttrib_tuple,ensure_ascii=True)
+pth = "./SimProj/bin/Release/net7.0/"
 
-process = subprocess.Popen(["./SimProj/bin/Debug/net7.0/SimProj.exe", simPip_nontuple,simPip_tuple], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+file_nonTuple = pth + "InputNonTuple.json"
+file_tuple = pth + "InputTuple.json"
+with open(file_nonTuple,"w") as json_file:
+    json.dump(simAttributes_nontuple,json_file,ensure_ascii=True)
+with open(file_tuple,"w") as json_file:
+    json.dump(simAttrib_tuple,json_file,ensure_ascii=True)
+
+"""process = subprocess.Popen([pth+"SimProj.exe"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
 stdout, stderr = process.communicate()
 
 if stderr:
@@ -143,4 +149,4 @@ if stderr:
 else:
     output = stdout.strip()
     print(output)
-    print(len(output))
+    print(len(output))"""

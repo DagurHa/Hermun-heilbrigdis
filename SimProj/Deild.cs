@@ -14,14 +14,13 @@ public class Deild
     private Dictionary<string,MathNet.Numerics.Distributions.LogNormal> waitLognorm = new Dictionary<string, MathNet.Numerics.Distributions.LogNormal>();
     private MathNet.Numerics.Distributions.ContinuousUniform WaitUnif;
     private double wait = 0;
-    private readonly IEnumerable<int>? deildnr;
-    public Deild(Simulation envment, string Nafn, SimAttribs SimAttributes,DeildInfo DataDeild, Kerfi Kerfi)
+    public Deild(Simulation envment, string Nafn, SimAttribs SimAttributes, Kerfi Kerfi)
     {
         kerfi = Kerfi;
         env = envment;
         nafn = Nafn;
         simAttribs = SimAttributes;
-        dataDeild = DataDeild;
+        dataDeild = new DeildInfo(simAttribs);
         if(simAttribs.WaitLognorm.ContainsKey(nafn)){
             foreach (string age_grp in simAttribs.AgeGroups)
             {
@@ -33,7 +32,6 @@ public class Deild
         if (simAttribs.WaitUniform.ContainsKey(nafn))
         {
             WaitUnif = new MathNet.Numerics.Distributions.ContinuousUniform(simAttribs.WaitUniform[nafn][0], simAttribs.WaitUniform[nafn][1]);
-            deildnr = Enumerable.Range(0, simAttribs.States.Count);
         }
     }
     public IEnumerable<Event> addP(Patient p, bool innrit, bool endurkoma, string prev_deild)
@@ -81,10 +79,6 @@ public class Deild
     {
         dataDeild.inni--;
         dataDeild.fjoldiInni[p.Aldur]--;
-        if (p.Deild != simAttribs.States[5])
-        {
-
-        }
     }
 }
 

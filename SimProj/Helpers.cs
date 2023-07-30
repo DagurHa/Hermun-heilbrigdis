@@ -1,15 +1,5 @@
 ﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Globalization;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Text.Json;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace SimProj;
 
@@ -30,6 +20,9 @@ public static class Helpers
         }
         return p.Count - 1;
     }
+    /*
+     Þetta fall finnur númer deildarinnar í listanum sem er gefinn
+     */
     public static int getDeildnr(string deild, List<string> deildir)
     {
         for (int i = 0; i < deildir.Count; i++)
@@ -85,9 +78,9 @@ public static class Helpers
     public static void CalcData(SimAttribs simAttr, Kerfi kerfi, DataFinal data)
     {
         int[] maxIn = new int[simAttr.States.Count];
-        foreach (string state in simAttr.States)
+        foreach (string state in kerfi.deildir.Keys)
         {
-            data.maxInni.Add(state, kerfi.data[state].maxInni);
+            data.maxInni.Add(state, kerfi.deildir[state].dataDeild.maxInni);
             if (!simAttr.FinalState.Contains(state)) { maxIn[getDeildnr(state, simAttr.States)] = data.maxInni[state]; }
         }
         data.HeildarPatient = kerfi.telja;
@@ -98,9 +91,9 @@ public static class Helpers
         }
         foreach((string,string) key in simAttr.DeildaSkipti.Keys)
         {
-            string[] sankKey = { key.Item1, key.Item2 };
-            if (kerfi.deildir.ContainsKey(key.Item1)){
-                data.SankeyData.Add(sankKey, kerfi.deildir[key.Item1].dataDeild.deildSkipt[getDeildnr(key.Item2, simAttr.States)]);
+            if (kerfi.deildir.ContainsKey(key.Item1))
+            {
+                data.SankeyData.Add(key, kerfi.deildir[key.Item1].dataDeild.deildSkipt[getDeildnr(key.Item2, simAttr.States)]);
             }
         }
     }

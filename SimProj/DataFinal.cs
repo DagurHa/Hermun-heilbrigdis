@@ -1,23 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SimProj;
+﻿namespace SimProj;
 
 public class DataFinal
 {
     public Dictionary<string, int[]> fjoldiDag;
     public Dictionary<string, int> maxInni = new Dictionary<string, int>();
     public Dictionary<string[], List<int>> deildAgeAmount;
-    public List<int> LeguAmount;
+    public List<double> LeguAmount;
     public int HeildarPatient;
     public Dictionary<(string,string), int> JobNum;
-    public Dictionary<string[], int> SankeyData;
+    public Dictionary<(string,string), int> SankeyData;
     public DataFinal(List<List<string>> keys)
     {
-        SankeyData = new Dictionary<string[], int>();
+        SankeyData = new Dictionary<(string,string), int>();
         fjoldiDag = new Dictionary<string, int[]>();
         deildAgeAmount = new Dictionary<string[], List<int>>();
         foreach(List<string> lst_key in keys)
@@ -25,7 +19,7 @@ public class DataFinal
             string[] keyArr = { lst_key[0] , lst_key[1] };
             deildAgeAmount.Add(keyArr, new List<int>());
         }
-        LeguAmount = new List<int>();
+        LeguAmount = new List<double>();
     }
 
     public void Log()

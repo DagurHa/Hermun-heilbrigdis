@@ -181,4 +181,9 @@ SimProj/bin/
 SimProj/bin
 **/bin/
 TestSimSharp/bin/
-
+*.sln.DotSettings.user
+**/*.sln.DotSettings.user
+*.csproj
+**/*.csproj
+*.sln
+**/*.sln

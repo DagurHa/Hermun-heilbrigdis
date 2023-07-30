@@ -5,8 +5,7 @@ public class TotalData
 {
     public List<int> SpitaliAmount;
     public List<double> MeanLega;
-    public Dictionary<string[], int> Sankey;
-    public List<double> ConfInter;
+    public Dictionary<(string,string), List<int>> Sankey;
     public List<int> totalPatient;
     public Dictionary<string[],double> BoxPlot;
     public Dictionary<(string,string), List<int>> StarfsInfo;
