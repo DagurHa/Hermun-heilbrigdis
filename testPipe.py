@@ -116,12 +116,11 @@ simAttributes_tuple = {
     'Deildaskipti' : deildaskipti,
     'JobDemand' : STARFSDEMAND
 }
-simAttributes_nontuple["MeanExp"] = {
-    AGE_GROUPS[0] : 0.5,
-    AGE_GROUPS[1] : 0.7,
-    AGE_GROUPS[2] : 0.9
-}
-simAttributes_nontuple["Lam"] = sum([1.0/simAttributes_nontuple["MeanArrive"][age] for age in AGE_GROUPS])
+keys = [age_group for age_group in AGE_GROUPS]
+vals = [1.0/simAttributes_nontuple["MeanArrive"][age_group] for age_group in AGE_GROUPS]
+
+simAttributes_nontuple["MeanWait"] = dict(zip(keys,vals))
+simAttributes_nontuple["Lam"] = sum([1.0/simAttributes_nontuple["MeanWait"][age] for age in AGE_GROUPS])
 simAttributes_nontuple["ShowSim"] = False
 simAttributes_nontuple["Stop"] = 100
 

@@ -1,5 +1,4 @@
 ﻿using SimSharp;
-
 /* 
     Þessi class hermir kerfið í heild
  */
@@ -26,7 +25,7 @@ public class Kerfi
         fastar = simAttributes;
         foreach(string age_grp in fastar.AgeGroups)
         {
-            p_age.Add((1.0 / fastar.MeanExp[age_grp]) / fastar.Lam);
+            p_age.Add((1.0 / fastar.MeanWait[age_grp]) / fastar.Lam);
         }
         telja = 0;
         Dagur = 0;
@@ -34,7 +33,7 @@ public class Kerfi
         endurkomur = 0;
         homePatientWait = false;
         upphitun = new Event(env);
-        arrive = new MathNet.Numerics.Distributions.Exponential(1.0/fastar.Lam);
+        arrive = new MathNet.Numerics.Distributions.Exponential(fastar.Lam);
         CreateDeildir();
         action = env.Process(patientGen(env));
         env.Process(upphitunWait());
@@ -50,19 +49,19 @@ public class Kerfi
                     //env.Process(homeGen(env, discharged));
                 }
                 double wait = arrive.Sample();
-                File.AppendAllText(Run.pth, $"Þurfum að bíða í {wait} langann tima eftir næsta sjukling" + System.Environment.NewLine);
+                //Console.WriteLine($"Þurfum að bíða í {wait} langann tima eftir næsta sjukling");
                 yield return env.TimeoutD(wait);
                 int i_aldur = Helpers.randomChoice(p_age);
                 string aldur = fastar.AgeGroups[i_aldur];
                 int i_deild_upphaf = Helpers.randomChoice(fastar.InitialProb);
                 string deild_upphaf = fastar.InitState[i_deild_upphaf];
                 Patient p = new Patient(aldur, deild_upphaf, telja);
-                File.AppendAllText(Run.pth, $"Sjúklingur numer {p.Numer} fer á {p.Deild} og er {p.Aldur}, liðinn tími er {env.NowD}" + System.Environment.NewLine);
+                //Console.WriteLine($"Sjúklingur numer {p.Numer} fer á {p.Deild} og er {p.Aldur}, liðinn tími er {env.NowD}");
                 env.Process(deildir[deild_upphaf].addP(p, false, false, ""));
             }
             else 
             {
-                File.AppendAllText(Run.pth, "Interrupted!" + System.Environment.NewLine);
+                //Console.WriteLine("Interrupted!");
                 Dagur++;
             }
         }

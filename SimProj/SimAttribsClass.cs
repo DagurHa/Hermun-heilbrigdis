@@ -18,7 +18,7 @@ public class SimAttribsNontuples
     public Dictionary<string,double>? ReEnter { get; set; }
     public List<List<string>>? Keys { get; set; }
     public List<string>? Jobs { get; set; }
-    public Dictionary<string,double>? MeanExp {  get; set; }
+    public Dictionary<string,double>? MeanWait {  get; set; }
     public double Lam { get; set; }
     public bool ShowSim { get; set; }
     public int Stop { get; set; }
@@ -172,10 +172,10 @@ public class SimAttribs : SimAttribsNontuples
         {
             Console.WriteLine($"Item: {item}");
         }
-        Console.WriteLine("MeanExp:");
-        foreach(string key in MeanExp.Keys)
+        Console.WriteLine("MeanWait:");
+        foreach(string key in MeanWait.Keys)
         {
-            Console.WriteLine($"Lykill: {key} og Item: {MeanExp[key]}");
+            Console.WriteLine($"Lykill: {key} og Item: {MeanWait[key]}");
         }
         Console.WriteLine($"Lam: {Lam}");
         Console.WriteLine($"ShowSim: {ShowSim}");

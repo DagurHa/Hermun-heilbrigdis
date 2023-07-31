@@ -45,7 +45,7 @@ public class Deild
         {
             kerfi.telja++;
             kerfi.amount++;
-            File.AppendAllText(Run.pth, $"Fjöldi á spítala er núna {kerfi.amount}, liðinn tími er {env.NowD}" + System.Environment.NewLine);
+            //Console.WriteLine($"Fjöldi á spítala er núna {kerfi.amount}, liðinn tími er {env.NowD}");
         }
         if (endurkoma) { kerfi.endurkomur++; }
         dataDeild.fjoldiInni[p.Aldur]++;
@@ -54,7 +54,7 @@ public class Deild
         if (dataDeild.inni > dataDeild.maxInni){ dataDeild.maxInni = dataDeild.inni; }
         if (simAttribs.WaitLognorm.ContainsKey(nafn)){ wait = waitLognorm[p.Aldur].Sample(); }
         else if (simAttribs.WaitUniform.ContainsKey(nafn)){ wait = WaitUnif.Sample(); }
-        File.AppendAllText(Run.pth, $"Sjúklingur númer {p.Numer} á {p.Deild} þarf að bíða þar í {wait}, liðinn tími er {env.NowD}" + System.Environment.NewLine);
+        //Console.WriteLine($"Sjúklingur númer {p.Numer} á {p.Deild} þarf að bíða þar í {wait}, liðinn tími er {env.NowD}");
         yield return env.TimeoutD(wait);
         yield return env.Process(updatePatient(p));
     }
@@ -64,19 +64,17 @@ public class Deild
         string newDeild = simAttribs.States[i_deild];
         string prev = p.Deild;
         p.Deild = newDeild;
-        if (Run.upphitunFlag)
-        {
-            dataDeild.deildSkipt[Helpers.getDeildnr(prev, simAttribs.States)]++;
-        }
-        if (simAttribs.FinalState.Contains(newDeild)) { removeP(p); }
+        if (Run.upphitunFlag) { dataDeild.deildSkipt[Helpers.getDeildnr(newDeild, simAttribs.States)]++; }
+        if (simAttribs.FinalState.Contains(newDeild)) { removeP(p, prev); }
         else
         {
-            File.AppendAllText(Run.pth, $"Sjúklingur númer {p.Numer} fer af {prev} til {p.Deild}, liðinn tími er {env.NowD}" + System.Environment.NewLine);
+            //Console.WriteLine($"Sjúklingur númer {p.Numer} fer af {prev} til {p.Deild}, liðinn tími er {env.NowD}");
             yield return env.Process(kerfi.deildir[newDeild].addP(p,true,false,prev));
         }
     }
-    public void removeP(Patient p)
+    public void removeP(Patient p,string prev)
     {
+        //Console.WriteLine($"Sjúklingur númer {p.Numer} fer af {prev} til {p.Deild}, liðinn tími er {env.NowD}");
         dataDeild.inni--;
         dataDeild.fjoldiInni[p.Aldur]--;
     }

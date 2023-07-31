@@ -121,6 +121,7 @@ if compare:
     hermun1,hermun2 = st.tabs(names)
     simAttributes1 = initSimAttribs(simAttributes1,hermun1,num_in_key,names[0],compare)
     simAttributes2 = initSimAttribs(simAttributes2,hermun2,num_in_key,names[1],compare)
+    print(simAttributes1)
     print(simAttributes1["lambda"])
     print(simAttributes2["lambda"])
 else:

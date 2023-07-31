@@ -35,7 +35,7 @@ class Deild:
         if not innritaður:
             self.S.telja += 1
             self.S.amount += 1
-            #print(f"fjöldi á spítala er núna {self.amount}, liðinn tími er {self.env.now}")
+            #print(f"fjöldi á spítala er núna {self.S.amount}, liðinn tími er {self.env.now}")
         if endurkoma:
             #print(self.endurkomur/self.telja)
             self.S.endurkomur += 1
@@ -57,11 +57,11 @@ class Deild:
         if self.S.upphitunFlag:
             self.S.fjoldi["deildaskipti"][(self.nafn,newDeild)] += 1
         if newDeild in self.S.fastar["Endastöður"]:
-            self.removeP(p)
+            self.removeP(p,prev)
         else:
             yield self.env.process(self.S.deildir[newDeild].addP(p,True,False,prev))
         
-    def removeP(self,p):
+    def removeP(self,p,prev):
         #print(f"Sjúklingur númer {p.numer} fer af {prev} til {p.deild}, liðinn tími er {self.env.now}")
         self.S.amount -= 1
         self.count[p.aldur] -= 1

@@ -40,10 +40,12 @@ public class Run
         for(int i = 0; i < L; i++)
         {
             DataFinal data = sim(simAttr);
+            upphitunFlag = false;
             stayData.Add(data.LeguAmount);
             foreach(string[] key in data.deildAgeAmount.Keys)
             {
-                totalData.BoxPlot.Add(key, (double)data.deildAgeAmount[key].Sum()/days);
+                (string, string) keyTup = (key[0], key[1]);
+                totalData.BoxPlot[keyTup].Add((double)data.deildAgeAmount[key].Sum()/days);
             }
             foreach ((string,string) JobKey in data.JobNum.Keys)
             {

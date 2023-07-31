@@ -24,21 +24,21 @@ public class DataFinal
 
     public void Log()
     {
-        File.AppendAllText(Run.pth, "Gögn um kerfið:" + Environment.NewLine);
+        Console.WriteLine("Gögn um kerfið:" + Environment.NewLine);
         foreach(string key in maxInni.Keys)
         {
-            File.AppendAllText(Run.pth,$"Lykill {key} og max inni eru {maxInni[key]}" + Environment.NewLine);
+            Console.WriteLine($"Lykill {key} og max inni eru {maxInni[key]}" + Environment.NewLine);
         }
         foreach((string,string) key in JobNum.Keys)
         {
-            File.AppendAllText(Run.pth, $"Lykill {key} og starfsþörf: {JobNum[key]}" + Environment.NewLine);
+            Console.WriteLine($"Lykill {key} og starfsþörf: {JobNum[key]}" + Environment.NewLine);
         }
         foreach(string state in fjoldiDag.Keys)
         {
-            File.AppendAllText(Run.pth, $"Deild {state} og fjöldi sem kom inn á hverjum degi:" + Environment.NewLine);
+            Console.WriteLine($"Deild {state} og fjöldi sem kom inn á hverjum degi:" + Environment.NewLine);
             foreach(int fj in fjoldiDag[state])
             {
-                File.AppendAllText(Run.pth, fj.ToString() + Environment.NewLine);
+                Console.WriteLine(fj.ToString() + Environment.NewLine);
             }
         }
     }
