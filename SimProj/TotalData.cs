@@ -3,14 +3,16 @@
 
 public class TotalData
 {
-    public List<double> MeanLega;
-    public Dictionary<(string,string), List<int>> Sankey;
-    public List<int> totalPatient;
-    public Dictionary<(string,string),List<double>> BoxPlot;
+    public List<double> MeanLega; //Meðalfjöldi fólks á legudeild í enda dags
+    public Dictionary<(string,string), List<int>> Sankey; //Gögn fyrir sankey rit, item1 er frá item2 er til
+    public List<int> totalPatient; //Heildarfjöldi Sjúklinga sem kom í kerfið
+    public Dictionary<(string,string),List<double>> BoxPlot; //useless
     public Dictionary<(string,string), List<int>> StarfsInfo;
+    public Dictionary<(string, string), int[,]> MeanAmount; //Fjöldi fólks eftir aldurshópi og deild sem kom yfir dag fyrir alla daga   
 
     public TotalData(SimAttribs simAttr)
     {
+        MeanAmount = new Dictionary<(string, string), int[,]>();
         MeanLega = new List<double>();
         totalPatient = new List<int>();
         BoxPlot = new Dictionary<(string,string), List<double>>();
@@ -23,6 +25,8 @@ public class TotalData
         {
             (string, string) keyTup = (keyList[0], keyList[1]);
             BoxPlot.Add(keyTup, new List<double>());
+            MeanAmount.Add(keyTup, new int[simAttr.SimAmount,simAttr.Stop]);
         }
+
     }
 }

@@ -13,18 +13,18 @@ public class Deild
     private Simulation env;
     private Dictionary<string,MathNet.Numerics.Distributions.LogNormal> waitLognorm = new Dictionary<string, MathNet.Numerics.Distributions.LogNormal>();
     private MathNet.Numerics.Distributions.ContinuousUniform WaitUnif;
-    private double wait = 0;
+    private double wait;
     public Deild(Simulation envment, string Nafn, SimAttribs SimAttributes, Kerfi Kerfi)
     {
         kerfi = Kerfi;
         env = envment;
         nafn = Nafn;
         simAttribs = SimAttributes;
+        wait = 0;
         dataDeild = new DeildInfo(simAttribs);
         if(simAttribs.WaitLognorm.ContainsKey(nafn)){
             foreach (string age_grp in simAttribs.AgeGroups)
             {
-                //Þarf að tjekka hvort sé verið að nota retta mu og sd
                 MathNet.Numerics.Distributions.LogNormal lgnrm = new MathNet.Numerics.Distributions.LogNormal(simAttribs.WaitLognorm[nafn][age_grp][0], simAttribs.WaitLognorm[nafn][age_grp][1]);
                 waitLognorm[age_grp] = lgnrm;
             }
@@ -34,7 +34,7 @@ public class Deild
             WaitUnif = new MathNet.Numerics.Distributions.ContinuousUniform(simAttribs.WaitUniform[nafn][0], simAttribs.WaitUniform[nafn][1]);
         }
     }
-    public IEnumerable<Event> addP(Patient p, bool innrit, bool endurkoma, string prev_deild)
+    public IEnumerable<Event> addP(Patient p, bool innrit, string prev_deild)
     {
         if (innrit)
         {
@@ -45,16 +45,16 @@ public class Deild
         {
             kerfi.telja++;
             kerfi.amount++;
-            //Console.WriteLine($"Fjöldi á spítala er núna {kerfi.amount}, liðinn tími er {env.NowD}");
         }
-        if (endurkoma) { kerfi.endurkomur++; }
         dataDeild.fjoldiInni[p.Aldur]++;
         dataDeild.inni++;
-        dataDeild.fjoldiDag[kerfi.Dagur]++;
+        if (Run.upphitunFlag)
+        {
+            foreach (string age_grp in simAttribs.AgeGroups) { dataDeild.fjoldiDag[age_grp][kerfi.Dagur]++; }
+        }
         if (dataDeild.inni > dataDeild.maxInni){ dataDeild.maxInni = dataDeild.inni; }
         if (simAttribs.WaitLognorm.ContainsKey(nafn)){ wait = waitLognorm[p.Aldur].Sample(); }
         else if (simAttribs.WaitUniform.ContainsKey(nafn)){ wait = WaitUnif.Sample(); }
-        //Console.WriteLine($"Sjúklingur númer {p.Numer} á {p.Deild} þarf að bíða þar í {wait}, liðinn tími er {env.NowD}");
         yield return env.TimeoutD(wait);
         yield return env.Process(updatePatient(p));
     }
@@ -64,17 +64,15 @@ public class Deild
         string newDeild = simAttribs.States[i_deild];
         string prev = p.Deild;
         p.Deild = newDeild;
-        if (Run.upphitunFlag) { dataDeild.deildSkipt[Helpers.getDeildnr(newDeild, simAttribs.States)]++; }
-        if (simAttribs.FinalState.Contains(newDeild)) { removeP(p, prev); }
+        if (Run.upphitunFlag) { dataDeild.deildSkipt[newDeild]++; }
+        if (simAttribs.FinalState.Contains(newDeild)) { removeP(p); }
         else
         {
-            //Console.WriteLine($"Sjúklingur númer {p.Numer} fer af {prev} til {p.Deild}, liðinn tími er {env.NowD}");
-            yield return env.Process(kerfi.deildir[newDeild].addP(p,true,false,prev));
+            yield return env.Process(kerfi.deildir[newDeild].addP(p,true,prev));
         }
     }
-    public void removeP(Patient p,string prev)
+    public void removeP(Patient p)
     {
-        //Console.WriteLine($"Sjúklingur númer {p.Numer} fer af {prev} til {p.Deild}, liðinn tími er {env.NowD}");
         dataDeild.inni--;
         dataDeild.fjoldiInni[p.Aldur]--;
     }

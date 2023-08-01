@@ -13,12 +13,9 @@ public class Kerfi
     public int telja;
     public int amount;
     public int Dagur;
-    private Dictionary<int,Patient> discharged = new Dictionary<int,Patient>();
     public Dictionary<string, Deild> deildir = new Dictionary<string, Deild>();
-    public int endurkomur;
     private Process action;
     private Event upphitun;
-    private bool homePatientWait;
     private MathNet.Numerics.Distributions.Exponential arrive;
     public Kerfi(Simulation envment, SimAttribs simAttributes) {
         env = envment;
@@ -30,8 +27,6 @@ public class Kerfi
         telja = 0;
         Dagur = 0;
         amount = 0;
-        endurkomur = 0;
-        homePatientWait = false;
         upphitun = new Event(env);
         arrive = new MathNet.Numerics.Distributions.Exponential(fastar.Lam);
         CreateDeildir();
@@ -44,26 +39,16 @@ public class Kerfi
         {
             if (!env.ActiveProcess.HandleFault())
             {
-                if (discharged.Count > 0 & !homePatientWait)
-                {
-                    //env.Process(homeGen(env, discharged));
-                }
                 double wait = arrive.Sample();
-                //Console.WriteLine($"Þurfum að bíða í {wait} langann tima eftir næsta sjukling");
                 yield return env.TimeoutD(wait);
                 int i_aldur = Helpers.randomChoice(p_age);
                 string aldur = fastar.AgeGroups[i_aldur];
                 int i_deild_upphaf = Helpers.randomChoice(fastar.InitialProb);
                 string deild_upphaf = fastar.InitState[i_deild_upphaf];
                 Patient p = new Patient(aldur, deild_upphaf, telja);
-                //Console.WriteLine($"Sjúklingur numer {p.Numer} fer á {p.Deild} og er {p.Aldur}, liðinn tími er {env.NowD}");
-                env.Process(deildir[deild_upphaf].addP(p, false, false, ""));
+                env.Process(deildir[deild_upphaf].addP(p, false, ""));
             }
-            else 
-            {
-                //Console.WriteLine("Interrupted!");
-                Dagur++;
-            }
+            else { Dagur++; }
         }
     }
     private void CreateDeildir()

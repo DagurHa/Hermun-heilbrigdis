@@ -2,7 +2,7 @@
 
 public class DataFinal
 {
-    public Dictionary<string, int[]> fjoldiDag;
+    public Dictionary<(string,string), int[]> fjoldiDag;
     public Dictionary<string, int> maxInni = new Dictionary<string, int>();
     public Dictionary<string[], List<int>> deildAgeAmount;
     public List<double> LeguAmount;
@@ -12,7 +12,7 @@ public class DataFinal
     public DataFinal(List<List<string>> keys)
     {
         SankeyData = new Dictionary<(string,string), int>();
-        fjoldiDag = new Dictionary<string, int[]>();
+        fjoldiDag = new Dictionary<(string,string), int[]>();
         deildAgeAmount = new Dictionary<string[], List<int>>();
         foreach(List<string> lst_key in keys)
         {
@@ -33,10 +33,10 @@ public class DataFinal
         {
             Console.WriteLine($"Lykill {key} og starfsþörf: {JobNum[key]}" + Environment.NewLine);
         }
-        foreach(string state in fjoldiDag.Keys)
+        foreach((string,string) kvp in fjoldiDag.Keys)
         {
-            Console.WriteLine($"Deild {state} og fjöldi sem kom inn á hverjum degi:" + Environment.NewLine);
-            foreach(int fj in fjoldiDag[state])
+            Console.WriteLine($"Deild {kvp.Item2} og fjöldi sem kom inn á hverjum degi:" + Environment.NewLine);
+            foreach(int fj in fjoldiDag[kvp])
             {
                 Console.WriteLine(fj.ToString() + Environment.NewLine);
             }

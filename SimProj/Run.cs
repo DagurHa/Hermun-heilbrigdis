@@ -6,10 +6,8 @@ namespace SimProj;
 public class Run
 {
     public static bool upphitunFlag = false;
-    public const string pth = "Test.txt";
     public static void Main(string[] args)
     {
-        File.WriteAllText(pth,string.Empty);
         string simString_tup = File.ReadAllText("InputTuple.json");
         string simString_nontup = File.ReadAllText("InputNonTuple.json");
         SimAttribs simAttr = Helpers.InitSimAttr(simString_tup, simString_nontup);
@@ -25,19 +23,19 @@ public class Run
         Simulation env = new Simulation();
         Kerfi kerfi = new Kerfi(env, simAttr);
         env.Process(kerfi.interrupter(data));
-        env.RunD((double?)(simAttr.Stop + simAttr.WarmupTime));
+        env.RunD(simAttr.Stop + simAttr.WarmupTime);
         Helpers.CalcData(simAttr, kerfi, data);
         return data;
     }
+    
     private static TotalData hermHundur(SimAttribs simAttr)
     {
-        int L = simAttr.SimAmount;
         int days = simAttr.Stop - 1;
         List<List<double>> stayData = new List<List<double>>();
         TotalData totalData = new TotalData(simAttr);
         Dictionary<(string, string), List<int>> SankeyData = new Dictionary<(string, string), List<int>>();
         foreach((string,string) key in simAttr.DeildaSkipti.Keys) { SankeyData.Add(key, new List<int>()); }
-        for(int i = 0; i < L; i++)
+        for(int i = 0; i < simAttr.SimAmount; i++)
         {
             DataFinal data = sim(simAttr);
             upphitunFlag = false;
@@ -46,6 +44,7 @@ public class Run
             {
                 (string, string) keyTup = (key[0], key[1]);
                 totalData.BoxPlot[keyTup].Add((double)data.deildAgeAmount[key].Sum()/days);
+                for(int j = 0; j < simAttr.Stop; j++) { totalData.MeanAmount[keyTup][i, j] = data.fjoldiDag[keyTup][j]; }
             }
             foreach ((string,string) JobKey in data.JobNum.Keys)
             {

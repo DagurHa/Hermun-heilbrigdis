@@ -1,6 +1,7 @@
 ﻿from itertools import product
 import json
 import subprocess
+import os
 
 #Hér eftir koma allar global breytur.
 # Mismunandi stöður sjúklings. Bætum við og breytum þegar lengra er komið.
@@ -127,6 +128,19 @@ simAttributes_nontuple["Stop"] = 100
 def tup_to_string(dict):
     return {str(key):dict[key] for key in dict}
 
+def parse_tuple_string(s):
+    # Remove the outer parentheses from the string
+    s = s.strip("()")
+
+    # Split the string by comma and remove any leading/trailing whitespace
+    items = [item.strip() for item in s.split(',')]
+
+    # Convert the list of strings into a tuple
+    result_tuple = tuple(items)
+
+    return result_tuple
+
+
 simAttrib_tuple = {}
 for key in simAttributes_tuple:
     simAttrib_tuple[key] = tup_to_string(simAttributes_tuple[key])
@@ -145,7 +159,35 @@ stdout, stderr = process.communicate()
 
 if stderr:
     print(f"Error: {stderr}")
-else:
-    output = stdout.strip()
-    print(output)
-    print(len(output))"""
+"""
+def data_use(data):
+    dataOut = {
+        "MeanLega" : [],
+        "Sankey" : {},
+        "totalPatient" : [],
+        "BoxPlot": {},
+        "StarfsInfo": {},
+        "MeanAmount": {}
+    }
+    dataOut["MeanLega"] = data["MeanLega"]
+    for keys in data["Sankey"]:
+        keyTup = parse_tuple_string(keys)
+        dataOut["Sankey"][keyTup] = data["Sankey"][keys]
+    dataOut["totalPatient"] = data["totalPatient"]
+    for keys in data["BoxPlot"]:
+        keyTup = parse_tuple_string(keys)
+        dataOut["BoxPlot"][keyTup] = data["BoxPlot"][keys]
+    for keys in data["StarfsInfo"]:
+        keyTup = parse_tuple_string(keys)
+        dataOut["StarfsInfo"][keyTup] = data["StarfsInfo"][keys]
+    for keys in data["MeanAmount"]:
+        keyTup = parse_tuple_string(keys)
+        dataOut["MeanAmount"][keyTup] = data["MeanAmount"][keys]
+    return dataOut
+
+f = open(pth+"JSONOUTPUT.json")
+data = json.load(f)
+dataUse = data_use(data)
+for keys in dataUse["MeanAmount"]:
+    print(keys)
+    print(dataUse["MeanAmount"][keys])

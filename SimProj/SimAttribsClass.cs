@@ -49,7 +49,6 @@ public class SimAttribs : SimAttribsNontuples
 
     public void initTuple(SimAttribsTuples simAttr)
     {
-        //Höfum basic til að byrja með
         MoveProb = new Dictionary<(string, string), List<double>>();
         JobDemand = new Dictionary<(string, string), List<int>>();
         DeildaSkipti = new Dictionary<(string, string), int>();
