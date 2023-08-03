@@ -1,18 +1,15 @@
 from time import time
 import streamlit as st
 from helpers import *
-from simulation import sim,hermHundur
+from simulation import sim
 import plotly.express as px
 import plotly.graph_objs as go
 import pandas as pd
 import numpy as np
-import cProfile
-import pstats
-import io
 from copy import copy,deepcopy
 from math import ceil
 
-def initSimAttribs(simAttribs,tab,num_in_key,name,compare):
+def initSimAttribs(simAttribs_tuple,simAttribs_nontuple,tab,num_in_key,name,compare):
     with tab:
         st.header("Deildir")
         st.write("Hér getur þú valið hversu marga sjúklinga annað hvort læknir eða hjúkrúnarfræðingur"
@@ -21,9 +18,9 @@ def initSimAttribs(simAttribs,tab,num_in_key,name,compare):
         gongu,legu,bmt,hh = deildir.tabs(["Göngudeild","Legudeild","Bráðamóttaka", "Heilsugæsla"])
         with gongu:
             st.write("Veldu hversu marga sjúklinga hver göngudeildalæknir getur séð um í einu.")
-            simAttribs["Starfsþörf"][("göngudeild","Læknar")][0] = st.number_input("Fjöldi sjúklinga fyrir göngudeildalækna",value = STARFSDEMAND[("göngudeild","Læknar")][0],max_value=40,step =1,key=num_in_key[name][0])
+            simAttribs_tuple["JobDemand"][("göngudeild","Læknar")][0] = st.number_input("Fjöldi sjúklinga fyrir göngudeildalækna",value = STARFSDEMAND[("göngudeild","Læknar")][0],max_value=40,step =1,key=num_in_key[name][0])
             st.write("Veldu hversu marga sjúklinga hver göngudeildar hjúkrunarfræðingur getur séð um í einu.")
-            simAttribs["Starfsþörf"][("göngudeild","Hjúkrunarfræðingar")][0] = st.number_input("Fjöldi sjúklinga fyrir göngudeilda hjúkrunarfræðinga",value = STARFSDEMAND[("göngudeild","Hjúkrunarfræðingar")][0],max_value=40,step =1,key = num_in_key[name][1])
+            simAttribs_tuple["JobDemand"][("göngudeild","Hjúkrunarfræðingar")][0] = st.number_input("Fjöldi sjúklinga fyrir göngudeilda hjúkrunarfræðinga",value = STARFSDEMAND[("göngudeild","Hjúkrunarfræðingar")][0],max_value=40,step =1,key = num_in_key[name][1])
 
         with legu:
             st.write("Veldu fjölda lækna á legudeild,")
@@ -31,24 +28,24 @@ def initSimAttribs(simAttribs,tab,num_in_key,name,compare):
             SNL = st.number_input("Sérnámslæknir", value = 1,key=num_in_key[name][3])
             SGL = st.number_input("Deildarlæknir",value = 1,key=num_in_key[name][4])
             st.write("Veldu legurými á einni legudeild.")
-            simAttribs["Starfsþörf"][("legudeild","Læknar")][0] = st.number_input("Fjöldi legurýma", value = STARFSDEMAND[("legudeild","Læknar")][0],max_value=40,step=1,key = num_in_key[name][5])
-            simAttribs["Starfsþörf"][("legudeild","Hjúkrunarfræðingar")][0] = simAttribs["Starfsþörf"][("legudeild","Læknar")][0]
-            simAttribs["Starfsþörf"][("legudeild","Læknar")][1] = SERF+SNL+SGL
+            simAttribs_tuple["JobDemand"][("legudeild","Læknar")][0] = st.number_input("Fjöldi legurýma", value = STARFSDEMAND[("legudeild","Læknar")][0],max_value=40,step=1,key = num_in_key[name][5])
+            simAttribs_tuple["JobDemand"][("legudeild","Hjúkrunarfræðingar")][0] = simAttribs_tuple["JobDemand"][("legudeild","Læknar")][0]
+            simAttribs_tuple["JobDemand"][("legudeild","Læknar")][1] = SERF+SNL+SGL
             st.write("Veldu hversu marga sjúklinga á legudeild einn hjúkrunarfræðingur sér um.")
             numPatients = st.number_input("Fjöldi sjúklinga",value = 4,max_value=10,step = 1,key=num_in_key[name][6])
-            simAttribs["Starfsþörf"][("legudeild","Hjúkrunarfræðingar")][1] = int(ceil(simAttribs["Starfsþörf"][("legudeild","Hjúkrunarfræðingar")][0]/numPatients))
+            simAttribs_tuple["JobDemand"][("legudeild","Hjúkrunarfræðingar")][1] = int(ceil(simAttribs_tuple["JobDemand"][("legudeild","Hjúkrunarfræðingar")][0]/numPatients))
 
         with bmt:
             st.write("Veldu hversu marga sjúklinga hver bráðamóttökulæknir getur séð um í einu.")
-            simAttribs["Starfsþörf"][("bráðamóttaka","Læknar")][0] = st.number_input("Fjöldi sjúklinga fyrir bráðamóttökulækna",value = STARFSDEMAND[("bráðamóttaka","Læknar")][0],max_value=40,step =1,key=num_in_key[name][19])
+            simAttribs_tuple["JobDemand"][("bráðamóttaka","Læknar")][0] = st.number_input("Fjöldi sjúklinga fyrir bráðamóttökulækna",value = STARFSDEMAND[("bráðamóttaka","Læknar")][0],max_value=40,step =1,key=num_in_key[name][19])
             st.write("Veldu hversu marga sjúklinga hver bráðamóttöku hjúkrunarfræðingur getur séð um í einu.")
-            simAttribs["Starfsþörf"][("bráðamóttaka","Hjúkrunarfræðingar")][0] = st.number_input("Fjöldi sjúklinga fyrir bráðamóttöku hjúkrunarfræðinga",value = STARFSDEMAND[("bráðamóttaka","Hjúkrunarfræðingar")][0],max_value=40,step =1,key = num_in_key[name][20])
+            simAttribs_tuple["JobDemand"][("bráðamóttaka","Hjúkrunarfræðingar")][0] = st.number_input("Fjöldi sjúklinga fyrir bráðamóttöku hjúkrunarfræðinga",value = STARFSDEMAND[("bráðamóttaka","Hjúkrunarfræðingar")][0],max_value=40,step =1,key = num_in_key[name][20])
 
         with hh:
             st.write("Veldu hversu marga sjúklinga hver heilsugæslulæknir getur séð um í einu.")
-            simAttribs["Starfsþörf"][("heilsugæsla","Læknar")][0] = st.number_input("Fjöldi sjúklinga fyrir heilsugæslulækna",value = STARFSDEMAND[("heilsugæsla","Læknar")][0],max_value=40,step =1,key=num_in_key[name][21])
+            simAttribs_tuple["JobDemand"][("heilsugæsla","Læknar")][0] = st.number_input("Fjöldi sjúklinga fyrir heilsugæslulækna",value = STARFSDEMAND[("heilsugæsla","Læknar")][0],max_value=40,step =1,key=num_in_key[name][21])
             st.write("Veldu hversu marga sjúklinga hver heilsugæslu hjúkrunarfræðingur getur séð um í einu.")
-            simAttribs["Starfsþörf"][("heilsugæsla","Hjúkrunarfræðingar")][0] = st.number_input("Fjöldi sjúklinga fyrir heilsugæslu hjúkrunarfræðinga",value = STARFSDEMAND[("heilsugæsla","Hjúkrunarfræðingar")][0],max_value=40,step =1,key = num_in_key[name][22])
+            simAttribs_tuple["JobDemand"][("heilsugæsla","Hjúkrunarfræðingar")][0] = st.number_input("Fjöldi sjúklinga fyrir heilsugæslu hjúkrunarfræðinga",value = STARFSDEMAND[("heilsugæsla","Hjúkrunarfræðingar")][0],max_value=40,step =1,key = num_in_key[name][22])
         st.divider()
 
         st.header("Hermunar stillingar")
@@ -72,32 +69,31 @@ def initSimAttribs(simAttribs,tab,num_in_key,name,compare):
         with stillingar:
             if scenarios == "Default":
                 st.write("Veldu meðalfjölda sem koma á heilsugæslur og bráðamóttökur á dag.")
-                simAttribs["meðalfjöldi"][AGE_GROUPS[0]] = st.number_input("Meðalfjöldi ungra á dag",min_value = 1, max_value=1500,
+                simAttribs_nontuple["MeanArrive"][AGE_GROUPS[0]] = st.number_input("Meðalfjöldi ungra á dag",min_value = 1, max_value=1500,
                                                             value = copy(meanArrivaltimes[AGE_GROUPS[0]]),step = 1,key=num_in_key[name][10])
-                simAttribs["meðalfjöldi"][AGE_GROUPS[1]] = st.number_input("Meðalfjöldi miðaldra á dag",min_value = 1, max_value=1500,
+                simAttribs_nontuple["MeanArrive"][AGE_GROUPS[1]] = st.number_input("Meðalfjöldi miðaldra á dag",min_value = 1, max_value=1500,
                                                             value = copy(meanArrivaltimes[AGE_GROUPS[1]]),step = 1,key=num_in_key[name][11])
-                simAttribs["meðalfjöldi"][AGE_GROUPS[2]] = st.number_input("Meðalfjöldi aldraðra á dag",min_value = 1, max_value=1500,
+                simAttribs_nontuple["MeanArrive"][AGE_GROUPS[2]] = st.number_input("Meðalfjöldi aldraðra á dag",min_value = 1, max_value=1500,
                                                             value = copy(meanArrivaltimes[AGE_GROUPS[2]]),step = 1,key=num_in_key[name][12])
-            simAttribs["Upphafslíkur"][0] = st.slider("Líkur á að nýr sjúklingur fari á heilsugæslu", 
-                                                            value = simAttribs["Upphafslíkur"][0],key=num_in_key[name][13])
-            simAttribs["CAP"] = st.slider("Hámarskfjöldi á spítala",min_value = 50,max_value = 500,value = 50,step = 10,key=num_in_key[name][14])
+            simAttribs_nontuple["InitialProb"][0] = st.slider("Líkur á að nýr sjúklingur fari á heilsugæslu", 
+                                                            value = simAttribs_nontuple["InitialProb"][0],key=num_in_key[name][13])
             if not compare:
-                simAttribs["STOP"] = st.number_input("Fjöldi hermunardaga",min_value=10,max_value=1095,value=100,key=num_in_key[name][15])
-                simAttribs["Fjöldi hermana"] = st.number_input("Fjöldi hermana",5,100,20,key=num_in_key[name][16])
+                simAttribs_nontuple["Stop"] = st.number_input("Fjöldi hermunardaga",min_value=10,max_value=1095,value=100,key=num_in_key[name][15])
+                simAttribs_nontuple["SimAmount"] = st.number_input("Fjöldi hermana",5,100,20,key=num_in_key[name][16])
 
         if scenarios == "Eldri þjóð":
             tmp = copy(meanArrivaltimes)
             for i in range(len(AGE_GROUPS)):
-                simAttribs["meðalfjöldi"][AGE_GROUPS[i]] = (1.0+t[i]/100.0)*tmp[AGE_GROUPS[i]]
+                simAttribs_nontuple["MeanArrive"][AGE_GROUPS[i]] = (1.0+t[i]/100.0)*tmp[AGE_GROUPS[i]]
         # meðaltími milli koma á spítalann frá mismunandi aldurshópum. Hér höfum við default tímann.
         keys = [age_group for age_group in AGE_GROUPS]
-        vals = [1.0/simAttribs["meðalfjöldi"][age_group] for age_group in AGE_GROUPS]
+        vals = [1.0/simAttribs_nontuple["MeanArrive"][age_group] for age_group in AGE_GROUPS]
 
-        simAttribs["meðalbið"] = dict(zip(keys,vals))
+        simAttribs_nontuple["MeanWait"] = dict(zip(keys,vals))
         #Einmitt núna er upphafslíkur á að fara inná göngudeild beint alltaf 1/4 af upphafslíkum BMT
-        simAttribs["Upphafslíkur"][1] = 1 - simAttribs["Upphafslíkur"][0]
-        simAttribs["lambda"] = sum([1.0/simAttribs["meðalbið"][age] for age in AGE_GROUPS])
-    return simAttribs
+        simAttribs_nontuple["InitialProb"][1] = 1 - simAttribs_nontuple["InitialProb"][0]
+        simAttribs_nontuple["Lam"] = sum([1.0/simAttribs_nontuple["MeanWait"][age] for age in AGE_GROUPS])
+    return [simAttribs_nontuple,simAttribs_tuple]
 
 ## Hér kemur streamlit kóðinn
 
@@ -112,27 +108,27 @@ num_in_key = {
     "Hermun 2" : [i for i in range(26,51)]
     }
 if compare:
-    simAttributes1 = deepcopy(simAttributes)
-    simAttributes2 = deepcopy(simAttributes)
-    simAttributes1["STOP"] = st.number_input("Fjöldi hermunardaga",min_value=10,max_value=1095,value=100)
-    simAttributes1["Fjöldi hermana"] = st.number_input("Fjöldi hermana",5,100,20)
-    simAttributes2["STOP"] = simAttributes1["STOP"]
-    simAttributes2["Fjöldi hermana"] = simAttributes1["Fjöldi hermana"]
+    simAttributes1_nontuple = deepcopy(simAttributes_nontuple)
+    simAttributes1_tuple = deepcopy(simAttributes_tuple)
+    simAttributes2_nontuple = deepcopy(simAttributes_nontuple)
+    simAttributes2_tuple = deepcopy(simAttributes_tuple)
+    simAttributes1_nontuple["Stop"] = st.number_input("Fjöldi hermunardaga",min_value=10,max_value=1095,value=100)
+    simAttributes1_nontuple["SimAmount"] = st.number_input("Fjöldi hermana",5,100,20)
+    simAttributes2_nontuple["Stop"] = simAttributes1_nontuple["Stop"]
+    simAttributes2_nontuple["SimAmount"] = simAttributes1_nontuple["Fjöldi hermana"]
     hermun1,hermun2 = st.tabs(names)
-    simAttributes1 = initSimAttribs(simAttributes1,hermun1,num_in_key,names[0],compare)
-    simAttributes2 = initSimAttribs(simAttributes2,hermun2,num_in_key,names[1],compare)
-    print(simAttributes1)
-    print(simAttributes1["lambda"])
-    print(simAttributes2["lambda"])
+    [simAttributes1_nontuple,simAttributes1_tuple] = initSimAttribs(simAttributes1_tuple,simAttributes1_nontuple,hermun1,num_in_key,names[0],compare)
+    [simAttributes2_nontuple,simAttributes2_tuple] = initSimAttribs(simAttributes2_tuple,simAttributes2_nontuple,hermun2,num_in_key,names[1],compare)
 else:
     hermun, reslts = st.tabs(["Hermun", "Niðurstöður"])
-    simAttributes1 = deepcopy(simAttributes)
-    simAttributes1 = initSimAttribs(simAttributes1,hermun,num_in_key,names[0],compare)
+    simAttributes1_nontuple = deepcopy(simAttributes_nontuple)
+    simAttributes1_tuple = deepcopy(simAttributes_tuple)
+    [simAttributes1_nontuple,simAttributes1_tuple] = initSimAttribs(simAttributes1_tuple,simAttributes1_nontuple,hermun,num_in_key,names[0],compare)
     with reslts:
         st.write("WIP")
 
 #Velja fjölda hermunardaga úr gögn
-data_graph = GOGN[400:399+simAttributes1["STOP"]]
+data_graph = GOGN[400:399+simAttributes1_nontuple["Stop"]]
 
 st.divider()
 
@@ -150,56 +146,66 @@ def calcSimShow(data):
     tot_bmt = sum(tot_bmt_age)
     tot_hh_age = [sum(data[(aldur, "heilsugæsla")]) for aldur in AGE_GROUPS]
     tot_hh = sum(tot_hh_age)
-    d = [(key_soy[0],key_soy[1],val) for key_soy,val in data["Læknar"].items()]
+    d = [(key_soy[0],key_soy[1],val) for key_soy,val in data["StarfsInfo"].items()]
     df = pd.DataFrame(d,columns = ["Deild","Starfsheiti","Fjöldi"])
     df_pivot = df.pivot(index="Deild",columns="Starfsheiti",values="Fjöldi")
-    df_pivot.columns=["Hjúkrunarfræðingar","Læknar"]
+    df_pivot.columns=["Hjúkrunarfræðingar","StarfsInfo"]
     return [tot_leg,tot_gong,tot_bmt,tot_hh,df_pivot]
 
 if start:
+    simAttributes1 = {**simAttributes1_nontuple,**simAttributes1_tuple}
     data1 = sim(True,simAttributes1)
     [tot_leg,tot_gong,tot_bmt,tot_hh,df] = calcSimShow(data1)
-    st.write(f"Meðalfjöldi á legudeild er {tot_leg/simAttributes1['STOP']} og meðalfjöldi á göngudeild er {tot_gong/simAttributes1['STOP']}")
-    st.write(f"Meðalfjöldi á bráðamóttökur er {tot_bmt/simAttributes1['STOP']}") 
-    st.write(f"Meðalfjöldi á heilsugæslur er {tot_hh/simAttributes1['STOP']}")
+    st.write(f"Meðalfjöldi á legudeild er {tot_leg/simAttributes1['Stop']} og MeanArrive á göngudeild er {tot_gong/simAttributes1['Stop']}")
+    st.write(f"Meðalfjöldi á bráðamóttökur er {tot_bmt/simAttributes1['Stop']}") 
+    st.write(f"Meðalfjöldi á heilsugæslur er {tot_hh/simAttributes1['Stop']}")
     st.write(f"og heildarfjöldi einstakra sjúklinga sem kom í kerfið var {data1['heildarsjúklingar']}")
     st.write(f"Meðal starfsþörf miðað við enga bið:")
     st.dataframe(df)
     if compare:
+        simAttributes2 = {**simAttributes2_nontuple,**simAttributes2_tuple}
         st.write("Seinni hermun gefur.")
         data2 = sim(True,simAttributes2)
         [tot_leg,tot_gong,df] = calcSimShow(data2)
-        st.write(f"Meðalfjöldi á legudeild er {tot_leg/simAttributes1['STOP']} og meðalfjöldi á göngudeild er {tot_gong/simAttributes1['STOP']}")
+        st.write(f"Meðalfjöldi á legudeild er {tot_leg/simAttributes1['Stop']} og MeanArrive á göngudeild er {tot_gong/simAttributes1['Stop']}")
         st.write(f"Meðal starfsþörf miðað við enga bið:")
         st.dataframe(df)
 
-st.text(f"Skoða niðurstöður úr {simAttributes1['Fjöldi hermana']} hermunum.")
+st.text(f"Skoða niðurstöður úr {simAttributes1_nontuple['SimAmount']} hermunum.")
 
-KEYS_TOT = simAttributes1["Lyklar"]
+KEYS_TOT = simAttributes1_nontuple["Keys"]
 
-def initTotalData():
-    totalData = {
-        "spitaliAmount" : [],
-        "meðal lega" : [],
-        "Sankey" : {},
-        "dagar yfir cap" : [],
-        "CI" : [],
-        "heildarsjúklingar" : [],
-        "Læknar" : {key : [] for key in simAttributes["Starfsþörf"]}
-    }
-    for key in KEYS_TOT:
-        totalData[key] = []
-    return totalData
+def calcConfidence(data,simAttr):
+    dataIM = [[] for _ in range(simAttr["SimAmount"])]
+    total = [0 for _ in range(simAttr["Stop"])]
+    for i in range(simAttr["SimAmount"]):
+        for j in range(simAttr["Stop"]):
+            s = sum([data["MeanAmount"][(age_grp,"legudeild")][i][j] for age_grp in data["AgeGroups"]])
+            total[j] += s
+            dataIM[i].append(s)
+    totalMean = [total[k]/simAttr["Stop"] for k in range(simAttr["Stop"])]
+    stayData_arr = np.array(dataIM)
+    stayData_arr = np.transpose(stayData_arr)
+    data["MeanLegaPerHerm"] = totalMean
+    inter = []
+    if L < 30:
+        for i in range(simAttr["Stop"]):
+            inter.append(stats.t.interval(alpha=0.95,df = len(stayData_arr[i,:])-1, loc = totalMean[i],
+                                          scale = stats.sem(stayData_arr[i,:])))
+    else:
+        for i in range(simAttr["Stop"]):
+            inter.append(stats.norm.interval(alpha=0.95,loc = totalMean[i],scale = stats.sem(stayData_arr[i,:])))
+    return inter
 
-def calcLegudata(totalData,simAttribs):
-    legudataUngir = totalData[(simAttribs["Aldurshópar"][0],STATES[0])]
-    legudataMid = totalData[(simAttribs["Aldurshópar"][1],STATES[0])]
-    legudataGamlir = totalData[(simAttribs["Aldurshópar"][2],STATES[0])]
+def calcLegudata(data):
+    legudataUngir = data["BoxPlot"][(data["AgeGroups"][0],data["States"][0])]
+    legudataMid = data["BoxPlot"][(data["AgeGroups"][1],data["States"][0])]
+    legudataGamlir = data["BoxPlot"][(data["AgeGroups"][2],data["States"][0])]
     return [legudataUngir,legudataMid,legudataGamlir]
 
 def calcGraph(data,simAttribs,vis,first):
-    days = simAttribs["STOP"] -1
-    mean_stay = data["meðal lega"]
+    days = simAttribs["Stop"] -1
+    mean_stay = data["MeanLegaPerHerm"]
     CI = data["CI"]
     lower,upper = [],[]
     if first:
@@ -235,21 +241,20 @@ def calcGraph(data,simAttribs,vis,first):
         graf[0].name = "Hermun 2"
     return graf
 
-def calcSankey(data,simAttribs):
-    L = simAttribs["Fjöldi hermana"]
+def calcSankey(data,simAttribs_nontuple,simAttribs_tuple):
+    L = simAttribs_nontuple["SimAmount"]
     sankeyData = data["Sankey"]
-    print(sankeyData)
-    nodeNum = {simAttribs["Stöður"][i] : i for i in range(len(simAttribs["Stöður"]))}
+    nodeNum = {simAttribs_nontuple["States"][i] : i for i in range(len(simAttribs_nontuple["States"]))}
     source = []
     target = []
-    for tvennd in simAttribs["deildaskipti"]:
+    for tvennd in simAttribs_tuple["Deildaskipti"]:
         source.append(nodeNum[tvennd[0]])
         target.append(nodeNum[tvennd[1]])
-    data_graph = [np.sum(sankeyData[key])/L for key in simAttribs["deildaskipti"]]
+    data_graph = [np.sum(sankeyData[key])/L for key in simAttribs_tuple["Deildaskipti"]]
     fig3 = go.Figure(go.Sankey(
     arrangement = "freeform",
     node = {
-        "label": simAttributes["Stöður"],
+        "label": simAttribs_nontuple["States"],
         'pad':10},
     link = {
         "arrowlen" : 10,
@@ -258,28 +263,52 @@ def calcSankey(data,simAttribs):
         "value" : data_graph}))
     return fig3
 
-def calcRandom(data,simAttribs):
-    L = simAttribs["Fjöldi hermana"]
-    meanYfirCap = np.sum(data["dagar yfir cap"])/L
+def calcRandom(data,simAttribs_nontuple,simAttribs_tuple):
+    L = simAttribs_nontuple["SimAmount"]
     meanWork = {}
-    for keys in simAttribs["Starfsþörf"]:
-        meanWork[keys] = sum(data["Læknar"][keys])/L
+    for keys in simAttribs_tuple["JobDemand"]:
+        meanWork[keys] = sum(data["StarfsInfo"][keys])/L
     d = [(key_soy[0],key_soy[1],val) for key_soy,val in meanWork.items()]
     df = pd.DataFrame(d,columns=["Deild","Starfsheiti","Fjöldi"])
     df_pivot = df.pivot(index="Deild",columns="Starfsheiti",values="Fjöldi")
     df_pivot.columns=["Hjúkrunarfræðingar","Læknar"]
-    meanFjoldi_patient = sum(totalData["heildarsjúklingar"])/L
-    return [df_pivot,meanYfirCap,meanFjoldi_patient]
+    meanFjoldi_patient = sum(data["totalPatient"])/L
+    return [df_pivot,meanFjoldi_patient]
 
 vis = st.checkbox("Sjá raungögn með hermun")
 hundur = st.button("Byrja hermun!")
 if hundur:
     with st.spinner("Hermun í gangi..."):
-        totalData = initTotalData()
-        totalData1 = hermHundur(totalData,simAttributes1)
-        [legudataUngir,legudataMid,legudataGamlir] = calcLegudata(totalData1,simAttributes1)
-        graf = calcGraph(totalData1,simAttributes1,vis,True)
-        fig3 = calcSankey(totalData1,simAttributes1)
+        simAttrib_tuple = {}
+        for key in simAttributes1_tuple:
+            simAttrib_tuple[key] = tup_to_string(simAttributes1_tuple[key])
+            if key == "JobDemand":
+                for keys in simAttributes1_tuple[key]:
+                    simAttributes1_tuple[key][keys] = tuple(simAttributes1_tuple[key][keys])
+
+        pth = "./SimProj/bin/Release/net7.0/"
+        file_nonTuple = pth + "InputNonTuple.json"
+        file_tuple = pth + "InputTuple.json"
+        with open(file_nonTuple,"w") as json_file:
+            json.dump(simAttributes1_nontuple,json_file,ensure_ascii=True)
+        with open(file_tuple,"w") as json_file:
+            json.dump(simAttrib_tuple,json_file,ensure_ascii=True)
+        
+        process = subprocess.Popen([pth+"SimProj.exe"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+        stdout, stderr = process.communicate()
+
+        if stderr:
+            print(f"Error: {stderr}")
+        
+        f = open(pth+"JSONOUTPUT.json")
+        data = json.load(f)
+        dataUse = data_use(data)
+        print(dataUse["States"])
+        print(dataUse["AgeGroups"])
+        dataUse["CI"] = calcConfidence(dataUse,simAttributes1_nontuple)
+        [legudataUngir,legudataMid,legudataGamlir] = calcLegudata(dataUse)
+        graf = calcGraph(dataUse,simAttributes1_nontuple,vis,True)
+        fig3 = calcSankey(dataUse,simAttributes1_nontuple,simAttributes1_tuple)
         df = pd.DataFrame(
             {
                 "Legudeild Ungir": legudataUngir,
@@ -287,37 +316,60 @@ if hundur:
                 "Legudeild Gamlir" : legudataGamlir
             }
         )
-        [df_starf,meanYfirCap,meanFjoldi_patient] = calcRandom(totalData1,simAttributes1)
+        [df_starf,meanFjoldi_patient] = calcRandom(dataUse,simAttributes1)
         if compare:
-            totalData = initTotalData()
-            totalData2 = hermHundur(totalData,simAttributes2)
-            [legudataUngir_new,legudataMid_new,legudataGamlir_new] = calcLegudata(totalData2,simAttributes1)
-            graf_new = calcGraph(totalData2,simAttributes2,vis,False)
-            fig3_new = calcSankey(totalData2,simAttributes2)
-            df["Hermun"] = ["Hermun 1" for _ in range(simAttributes1["Fjöldi hermana"])]
+            simAttrib_tuple = {}
+            for key in simAttributes2_tuple:
+                simAttrib_tuple[key] = tup_to_string(simAttributes2_tuple[key])
+                if key == "JobDemand":
+                    for keys in simAttributes2_tuple[key]:
+                        simAttributes2_tuple[key][keys] = tuple(simAttributes2_tuple[key][keys])
+
+            pth = "./SimProj/bin/Release/net7.0/"
+            file_nonTuple = pth + "InputNonTuple.json"
+            file_tuple = pth + "InputTuple.json"
+            with open(file_nonTuple,"w") as json_file:
+                json.dump(simAttributes2_nontuple,json_file,ensure_ascii=True)
+            with open(file_tuple,"w") as json_file:
+                json.dump(simAttrib_tuple,json_file,ensure_ascii=True)
+        
+            process = subprocess.Popen([pth+"SimProj.exe"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+            stdout, stderr = process.communicate()
+
+            if stderr:
+                print(f"Error: {stderr}")
+        
+            f = open(pth+"JSONOUTPUT.json")
+            data = json.load(f)
+            dataUse = data_use(data)
+            dataUse["CI"] = calcConfidence(dataUse,simAttributes2_nontuple)
+            [legudataUngir_new,legudataMid_new,legudataGamlir_new] = calcLegudata(dataUse)
+            graf_new = calcGraph(dataUse,simAttributes2,vis,False)
+            fig3_new = calcSankey(dataUse,simAttributes2_nontuple,simAttributes2_tuple)
+            df["Hermun"] = ["Hermun 1" for _ in range(simAttributes1_nontuple["SimAmount"])]
             df_new = pd.DataFrame(
                 {
                     "Legudeild Ungir" : legudataUngir_new,
                     "Legudeild Miðaldra" : legudataMid_new,
                     "Legudeild Gamlir" : legudataGamlir_new,
-                    "Hermun" : ["Hermun 2" for _ in range(simAttributes2["Fjöldi hermana"])]
+                    "Hermun" : ["Hermun 2" for _ in range(simAttributes2_nontuple["SimAmount"])]
                 },
-                index = [simAttributes2["Fjöldi hermana"] + i for i in range(simAttributes2["Fjöldi hermana"])]
+                index = [simAttributes2_nontuple["SimAmount"] + i for i in range(simAttributes2_nontuple["SimAmount"])]
             )
             df_tot = pd.concat([df,df_new])
             graf_tot = graf + graf_new
-            [df_starf_new,meanYfirCap_new,meanFjoldi_patient_new] = calcRandom(totalData2,simAttributes2)
+            [df_starf_new,meanFjoldi_patient_new] = calcRandom(dataUse,simAttributes2_nontuple,simAttributes2_tuple)
         else:
             df_tot = df
             graf_tot = graf
     st.success("Hermun lokið")
-    st.write("Hér er meðalfjöldi fólks á legudeild eftir aldursflokki.")
+    st.write("Hér er MeanArrive fólks á legudeild eftir aldursflokki.")
     if compare:
         fig1 = px.box(df_tot,color = "Hermun")
     else:
         fig1 = px.box(df_tot)
     st.plotly_chart(fig1)
-    st.text(f"Hér sést meðalfjöldi einstaklinga í kerfinu á dag yfir þessar {L}")
+    st.text(f"Hér sést MeanArrive einstaklinga í kerfinu á dag yfir þessar {L}")
     st.text(f"hermanir ásamt 95% vikmörkum.")
     fig2 = go.Figure(
         graf_tot
@@ -335,26 +387,10 @@ if hundur:
         st.plotly_chart(fig3_new)
     st.write(f"Meðal starfsþörf miðað við enga bið:")
     st.dataframe(df_starf)
-    st.write(f"**Meðalfjöldi daga** þar sem fjöldi sjúklinga á spítala fóru yfir hámark voru **{meanYfirCap}**.")
     st.write(f"**Meðalfjöldi einstakra sjúklinga** sem komu í kerfið voru **{meanFjoldi_patient}**")
     if compare:
         st.write(f"Meðal starfsþörf miðað við enga bið í seinni hermun:")
         st.dataframe(df_starf_new)
-        st.write(f"**Meðalfjöldi daga** þar sem fjöldi sjúklinga á spítala fóru yfir hámark voru **{meanYfirCap_new}**.")
         st.write(f"**Meðalfjöldi einstakra sjúklinga** sem komu í kerfið voru **{meanFjoldi_patient_new}**")
-
-
-prof = st.button("Skoða tíma profile")
-
-if prof:
-    pr = cProfile.Profile()
-    pr.enable()
-    res = hermHundur(totalData,simAttributes)
-    pr.disable()
-    s = io.StringIO()
-    ps = pstats.Stats(pr,stream = s).sort_stats("tottime")
-    ps.print_stats()
-    with open("time.txt","w+") as f:
-        f.write(s.getvalue())
 
 print(time()-start_time)

@@ -1,20 +1,66 @@
 from itertools import product
 from copy import copy
+from scipy import stats
 import pandas as pd
+import numpy as np
 import json
+import subprocess
+import os
+
+def data_use(data):
+    dataOut = {
+        "MeanLega" : [],
+        "Sankey" : {},
+        "totalPatient" : [],
+        "BoxPlot": {},
+        "StarfsInfo": {},
+        "MeanAmount": {}
+    }
+    dataOut["MeanLega"] = data["MeanLega"]
+    for keys in data["Sankey"]:
+        keyTup = parse_tuple_string(keys)
+        dataOut["Sankey"][keyTup] = data["Sankey"][keys]
+    dataOut["totalPatient"] = data["totalPatient"]
+    for keys in data["BoxPlot"]:
+        keyTup = parse_tuple_string(keys)
+        dataOut["BoxPlot"][keyTup] = data["BoxPlot"][keys]
+    for keys in data["StarfsInfo"]:
+        keyTup = parse_tuple_string(keys)
+        dataOut["StarfsInfo"][keyTup] = data["StarfsInfo"][keys]
+    for keys in data["MeanAmount"]:
+        keyTup = parse_tuple_string(keys)
+        dataOut["MeanAmount"][keyTup] = data["MeanAmount"][keys]
+    dataAge = []
+    dataStates = []
+    for kvp in dataOut["MeanAmount"]:
+        if not dataAge.__contains__(kvp[0]):
+            dataAge.append(kvp[0])
+        if not dataStates.__contains__(kvp[1]):
+            dataStates.append(kvp[1])
+    dataOut["AgeGroups"] = dataAge
+    dataOut["States"] = dataStates
+    return dataOut
+
+def tup_to_string(dict):
+    return {str(key):dict[key] for key in dict}
+
+def parse_tuple_string(s):
+    # Remove the outer parentheses from the string
+    s = s.strip("()")
+
+    # Split the string by comma and remove any leading/trailing whitespace
+    items = [item.strip() for item in s.split(',')]
+
+    # Convert the list of strings into a tuple
+    result_tuple = tuple(items)
+
+    return result_tuple
 
 d_skra = pd.read_csv("dagar.csv")
 
-#Kóði til að lesa dict úr csv
-"""with open('dict.csv') as csv_file:
-    reader = csv.reader(csv_file)
-    mydict = dict(reader)"""
-
 #Hér eftir koma allar global breytur.
 # Mismunandi stöður sjúklings. Bætum við og breytum þegar lengra er komið.
-STATES = ["legudeild", "göngudeild", 
-          "bráðamóttaka", "heilsugæsla", 
-          "hjúkrun", "dauði", "heim"]
+STATES = ["legudeild", "göngudeild", "bráðamóttaka", "heilsugæsla", "hjúkrun", "dauði", "heim"]
 AGE_GROUPS = ["Ungur","Miðaldra","Gamall"] # mismunandi aldurshópar sjúklings. Breytum/bætum við mögulega
 # meðalfjöldi aldurshópa sem koma á spítala á dag, fáum rauntölur hér og getum síðan breytt
 AGE_GROUP_AMOUNT = {
@@ -26,10 +72,10 @@ AGE_GROUP_AMOUNT = {
 # Skiptum færslulíkum eftir aldri en bara til þess að aldrað fólk geti komist á hjúkrun, einmitt nuna er hjúkrun absorbing
 #37% sem utskrifast af legudeild fara á göngudeild
 PROB = {
-    #Færslulíkur ungra          LD     GD   BMT  HH   HJ    D     H
+    #Færslulíkur ungra
     (STATES[0],AGE_GROUPS[0]) : [0.0, 0.31, 0.0, 0.0, 0.0, 0.04, 0.65],
     (STATES[1],AGE_GROUPS[0]) : [0.005, 0.0, 0.0, 0.0, 0.0, 0.0, 0.995],
-    (STATES[2],AGE_GROUPS[0]) : [0.1620, 0.3, 0.0, 0.0, 0.0, 0.0, 0.538],
+    (STATES[2],AGE_GROUPS[0]) : [0.162, 0.3, 0.0, 0.0, 0.0, 0.0, 0.538],
     (STATES[3],AGE_GROUPS[0]) : [0.0857, 0.0217, 0.005, 0.0, 0.0, 0.0, 0.8876],
     (STATES[4],AGE_GROUPS[0]) : [0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0],
     (STATES[5],AGE_GROUPS[0]) : [0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0],
@@ -37,7 +83,7 @@ PROB = {
     #Færslulíkur miðaldra
     (STATES[0],AGE_GROUPS[1]) : [0.0, 0.31, 0.0, 0.0, 0.0, 0.04, 0.65],
     (STATES[1],AGE_GROUPS[1]) : [0.005, 0.0, 0.0, 0.0, 0.0, 0.0, 0.995],
-    (STATES[2],AGE_GROUPS[1]) : [0.1620, 0.3, 0.0, 0.0, 0.0, 0.0, 0.538],
+    (STATES[2],AGE_GROUPS[1]) : [0.162, 0.3, 0.0, 0.0, 0.0, 0.0, 0.538],
     (STATES[3],AGE_GROUPS[1]) : [0.0857, 0.0217, 0.005, 0.0, 0.0, 0.0, 0.8876],
     (STATES[4],AGE_GROUPS[1]) : [0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0],
     (STATES[5],AGE_GROUPS[1]) : [0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0],
@@ -45,8 +91,8 @@ PROB = {
     #Færslulíkur aldraðra (Hér breytast líkur á að fara til hjúkrunar, einmitt nuna ekki byggt á gögnum)
     (STATES[0],AGE_GROUPS[2]) : [0.0, 0.31, 0.0, 0.0, 0.1, 0.04, 0.55],
     (STATES[1],AGE_GROUPS[2]) : [0.005, 0.0, 0.0, 0.0, 0.1, 0.0, 0.895],
-    (STATES[2],AGE_GROUPS[2]) : [0.1620, 0.3, 0.0, 0.0, 0.0, 0.0, 0.538],
-    (STATES[3],AGE_GROUPS[2]) : [0.0857, 0.0217, 0.005, 0.0, 0.017, 0.0, 0.8706],
+    (STATES[2],AGE_GROUPS[2]) : [0.162, 0.3, 0.0, 0.0, 0.0, 0.0, 0.538],
+    (STATES[3],AGE_GROUPS[2]) : [0.0857, 0.0217, 0.005, 0.0, 0.0, 0.0, 0.8876],
     (STATES[4],AGE_GROUPS[2]) : [0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0],
     (STATES[5],AGE_GROUPS[2]) : [0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0],
     (STATES[6],AGE_GROUPS[2]) : [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0]
@@ -97,35 +143,34 @@ STARFSDEMAND = {
     (STATES[1],STORF[0]) : [4,1],      #Miðum við að hver göngudeildarlæknir geti séð 12 sjúklinga á dag og þurfi einn hjúkrunarfræðing
     (STATES[0],STORF[1]) : [20,4],
     (STATES[1],STORF[1]) : [1,1],
-    (STATES[2],STORF[0]) : [10,1],
-    (STATES[2],STORF[1]) : [5,1],
-    (STATES[3],STORF[0]) : [10,1],
-    (STATES[3],STORF[1]) : [1,1]
+    (STATES[2],STORF[0]): [10,1],
+    (STATES[2],STORF[1]): [5,1],
+    (STATES[3],STORF[0]): [10,1],
+    (STATES[3],STORF[1]): [1,1]
+}
+KEYS_TOT = list(product(AGE_GROUPS,UPPHAFSDEILD+MILLIDEILD))
+
+UPPHITUN = 25 # Upphitunartími hverrar hermunar, þ.e. byrjum ekki að safna/sýna upplýsingar fyrr en svona margir dagar hafa liðið
+simAttributes_nontuple = {
+    "MeanArrive" : AGE_GROUP_AMOUNT,
+    "InitialProb" : INITIAL_PROB,
+    "States" : STATES,
+    "AgeGroups" : AGE_GROUPS,
+    "WaitLognorm" : WAIT_lognorm,
+    "WaitUniform" : WAIT_unif,
+    "SimAmount" : L,
+    "InitState" : UPPHAFSDEILD,
+    "MedState" : MILLIDEILD,
+    "FinalState" : ENDADEILD,
+    "WarmupTime" : UPPHITUN,
+    "ReEnter" : ENDURKOMA,
+    "Keys" : KEYS_TOT,
+    "Jobs" : STORF
+}
+simAttributes_tuple = {
+    'MoveProb' : PROB,
+    'Deildaskipti' : deildaskipti,
+    'JobDemand' : STARFSDEMAND
 }
 GOGN = d_skra["Fjöldi á dag"].tolist()
-print(len(GOGN))
-KEYS_TOT = list(product(AGE_GROUPS,UPPHAFSDEILD+MILLIDEILD))
-UPPHITUN = 25 # Upphitunartími hverrar hermunar, þ.e. byrjum ekki að safna/sýna upplýsingar fyrr en svona margir dagar hafa liðið
-simAttributes = {
-    "meðalfjöldi" : AGE_GROUP_AMOUNT,
-    "Færslulíkur" : PROB,
-    "Upphafslíkur" : INITIAL_PROB,
-    "Stöður" : STATES,
-    "Aldurshópar" : AGE_GROUPS,
-    "Biðtímar lognormal" : WAIT_lognorm,
-    "Biðtímar jöfn" : WAIT_unif,
-    "Fjöldi hermana" : L,
-    "deildaskipti" : deildaskipti,
-    "Upphafsstöður" : UPPHAFSDEILD,
-    "Millistöður" : MILLIDEILD,
-    "Endastöður" : ENDADEILD,
-    "Upphitunartími" : UPPHITUN,
-    "Endurkoma" : ENDURKOMA,
-    "Starfsþörf" : STARFSDEMAND,
-    "Lyklar" : KEYS_TOT,
-    "Störf" : STORF,
-}
-meanArrivaltimes = copy(simAttributes["meðalfjöldi"])
-
-#jsonSimAttribs = json.dumps({str(k) : v for k,v in simAttributes.items()})
-#print(jsonSimAttribs)
+meanArrivaltimes = copy(simAttributes_nontuple["MeanArrive"])

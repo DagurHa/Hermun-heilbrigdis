@@ -9,7 +9,6 @@ public class TotalData
     public Dictionary<(string,string),List<double>> BoxPlot; //useless
     public Dictionary<(string,string), List<int>> StarfsInfo;
     public Dictionary<(string, string), int[,]> MeanAmount; //Fjöldi fólks eftir aldurshópi og deild sem kom yfir dag fyrir alla daga   
-
     public TotalData(SimAttribs simAttr)
     {
         MeanAmount = new Dictionary<(string, string), int[,]>();
