@@ -115,7 +115,7 @@ if compare:
     simAttributes1_nontuple["Stop"] = st.number_input("Fjöldi hermunardaga",min_value=10,max_value=1095,value=100)
     simAttributes1_nontuple["SimAmount"] = st.number_input("Fjöldi hermana",5,100,20)
     simAttributes2_nontuple["Stop"] = simAttributes1_nontuple["Stop"]
-    simAttributes2_nontuple["SimAmount"] = simAttributes1_nontuple["Fjöldi hermana"]
+    simAttributes2_nontuple["SimAmount"] = simAttributes1_nontuple["SimAmount"]
     hermun1,hermun2 = st.tabs(names)
     [simAttributes1_nontuple,simAttributes1_tuple] = initSimAttribs(simAttributes1_tuple,simAttributes1_nontuple,hermun1,num_in_key,names[0],compare)
     [simAttributes2_nontuple,simAttributes2_tuple] = initSimAttribs(simAttributes2_tuple,simAttributes2_nontuple,hermun2,num_in_key,names[1],compare)
@@ -146,7 +146,7 @@ def calcSimShow(data):
     tot_bmt = sum(tot_bmt_age)
     tot_hh_age = [sum(data[(aldur, "heilsugæsla")]) for aldur in AGE_GROUPS]
     tot_hh = sum(tot_hh_age)
-    d = [(key_soy[0],key_soy[1],val) for key_soy,val in data["StarfsInfo"].items()]
+    d = [(key_soy[0],key_soy[1],val) for key_soy,val in data["Læknar"].items()]
     df = pd.DataFrame(d,columns = ["Deild","Starfsheiti","Fjöldi"])
     df_pivot = df.pivot(index="Deild",columns="Starfsheiti",values="Fjöldi")
     df_pivot.columns=["Hjúkrunarfræðingar","StarfsInfo"]
@@ -175,25 +175,25 @@ st.text(f"Skoða niðurstöður úr {simAttributes1_nontuple['SimAmount']} hermu
 
 KEYS_TOT = simAttributes1_nontuple["Keys"]
 
-def calcConfidence(data,simAttr):
-    dataIM = [[] for _ in range(simAttr["SimAmount"])]
-    total = [0 for _ in range(simAttr["Stop"])]
-    for i in range(simAttr["SimAmount"]):
-        for j in range(simAttr["Stop"]):
+def calcConfidence(data,stop,simAmount):
+    dataIM = [[] for _ in range(simAmount)]
+    total = [0 for _ in range(stop)]
+    for i in range(simAmount):
+        for j in range(stop):
             s = sum([data["MeanAmount"][(age_grp,"legudeild")][i][j] for age_grp in data["AgeGroups"]])
             total[j] += s
             dataIM[i].append(s)
-    totalMean = [total[k]/simAttr["Stop"] for k in range(simAttr["Stop"])]
+    totalMean = [total[k]/simAmount for k in range(stop)]
     stayData_arr = np.array(dataIM)
     stayData_arr = np.transpose(stayData_arr)
     data["MeanLegaPerHerm"] = totalMean
     inter = []
     if L < 30:
-        for i in range(simAttr["Stop"]):
+        for i in range(stop):
             inter.append(stats.t.interval(confidence=0.95,df = len(stayData_arr[i,:])-1, loc = totalMean[i],
                                           scale = stats.sem(stayData_arr[i,:])))
     else:
-        for i in range(simAttr["Stop"]):
+        for i in range(stop):
             inter.append(stats.norm.interval(confidence=0.95,loc = totalMean[i],scale = stats.sem(stayData_arr[i,:])))
     return inter
 
@@ -203,8 +203,7 @@ def calcLegudata(data):
     legudataGamlir = data["BoxPlot"][(data["AgeGroups"][2],data["States"][0])]
     return [legudataUngir,legudataMid,legudataGamlir]
 
-def calcGraph(data,simAttribs,vis,first):
-    days = simAttribs["Stop"] -1
+def calcGraph(data,days,vis,first):
     mean_stay = data["MeanLegaPerHerm"]
     CI = data["CI"]
     lower,upper = [],[]
@@ -263,16 +262,15 @@ def calcSankey(data,simAttribs_nontuple,simAttribs_tuple):
         "value" : data_graph}))
     return fig3
 
-def calcRandom(data,simAttribs_nontuple,simAttribs_tuple):
-    L = simAttribs_nontuple["SimAmount"]
+def calcRandom(data,simAmount):
     meanWork = {}
     for keys in data["StarfsInfo"]:
-        meanWork[keys] = sum(data["StarfsInfo"][keys])/L
+        meanWork[keys] = sum(data["StarfsInfo"][keys])/simAmount
     d = [(key_soy[0],key_soy[1],val) for key_soy,val in meanWork.items()]
     df = pd.DataFrame(d,columns=["Deild","Starfsheiti","Fjöldi"])
     df_pivot = df.pivot(index="Deild",columns="Starfsheiti",values="Fjöldi")
     df_pivot.columns=["Hjúkrunarfræðingar","Læknar"]
-    meanFjoldi_patient = sum(data["totalPatient"])/L
+    meanFjoldi_patient = sum(data["totalPatient"])/simAmount
     return [df_pivot,meanFjoldi_patient]
 
 vis = st.checkbox("Sjá raungögn með hermun")
@@ -305,9 +303,9 @@ if hundur:
         dataUse = data_use(data)
         print(dataUse["States"])
         print(dataUse["AgeGroups"])
-        dataUse["CI"] = calcConfidence(dataUse,simAttributes1_nontuple)
+        dataUse["CI"] = calcConfidence(dataUse,simAttributes1_nontuple["Stop"],simAttributes1_nontuple["SimAmount"])
         [legudataUngir,legudataMid,legudataGamlir] = calcLegudata(dataUse)
-        graf = calcGraph(dataUse,simAttributes1_nontuple,vis,True)
+        graf = calcGraph(dataUse,simAttributes1_nontuple["Stop"],vis,True)
         fig3 = calcSankey(dataUse,simAttributes1_nontuple,simAttributes1_tuple)
         df = pd.DataFrame(
             {
@@ -316,7 +314,7 @@ if hundur:
                 "Legudeild Gamlir" : legudataGamlir
             }
         )
-        [df_starf,meanFjoldi_patient] = calcRandom(dataUse,simAttributes1_nontuple,simAttributes1_tuple)
+        [df_starf,meanFjoldi_patient] = calcRandom(dataUse,simAttributes1_nontuple["SimAmount"])
         if compare:
             simAttrib_tuple = {}
             for key in simAttributes2_tuple:
@@ -342,9 +340,9 @@ if hundur:
             f = open(pth+"JSONOUTPUT.json")
             data = json.load(f)
             dataUse = data_use(data)
-            dataUse["CI"] = calcConfidence(dataUse,simAttributes2_nontuple)
+            dataUse["CI"] = calcConfidence(dataUse,simAttributes2_nontuple["Stop"],simAttributes2_nontuple["SimAmount"])
             [legudataUngir_new,legudataMid_new,legudataGamlir_new] = calcLegudata(dataUse)
-            graf_new = calcGraph(dataUse,simAttributes2,vis,False)
+            graf_new = calcGraph(dataUse,simAttributes2_nontuple["Stop"],vis,False)
             fig3_new = calcSankey(dataUse,simAttributes2_nontuple,simAttributes2_tuple)
             df["Hermun"] = ["Hermun 1" for _ in range(simAttributes1_nontuple["SimAmount"])]
             df_new = pd.DataFrame(
@@ -358,18 +356,18 @@ if hundur:
             )
             df_tot = pd.concat([df,df_new])
             graf_tot = graf + graf_new
-            [df_starf_new,meanFjoldi_patient_new] = calcRandom(dataUse,simAttributes2_nontuple,simAttributes2_tuple)
+            [df_starf_new,meanFjoldi_patient_new] = calcRandom(dataUse,simAttributes2_nontuple["SimAmount"])
         else:
             df_tot = df
             graf_tot = graf
     st.success("Hermun lokið")
-    st.write("Hér er MeanArrive fólks á legudeild eftir aldursflokki.")
+    st.write("Hér er fjöldi fólks á legudeild í lok dags eftir aldursflokki.")
     if compare:
         fig1 = px.box(df_tot,color = "Hermun")
     else:
         fig1 = px.box(df_tot)
     st.plotly_chart(fig1)
-    st.text(f"Hér sést MeanArrive einstaklinga í kerfinu á dag yfir þessar {L}")
+    st.text(f"Hér sést fjöldi einstaklinga sem koma á legudeild á dag yfir þessar {L}")
     st.text(f"hermanir ásamt 95% vikmörkum.")
     fig2 = go.Figure(
         graf_tot
@@ -377,8 +375,9 @@ if hundur:
     fig2.update_layout(
         xaxis_title = "Dagar",
         yaxis_title = "Meðalfjöldi",
-        title="Meðalfjöldi inniliggjandi sjúklinga á legudeild"
+        title="Meðalfjöldi sjúklinga sem leggjast inn á legudeild á dag"
     )
+    fig2.update_yaxes(rangemode="tozero")
     st.plotly_chart(fig2)
     fig3.update_layout(title_text="Flæði sjúklinga í gegnum kerfið")
     st.plotly_chart(fig3)

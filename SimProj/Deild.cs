@@ -1,5 +1,5 @@
-﻿/* Þessi class hermir deildir kerfisins 
- * 
+﻿/* 
+ * Þessi class hermir deildir kerfisins  
  */
 using SimSharp;
 
@@ -48,10 +48,7 @@ public class Deild
         }
         dataDeild.fjoldiInni[p.Aldur]++;
         dataDeild.inni++;
-        if (Run.upphitunFlag)
-        {
-            foreach (string age_grp in simAttribs.AgeGroups) { dataDeild.fjoldiDag[age_grp][kerfi.Dagur]++; }
-        }
+        if (Run.upphitunFlag){dataDeild.fjoldiDag[p.Aldur][kerfi.Dagur]++; }
         if (dataDeild.inni > dataDeild.maxInni){ dataDeild.maxInni = dataDeild.inni; }
         if (simAttribs.WaitLognorm.ContainsKey(nafn)){ wait = waitLognorm[p.Aldur].Sample(); }
         else if (simAttribs.WaitUniform.ContainsKey(nafn)){ wait = WaitUnif.Sample(); }
