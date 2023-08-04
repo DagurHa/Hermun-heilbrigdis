@@ -190,11 +190,11 @@ def calcConfidence(data,simAttr):
     inter = []
     if L < 30:
         for i in range(simAttr["Stop"]):
-            inter.append(stats.t.interval(alpha=0.95,df = len(stayData_arr[i,:])-1, loc = totalMean[i],
+            inter.append(stats.t.interval(confidence=0.95,df = len(stayData_arr[i,:])-1, loc = totalMean[i],
                                           scale = stats.sem(stayData_arr[i,:])))
     else:
         for i in range(simAttr["Stop"]):
-            inter.append(stats.norm.interval(alpha=0.95,loc = totalMean[i],scale = stats.sem(stayData_arr[i,:])))
+            inter.append(stats.norm.interval(confidence=0.95,loc = totalMean[i],scale = stats.sem(stayData_arr[i,:])))
     return inter
 
 def calcLegudata(data):
@@ -250,7 +250,7 @@ def calcSankey(data,simAttribs_nontuple,simAttribs_tuple):
     for tvennd in simAttribs_tuple["Deildaskipti"]:
         source.append(nodeNum[tvennd[0]])
         target.append(nodeNum[tvennd[1]])
-    data_graph = [np.sum(sankeyData[key])/L for key in simAttribs_tuple["Deildaskipti"]]
+    data_graph = [np.sum(sankeyData[key])/L for key in sankeyData]
     fig3 = go.Figure(go.Sankey(
     arrangement = "freeform",
     node = {
@@ -266,7 +266,7 @@ def calcSankey(data,simAttribs_nontuple,simAttribs_tuple):
 def calcRandom(data,simAttribs_nontuple,simAttribs_tuple):
     L = simAttribs_nontuple["SimAmount"]
     meanWork = {}
-    for keys in simAttribs_tuple["JobDemand"]:
+    for keys in data["StarfsInfo"]:
         meanWork[keys] = sum(data["StarfsInfo"][keys])/L
     d = [(key_soy[0],key_soy[1],val) for key_soy,val in meanWork.items()]
     df = pd.DataFrame(d,columns=["Deild","Starfsheiti","Fjöldi"])
@@ -289,10 +289,10 @@ if hundur:
         pth = "./SimProj/bin/Release/net7.0/"
         file_nonTuple = pth + "InputNonTuple.json"
         file_tuple = pth + "InputTuple.json"
-        with open(file_nonTuple,"w") as json_file:
-            json.dump(simAttributes1_nontuple,json_file,ensure_ascii=True)
-        with open(file_tuple,"w") as json_file:
-            json.dump(simAttrib_tuple,json_file,ensure_ascii=True)
+        with open(file_nonTuple,"w",encoding='utf8') as json_file:
+            json.dump(simAttributes1_nontuple,json_file,ensure_ascii=False)
+        with open(file_tuple,"w",encoding='utf8') as json_file:
+            json.dump(simAttrib_tuple,json_file,ensure_ascii=False)
         
         process = subprocess.Popen([pth+"SimProj.exe"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
         stdout, stderr = process.communicate()
@@ -316,7 +316,7 @@ if hundur:
                 "Legudeild Gamlir" : legudataGamlir
             }
         )
-        [df_starf,meanFjoldi_patient] = calcRandom(dataUse,simAttributes1)
+        [df_starf,meanFjoldi_patient] = calcRandom(dataUse,simAttributes1_nontuple,simAttributes1_tuple)
         if compare:
             simAttrib_tuple = {}
             for key in simAttributes2_tuple:
