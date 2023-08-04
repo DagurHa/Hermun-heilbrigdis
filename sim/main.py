@@ -8,6 +8,9 @@ import pandas as pd
 import numpy as np
 from copy import copy,deepcopy
 from math import ceil
+import json
+from scipy import stats
+import subprocess
 
 def initSimAttribs(simAttribs_tuple,simAttribs_nontuple,tab,num_in_key,name,compare):
     with tab:

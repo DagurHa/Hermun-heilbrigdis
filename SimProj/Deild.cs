@@ -61,6 +61,7 @@ public class Deild
         string newDeild = simAttribs.States[i_deild];
         string prev = p.Deild;
         p.Deild = newDeild;
+        if (prev == simAttribs.States[2] & newDeild == simAttribs.States[0]) { env.TimeoutD(0.9); }
         if (Run.upphitunFlag) { dataDeild.deildSkipt[newDeild]++; }
         if (simAttribs.FinalState.Contains(newDeild)) { removeP(p); }
         else

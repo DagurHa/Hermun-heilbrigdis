@@ -1,11 +1,6 @@
 from itertools import product
 from copy import copy
-from scipy import stats
 import pandas as pd
-import numpy as np
-import json
-import subprocess
-import os
 
 def data_use(data):
     dataOut = {
@@ -64,9 +59,9 @@ STATES = ["legudeild", "göngudeild", "bráðamóttaka", "heilsugæsla", "hjúkr
 AGE_GROUPS = ["Ungur","Miðaldra","Gamall"] # mismunandi aldurshópar sjúklings. Breytum/bætum við mögulega
 # meðalfjöldi aldurshópa sem koma á spítala á dag, fáum rauntölur hér og getum síðan breytt
 AGE_GROUP_AMOUNT = {
-    AGE_GROUPS[0] : 1392,
-    AGE_GROUPS[1] : 450,
-    AGE_GROUPS[2] : 205
+    AGE_GROUPS[0] : 1331,
+    AGE_GROUPS[1] : 389,
+    AGE_GROUPS[2] : 328
 }
 # færslulíkur milli deilda, hér höfum við default færslulíkur sem verða vonandi byggðar á gögnum.
 # Skiptum færslulíkum eftir aldri en bara til þess að aldrað fólk geti komist á hjúkrun, einmitt nuna er hjúkrun absorbing
@@ -75,24 +70,24 @@ PROB = {
     #Færslulíkur ungra
     (STATES[0],AGE_GROUPS[0]) : [0.0, 0.31, 0.0, 0.0, 0.0, 0.04, 0.65],
     (STATES[1],AGE_GROUPS[0]) : [0.005, 0.0, 0.0, 0.0, 0.0, 0.0, 0.995],
-    (STATES[2],AGE_GROUPS[0]) : [0.162, 0.3, 0.0, 0.0, 0.0, 0.0, 0.538],
-    (STATES[3],AGE_GROUPS[0]) : [0.0857, 0.0217, 0.005, 0.0, 0.0, 0.0, 0.8876],
+    (STATES[2],AGE_GROUPS[0]) : [0.126, 0.0, 0.0, 0.0, 0.0, 0.0, 0.874],
+    (STATES[3],AGE_GROUPS[0]) : [0.0, 0.0217, 0.005, 0.0, 0.0, 0.0, 0.9733],
     (STATES[4],AGE_GROUPS[0]) : [0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0],
     (STATES[5],AGE_GROUPS[0]) : [0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0],
     (STATES[6],AGE_GROUPS[0]) : [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0],
     #Færslulíkur miðaldra
     (STATES[0],AGE_GROUPS[1]) : [0.0, 0.31, 0.0, 0.0, 0.0, 0.04, 0.65],
     (STATES[1],AGE_GROUPS[1]) : [0.005, 0.0, 0.0, 0.0, 0.0, 0.0, 0.995],
-    (STATES[2],AGE_GROUPS[1]) : [0.162, 0.3, 0.0, 0.0, 0.0, 0.0, 0.538],
-    (STATES[3],AGE_GROUPS[1]) : [0.0857, 0.0217, 0.005, 0.0, 0.0, 0.0, 0.8876],
+    (STATES[2],AGE_GROUPS[1]) : [0.196, 0.0, 0.0, 0.0, 0.0, 0.0, 0.804],
+    (STATES[3],AGE_GROUPS[1]) : [0.0, 0.0217, 0.005, 0.0, 0.0, 0.0, 0.9733],
     (STATES[4],AGE_GROUPS[1]) : [0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0],
     (STATES[5],AGE_GROUPS[1]) : [0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0],
     (STATES[6],AGE_GROUPS[1]) : [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0],
     #Færslulíkur aldraðra (Hér breytast líkur á að fara til hjúkrunar, einmitt nuna ekki byggt á gögnum)
     (STATES[0],AGE_GROUPS[2]) : [0.0, 0.31, 0.0, 0.0, 0.1, 0.04, 0.55],
     (STATES[1],AGE_GROUPS[2]) : [0.005, 0.0, 0.0, 0.0, 0.1, 0.0, 0.895],
-    (STATES[2],AGE_GROUPS[2]) : [0.162, 0.3, 0.0, 0.0, 0.0, 0.0, 0.538],
-    (STATES[3],AGE_GROUPS[2]) : [0.0857, 0.0217, 0.005, 0.0, 0.0, 0.0, 0.8876],
+    (STATES[2],AGE_GROUPS[2]) : [0.394, 0.0, 0.0, 0.0, 0.0, 0.0, 0.606],
+    (STATES[3],AGE_GROUPS[2]) : [0.0, 0.0217, 0.005, 0.0, 0.0, 0.0, 0.9733],
     (STATES[4],AGE_GROUPS[2]) : [0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0],
     (STATES[5],AGE_GROUPS[2]) : [0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0],
     (STATES[6],AGE_GROUPS[2]) : [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0]
@@ -103,9 +98,10 @@ PROB = {
 UPPHAFSDEILD = [STATES[2],STATES[3]]
 MILLIDEILD = [STATES[0],STATES[1]]
 ENDADEILD = [STATES[4],STATES[5],STATES[6]]
-INITIAL_PROB = [0.88, 0.12] # Upphafslíkur á að fara á legudeild ,göngudeild og bráðamóttöku
+INITIAL_PROB = [0.12, 0.88] # Upphafslíkur á að fara á legudeild ,göngudeild og bráðamóttöku
 # meðalbiðtímar á göngu- og legudeild, þetta verður default biðin sem byggist nú á aldri og verður vonandi byggð á gögnum.
-WAIT_BMT = (0.0, 0.39) # Þarf að finna gögn um þetta (biðtími á bráðamóttöku)
+#WAIT_BMT = {0.0,0.39}  Þarf að finna gögn um þetta (biðtími á bráðamóttöku)
+
 WAIT_HH = (0.0, 0.2) # Þarf að finna gögn um þetta (Biðtími á heilsugæslu)
 WAIT_GONGU = (0.01, 0.03)
 WAIT_LEGU = {
@@ -115,7 +111,6 @@ WAIT_LEGU = {
 }
 WAIT_unif = {
     STATES[1] : WAIT_GONGU,
-    STATES[2] : WAIT_BMT,
     STATES[3] : WAIT_HH
 }
 WAIT_lognorm = {
@@ -172,5 +167,5 @@ simAttributes_tuple = {
     'Deildaskipti' : deildaskipti,
     'JobDemand' : STARFSDEMAND
 }
-GOGN = d_skra["Fjöldi á dag"].tolist()
+GOGN = d_skra["Fjöldi koma á legudeild per dag"].tolist()
 meanArrivaltimes = copy(simAttributes_nontuple["MeanArrive"])
