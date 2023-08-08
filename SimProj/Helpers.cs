@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace SimProj;
@@ -27,7 +28,8 @@ public static class Helpers
     public static Dictionary<(string,string), int> CalcNumJobs(Dictionary<string,int> maxIn, SimAttribs simAttribs)
     {
         starfs = new Dictionary<(string,string), int>();
-        IEnumerable<string> deildir = simAttribs.InitState.Concat(simAttribs.MedState);
+        //IEnumerable<string> deildir = simAttribs.InitState.Concat(simAttribs.States[0]);
+        List<string> deildir = new List<string> {"legudeild","bráðamóttaka","heilsugæsla" };
         foreach (string state in deildir)
         {
             foreach (string job in simAttribs.Jobs)

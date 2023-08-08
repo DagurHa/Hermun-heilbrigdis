@@ -42,11 +42,10 @@ public class Run
             DataFinal data = sim(simAttr);
             upphitunFlag = false;
             stayData.Add(data.LeguAmount);
-            foreach(string[] key in data.deildAgeAmount.Keys)
+            foreach((string,string) key in data.deildAgeAmount.Keys)
             {
-                (string, string) keyTup = (key[0], key[1]);
-                totalData.BoxPlot[keyTup].Add((double)data.deildAgeAmount[key].Sum()/days);
-                for(int j = 0; j < simAttr.Stop; j++) { totalData.MeanAmount[keyTup][i, j] = data.fjoldiDag[keyTup][j]; }
+                totalData.BoxPlot[key].Add((double)data.deildAgeAmount[key].Sum()/days);
+                for(int j = 0; j < simAttr.Stop; j++) { totalData.MeanAmount[key][i, j] = data.fjoldiDag[key][j]; }
             }
             foreach ((string,string) JobKey in data.JobNum.Keys)
             {

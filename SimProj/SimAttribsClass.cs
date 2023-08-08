@@ -9,7 +9,7 @@ public class SimAttribsNontuples
     public List<string>? States { get; set; }
     public List<string>? AgeGroups { get; set; }
     public Dictionary<string, Dictionary<string,List<double>>>? WaitLognorm {  get; set; }
-    public Dictionary<string,List<double>>? WaitUniform { get; set; }
+    public List<string> PeriodStates { get; set; }
     public int SimAmount { get; set; }
     public List<string>? InitState { get; set; }
     public List<string>? MedState { get; set; }
@@ -28,6 +28,8 @@ public class SimAttribs : SimAttribsNontuples
     public Dictionary<(string, string), List<double>>? MoveProb { get; set; }
     public Dictionary<(string, string), int>? DeildaSkipti { get; set; }
     public Dictionary<(string, string), List<int>>? JobDemand { get; set; }
+    public Dictionary<(string,string),double>? PeriodStays { get; set; }
+    public Dictionary<(string,string),double>? PeriodDays { get; set; }
 
     public void initNonTuple(SimAttribsNontuples simAttr)
     {
@@ -52,6 +54,8 @@ public class SimAttribs : SimAttribsNontuples
         MoveProb = new Dictionary<(string, string), List<double>>();
         JobDemand = new Dictionary<(string, string), List<int>>();
         DeildaSkipti = new Dictionary<(string, string), int>();
+        PeriodStays = new Dictionary<(string, string), double>();
+        PeriodDays = new Dictionary<(string, string), double>();
         foreach(var key in simAttr.MoveProb.Keys)
         {
             (string, string) keyTup = Helpers.StringToTup(key);
@@ -66,6 +70,16 @@ public class SimAttribs : SimAttribsNontuples
         {
             (string, string) keyTup = Helpers.StringToTup(key);
             DeildaSkipti[keyTup] = simAttr.DeildaSkipti[key];
+        }
+        foreach (var key in simAttr.PeriodStays.Keys)
+        {
+            (string, string) keyTup = Helpers.StringToTup(key);
+            PeriodStays[keyTup] = simAttr.PeriodStays[key];
+        }
+        foreach (var key in simAttr.PeriodDays.Keys)
+        {
+            (string, string) keyTup = Helpers.StringToTup(key);
+            PeriodDays[keyTup] = simAttr.PeriodDays[key];
         }
     }
     public void Log()
@@ -126,15 +140,6 @@ public class SimAttribs : SimAttribsNontuples
                 }
             }
         }
-        Console.WriteLine("WaitUniform:");
-        foreach(string key in WaitUniform.Keys)
-        {
-            Console.WriteLine($"Lykill: {key}");
-            foreach(double item in WaitUniform[key])
-            {
-                Console.WriteLine($"Item : {item}");
-            }
-        }
         Console.WriteLine($"SimAmount: {SimAmount}");
         Console.WriteLine("InitState:");
         foreach(string item in InitState)
@@ -188,5 +193,7 @@ public class SimAttribsTuples
     public Dictionary<string, List<double>>? MoveProb { get; set; }
     public Dictionary<string, int>? DeildaSkipti { get; set; }
     public Dictionary<string, List<int>>? JobDemand { get; set; }
+    public Dictionary<string, double>? PeriodDays { get; set; }
+    public Dictionary<string,double>? PeriodStays { get; set; }
 
 }

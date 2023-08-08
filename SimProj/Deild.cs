@@ -12,7 +12,6 @@ public class Deild
     private string nafn;
     private Simulation env;
     private Dictionary<string,MathNet.Numerics.Distributions.LogNormal> waitLognorm = new Dictionary<string, MathNet.Numerics.Distributions.LogNormal>();
-    private MathNet.Numerics.Distributions.ContinuousUniform WaitUnif;
     private double wait;
     public Deild(Simulation envment, string Nafn, SimAttribs SimAttributes, Kerfi Kerfi)
     {
@@ -29,10 +28,6 @@ public class Deild
                 waitLognorm[age_grp] = lgnrm;
             }
         }
-        if (simAttribs.WaitUniform.ContainsKey(nafn))
-        {
-            WaitUnif = new MathNet.Numerics.Distributions.ContinuousUniform(simAttribs.WaitUniform[nafn][0], simAttribs.WaitUniform[nafn][1]);
-        }
     }
     public IEnumerable<Event> addP(Patient p, bool innrit, string prev_deild)
     {
@@ -41,19 +36,38 @@ public class Deild
             kerfi.deildir[prev_deild].dataDeild.fjoldiInni[p.Aldur]--;
             kerfi.deildir[prev_deild].dataDeild.inni--;
         }
-        else
-        {
-            kerfi.telja++;
-            kerfi.amount++;
-        }
+        else { kerfi.amount++; }
         dataDeild.fjoldiInni[p.Aldur]++;
         dataDeild.inni++;
-        if (Run.upphitunFlag){dataDeild.fjoldiDag[p.Aldur][kerfi.Dagur]++; }
+        if (Run.upphitunFlag && !simAttribs.PeriodStates.Contains(nafn))
+        { 
+            dataDeild.fjoldiDag[p.Aldur][kerfi.Dagur]++;
+            kerfi.telja++;
+        }
         if (dataDeild.inni > dataDeild.maxInni){ dataDeild.maxInni = dataDeild.inni; }
-        if (simAttribs.WaitLognorm.ContainsKey(nafn)){ wait = waitLognorm[p.Aldur].Sample(); }
-        else if (simAttribs.WaitUniform.ContainsKey(nafn)){ wait = WaitUnif.Sample(); }
-        yield return env.TimeoutD(wait);
-        yield return env.Process(updatePatient(p));
+        if (simAttribs.WaitLognorm.ContainsKey(nafn))
+        {
+            wait = waitLognorm[p.Aldur].Sample();
+            yield return env.TimeoutD(wait);
+        }
+        if (simAttribs.PeriodStates.Contains(nafn))
+        {
+            yield return env.TimeoutD(30.0);
+            int inxNextDeild = Helpers.randomChoice(simAttribs.MoveProb[(nafn, p.Aldur)]);
+            string NextDeild = simAttribs.States[inxNextDeild];
+            if (NextDeild == simAttribs.States[0])
+            {
+                p.Deild = NextDeild;
+                if (Run.upphitunFlag) { dataDeild.deildSkipt[NextDeild]++; }
+                yield return env.Process(kerfi.deildir[NextDeild].addP(p, true, nafn));
+            }
+            else
+            {
+                double wait = simAttribs.PeriodDays[(p.Aldur, nafn)] / simAttribs.PeriodStays[(p.Aldur, nafn)];
+                yield return env.Process(TreatmentPeriod(p, simAttribs.PeriodDays[(p.Aldur, nafn)], wait));
+            }
+        }
+        else { yield return env.Process(updatePatient(p)); }
     }
     public IEnumerable<Event> updatePatient(Patient p)
     {
@@ -61,13 +75,25 @@ public class Deild
         string newDeild = simAttribs.States[i_deild];
         string prev = p.Deild;
         p.Deild = newDeild;
-        if (prev == simAttribs.States[2] & newDeild == simAttribs.States[0]) { env.TimeoutD(0.9); }
+        if (prev == simAttribs.States[3] & newDeild == simAttribs.States[0]) { env.TimeoutD(0.9); }
         if (Run.upphitunFlag) { dataDeild.deildSkipt[newDeild]++; }
         if (simAttribs.FinalState.Contains(newDeild)) { removeP(p); }
         else
         {
             yield return env.Process(kerfi.deildir[newDeild].addP(p,true,prev));
         }
+    }
+    public IEnumerable<Event> TreatmentPeriod(Patient p, double KomurLeft, double wait)
+    {
+        while(KomurLeft >= 0.0)
+        {
+            yield return env.TimeoutD(wait);
+            dataDeild.fjoldiDag[p.Aldur][kerfi.Dagur]++;
+            KomurLeft -= 1.0;
+        }
+        //Einu deildirnar sem sjúklingur getur farið á eftir meðferðarlotu eru "heim" og "legudeild"
+        if (Run.upphitunFlag) { dataDeild.deildSkipt["heim"]++; }
+        removeP(p);
     }
     public void removeP(Patient p)
     {

@@ -18,12 +18,7 @@ def initSimAttribs(simAttribs_tuple,simAttribs_nontuple,tab,num_in_key,name,comp
         st.write("Hér getur þú valið hversu marga sjúklinga annað hvort læknir eða hjúkrúnarfræðingur"
                 "getur séð um í einu á hverri deild. Þetta er þá miðað við að hver sjúklingur þarf ekki að bíða eftir aðstoð.")
         deildir = st.expander("Starfsupplýsingar")
-        gongu,legu,bmt,hh = deildir.tabs(["Göngudeild","Legudeild","Bráðamóttaka", "Heilsugæsla"])
-        with gongu:
-            st.write("Veldu hversu marga sjúklinga hver göngudeildalæknir getur séð um í einu.")
-            simAttribs_tuple["JobDemand"][("göngudeild","Læknar")][0] = st.number_input("Fjöldi sjúklinga fyrir göngudeildalækna",value = STARFSDEMAND[("göngudeild","Læknar")][0],max_value=40,step =1,key=num_in_key[name][0])
-            st.write("Veldu hversu marga sjúklinga hver göngudeildar hjúkrunarfræðingur getur séð um í einu.")
-            simAttribs_tuple["JobDemand"][("göngudeild","Hjúkrunarfræðingar")][0] = st.number_input("Fjöldi sjúklinga fyrir göngudeilda hjúkrunarfræðinga",value = STARFSDEMAND[("göngudeild","Hjúkrunarfræðingar")][0],max_value=40,step =1,key = num_in_key[name][1])
+        legu,bmt,hh = deildir.tabs(["Göngudeild","Legudeild","Bráðamóttaka", "Heilsugæsla"])
 
         with legu:
             st.write("Veldu fjölda lækna á legudeild,")
@@ -143,8 +138,6 @@ start = st.button("Start")
 def calcSimShow(data):
     tot_leg_age = [sum(data[(aldur, "legudeild")]) for aldur in AGE_GROUPS]
     tot_leg = sum(tot_leg_age)
-    tot_gong_age = [sum(data[(aldur, "göngudeild")]) for aldur in AGE_GROUPS]
-    tot_gong = sum(tot_gong_age)
     tot_bmt_age = [sum(data[(aldur, "bráðamóttaka")]) for aldur in AGE_GROUPS]
     tot_bmt = sum(tot_bmt_age)
     tot_hh_age = [sum(data[(aldur, "heilsugæsla")]) for aldur in AGE_GROUPS]
@@ -201,9 +194,10 @@ def calcConfidence(data,stop,simAmount):
     return inter
 
 def calcLegudata(data):
-    legudataUngir = data["BoxPlot"][(data["AgeGroups"][0],data["States"][0])]
-    legudataMid = data["BoxPlot"][(data["AgeGroups"][1],data["States"][0])]
-    legudataGamlir = data["BoxPlot"][(data["AgeGroups"][2],data["States"][0])]
+    print(data["BoxPlot"][(data["AgeGroups"][0],data["States"][0])])
+    legudataUngir = data["BoxPlot"][(data["AgeGroups"][0],"legudeild")]
+    legudataMid = data["BoxPlot"][(data["AgeGroups"][1],"legudeild")]
+    legudataGamlir = data["BoxPlot"][(data["AgeGroups"][2],"legudeild")]
     return [legudataUngir,legudataMid,legudataGamlir]
 
 def calcGraph(data,days,vis,first):
@@ -304,8 +298,6 @@ if hundur:
         f = open(pth+"JSONOUTPUT.json")
         data = json.load(f)
         dataUse = data_use(data)
-        print(dataUse["States"])
-        print(dataUse["AgeGroups"])
         dataUse["CI"] = calcConfidence(dataUse,simAttributes1_nontuple["Stop"],simAttributes1_nontuple["SimAmount"])
         [legudataUngir,legudataMid,legudataGamlir] = calcLegudata(dataUse)
         graf = calcGraph(dataUse,simAttributes1_nontuple["Stop"],vis,True)
@@ -317,6 +309,7 @@ if hundur:
                 "Legudeild Gamlir" : legudataGamlir
             }
         )
+        print(df)
         [df_starf,meanFjoldi_patient] = calcRandom(dataUse,simAttributes1_nontuple["SimAmount"])
         if compare:
             simAttrib_tuple = {}

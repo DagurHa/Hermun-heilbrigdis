@@ -67,9 +67,9 @@ public class Kerfi
         {
             yield return env.TimeoutD(1.0);
             action.Interrupt();
-            foreach (string[] keyArr in data.deildAgeAmount.Keys)
+            foreach ((string,string) keyArr in data.deildAgeAmount.Keys)
             {
-                data.deildAgeAmount[keyArr].Add(deildir[keyArr[1]].dataDeild.fjoldiInni[keyArr[0]]);
+                data.deildAgeAmount[keyArr].Add(deildir[keyArr.Item2].dataDeild.fjoldiInni[keyArr.Item1]);
             }
             data.LeguAmount.Add(deildir["legudeild"].dataDeild.inni);
         }

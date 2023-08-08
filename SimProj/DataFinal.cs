@@ -4,7 +4,7 @@ public class DataFinal
 {
     public Dictionary<(string,string), int[]> fjoldiDag;
     public Dictionary<string, int> maxInni = new Dictionary<string, int>();
-    public Dictionary<string[], List<int>> deildAgeAmount;
+    public Dictionary<(string,string), List<int>> deildAgeAmount;
     public List<double> LeguAmount;
     public int HeildarPatient;
     public Dictionary<(string,string), int> JobNum;
@@ -13,11 +13,11 @@ public class DataFinal
     {
         SankeyData = new Dictionary<(string,string), int>();
         fjoldiDag = new Dictionary<(string,string), int[]>();
-        deildAgeAmount = new Dictionary<string[], List<int>>();
+        deildAgeAmount = new Dictionary<(string,string), List<int>>();
         foreach(List<string> lst_key in keys)
         {
-            string[] keyArr = { lst_key[0] , lst_key[1] };
-            deildAgeAmount.Add(keyArr, new List<int>());
+            (string, string) key_tup = (lst_key[0], lst_key[1]);
+            deildAgeAmount.Add(key_tup, new List<int>());
         }
         LeguAmount = new List<double>();
     }
