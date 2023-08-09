@@ -285,14 +285,14 @@ if hundur:
 
         #pth = "../SimProj/bin/Release/net7.0/"
         path = "/mount/src/hermun-heilbrigdis"
-        file_nonTuple = path + "/sim/InputNonTuple.json"
+        file_nonTuple = path + "./sim/InputNonTuple.json"
         file_tuple = path + "/sim/InputTuple.json"
         with open(file_nonTuple,"w",encoding='utf8') as json_file:
             json.dump(simAttributes1_nontuple,json_file,ensure_ascii=False)
         with open(file_tuple,"w",encoding='utf8') as json_file:
             json.dump(simAttrib_tuple,json_file,ensure_ascii=False)
         
-        process = subprocess.Popen([path + "/SimProj/bin/Release/net7.0/SimProj.exe"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True,shell=True)
+        process = subprocess.Popen([path + "/SimProj/bin/Release/net7.0/SimProj.exe"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
         stdout, stderr = process.communicate()
 
         if stderr:
