@@ -11,11 +11,11 @@ public class Patient
     private string deild;
     private double timiSpitala;
     private int numer;
-    public Patient(string age, string state, int number)
+    public Patient(string age, string state, int number,double time)
     {
         aldur = age;
         deild = state;
-        timiSpitala = 0.0;
+        timiSpitala = time;
         numer = number;
     }
     public string Aldur

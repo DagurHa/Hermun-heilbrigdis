@@ -42,6 +42,7 @@ public class Run
             DataFinal data = sim(simAttr);
             upphitunFlag = false;
             stayData.Add(data.LeguAmount);
+            totalData.meanTimeDeild.Add(data.meanTime);
             foreach((string,string) key in data.deildAgeAmount.Keys)
             {
                 totalData.BoxPlot[key].Add((double)data.deildAgeAmount[key].Sum()/days);

@@ -313,7 +313,7 @@ if hundur:
                 "Legudeild Gamlir" : legudataGamlir
             }
         )
-        print(df)
+        st.write(dataUse["MeanTimeDeild"])
         [df_starf,meanFjoldi_patient] = calcRandom(dataUse,simAttributes1_nontuple["SimAmount"])
         if compare:
             simAttrib_tuple = {}
