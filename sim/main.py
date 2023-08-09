@@ -285,20 +285,20 @@ if hundur:
 
         #pth = "../SimProj/bin/Release/net7.0/"
         path = "/mount/src/hermun-heilbrigdis"
-        file_nonTuple = path + "/sim/InputNonTuple.json"
-        file_tuple = path + "/sim/InputTuple.json"
+        file_nonTuple = "./sim/InputNonTuple.json"
+        file_tuple = "./sim/InputTuple.json"
         with open(file_nonTuple,"w",encoding='utf8') as json_file:
             json.dump(simAttributes1_nontuple,json_file,ensure_ascii=False)
         with open(file_tuple,"w",encoding='utf8') as json_file:
             json.dump(simAttrib_tuple,json_file,ensure_ascii=False)
         
-        process = subprocess.Popen([path + "/SimProj/bin/Release/net7.0/SimProj.exe"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+        process = subprocess.Popen(["./SimProj/bin/Release/net7.0/SimProj.exe"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
         stdout, stderr = process.communicate()
 
         if stderr:
             print(f"Error: {stderr}")
         
-        f = open(path+"/sim/JSONOUTPUT.json")
+        f = open("./sim/JSONOUTPUT.json")
         data = json.load(f)
         dataUse = data_use(data)
         dataUse["CI"] = calcConfidence(dataUse,simAttributes1_nontuple["Stop"],simAttributes1_nontuple["SimAmount"])
