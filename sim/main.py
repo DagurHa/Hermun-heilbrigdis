@@ -281,15 +281,15 @@ if hundur:
                 for keys in simAttributes1_tuple[key]:
                     simAttributes1_tuple[key][keys] = tuple(simAttributes1_tuple[key][keys])
 
-        pth = "../SimProj/bin/Release/net7.0/"
-        file_nonTuple = pth + "InputNonTuple.json"
-        file_tuple = pth + "InputTuple.json"
+        #pth = "../SimProj/bin/Release/net7.0/"
+        file_nonTuple ="./InputNonTuple.json"
+        file_tuple = "./InputTuple.json"
         with open(file_nonTuple,"w",encoding='utf8') as json_file:
             json.dump(simAttributes1_nontuple,json_file,ensure_ascii=False)
         with open(file_tuple,"w",encoding='utf8') as json_file:
             json.dump(simAttrib_tuple,json_file,ensure_ascii=False)
         
-        process = subprocess.Popen([pth+"SimProj.exe"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+        process = subprocess.Popen(["./SimProj.exe"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
         stdout, stderr = process.communicate()
 
         if stderr:
