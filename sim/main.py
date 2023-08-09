@@ -10,6 +10,7 @@ from copy import copy,deepcopy
 from math import ceil
 import json
 from scipy import stats
+import os
 import subprocess
 from pathlib import Path
 
@@ -128,6 +129,8 @@ else:
 
 #Velja fjölda hermunardaga úr gögn
 data_graph = GOGN[400:399+simAttributes1_nontuple["Stop"]]
+
+st.write(f"Directory: {os.getcwd()}")
 
 st.divider()
 
