@@ -300,6 +300,7 @@ if hundur:
         
         f = open(pth + "JSONOUTPUT.json")
         data = json.load(f)
+        f.close()
         dataUse = data_use(data)
         dataUse["CI"] = calcConfidence(dataUse,simAttributes1_nontuple["Stop"],simAttributes1_nontuple["SimAmount"])
         [legudataUngir,legudataMid,legudataGamlir] = calcLegudata(dataUse)
@@ -337,6 +338,7 @@ if hundur:
         
             f = open(pth+"JSONOUTPUT.json")
             data = json.load(f)
+            f.close()
             dataUse = data_use(data)
             dataUse["CI"] = calcConfidence(dataUse,simAttributes2_nontuple["Stop"],simAttributes2_nontuple["SimAmount"])
             [legudataUngir_new,legudataMid_new,legudataGamlir_new] = calcLegudata(dataUse)
