@@ -295,7 +295,7 @@ if hundur:
         if stderr:
             print(f"Error: {stderr}")
         
-        f = open(pth+"JSONOUTPUT.json")
+        f = open("./JSONOUTPUT.json")
         data = json.load(f)
         dataUse = data_use(data)
         dataUse["CI"] = calcConfidence(dataUse,simAttributes1_nontuple["Stop"],simAttributes1_nontuple["SimAmount"])
