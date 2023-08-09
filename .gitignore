@@ -176,10 +176,8 @@ test.csv
 **/UpgradeLog.htm
 **/obj/
 **/.vs/
-**/bin/
-SimProj/bin/
-SimProj/bin
-**/bin/
+SimProj/bin/Debug
+SimProj/bin/Debug/
 TestSimSharp/bin/
 *.sln.DotSettings.user
 **/*.sln.DotSettings.user
