@@ -292,7 +292,7 @@ if hundur:
         with open(file_tuple,"w",encoding='utf8') as json_file:
             json.dump(simAttrib_tuple,json_file,ensure_ascii=False)
         
-        process = subprocess.Popen([path + "/sim/SimProj.exe"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+        process = subprocess.Popen(["chmod","+x",path + "/sim/SimProj.exe"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
         stdout, stderr = process.communicate()
 
         if stderr:
