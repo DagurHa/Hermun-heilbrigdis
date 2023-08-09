@@ -298,7 +298,7 @@ if hundur:
         if stderr:
             print(f"Error: {stderr}")
         
-        f = open("./sim/JSONOUTPUT.json")
+        f = open(pth + "JSONOUTPUT.json")
         data = json.load(f)
         dataUse = data_use(data)
         dataUse["CI"] = calcConfidence(dataUse,simAttributes1_nontuple["Stop"],simAttributes1_nontuple["SimAmount"])
@@ -322,7 +322,6 @@ if hundur:
                     for keys in simAttributes2_tuple[key]:
                         simAttributes2_tuple[key][keys] = tuple(simAttributes2_tuple[key][keys])
 
-            pth = "./SimProj/bin/Release/net7.0/"
             file_nonTuple = pth + "InputNonTuple.json"
             file_tuple = pth + "InputTuple.json"
             with open(file_nonTuple,"w") as json_file:
