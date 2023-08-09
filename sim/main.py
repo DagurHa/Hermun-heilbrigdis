@@ -18,7 +18,7 @@ def initSimAttribs(simAttribs_tuple,simAttribs_nontuple,tab,num_in_key,name,comp
         st.write("Hér getur þú valið hversu marga sjúklinga annað hvort læknir eða hjúkrúnarfræðingur"
                 "getur séð um í einu á hverri deild. Þetta er þá miðað við að hver sjúklingur þarf ekki að bíða eftir aðstoð.")
         deildir = st.expander("Starfsupplýsingar")
-        legu,bmt,hh = deildir.tabs(["Göngudeild","Legudeild","Bráðamóttaka", "Heilsugæsla"])
+        legu,bmt,hh = deildir.tabs(["Legudeild","Bráðamóttaka", "Heilsugæsla"])
 
         with legu:
             st.write("Veldu fjölda lækna á legudeild,")

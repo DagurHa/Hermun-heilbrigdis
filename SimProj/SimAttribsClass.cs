@@ -15,7 +15,6 @@ public class SimAttribsNontuples
     public List<string>? MedState { get; set; }
     public List<string>? FinalState { get; set; }
     public int WarmupTime { get; set; }
-    public Dictionary<string,double>? ReEnter { get; set; }
     public List<List<string>>? Keys { get; set; }
     public List<string>? Jobs { get; set; }
     public Dictionary<string,double>? MeanWait {  get; set; }
@@ -157,11 +156,6 @@ public class SimAttribs : SimAttribsNontuples
             Console.WriteLine($"Item: {item}");
         }
         Console.WriteLine($"WarmupTime: {WarmupTime}");
-        Console.WriteLine("ReEnter:");
-        foreach(string key in ReEnter.Keys)
-        {
-            Console.WriteLine($"Lykill: {key} og Item: {ReEnter[key]}");
-        }
         Console.WriteLine("Keys:");
         foreach(List<string> lstKey in Keys)
         {

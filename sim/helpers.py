@@ -145,12 +145,6 @@ for deild in UPPHAFSDEILD:
     skiptiKeys.append(("hjúkrun",deild))
     skiptiKeys.append(("heim",deild))
 deildaskipti = {keys : 0 for keys in skiptiKeys}
-#Erum ekki að nota þetta einmitt nuna, kannski seinna
-ENDURKOMA = {
-    AGE_GROUPS[0] : 0.02,
-    AGE_GROUPS[1] : 0.04,
-    AGE_GROUPS[2] : 0.06
-}
 STORF = ["Læknar","Hjúkrunarfræðingar"]
 # Fyrri talan í listanum segir til um hversu marga rýmir og seinni um hversu margir starfsmenn
 STARFSDEMAND = {
@@ -176,7 +170,6 @@ simAttributes_nontuple = {
     "MedState" : MILLIDEILD,
     "FinalState" : ENDADEILD,
     "WarmupTime" : UPPHITUN,
-    "ReEnter" : ENDURKOMA,
     "Keys" : KEYS_TOT,
     "Jobs" : STORF
 }
