@@ -11,6 +11,7 @@ from math import ceil
 import json
 from scipy import stats
 import subprocess
+from pathlib import Path
 
 def initSimAttribs(simAttribs_tuple,simAttribs_nontuple,tab,num_in_key,name,compare):
     with tab:
@@ -282,20 +283,20 @@ if hundur:
                     simAttributes1_tuple[key][keys] = tuple(simAttributes1_tuple[key][keys])
 
         #pth = "../SimProj/bin/Release/net7.0/"
-        file_nonTuple ="./InputNonTuple.json"
-        file_tuple = "./InputTuple.json"
+        file_nonTuple =".\InputNonTuple.json"
+        file_tuple = ".\InputTuple.json"
         with open(file_nonTuple,"w",encoding='utf8') as json_file:
             json.dump(simAttributes1_nontuple,json_file,ensure_ascii=False)
         with open(file_tuple,"w",encoding='utf8') as json_file:
             json.dump(simAttrib_tuple,json_file,ensure_ascii=False)
         
-        process = subprocess.Popen(["./SimProj.exe"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+        process = subprocess.Popen([".\SimProj.exe"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
         stdout, stderr = process.communicate()
 
         if stderr:
             print(f"Error: {stderr}")
         
-        f = open("./JSONOUTPUT.json")
+        f = open(".\JSONOUTPUT.json")
         data = json.load(f)
         dataUse = data_use(data)
         dataUse["CI"] = calcConfidence(dataUse,simAttributes1_nontuple["Stop"],simAttributes1_nontuple["SimAmount"])
