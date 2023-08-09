@@ -285,7 +285,7 @@ if hundur:
 
         #pth = "../SimProj/bin/Release/net7.0/"
         path = "/mount/src/hermun-heilbrigdis"
-        file_nonTuple = path + "./sim/InputNonTuple.json"
+        file_nonTuple = path + "/sim/InputNonTuple.json"
         file_tuple = path + "/sim/InputTuple.json"
         with open(file_nonTuple,"w",encoding='utf8') as json_file:
             json.dump(simAttributes1_nontuple,json_file,ensure_ascii=False)
