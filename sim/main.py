@@ -283,7 +283,7 @@ if hundur:
                     simAttributes1_tuple[key][keys] = tuple(simAttributes1_tuple[key][keys])
 
         #pth = "../SimProj/bin/Release/net7.0/"
-        path = Path(__file__).parent
+        path = Path(__file__).parents[1]
         file_nonTuple =path/"InputNonTuple.json"
         file_tuple = path/"InputTuple.json"
         with open(file_nonTuple,"w",encoding='utf8') as json_file:
