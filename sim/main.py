@@ -130,8 +130,6 @@ else:
 #Velja fjölda hermunardaga úr gögn
 data_graph = GOGN[400:399+simAttributes1_nontuple["Stop"]]
 
-st.write(f"Directory: {os.getcwd()}")
-
 st.divider()
 
 st.header("Hermun")
@@ -286,21 +284,21 @@ if hundur:
                     simAttributes1_tuple[key][keys] = tuple(simAttributes1_tuple[key][keys])
 
         #pth = "../SimProj/bin/Release/net7.0/"
-        path = Path(__file__).parents[1]
-        file_nonTuple =str(path)/"InputNonTuple.json"
-        file_tuple = str(path)/"InputTuple.json"
+        path = "/mount/src/hermun-heilbrigdis"
+        file_nonTuple = path + "/sim/InputNonTuple.json"
+        file_tuple = path + "/sim/InputTuple.json"
         with open(file_nonTuple,"w",encoding='utf8') as json_file:
             json.dump(simAttributes1_nontuple,json_file,ensure_ascii=False)
         with open(file_tuple,"w",encoding='utf8') as json_file:
             json.dump(simAttrib_tuple,json_file,ensure_ascii=False)
         
-        process = subprocess.Popen([str(path)/"SimProj.exe"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+        process = subprocess.Popen([path + "/sim/SimProj.exe"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
         stdout, stderr = process.communicate()
 
         if stderr:
             print(f"Error: {stderr}")
         
-        f = open(str(path)/"JSONOUTPUT.json")
+        f = open(path+"/sim/JSONOUTPUT.json")
         data = json.load(f)
         dataUse = data_use(data)
         dataUse["CI"] = calcConfidence(dataUse,simAttributes1_nontuple["Stop"],simAttributes1_nontuple["SimAmount"])
