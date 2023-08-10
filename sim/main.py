@@ -73,7 +73,7 @@ def initSimAttribs(simAttribs_tuple,simAttribs_nontuple,tab,num_in_key,name,comp
                                                             value = copy(meanArrivaltimes[AGE_GROUPS[1]]),step = 1,key=num_in_key[name][11])
                 simAttribs_nontuple["MeanArrive"][AGE_GROUPS[2]] = st.number_input("Meðalfjöldi aldraðra á dag",min_value = 1, max_value=1500,
                                                             value = copy(meanArrivaltimes[AGE_GROUPS[2]]),step = 1,key=num_in_key[name][12])
-            simAttribs_nontuple["InitialProb"][0] = st.slider("Líkur á að nýr sjúklingur fari á heilsugæslu", 
+            simAttribs_nontuple["InitialProb"][0] = st.slider("Líkur á að nýr sjúklingur fari á bráðamóttöku", 
                                                             value = simAttribs_nontuple["InitialProb"][0],key=num_in_key[name][13])
             if not compare:
                 simAttribs_nontuple["Stop"] = st.number_input("Fjöldi hermunardaga",min_value=10,max_value=1095,value=100,key=num_in_key[name][15])
@@ -166,7 +166,7 @@ if start:
         st.write(f"Meðalfjöldi á legudeild er {tot_leg/simAttributes1['Stop']} og MeanArrive á göngudeild er {tot_gong/simAttributes1['Stop']}")
         st.write(f"Meðal starfsþörf miðað við enga bið:")
         st.dataframe(df)
-
+st.divider()
 st.text(f"Skoða niðurstöður úr {simAttributes1_nontuple['SimAmount']} hermunum.")
 
 KEYS_TOT = simAttributes1_nontuple["Keys"]
@@ -357,11 +357,17 @@ if hundur:
             df_tot = df
             graf_tot = graf
     st.success("Hermun lokið")
-    st.write("Hér er fjöldi fólks á legudeild í lok dags eftir aldursflokki.")
+    #st.write("Hér er fjöldi fólks á legudeild í lok dags eftir aldursflokki.")
     if compare:
         fig1 = px.box(df_tot,color = "Hermun")
+        fig1.update_layout(title="Fjöldi fólks á legudeild í lok dags eftir aldursflokki")
+        fig1.update_xaxes(title_text="Aldurshópar")
+        fig1.update_yaxes(title_text="Dreifing á fjölda fólks")
     else:
         fig1 = px.box(df_tot)
+        fig1.update_layout(title="Fjöldi fólks á legudeild í lok dags eftir aldurshópi")
+        fig1.update_xaxes(title_text="Aldurshópar")
+        fig1.update_yaxes(title_text="Dreifing á fjölda fólks")
     st.plotly_chart(fig1)
     st.text(f"Hér sést fjöldi einstaklinga sem koma á legudeild á dag yfir þessar {L}")
     st.text(f"hermanir ásamt 95% vikmörkum.")
