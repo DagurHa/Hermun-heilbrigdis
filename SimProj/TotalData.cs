@@ -3,6 +3,7 @@
 
 public class TotalData
 {
+    public List<Dictionary<(string,string), double>> meanTimeDeild; //Listi af meðaltímum á deild eftir aldri yfir allar hermanirnar
     public List<double> MeanLega; //Meðalfjöldi fólks á legudeild í enda dags
     public Dictionary<(string,string), List<int>> Sankey; //Gögn fyrir sankey rit, item1 er frá item2 er til
     public List<int> totalPatient; //Heildarfjöldi Sjúklinga sem kom í kerfið
@@ -11,6 +12,7 @@ public class TotalData
     public Dictionary<(string, string), int[,]> MeanAmount; //Fjöldi fólks eftir aldurshópi og deild sem kom yfir dag fyrir alla daga   
     public TotalData(SimAttribs simAttr)
     {
+        meanTimeDeild = new List<Dictionary<(string, string), double>>();
         MeanAmount = new Dictionary<(string, string), int[,]>();
         MeanLega = new List<double>();
         totalPatient = new List<int>();

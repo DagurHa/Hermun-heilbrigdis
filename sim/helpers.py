@@ -9,7 +9,8 @@ def data_use(data):
         "totalPatient" : [],
         "BoxPlot": {},
         "StarfsInfo": {},
-        "MeanAmount": {}
+        "MeanAmount": {},
+        "MeanTimeDeild": []
     }
     dataOut["MeanLega"] = data["MeanLega"]
     for keys in data["Sankey"]:
@@ -25,6 +26,12 @@ def data_use(data):
     for keys in data["MeanAmount"]:
         keyTup = parse_tuple_string(keys)
         dataOut["MeanAmount"][keyTup] = data["MeanAmount"][keys]
+    for itemDict in data["meanTimeDeild"]:
+        dataOutDict = {}
+        for innerKeys in itemDict:
+            keyTup = parse_tuple_string(innerKeys)
+            dataOutDict[keyTup] = itemDict[innerKeys]
+        dataOut["MeanTimeDeild"].append(dataOutDict)
     dataAge = []
     dataStates = []
     for kvp in dataOut["MeanAmount"]:
@@ -104,7 +111,6 @@ PROB = {
 # endadeildir : hjúkrun, dauði og heim
 UPPHAFSDEILD = [STATES[3],STATES[4]]
 MILLIDEILD = LOTUDEILDIR + ["legudeild"]
-print(MILLIDEILD)
 ENDADEILD = [STATES[5],STATES[6],STATES[7],STATES[8]]
 INITIAL_PROB = [0.12, 0.88] # Upphafslíkur á að fara á legudeild ,göngudeild og bráðamóttöku
 # meðalbiðtímar á göngu- og legudeild, þetta verður default biðin sem byggist nú á aldri og verður vonandi byggð á gögnum.
@@ -157,7 +163,7 @@ STARFSDEMAND = {
 }
 KEYS_TOT = list(product(AGE_GROUPS,UPPHAFSDEILD+MILLIDEILD))
 
-UPPHITUN = 30 # Upphitunartími hverrar hermunar, þ.e. byrjum ekki að safna/sýna upplýsingar fyrr en svona margir dagar hafa liðið
+UPPHITUN = 100 # Upphitunartími hverrar hermunar, þ.e. byrjum ekki að safna/sýna upplýsingar fyrr en svona margir dagar hafa liðið
 simAttributes_nontuple = {
     "MeanArrive" : AGE_GROUP_AMOUNT,
     "InitialProb" : INITIAL_PROB,

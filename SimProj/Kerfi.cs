@@ -45,7 +45,7 @@ public class Kerfi
                 string aldur = fastar.AgeGroups[i_aldur];
                 int i_deild_upphaf = Helpers.randomChoice(fastar.InitialProb);
                 string deild_upphaf = fastar.InitState[i_deild_upphaf];
-                Patient p = new Patient(aldur, deild_upphaf, telja);
+                Patient p = new Patient(aldur, deild_upphaf, telja,env.NowD);
                 env.Process(deildir[deild_upphaf].addP(p, false, ""));
             }
             else { Dagur++; }

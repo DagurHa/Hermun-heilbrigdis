@@ -10,7 +10,9 @@ from copy import copy,deepcopy
 from math import ceil
 import json
 from scipy import stats
+import os
 import subprocess
+from pathlib import Path
 
 def initSimAttribs(simAttribs_tuple,simAttribs_nontuple,tab,num_in_key,name,compare):
     with tab:
@@ -282,6 +284,7 @@ if hundur:
                     simAttributes1_tuple[key][keys] = tuple(simAttributes1_tuple[key][keys])
 
         pth = "./SimProj/bin/Release/net7.0/"
+        path = "/mount/src/hermun-heilbrigdis"
         file_nonTuple = pth + "InputNonTuple.json"
         file_tuple = pth + "InputTuple.json"
         with open(file_nonTuple,"w",encoding='utf8') as json_file:
@@ -289,14 +292,15 @@ if hundur:
         with open(file_tuple,"w",encoding='utf8') as json_file:
             json.dump(simAttrib_tuple,json_file,ensure_ascii=False)
         
-        process = subprocess.Popen([pth+"SimProj.exe"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+        process = subprocess.Popen([pth + "SimProj.exe"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
         stdout, stderr = process.communicate()
 
         if stderr:
             print(f"Error: {stderr}")
         
-        f = open(pth+"JSONOUTPUT.json")
+        f = open(pth + "JSONOUTPUT.json")
         data = json.load(f)
+        f.close()
         dataUse = data_use(data)
         dataUse["CI"] = calcConfidence(dataUse,simAttributes1_nontuple["Stop"],simAttributes1_nontuple["SimAmount"])
         [legudataUngir,legudataMid,legudataGamlir] = calcLegudata(dataUse)
@@ -309,7 +313,7 @@ if hundur:
                 "Legudeild Gamlir" : legudataGamlir
             }
         )
-        print(df)
+        st.write(dataUse["MeanTimeDeild"])
         [df_starf,meanFjoldi_patient] = calcRandom(dataUse,simAttributes1_nontuple["SimAmount"])
         if compare:
             simAttrib_tuple = {}
@@ -319,7 +323,6 @@ if hundur:
                     for keys in simAttributes2_tuple[key]:
                         simAttributes2_tuple[key][keys] = tuple(simAttributes2_tuple[key][keys])
 
-            pth = "./SimProj/bin/Release/net7.0/"
             file_nonTuple = pth + "InputNonTuple.json"
             file_tuple = pth + "InputTuple.json"
             with open(file_nonTuple,"w") as json_file:
@@ -335,6 +338,7 @@ if hundur:
         
             f = open(pth+"JSONOUTPUT.json")
             data = json.load(f)
+            f.close()
             dataUse = data_use(data)
             dataUse["CI"] = calcConfidence(dataUse,simAttributes2_nontuple["Stop"],simAttributes2_nontuple["SimAmount"])
             [legudataUngir_new,legudataMid_new,legudataGamlir_new] = calcLegudata(dataUse)

@@ -9,8 +9,10 @@ public class DataFinal
     public int HeildarPatient;
     public Dictionary<(string,string), int> JobNum;
     public Dictionary<(string,string), int> SankeyData;
+    public Dictionary<(string, string), double> meanTime; //Meðaltími sjúklinga í deild
     public DataFinal(List<List<string>> keys)
     {
+        meanTime = new Dictionary<(string, string), double>();
         SankeyData = new Dictionary<(string,string), int>();
         fjoldiDag = new Dictionary<(string,string), int[]>();
         deildAgeAmount = new Dictionary<(string,string), List<int>>();

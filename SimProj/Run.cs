@@ -9,8 +9,8 @@ public class Run
     public static void Main(string[] args)
     {
         string pth = "./SimProj/bin/Release/net7.0/";
-        string simString_tup = File.ReadAllText(pth+"InputTuple.json");
-        string simString_nontup = File.ReadAllText(pth+"InputNonTuple.json");
+        string simString_tup = File.ReadAllText(pth + "InputTuple.json");
+        string simString_nontup = File.ReadAllText(pth + "InputNonTuple.json");
         SimAttribs simAttr = Helpers.InitSimAttr(simString_tup, simString_nontup);
         simAttr.Log();
         TotalData retData = hermHundur(simAttr);
@@ -42,6 +42,7 @@ public class Run
             DataFinal data = sim(simAttr);
             upphitunFlag = false;
             stayData.Add(data.LeguAmount);
+            totalData.meanTimeDeild.Add(data.meanTime);
             foreach((string,string) key in data.deildAgeAmount.Keys)
             {
                 totalData.BoxPlot[key].Add((double)data.deildAgeAmount[key].Sum()/days);

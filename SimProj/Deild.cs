@@ -52,6 +52,7 @@ public class Deild
         }
         if (simAttribs.PeriodStates.Contains(nafn))
         {
+            if (Run.upphitunFlag) { kerfi.telja++; }
             yield return env.TimeoutD(30.0);
             int inxNextDeild = Helpers.randomChoice(simAttribs.MoveProb[(nafn, p.Aldur)]);
             string NextDeild = simAttribs.States[inxNextDeild];
@@ -64,7 +65,7 @@ public class Deild
             else
             {
                 double wait = simAttribs.PeriodDays[(p.Aldur, nafn)] / simAttribs.PeriodStays[(p.Aldur, nafn)];
-                yield return env.Process(TreatmentPeriod(p, simAttribs.PeriodDays[(p.Aldur, nafn)], wait));
+                yield return env.Process(TreatmentPeriod(p, simAttribs.PeriodStays[(p.Aldur, nafn)], wait));
             }
         }
         else { yield return env.Process(updatePatient(p)); }
@@ -99,6 +100,7 @@ public class Deild
     {
         dataDeild.inni--;
         dataDeild.fjoldiInni[p.Aldur]--;
+        dataDeild.totalTime[p.Aldur] += (env.NowD - p.TimiSpitala);
     }
 }
 
