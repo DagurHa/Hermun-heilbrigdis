@@ -21,7 +21,8 @@ public class Deild
         simAttribs = SimAttributes;
         wait = 0;
         dataDeild = new DeildInfo(simAttribs);
-        if(simAttribs.WaitLognorm.ContainsKey(nafn)){
+        if(simAttribs.WaitLognorm.ContainsKey(nafn))
+        {
             foreach (string age_grp in simAttribs.AgeGroups)
             {
                 MathNet.Numerics.Distributions.LogNormal lgnrm = new MathNet.Numerics.Distributions.LogNormal(simAttribs.WaitLognorm[nafn][age_grp][0], simAttribs.WaitLognorm[nafn][age_grp][1]);
@@ -98,6 +99,7 @@ public class Deild
     }
     public void removeP(Patient p)
     {
+        dataDeild.AgeGrad[p.Aldur]++;
         dataDeild.inni--;
         dataDeild.fjoldiInni[p.Aldur]--;
         dataDeild.totalTime[p.Aldur] += (env.NowD - p.TimiSpitala);

@@ -91,7 +91,8 @@ public static class Helpers
         {
             foreach (string age in simAttr.AgeGroups)
             {
-                int totalPatientAge = kerfi.deildir[deild].dataDeild.fjoldiDag[age].Sum();
+                int totalPatientAge = kerfi.deildir[deild].dataDeild.AgeGrad[age];
+                Console.WriteLine($"Deild: {deild}, Aldur: {age} og fjöldi: {totalPatientAge}");
                 data.meanTime[(age,deild)] = (double) kerfi.deildir[deild].dataDeild.totalTime[age]/totalPatientAge;
             }
         }

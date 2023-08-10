@@ -270,7 +270,13 @@ def calcRandom(data,simAmount):
     df_pivot = df.pivot(index="Deild",columns="Starfsheiti",values="Fjöldi")
     df_pivot.columns=["Hjúkrunarfræðingar","Læknar"]
     meanFjoldi_patient = sum(data["totalPatient"])/simAmount
-    return [df_pivot,meanFjoldi_patient]
+    MeanTimeMean = {key_data : 0 for key_data in data["MeanTimeDeild"][0]}
+    for dictItem in data["MeanTimeDeild"]:
+        for key in dictItem:
+            MeanTimeMean[key] += dictItem[key]
+    for key in MeanTimeMean:
+        MeanTimeMean[key] = MeanTimeMean[key]/simAmount
+    return [df_pivot,meanFjoldi_patient,MeanTimeMean]
 
 vis = st.checkbox("Sjá raungögn með hermun")
 hundur = st.button("Byrja hermun!")
@@ -313,8 +319,8 @@ if hundur:
                 "Legudeild Gamlir" : legudataGamlir
             }
         )
-        st.write(dataUse["MeanTimeDeild"])
-        [df_starf,meanFjoldi_patient] = calcRandom(dataUse,simAttributes1_nontuple["SimAmount"])
+        [df_starf,meanFjoldi_patient,MeanTimeDict] = calcRandom(dataUse,simAttributes1_nontuple["SimAmount"])
+        MeanTimeDict_DF = pd.DataFrame(MeanTimeDict,index = MeanTimeDict.keys())
         if compare:
             simAttrib_tuple = {}
             for key in simAttributes2_tuple:
@@ -356,7 +362,8 @@ if hundur:
             )
             df_tot = pd.concat([df,df_new])
             graf_tot = graf + graf_new
-            [df_starf_new,meanFjoldi_patient_new] = calcRandom(dataUse,simAttributes2_nontuple["SimAmount"])
+            [df_starf_new,meanFjoldi_patient_new,MeanTimeDict_new] = calcRandom(dataUse,simAttributes2_nontuple["SimAmount"])
+            MeanTimeDict_DF_new = pd.DataFrame(MeanTimeDict_new,index = MeanTimeDict_new.keys())
         else:
             df_tot = df
             graf_tot = graf
@@ -384,6 +391,11 @@ if hundur:
     if compare:
         fig3_new.update_layout(title_text="Flæði sjúklinga í gegnum kerfið í seinni hermun")
         st.plotly_chart(fig3_new)
+    st.write("Meðaltími sjúklinga í kerfinu í hermun 1:")
+    st.dataframe(MeanTimeDict_DF)
+    if compare:
+        st.write("Meðaltími sjúklinga í kerfinu í hermun 2:")
+        st.dataframe(MeanTimeDict_DF_new)
     st.write(f"Meðal starfsþörf miðað við enga bið:")
     st.dataframe(df_starf)
     st.write(f"**Meðalfjöldi einstakra sjúklinga** sem komu í kerfið voru **{meanFjoldi_patient}**")

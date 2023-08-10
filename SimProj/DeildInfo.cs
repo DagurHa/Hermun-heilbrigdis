@@ -6,6 +6,7 @@ namespace SimProj;
 
 public class DeildInfo
 {
+    public Dictionary<string, int> AgeGrad; //Fjöldi sem útskriftast af deildinni eftir aldri
     public Dictionary<string,double> totalTime; //Heildartími sjúklinga eftir aldurshópi á þessari deild
     public Dictionary<string, int[]> fjoldiDag; //Fjöldi sjúklinga sem koma á deildina yfir daginn (þurfa ekki að vera unique)
     public int maxInni = 0;          //Hámarksfjöldi sjúklinga sem voru inni á deildinni yfir hermunina
@@ -14,10 +15,12 @@ public class DeildInfo
     public Dictionary<string,int> deildSkipt; // Deildarskipti fyrir deildina sem þessi class sér um
     public DeildInfo(SimAttribs simAttribs)
     {
+        AgeGrad = new Dictionary<string, int>();
         totalTime = new Dictionary<string, double>();
         fjoldiDag = new Dictionary<string, int[]>();
         foreach(string age_grp in simAttribs.AgeGroups)
-        { 
+        {
+            AgeGrad.Add(age_grp, 0);
             fjoldiInni[age_grp] = 0;
             fjoldiDag.Add(age_grp, new int[simAttribs.Stop + simAttribs.WarmupTime]);
             totalTime[age_grp] = 0.0;
