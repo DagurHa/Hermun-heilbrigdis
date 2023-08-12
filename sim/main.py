@@ -273,9 +273,11 @@ def calcRandom(data,simAmount):
     MeanTimeMean = {key_data : 0 for key_data in data["MeanTimeDeild"][0]}
     for dictItem in data["MeanTimeDeild"]:
         for key in dictItem:
-            MeanTimeMean[key] += dictItem[key]
+            if dictItem[key] != "NaN":
+                MeanTimeMean[key] += dictItem[key]
     for key in MeanTimeMean:
-        MeanTimeMean[key] = MeanTimeMean[key]/simAmount
+        if MeanTimeMean[key] != "NaN":
+            MeanTimeMean[key] = MeanTimeMean[key]/simAmount
     return [df_pivot,meanFjoldi_patient,MeanTimeMean]
 
 vis = st.checkbox("Sjá raungögn með hermun")
@@ -304,9 +306,8 @@ if hundur:
         if stderr:
             print(f"Error: {stderr}")
         
-        f = open(pth + "JSONOUTPUT.json")
-        data = json.load(f)
-        f.close()
+        with open(pth+'JSONOUTPUT.json', 'r', encoding='utf-8-sig') as json_f:
+            data = json.load(json_f)
         dataUse = data_use(data)
         dataUse["CI"] = calcConfidence(dataUse,simAttributes1_nontuple["Stop"],simAttributes1_nontuple["SimAmount"])
         [legudataUngir,legudataMid,legudataGamlir] = calcLegudata(dataUse)
@@ -342,10 +343,9 @@ if hundur:
             if stderr:
                 print(f"Error: {stderr}")
         
-            f = open(pth+"JSONOUTPUT.json")
-            data = json.load(f)
-            f.close()
-            dataUse = data_use(data)
+            with open(pth+'JSONOUTPUT.json','r',encoding='utf-8-sig') as json_f2:
+                data2 = json.load(json_f2)
+            dataUse = data_use(data2)
             dataUse["CI"] = calcConfidence(dataUse,simAttributes2_nontuple["Stop"],simAttributes2_nontuple["SimAmount"])
             [legudataUngir_new,legudataMid_new,legudataGamlir_new] = calcLegudata(dataUse)
             graf_new = calcGraph(dataUse,simAttributes2_nontuple["Stop"],vis,False)
