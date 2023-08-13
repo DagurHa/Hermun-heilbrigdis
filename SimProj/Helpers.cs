@@ -19,7 +19,7 @@ public static class Helpers
                 return item.Index;
             }
         }
-        return p.Count - 1;
+        throw new Exception("Færslulíkur summast ekki í 1");
     }
     /*
      Reiknum starfsþörf út frá hámarki sjúklinga sem komu í kerfið fyrir hverja deild
@@ -28,7 +28,6 @@ public static class Helpers
     public static Dictionary<(string, string), int> CalcNumJobs(Dictionary<string, int> maxIn, SimAttribs simAttribs)
     {
         starfs = new Dictionary<(string, string), int>();
-        //IEnumerable<string> deildir = simAttribs.InitState.Concat(simAttribs.States[0]);
         List<string> deildir = new List<string> { "legudeild", "bráðamóttaka", "heilsugæsla" };
         foreach (string state in deildir)
         {
@@ -92,7 +91,6 @@ public static class Helpers
             foreach (string age in simAttr.AgeGroups)
             {
                 int totalPatientAge = kerfi.deildir[deild].dataDeild.AgeGrad[age];
-                Console.WriteLine($"Deild: {deild}, Aldur: {age} og fjöldi: {totalPatientAge}");
                 data.meanTime[(age,deild)] = (double) kerfi.deildir[deild].dataDeild.totalTime[age]/totalPatientAge;
             }
         }

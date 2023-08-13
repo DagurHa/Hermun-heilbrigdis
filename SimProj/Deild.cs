@@ -2,6 +2,7 @@
  * Þessi class hermir deildir kerfisins  
  */
 using SimSharp;
+using System.Transactions;
 
 namespace SimProj;
 public class Deild
@@ -89,6 +90,7 @@ public class Deild
     {
         while(KomurLeft >= 0.0)
         {
+            if(KomurLeft < 1.0) { wait = wait * KomurLeft; }
             yield return env.TimeoutD(wait);
             dataDeild.fjoldiDag[p.Aldur][kerfi.Dagur]++;
             KomurLeft -= 1.0;

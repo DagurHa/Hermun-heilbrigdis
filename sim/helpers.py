@@ -164,7 +164,7 @@ STARFSDEMAND = {
 }
 KEYS_TOT = list(product(AGE_GROUPS,UPPHAFSDEILD+MILLIDEILD))
 
-UPPHITUN = 100 # Upphitunartími hverrar hermunar, þ.e. byrjum ekki að safna/sýna upplýsingar fyrr en svona margir dagar hafa liðið
+UPPHITUN = 130 # Upphitunartími hverrar hermunar, þ.e. byrjum ekki að safna/sýna upplýsingar fyrr en svona margir dagar hafa liðið
 simAttributes_nontuple = {
     "MeanArrive" : AGE_GROUP_AMOUNT,
     "InitialProb" : INITIAL_PROB,

@@ -13,7 +13,6 @@ public class Run
         string simString_tup = File.ReadAllText(pth + "InputTuple.json",Encoding.UTF8);
         string simString_nontup = File.ReadAllText(pth + "InputNonTuple.json",Encoding.UTF8);
         SimAttribs simAttr = Helpers.InitSimAttr(simString_tup, simString_nontup);
-        simAttr.Log();
         TotalData retData = hermHundur(simAttr);
         var jsonRetString = JsonConvert.SerializeObject(retData,Formatting.Indented);
         string jsonPth = pth + "JSONOUTPUT.json";
