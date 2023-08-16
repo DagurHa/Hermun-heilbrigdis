@@ -12,7 +12,6 @@ def data_use(data):
         "MeanAmount": {},
         "MeanTimeDeild": []
     }
-    print(data["MeanLega"])
     dataOut["MeanLega"] = data["MeanLega"]
     for keys in data["Sankey"]:
         keyTup = parse_tuple_string(keys)

@@ -1,7 +1,6 @@
 from time import time
 import streamlit as st
 from helpers import *
-from simulation import sim
 import plotly.express as px
 import plotly.graph_objs as go
 import pandas as pd
@@ -10,9 +9,7 @@ from copy import copy,deepcopy
 from math import ceil
 import json
 from scipy import stats
-import os
 import subprocess
-from pathlib import Path
 
 def initSimAttribs(simAttribs_tuple,simAttribs_nontuple,tab,num_in_key,name,compare):
     with tab:
@@ -134,41 +131,6 @@ st.divider()
 
 st.header("Hermun")
 
-st.text("Sjá eina hermun með völdum hermunarstillingum")
-start = st.button("Start")
-
-def calcSimShow(data):
-    tot_leg_age = [sum(data[(aldur, "legudeild")]) for aldur in AGE_GROUPS]
-    tot_leg = sum(tot_leg_age)
-    tot_bmt_age = [sum(data[(aldur, "bráðamóttaka")]) for aldur in AGE_GROUPS]
-    tot_bmt = sum(tot_bmt_age)
-    tot_hh_age = [sum(data[(aldur, "heilsugæsla")]) for aldur in AGE_GROUPS]
-    tot_hh = sum(tot_hh_age)
-    d = [(key_soy[0],key_soy[1],val) for key_soy,val in data["Læknar"].items()]
-    df = pd.DataFrame(d,columns = ["Deild","Starfsheiti","Fjöldi"])
-    df_pivot = df.pivot(index="Deild",columns="Starfsheiti",values="Fjöldi")
-    df_pivot.columns=["Hjúkrunarfræðingar","StarfsInfo"]
-    return [tot_leg,tot_gong,tot_bmt,tot_hh,df_pivot]
-
-if start:
-    simAttributes1 = {**simAttributes1_nontuple,**simAttributes1_tuple}
-    data1 = sim(True,simAttributes1)
-    [tot_leg,tot_gong,tot_bmt,tot_hh,df] = calcSimShow(data1)
-    st.write(f"Meðalfjöldi á legudeild er {tot_leg/simAttributes1['Stop']} og MeanArrive á göngudeild er {tot_gong/simAttributes1['Stop']}")
-    st.write(f"Meðalfjöldi á bráðamóttökur er {tot_bmt/simAttributes1['Stop']}") 
-    st.write(f"Meðalfjöldi á heilsugæslur er {tot_hh/simAttributes1['Stop']}")
-    st.write(f"og heildarfjöldi einstakra sjúklinga sem kom í kerfið var {data1['heildarsjúklingar']}")
-    st.write(f"Meðal starfsþörf miðað við enga bið:")
-    st.dataframe(df)
-    if compare:
-        simAttributes2 = {**simAttributes2_nontuple,**simAttributes2_tuple}
-        st.write("Seinni hermun gefur.")
-        data2 = sim(True,simAttributes2)
-        [tot_leg,tot_gong,df] = calcSimShow(data2)
-        st.write(f"Meðalfjöldi á legudeild er {tot_leg/simAttributes1['Stop']} og MeanArrive á göngudeild er {tot_gong/simAttributes1['Stop']}")
-        st.write(f"Meðal starfsþörf miðað við enga bið:")
-        st.dataframe(df)
-st.divider()
 st.text(f"Skoða niðurstöður úr {simAttributes1_nontuple['SimAmount']} hermunum.")
 
 KEYS_TOT = simAttributes1_nontuple["Keys"]
@@ -196,7 +158,6 @@ def calcConfidence(data,stop,simAmount):
     return inter
 
 def calcLegudata(data):
-    print(data["BoxPlot"][(data["AgeGroups"][0],data["States"][0])])
     legudataUngir = data["BoxPlot"][(data["AgeGroups"][0],"legudeild")]
     legudataMid = data["BoxPlot"][(data["AgeGroups"][1],"legudeild")]
     legudataGamlir = data["BoxPlot"][(data["AgeGroups"][2],"legudeild")]
@@ -420,5 +381,3 @@ if hundur:
         st.write(f"Meðal starfsþörf miðað við enga bið í seinni hermun:")
         st.dataframe(df_starf_new)
         st.write(f"**Meðalfjöldi einstakra sjúklinga** sem komu í kerfið voru **{meanFjoldi_patient_new}**")
-
-print(time()-start_time)
