@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using SimSharp;
+using System.Text;
 
 namespace SimProj;
 //Console.OutputEncoding = System.Text.Encoding.UTF8;
@@ -9,14 +10,13 @@ public class Run
     public static void Main(string[] args)
     {
         string pth = "./SimProj/bin/Release/net7.0/";
-        string simString_tup = File.ReadAllText(pth + "InputTuple.json");
-        string simString_nontup = File.ReadAllText(pth + "InputNonTuple.json");
+        string simString_tup = File.ReadAllText(pth + "InputTuple.json",Encoding.UTF8);
+        string simString_nontup = File.ReadAllText(pth + "InputNonTuple.json",Encoding.UTF8);
         SimAttribs simAttr = Helpers.InitSimAttr(simString_tup, simString_nontup);
-        simAttr.Log();
         TotalData retData = hermHundur(simAttr);
         var jsonRetString = JsonConvert.SerializeObject(retData,Formatting.Indented);
         string jsonPth = pth + "JSONOUTPUT.json";
-        File.WriteAllText(jsonPth, jsonRetString);
+        File.WriteAllText(jsonPth, jsonRetString,Encoding.UTF8);
     }
     //Fall sem hermir kerfið einu sinni með völdum stillingum.
     private static DataFinal sim(SimAttribs simAttr)
@@ -42,6 +42,7 @@ public class Run
             DataFinal data = sim(simAttr);
             upphitunFlag = false;
             stayData.Add(data.LeguAmount);
+            totalData.meanTimeDeild.Add(data.meanTime);
             foreach((string,string) key in data.deildAgeAmount.Keys)
             {
                 totalData.BoxPlot[key].Add((double)data.deildAgeAmount[key].Sum()/days);

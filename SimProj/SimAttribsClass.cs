@@ -178,6 +178,16 @@ public class SimAttribs : SimAttribsNontuples
         Console.WriteLine($"Lam: {Lam}");
         Console.WriteLine($"ShowSim: {ShowSim}");
         Console.WriteLine($"Stop: {Stop}");
+        Console.WriteLine("Lengd meðferðarlota");
+        foreach((string,string) key in PeriodDays.Keys)
+        {
+            Console.WriteLine($"Lykill: {key} og Item: {PeriodDays[key]}");
+        }
+        Console.WriteLine("Fjöldi koma í meðferðarlotu");
+        foreach((string,string) key in PeriodStays.Keys)
+        {
+            Console.WriteLine($"Lykill: {key} og Item: {PeriodStays[key]}");
+        }
     }
 }
 

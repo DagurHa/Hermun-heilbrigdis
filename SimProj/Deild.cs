@@ -2,6 +2,7 @@
  * Þessi class hermir deildir kerfisins  
  */
 using SimSharp;
+using System.Transactions;
 
 namespace SimProj;
 public class Deild
@@ -21,7 +22,8 @@ public class Deild
         simAttribs = SimAttributes;
         wait = 0;
         dataDeild = new DeildInfo(simAttribs);
-        if(simAttribs.WaitLognorm.ContainsKey(nafn)){
+        if(simAttribs.WaitLognorm.ContainsKey(nafn))
+        {
             foreach (string age_grp in simAttribs.AgeGroups)
             {
                 MathNet.Numerics.Distributions.LogNormal lgnrm = new MathNet.Numerics.Distributions.LogNormal(simAttribs.WaitLognorm[nafn][age_grp][0], simAttribs.WaitLognorm[nafn][age_grp][1]);
@@ -52,6 +54,7 @@ public class Deild
         }
         if (simAttribs.PeriodStates.Contains(nafn))
         {
+            if (Run.upphitunFlag) { kerfi.telja++; }
             yield return env.TimeoutD(30.0);
             int inxNextDeild = Helpers.randomChoice(simAttribs.MoveProb[(nafn, p.Aldur)]);
             string NextDeild = simAttribs.States[inxNextDeild];
@@ -64,7 +67,7 @@ public class Deild
             else
             {
                 double wait = simAttribs.PeriodDays[(p.Aldur, nafn)] / simAttribs.PeriodStays[(p.Aldur, nafn)];
-                yield return env.Process(TreatmentPeriod(p, simAttribs.PeriodDays[(p.Aldur, nafn)], wait));
+                yield return env.Process(TreatmentPeriod(p, simAttribs.PeriodStays[(p.Aldur, nafn)], wait));
             }
         }
         else { yield return env.Process(updatePatient(p)); }
@@ -87,6 +90,7 @@ public class Deild
     {
         while(KomurLeft >= 0.0)
         {
+            if(KomurLeft < 1.0) { wait = wait * KomurLeft; }
             yield return env.TimeoutD(wait);
             dataDeild.fjoldiDag[p.Aldur][kerfi.Dagur]++;
             KomurLeft -= 1.0;
@@ -97,8 +101,10 @@ public class Deild
     }
     public void removeP(Patient p)
     {
+        dataDeild.AgeGrad[p.Aldur]++;
         dataDeild.inni--;
         dataDeild.fjoldiInni[p.Aldur]--;
+        dataDeild.totalTime[p.Aldur] += (env.NowD - p.TimiSpitala);
     }
 }
 

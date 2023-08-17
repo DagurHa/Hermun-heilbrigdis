@@ -1,7 +1,6 @@
 from time import time
 import streamlit as st
 from helpers import *
-from simulation import sim
 import plotly.express as px
 import plotly.graph_objs as go
 import pandas as pd
@@ -10,9 +9,7 @@ from copy import copy,deepcopy
 from math import ceil
 import json
 from scipy import stats
-import os
 import subprocess
-from pathlib import Path
 
 def initSimAttribs(simAttribs_tuple,simAttribs_nontuple,tab,num_in_key,name,compare):
     with tab:
@@ -69,13 +66,13 @@ def initSimAttribs(simAttribs_tuple,simAttribs_nontuple,tab,num_in_key,name,comp
         with stillingar:
             if scenarios == "Default":
                 st.write("Veldu meðalfjölda sem koma á heilsugæslur og bráðamóttökur á dag.")
-                simAttribs_nontuple["MeanArrive"][AGE_GROUPS[0]] = st.number_input("Meðalfjöldi ungra á dag",min_value = 1, max_value=1500,
+                simAttribs_nontuple["MeanArrive"][AGE_GROUPS[0]] = st.number_input("Meðalfjöldi ungra á dag",min_value = 1, max_value=3000,
                                                             value = copy(meanArrivaltimes[AGE_GROUPS[0]]),step = 1,key=num_in_key[name][10])
-                simAttribs_nontuple["MeanArrive"][AGE_GROUPS[1]] = st.number_input("Meðalfjöldi miðaldra á dag",min_value = 1, max_value=1500,
+                simAttribs_nontuple["MeanArrive"][AGE_GROUPS[1]] = st.number_input("Meðalfjöldi miðaldra á dag",min_value = 1, max_value=3000,
                                                             value = copy(meanArrivaltimes[AGE_GROUPS[1]]),step = 1,key=num_in_key[name][11])
-                simAttribs_nontuple["MeanArrive"][AGE_GROUPS[2]] = st.number_input("Meðalfjöldi aldraðra á dag",min_value = 1, max_value=1500,
+                simAttribs_nontuple["MeanArrive"][AGE_GROUPS[2]] = st.number_input("Meðalfjöldi aldraðra á dag",min_value = 1, max_value=3000,
                                                             value = copy(meanArrivaltimes[AGE_GROUPS[2]]),step = 1,key=num_in_key[name][12])
-            simAttribs_nontuple["InitialProb"][0] = st.slider("Líkur á að nýr sjúklingur fari á heilsugæslu", 
+            simAttribs_nontuple["InitialProb"][0] = st.slider("Líkur á að nýr sjúklingur fari á bráðamóttöku", 
                                                             value = simAttribs_nontuple["InitialProb"][0],key=num_in_key[name][13])
             if not compare:
                 simAttribs_nontuple["Stop"] = st.number_input("Fjöldi hermunardaga",min_value=10,max_value=1095,value=100,key=num_in_key[name][15])
@@ -134,41 +131,6 @@ st.divider()
 
 st.header("Hermun")
 
-st.text("Sjá eina hermun með völdum hermunarstillingum")
-start = st.button("Start")
-
-def calcSimShow(data):
-    tot_leg_age = [sum(data[(aldur, "legudeild")]) for aldur in AGE_GROUPS]
-    tot_leg = sum(tot_leg_age)
-    tot_bmt_age = [sum(data[(aldur, "bráðamóttaka")]) for aldur in AGE_GROUPS]
-    tot_bmt = sum(tot_bmt_age)
-    tot_hh_age = [sum(data[(aldur, "heilsugæsla")]) for aldur in AGE_GROUPS]
-    tot_hh = sum(tot_hh_age)
-    d = [(key_soy[0],key_soy[1],val) for key_soy,val in data["Læknar"].items()]
-    df = pd.DataFrame(d,columns = ["Deild","Starfsheiti","Fjöldi"])
-    df_pivot = df.pivot(index="Deild",columns="Starfsheiti",values="Fjöldi")
-    df_pivot.columns=["Hjúkrunarfræðingar","StarfsInfo"]
-    return [tot_leg,tot_gong,tot_bmt,tot_hh,df_pivot]
-
-if start:
-    simAttributes1 = {**simAttributes1_nontuple,**simAttributes1_tuple}
-    data1 = sim(True,simAttributes1)
-    [tot_leg,tot_gong,tot_bmt,tot_hh,df] = calcSimShow(data1)
-    st.write(f"Meðalfjöldi á legudeild er {tot_leg/simAttributes1['Stop']} og MeanArrive á göngudeild er {tot_gong/simAttributes1['Stop']}")
-    st.write(f"Meðalfjöldi á bráðamóttökur er {tot_bmt/simAttributes1['Stop']}") 
-    st.write(f"Meðalfjöldi á heilsugæslur er {tot_hh/simAttributes1['Stop']}")
-    st.write(f"og heildarfjöldi einstakra sjúklinga sem kom í kerfið var {data1['heildarsjúklingar']}")
-    st.write(f"Meðal starfsþörf miðað við enga bið:")
-    st.dataframe(df)
-    if compare:
-        simAttributes2 = {**simAttributes2_nontuple,**simAttributes2_tuple}
-        st.write("Seinni hermun gefur.")
-        data2 = sim(True,simAttributes2)
-        [tot_leg,tot_gong,df] = calcSimShow(data2)
-        st.write(f"Meðalfjöldi á legudeild er {tot_leg/simAttributes1['Stop']} og MeanArrive á göngudeild er {tot_gong/simAttributes1['Stop']}")
-        st.write(f"Meðal starfsþörf miðað við enga bið:")
-        st.dataframe(df)
-
 st.text(f"Skoða niðurstöður úr {simAttributes1_nontuple['SimAmount']} hermunum.")
 
 KEYS_TOT = simAttributes1_nontuple["Keys"]
@@ -196,7 +158,6 @@ def calcConfidence(data,stop,simAmount):
     return inter
 
 def calcLegudata(data):
-    print(data["BoxPlot"][(data["AgeGroups"][0],data["States"][0])])
     legudataUngir = data["BoxPlot"][(data["AgeGroups"][0],"legudeild")]
     legudataMid = data["BoxPlot"][(data["AgeGroups"][1],"legudeild")]
     legudataGamlir = data["BoxPlot"][(data["AgeGroups"][2],"legudeild")]
@@ -270,7 +231,14 @@ def calcRandom(data,simAmount):
     df_pivot = df.pivot(index="Deild",columns="Starfsheiti",values="Fjöldi")
     df_pivot.columns=["Hjúkrunarfræðingar","Læknar"]
     meanFjoldi_patient = sum(data["totalPatient"])/simAmount
-    return [df_pivot,meanFjoldi_patient]
+    MeanTimeMean = {key_data : 0 for key_data in data["MeanTimeDeild"][0]}
+    for dictItem in data["MeanTimeDeild"]:
+        for key in dictItem:
+            if dictItem[key] != "NaN":
+                MeanTimeMean[key] += dictItem[key]
+    for key in MeanTimeMean:
+        MeanTimeMean[key] = MeanTimeMean[key]/simAmount
+    return [df_pivot,meanFjoldi_patient,MeanTimeMean]
 
 vis = st.checkbox("Sjá raungögn með hermun")
 hundur = st.button("Byrja hermun!")
@@ -298,9 +266,8 @@ if hundur:
         if stderr:
             print(f"Error: {stderr}")
         
-        f = open(pth + "JSONOUTPUT.json")
-        data = json.load(f)
-        f.close()
+        with open(pth+'JSONOUTPUT.json', 'r', encoding='utf-8-sig') as json_f:
+            data = json.load(json_f)
         dataUse = data_use(data)
         dataUse["CI"] = calcConfidence(dataUse,simAttributes1_nontuple["Stop"],simAttributes1_nontuple["SimAmount"])
         [legudataUngir,legudataMid,legudataGamlir] = calcLegudata(dataUse)
@@ -313,8 +280,14 @@ if hundur:
                 "Legudeild Gamlir" : legudataGamlir
             }
         )
-        print(df)
-        [df_starf,meanFjoldi_patient] = calcRandom(dataUse,simAttributes1_nontuple["SimAmount"])
+        [df_starf,meanFjoldi_patient,MeanTimeDict] = calcRandom(dataUse,simAttributes1_nontuple["SimAmount"])
+        data = {"Deild": [], "Aldur": [], "Meðal tími": []}
+        for (group,unit), mean_wait in MeanTimeDict.items():
+            data["Deild"].append(unit)
+            data["Aldur"].append(group)
+            data["Meðal tími"].append(mean_wait)
+        MeanTimeDict_DF = pd.DataFrame(data)
+        pivot_DF = MeanTimeDict_DF.pivot_table(index = "Deild", columns="Aldur", values="Meðal tími",aggfunc= "first")
         if compare:
             simAttrib_tuple = {}
             for key in simAttributes2_tuple:
@@ -336,10 +309,9 @@ if hundur:
             if stderr:
                 print(f"Error: {stderr}")
         
-            f = open(pth+"JSONOUTPUT.json")
-            data = json.load(f)
-            f.close()
-            dataUse = data_use(data)
+            with open(pth+'JSONOUTPUT.json','r',encoding='utf-8-sig') as json_f2:
+                data2 = json.load(json_f2)
+            dataUse = data_use(data2)
             dataUse["CI"] = calcConfidence(dataUse,simAttributes2_nontuple["Stop"],simAttributes2_nontuple["SimAmount"])
             [legudataUngir_new,legudataMid_new,legudataGamlir_new] = calcLegudata(dataUse)
             graf_new = calcGraph(dataUse,simAttributes2_nontuple["Stop"],vis,False)
@@ -356,16 +328,29 @@ if hundur:
             )
             df_tot = pd.concat([df,df_new])
             graf_tot = graf + graf_new
-            [df_starf_new,meanFjoldi_patient_new] = calcRandom(dataUse,simAttributes2_nontuple["SimAmount"])
+            [df_starf_new,meanFjoldi_patient_new,MeanTimeDict_new] = calcRandom(dataUse,simAttributes2_nontuple["SimAmount"])
+            data_new = {"Deild": [], "Aldur": [], "Meðal tími": []}
+            for (group,unit), mean_wait in MeanTimeDict_new.items():
+                data_new["Deild"].append(unit)
+                data_new["Aldur"].append(group)
+                data_new["Meðal tími"].append(mean_wait)
+            MeanTimeDict_DF_new = pd.DataFrame(data_new)
+            pivot_DF_new = MeanTimeDict_DF_new.pivot_table(index = "Deild", columns="Aldur", values="Meðal tími",aggfunc= "first")
         else:
             df_tot = df
             graf_tot = graf
     st.success("Hermun lokið")
-    st.write("Hér er fjöldi fólks á legudeild í lok dags eftir aldursflokki.")
+    #st.write("Hér er fjöldi fólks á legudeild í lok dags eftir aldursflokki.")
     if compare:
         fig1 = px.box(df_tot,color = "Hermun")
+        fig1.update_layout(title="Fjöldi fólks á legudeild í lok dags eftir aldursflokki")
+        fig1.update_xaxes(title_text="Aldurshópar")
+        fig1.update_yaxes(title_text="Dreifing á fjölda fólks")
     else:
         fig1 = px.box(df_tot)
+        fig1.update_layout(title="Fjöldi fólks á legudeild í lok dags eftir aldurshópi")
+        fig1.update_xaxes(title_text="Aldurshópar")
+        fig1.update_yaxes(title_text="Dreifing á fjölda fólks")
     st.plotly_chart(fig1)
     st.text(f"Hér sést fjöldi einstaklinga sem koma á legudeild á dag yfir þessar {L}")
     st.text(f"hermanir ásamt 95% vikmörkum.")
@@ -384,6 +369,11 @@ if hundur:
     if compare:
         fig3_new.update_layout(title_text="Flæði sjúklinga í gegnum kerfið í seinni hermun")
         st.plotly_chart(fig3_new)
+    st.write("Meðaltími sjúklinga í kerfinu í hermun 1:")
+    st.dataframe(pivot_DF)
+    if compare:
+        st.write("Meðaltími sjúklinga í kerfinu í hermun 2:")
+        st.dataframe(pivot_DF_new)
     st.write(f"Meðal starfsþörf miðað við enga bið:")
     st.dataframe(df_starf)
     st.write(f"**Meðalfjöldi einstakra sjúklinga** sem komu í kerfið voru **{meanFjoldi_patient}**")
@@ -391,5 +381,3 @@ if hundur:
         st.write(f"Meðal starfsþörf miðað við enga bið í seinni hermun:")
         st.dataframe(df_starf_new)
         st.write(f"**Meðalfjöldi einstakra sjúklinga** sem komu í kerfið voru **{meanFjoldi_patient_new}**")
-
-print(time()-start_time)
