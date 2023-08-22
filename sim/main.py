@@ -251,7 +251,7 @@ if hundur:
                 for keys in simAttributes1_tuple[key]:
                     simAttributes1_tuple[key][keys] = tuple(simAttributes1_tuple[key][keys])
 
-        pth = "./sim/"
+        pth = ".\\sim\\"
         file_nonTuple = pth + "InputNonTuple.json"
         file_tuple = pth + "InputTuple.json"
         with open(file_nonTuple,"w",encoding='utf8') as json_file:
@@ -259,7 +259,7 @@ if hundur:
         with open(file_tuple,"w",encoding='utf8') as json_file:
             json.dump(simAttrib_tuple,json_file,ensure_ascii=False)
         
-        subprocess.run(["C:/Program Files/dotnet/dotnet.exe",pth + "SimProj.dll"],check=True)
+        subprocess.run([r"C:\Program Files\dotnet\dotnet.exe",pth + "SimProj.dll"],check=True)
 
         with open(pth+'JSONOUTPUT.json', 'r', encoding='utf-8-sig') as json_f:
             data = json.load(json_f)
