@@ -251,7 +251,7 @@ if hundur:
                 for keys in simAttributes1_tuple[key]:
                     simAttributes1_tuple[key][keys] = tuple(simAttributes1_tuple[key][keys])
 
-        pth = "dagurha/hermun-heilbrigdis/SimProj/bin/Release/net7.0/"
+        pth = "./sim/"
         file_nonTuple = pth + "InputNonTuple.json"
         file_tuple = pth + "InputTuple.json"
         with open(file_nonTuple,"w",encoding='utf8') as json_file:
@@ -259,7 +259,7 @@ if hundur:
         with open(file_tuple,"w",encoding='utf8') as json_file:
             json.dump(simAttrib_tuple,json_file,ensure_ascii=False)
         
-        process = subprocess.Popen([pth + "SimProj.exe"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+        process = subprocess.Popen(["dotnet",pth + "SimProj.exe"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
 
         stdout, stderr = process.communicate()
 
