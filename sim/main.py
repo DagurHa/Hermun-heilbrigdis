@@ -259,7 +259,7 @@ if hundur:
         with open(file_tuple,"w",encoding='utf8') as json_file:
             json.dump(simAttrib_tuple,json_file,ensure_ascii=False)
         
-        process = subprocess.Popen(["dotnet",pth + "SimProj.exe"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+        process = subprocess.Popen(["dotnet",pth + "SimProj.dll"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
 
         stdout, stderr = process.communicate()
 
